@@ -1,0 +1,182 @@
+/* ========================================================
+   Rackets Academy — design system
+   Font: Galano Grotesque
+   Blue  #0077de   Green #6ffd1d   Ink #0b1a2b
+   ======================================================== */
+
+@font-face{
+  font-family:'Galano Grotesque';
+  src:url('fonts/Galano_Grotesque.otf') format('opentype');
+  font-weight:400; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:'Galano Grotesque';
+  src:url('fonts/Galano_Grotesque_Medium.otf') format('opentype');
+  font-weight:500; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:'Galano Grotesque';
+  src:url('fonts/Galano_Grotesque_Bold.otf') format('opentype');
+  font-weight:700; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:'Galano Grotesque';
+  src:url('fonts/Galano_Grotesque_Extra_Bold.otf') format('opentype');
+  font-weight:800; font-style:normal; font-display:swap;
+}
+
+:root{
+  --blue: #0077de;
+  --blue-dark: #045bab;
+  --green: #6ffd1d;
+  --ink: #0b1a2b;
+  --paper: #f5f9fd;
+  --white: #ffffff;
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --max: 1120px;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:'Galano Grotesque', sans-serif;
+  color:var(--ink);
+  background:var(--white);
+  line-height:1.5;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 24px;}
+
+/* ---------- header ---------- */
+header{
+  position:sticky; top:0; z-index:50;
+  background:var(--white);
+  border-bottom:1px solid #e7edf5;
+}
+.nav{
+  max-width:var(--max); margin:0 auto; padding:16px 24px;
+  display:flex; align-items:center; justify-content:space-between; gap:24px;
+}
+.logo{font-weight:800; font-size:1.15rem; color:var(--blue); letter-spacing:-0.02em;}
+.logo span{color:var(--ink);}
+.navlinks{display:flex; gap:28px; font-weight:600; font-size:0.95rem;}
+.navlinks a{padding:6px 0; border-bottom:2px solid transparent; transition:border-color .15s;}
+.navlinks a:hover, .navlinks a.active{border-color:var(--green);}
+.nav-cta{
+  background:var(--blue); color:var(--white); font-weight:600; font-size:0.9rem;
+  padding:11px 20px; border-radius:999px; white-space:nowrap;
+}
+.nav-cta:hover{background:var(--blue-dark);}
+@media (max-width:760px){ .navlinks{display:none;} }
+
+/* ---------- hero (court + balls motif) ---------- */
+.hero{
+  position:relative; overflow:hidden;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0 1px, transparent 1px 34px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.05) 0 1px, transparent 1px 34px),
+    linear-gradient(160deg, var(--blue) 0%, var(--blue-dark) 100%);
+  color:var(--white);
+  padding:96px 0 88px;
+}
+.ball{
+  position:absolute; border-radius:50%; background:var(--green);
+  filter:drop-shadow(0 6px 14px rgba(0,0,0,.15));
+}
+.hero .ball.b1{width:150px; height:150px; top:-60px; left:-50px;}
+.hero .ball.b2{width:90px; height:90px; top:70px; left:110px; opacity:.9;}
+.hero .ball.b3{width:60px; height:60px; top:180px; left:40px; opacity:.85;}
+.hero-inner{position:relative; z-index:2; max-width:640px;}
+.eyebrow-tag{
+  display:inline-block; background:rgba(255,255,255,.14); padding:8px 16px;
+  border-radius:999px; font-size:0.85rem; font-weight:600; margin-bottom:22px;
+}
+.hero h1{
+  font-size:clamp(2.4rem, 5.6vw, 4rem); font-weight:800; line-height:1.03;
+  letter-spacing:-0.02em; margin:0 0 20px;
+}
+.hero p.lede{font-size:1.15rem; opacity:.92; max-width:480px; margin:0 0 32px;}
+.hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
+.btn{
+  display:inline-block; padding:14px 26px; border-radius:999px; font-weight:600;
+  font-size:0.98rem; transition:transform .15s, box-shadow .15s;
+}
+.btn:hover{transform:translateY(-2px);}
+.btn-green{background:var(--green); color:var(--ink);}
+.btn-outline{border:1.5px solid rgba(255,255,255,.55); color:var(--white);}
+.btn-blue{background:var(--blue); color:var(--white);}
+
+/* ---------- sections ---------- */
+section{padding:80px 0;}
+.section-tight{padding:56px 0;}
+h2{font-size:clamp(1.7rem, 3.4vw, 2.3rem); font-weight:800; letter-spacing:-0.01em; margin:0 0 14px;}
+.section-lede{color:#4a5b70; max-width:560px; margin:0 0 44px; font-size:1.05rem;}
+
+/* location / feature cards */
+.grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+.grid-2{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
+@media (max-width:800px){ .grid-3,.grid-2{grid-template-columns:1fr;} }
+
+.card{
+  background:var(--paper); border-radius:var(--radius-md); padding:30px;
+  border:1px solid #e7edf5;
+}
+.card h3{margin:0 0 10px; font-size:1.15rem; font-weight:700;}
+.card p{margin:0; color:#4a5b70; font-size:0.96rem;}
+.card ul{margin:14px 0 0; padding-left:18px; color:#4a5b70; font-size:0.94rem;}
+
+/* pill outline box (echoes flyer pricing tables) */
+.pill-box{
+  border:2px solid var(--green); border-radius:var(--radius-lg);
+  padding:26px 28px; background:var(--white);
+}
+
+/* opening-hours style bar */
+.bar{
+  background:var(--blue); color:var(--white); border-radius:var(--radius-md);
+  padding:26px 30px;
+}
+.bar h3{margin:0 0 8px; font-size:1.05rem; font-weight:700;}
+.bar p{margin:0; opacity:.92; font-size:0.95rem;}
+
+/* sponsors */
+.sponsor-strip{
+  display:flex; align-items:center; justify-content:center; gap:40px; flex-wrap:wrap;
+  padding:36px 0; opacity:.7; font-weight:600; font-size:0.85rem; color:#4a5b70;
+}
+
+/* pricing table (training page) */
+.price-table{width:100%; border-collapse:collapse; font-size:0.95rem;}
+.price-table th{
+  text-align:left; padding:12px 14px; font-weight:700; color:var(--blue-dark);
+  border-bottom:2px solid var(--green);
+}
+.price-table td{padding:14px; border-bottom:1px solid #e7edf5;}
+.price-table .lead{font-weight:700;}
+.price-table .sub{display:block; font-size:0.78rem; color:#8195aa; font-weight:400;}
+.badge-discount{
+  display:inline-flex; flex-direction:column; align-items:center; justify-content:center;
+  width:104px; height:104px; border-radius:50%; background:var(--green); color:var(--ink);
+  text-align:center; font-weight:800; font-size:0.95rem; line-height:1.15; padding:6px;
+}
+
+.note-box{
+  border:1.5px solid #d7e3f0; border-radius:var(--radius-md); padding:24px 26px;
+  font-size:0.92rem; color:#4a5b70;
+}
+.note-box strong{color:var(--ink);}
+
+/* footer */
+footer{background:var(--ink); color:var(--white); padding:64px 0 32px; margin-top:40px;}
+.footer-grid{display:grid; grid-template-columns:2fr 1fr 1fr; gap:32px; margin-bottom:40px;}
+@media (max-width:760px){ .footer-grid{grid-template-columns:1fr;} }
+.footer-grid h4{font-size:0.95rem; margin:0 0 14px; color:var(--green);}
+.footer-grid p, .footer-grid a{color:rgba(255,255,255,.78); font-size:0.92rem; line-height:1.7; display:block;}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.14); padding-top:24px;
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+  font-size:0.82rem; color:rgba(255,255,255,.55);
+}
