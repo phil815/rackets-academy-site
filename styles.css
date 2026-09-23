@@ -402,3 +402,15 @@ a.card-link.offer .card-cta{display:none;}
   transition:background .15s;
 }
 .jump-nav a:hover{background:var(--green);}
+
+@media (max-width:420px){
+  .hours-row{flex-direction:column; gap:2px;}
+  .hours-row span:last-child{text-align:left;}
+}
+
+/* Google rating summary */
+.rating-summary{display:flex; gap:32px; justify-content:center; flex-wrap:wrap; margin-bottom:32px;}
+.rating-block{text-align:center;}
+.rating-stars{display:block; color:#f5a623; font-size:1.3rem; letter-spacing:2px;}
+.rating-number{display:block; font-size:1.8rem; font-weight:800; color:var(--blue-dark); margin-top:2px;}
+.rating-count{display:block; font-size:0.82rem; color:var(--blue-dark); opacity:.7; margin-top:2px;}
