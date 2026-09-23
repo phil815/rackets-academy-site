@@ -314,6 +314,7 @@ a.card-link.offer .card-cta{display:none;}
 .highlight-box, .community-highlight{
   background:linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
   border-radius:var(--radius-lg); padding:44px 28px; text-align:center;
+  color:var(--white);
 }
 .highlight-box .eyebrow-tag, .community-highlight .eyebrow-tag{
   color:var(--green); font-weight:800; font-size:1.05rem; padding:10px 22px;
@@ -324,7 +325,12 @@ a.card-link.offer .card-cta{display:none;}
 }
 
 .hero-welcome{
-  font-size:1.05rem; font-weight:700; opacity:.9; margin:0 0 8px; letter-spacing:.01em;
+  font-size:clamp(1.9rem, 4.2vw, 2.9rem); font-weight:800; opacity:1; margin:0 0 6px;
+  letter-spacing:-0.01em; line-height:1.08;
+}
+.hero-subtitle{
+  font-size:clamp(1.2rem, 2.6vw, 1.6rem) !important; font-weight:700 !important;
+  opacity:.92; line-height:1.2 !important; letter-spacing:0 !important;
 }
 
 /* scroll hint for horizontally-scrollable tables */
@@ -343,3 +349,56 @@ a.card-link.offer .card-cta{display:none;}
   color:var(--green); font-weight:800; font-size:1.4rem;
   display:flex; align-items:center; justify-content:center;
 }
+
+/* redesigned location cards */
+.location-card{
+  background:var(--paper); border-radius:var(--radius-md); overflow:hidden;
+  border:1px solid #e7edf5;
+}
+.location-photo{
+  height:150px; background-size:cover; background-position:center;
+}
+.location-body{padding:22px;}
+.location-address{color:var(--blue-dark); opacity:.75; margin:0 0 14px; font-size:0.92rem;}
+.amenity-row{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px;}
+.amenity-pill{
+  background:var(--white); border:1px solid #d7e0ea; border-radius:999px;
+  padding:5px 12px; font-size:0.78rem; font-weight:700; color:var(--blue-dark);
+}
+.hours-table{border-top:1px solid #d7e0ea; padding-top:12px;}
+.hours-row{
+  display:flex; justify-content:space-between; gap:12px; padding:6px 0;
+  font-size:0.86rem;
+}
+.hours-row span:first-child{font-weight:700; color:var(--blue-dark);}
+.hours-row span:last-child{color:var(--blue-dark); opacity:.75; text-align:right;}
+.btn-outline-blue{border:1.5px solid var(--blue); color:var(--blue); background:transparent;}
+
+/* "before you book" modal */
+.book-modal-overlay{
+  display:none; position:fixed; inset:0; background:rgba(11,26,43,.55); z-index:200;
+  align-items:center; justify-content:center; padding:20px;
+}
+.book-modal-overlay.open{display:flex;}
+.book-modal{
+  background:var(--white); border-radius:var(--radius-lg); padding:32px 28px;
+  max-width:420px; width:100%; position:relative; text-align:left;
+}
+.book-modal h3{color:var(--blue-dark); margin:0 0 16px; font-size:1.25rem;}
+.book-modal ul{margin:0 0 22px; padding-left:20px; color:var(--blue-dark); line-height:1.6; font-size:0.94rem;}
+.book-modal ul li{margin-bottom:10px;}
+.book-modal .btn{display:block; text-align:center;}
+.book-modal-close{
+  position:absolute; top:14px; right:18px; background:none; border:0; font-size:1.6rem;
+  line-height:1; cursor:pointer; color:var(--blue-dark); opacity:.5;
+}
+.book-modal-close:hover{opacity:1;}
+
+/* jump nav (Coaching page: Kids / Adults / Private) */
+.jump-nav{display:flex; gap:10px; flex-wrap:wrap; justify-content:center;}
+.jump-nav a{
+  background:var(--paper); border:1px solid #d7e0ea; border-radius:999px;
+  padding:9px 20px; font-weight:700; font-size:0.9rem; color:var(--blue-dark);
+  transition:background .15s;
+}
+.jump-nav a:hover{background:var(--green);}
