@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // API key filled in below (see instructions). Matches badges by keyword
 // against event titles, e.g. <span data-next-event="Racketero"></span>.
 (function () {
-  var API_KEY = ''; // <-- fill in: Google Cloud API key restricted to Calendar API + this domain
+  var API_KEY = 'AIzaSyDm1T-ofSLpJVzfpMOzhp7LLzMK1Pg9vpM';
   var CALENDARS = [
     'c_06fae67e3da9afefbea72735459e8b237c81650b84fff9332d50ddaa66509191@group.calendar.google.com', // Events - Salgesch
     'c_3ef252ff359c72bd0187f71d11f948958588fceca659a6d89ae3888ee6710d68@group.calendar.google.com'  // Events - Sion
