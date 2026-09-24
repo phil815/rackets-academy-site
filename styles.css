@@ -414,3 +414,30 @@ a.card-link.offer .card-cta{display:none;}
 .rating-stars{display:block; color:#f5a623; font-size:1.3rem; letter-spacing:2px;}
 .rating-number{display:block; font-size:1.8rem; font-weight:800; color:var(--blue-dark); margin-top:2px;}
 .rating-count{display:block; font-size:0.82rem; color:var(--blue-dark); opacity:.7; margin-top:2px;}
+
+/* Shop page */
+.shop-form{margin-top:20px;}
+.shop-options{display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:22px;}
+.shop-option{
+  position:relative; border:2px solid #d7e0ea; border-radius:14px; padding:14px; cursor:pointer;
+  transition:border-color .15s, background .15s;
+}
+.shop-option input{position:absolute; opacity:0;}
+.shop-option-body{display:flex; flex-direction:column; gap:2px;}
+.shop-option-body strong{font-size:1.3rem; color:var(--blue-dark);}
+.shop-option-body span{font-size:0.85rem; color:var(--blue-dark); opacity:.75;}
+.shop-option:has(input:checked){border-color:var(--green); background:var(--paper);}
+.shop-field{display:block; margin-bottom:16px; font-weight:700; font-size:0.9rem; color:var(--blue-dark);}
+.shop-field input, .shop-field select, .shop-field textarea{
+  display:block; width:100%; margin-top:6px; padding:12px 14px; border:1.5px solid #d7e0ea;
+  border-radius:10px; font-family:inherit; font-size:0.95rem; font-weight:400; color:var(--blue-dark);
+  background:var(--white);
+}
+
+/* next-event calendar badge */
+.next-event-badge{
+  display:inline-block; background:var(--green); color:var(--blue-dark);
+  font-weight:800; font-size:0.78rem; padding:5px 12px; border-radius:999px;
+  margin-top:8px;
+}
+.next-event-badge--empty{background:var(--paper); color:var(--blue-dark); opacity:.8;}
