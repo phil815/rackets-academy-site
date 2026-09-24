@@ -112,6 +112,16 @@ document.addEventListener('DOMContentLoaded', function () {
 // API key filled in below (see instructions). Matches badges by keyword
 // against event titles, e.g. <span data-next-event="Racketero"></span>.
 (function () {
+  function formatFullDate(d) {
+    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var day = d.getDate();
+    var suffix = 'th';
+    if (day % 10 === 1 && day !== 11) suffix = 'st';
+    else if (day % 10 === 2 && day !== 12) suffix = 'nd';
+    else if (day % 10 === 3 && day !== 13) suffix = 'rd';
+    return days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + day + suffix;
+  }
   var API_KEY = 'AIzaSyDm1T-ofSLpJVzfpMOzhp7LLzMK1Pg9vpM';
   var CALENDARS = [
     'c_06fae67e3da9afefbea72735459e8b237c81650b84fff9332d50ddaa66509191@group.calendar.google.com', // Events - Salgesch
@@ -144,9 +154,12 @@ document.addEventListener('DOMContentLoaded', function () {
       var allEvents = results.flatMap(function (r) { return r.items || []; });
 
       badges.forEach(function (el) {
-        var keyword = el.getAttribute('data-next-event').toLowerCase();
+        var keywords = el.getAttribute('data-next-event').toLowerCase().split(',').map(function (k) { return k.trim(); });
         var match = allEvents
-          .filter(function (ev) { return (ev.summary || '').toLowerCase().includes(keyword); })
+          .filter(function (ev) {
+            var title = (ev.summary || '').toLowerCase();
+            return keywords.some(function (k) { return title.includes(k); });
+          })
           .sort(function (a, b) {
             var da = new Date(a.start.dateTime || a.start.date);
             var db = new Date(b.start.dateTime || b.start.date);
@@ -155,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (match) {
           var d = new Date(match.start.dateTime || match.start.date);
-          var formatted = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+          var formatted = formatFullDate(d);
           el.textContent = 'Next: ' + formatted;
           el.classList.add('next-event-badge');
         } else {
