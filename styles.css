@@ -441,26 +441,3 @@ a.card-link.offer .card-cta{display:none;}
   margin-top:8px;
 }
 .next-event-badge--empty{background:var(--paper); color:var(--blue-dark); opacity:.8;}
-
-/* BENTO GRID — "What we offer" */
-.bento-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px;}
-.bento-item{
-  position:relative; border-radius:18px; overflow:hidden; background-size:cover; background-position:center;
-  display:flex; align-items:flex-end; padding:16px; min-height:130px; text-decoration:none;
-}
-.bento-item.span2{grid-column:span 2;}
-.bento-item.tall{min-height:210px;}
-.bento-item::before{
-  content:''; position:absolute; inset:0;
-  background:linear-gradient(180deg, rgba(11,26,43,0) 35%, rgba(11,26,43,.82) 100%);
-}
-.bento-item .bento-text{position:relative; z-index:1;}
-.bento-item h3{color:var(--white); margin:0 0 3px; font-size:1.15rem; font-weight:800;}
-.bento-item p{color:rgba(255,255,255,.88); font-size:0.78rem; margin:0; line-height:1.3;}
-.bento-item.accent{box-shadow:0 0 0 2px var(--green) inset;}
-.bento-item.accent .bento-text{background:none;}
-.bento-item.accent::before{background:linear-gradient(180deg, rgba(4,91,171,.15) 0%, rgba(11,26,43,.85) 100%);}
-@media (min-width:820px){
-  .bento-grid{grid-template-columns:repeat(4,1fr);}
-  .bento-item.span2{grid-column:span 2;}
-}
