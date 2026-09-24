@@ -125,13 +125,22 @@ document.addEventListener('DOMContentLoaded', function () {
     var now = new Date().toISOString();
     var future = new Date(Date.now() + 1000 * 60 * 60 * 24 * 120).toISOString(); // 120-day window
 
-    Promise.all(CALENDARS.map(function (calId) {
-      var url = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(calId) +
-        '/events?key=' + API_KEY + '&timeMin=' + now + '&timeMax=' + future +
-        '&singleEvents=true&orderBy=startTime&maxResults=100';
-      return fetch(url).then(function (r) { return r.ok ? r.json() : { items: [] }; })
-        .catch(function () { return { items: [] }; });
-    })).then(function (results) {
+    var timeout = new Promise(function (resolve) {
+      setTimeout(function () { resolve([]); }, 6000); // never leave badges stuck
+    });
+
+    Promise.race([
+      Promise.all(CALENDARS.map(function (calId) {
+        var url = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(calId) +
+          '/events?key=' + API_KEY + '&timeMin=' + now + '&timeMax=' + future +
+          '&singleEvents=true&orderBy=startTime&maxResults=100';
+        return fetch(url).then(function (r) {
+          if (!r.ok) { console.warn('Calendar fetch failed for', calId, r.status); return { items: [] }; }
+          return r.json();
+        }).catch(function (err) { console.warn('Calendar fetch error for', calId, err); return { items: [] }; });
+      })),
+      timeout
+    ]).then(function (results) {
       var allEvents = results.flatMap(function (r) { return r.items || []; });
 
       badges.forEach(function (el) {
