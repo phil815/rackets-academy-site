@@ -58,7 +58,10 @@
     <h2>Gift Vouchers</h2>
     <p class="section-lede">Each voucher is a Playtomic code worth one evening game (20 CHF) for one person. Choose a bundle:</p>
 
-    <form id="voucher-form" class="shop-form">
+    <form id="voucher-form" class="shop-form" method="POST" action="https://script.google.com/macros/s/AKfycbwLWTwsILcSkAHe9FSKjicU1pUk5s3nxSnS4PQ2Tws2RVejiHjBltJJ8gKpmIe3JLRe/exec">
+      <input type="hidden" name="formType" value="voucher">
+      <input type="hidden" name="price" id="voucher-price" value="20">
+      <input type="hidden" name="qty" id="voucher-qty" value="1">
       <div class="shop-options" id="voucher-options">
         <label class="shop-option">
           <input type="radio" name="bundle" value="1x20" data-price="20" data-qty="1" checked>
@@ -91,7 +94,7 @@
         <textarea name="giftMessage" rows="3" maxlength="200"></textarea>
       </label>
 
-      <button type="submit" class="btn btn-green" style="width:100%; text-align:center;">Order via WhatsApp — online checkout coming soon</button>
+      <button type="submit" class="btn btn-green" style="width:100%; text-align:center;">Continue to payment</button>
     </form>
   </div>
 </section>
@@ -101,7 +104,8 @@
     <h2>Rackets</h2>
     <p class="section-lede">Pick up your racket at the academy — no shipping. <em>Models &amp; prices to be confirmed.</em></p>
 
-    <form id="racket-form" class="shop-form">
+    <form id="racket-form" class="shop-form" method="POST" action="https://script.google.com/macros/s/AKfycbwLWTwsILcSkAHe9FSKjicU1pUk5s3nxSnS4PQ2Tws2RVejiHjBltJJ8gKpmIe3JLRe/exec">
+      <input type="hidden" name="formType" value="racket">
       <label class="shop-field">
         Racket model
         <select name="racketModel" required>
@@ -127,7 +131,7 @@
         <input type="email" name="buyerEmail" required>
       </label>
 
-      <button type="submit" class="btn btn-green" style="width:100%; text-align:center;">Order via WhatsApp — online checkout coming soon</button>
+      <button type="submit" class="btn btn-green" style="width:100%; text-align:center;">Continue to payment</button>
     </form>
   </div>
 </section>

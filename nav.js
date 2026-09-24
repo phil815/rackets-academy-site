@@ -70,40 +70,26 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-// Shop forms — WhatsApp stopgap until the Apps Script checkout is live.
-// TODO(shop-backend): replace the wa.me redirect below with a real submit
-// to the Apps Script Web App endpoint once it's deployed (SumUp checkout,
-// voucher code pull, PDF generation). Field names are already backend-ready.
+// Shop forms — real submission to the Apps Script backend (SumUp checkout,
+// voucher code pull / racket stock, email fulfillment). The form POSTs
+// directly (real page navigation, not fetch) so there's no CORS issue —
+// the Apps Script response redirects the browser to SumUp's hosted payment page.
 document.addEventListener('DOMContentLoaded', function () {
   var voucherForm = document.getElementById('voucher-form');
   if (voucherForm) {
-    voucherForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var fd = new FormData(voucherForm);
-      var bundleInput = voucherForm.querySelector('input[name="bundle"]:checked');
-      var qty = bundleInput.getAttribute('data-qty');
-      var price = bundleInput.getAttribute('data-price');
-      var msg = `Hi! I'd like to order a gift voucher bundle:\n` +
-        `- Bundle: ${qty}x 20 CHF (${price} CHF total)\n` +
-        `- Name: ${fd.get('buyerName')}\n` +
-        `- Email: ${fd.get('buyerEmail')}\n` +
-        (fd.get('giftMessage') ? `- Gift message: ${fd.get('giftMessage')}\n` : '');
-      window.open('https://wa.me/41762914369?text=' + encodeURIComponent(msg), '_blank');
+    var priceField = document.getElementById('voucher-price');
+    var qtyField = document.getElementById('voucher-qty');
+    var syncBundle = function () {
+      var checked = voucherForm.querySelector('input[name="bundle"]:checked');
+      if (checked) {
+        priceField.value = checked.getAttribute('data-price');
+        qtyField.value = checked.getAttribute('data-qty');
+      }
+    };
+    voucherForm.querySelectorAll('input[name="bundle"]').forEach(function (r) {
+      r.addEventListener('change', syncBundle);
     });
-  }
-
-  var racketForm = document.getElementById('racket-form');
-  if (racketForm) {
-    racketForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var fd = new FormData(racketForm);
-      var msg = `Hi! I'd like to order a racket:\n` +
-        `- Model: ${fd.get('racketModel')}\n` +
-        `- Pickup: ${fd.get('pickupLocation')}\n` +
-        `- Name: ${fd.get('buyerName')}\n` +
-        `- Email: ${fd.get('buyerEmail')}`;
-      window.open('https://wa.me/41762914369?text=' + encodeURIComponent(msg), '_blank');
-    });
+    syncBundle(); // set initial values from the pre-checked option
   }
 });
 
