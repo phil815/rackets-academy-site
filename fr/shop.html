@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop — Bons cadeaux &amp; Raquettes | Rackets Academy</title>
+<meta name="description" content="Achète un bon cadeau padel (codes Playtomic) ou commande une raquette à retirer à la Rackets Academy Salgesch ou Sion.">
+<link rel="canonical" href="https://racketsacademy.ch/fr/shop.html">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<div class="site-top">
+<div class="promo-banner">
+  <div class="promo-track">
+    <span>🎾 COURTS OUVERTS — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener">Réservez sur Playtomic →</a></span>
+    <span>🎾 COURTS OUVERTS — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener">Réservez sur Playtomic →</a></span>
+    <span>🎾 COURTS OUVERTS — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener">Réservez sur Playtomic →</a></span>
+  </div>
+</div>
+
+<header>
+  <div class="nav">
+    <a href="../index.html" class="logo"><img src="https://static.wixstatic.com/media/aa792a_055b56096ef04c0697a7ed52660d5a0b~mv2.png/v1/crop/x_579,y_1441,w_2868,h_1003/fill/w_223,h_78,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Rackets_Academy_Logo_2xblue-on-white_horizontal_FINAL.png" alt="Rackets Academy logo" width="180" height="63"></a>
+    <nav class="navlinks">
+      <a href="book.html">Réserver</a>
+      <a href="training.html">Cours</a>
+      <a href="events.html">Événements</a>
+      <a href="rackets-plus.html">Adhésion</a>
+      <a href="ski-and-padel.html">Ski & Padel</a>
+      <a href="spa-and-sauna.html">Spa | Sauna</a>
+      <a href="../shop.html" class="active">Shop</a>
+      <a href="about.html">À propos</a>
+      <div class="lang-switch">
+        <button type="button" aria-haspopup="true">FR</button>
+        <div class="lang-menu"><a href="../shop.html">English</a><a href="../de/shop.html">Deutsch</a><a href="#">Français</a></div>
+      </div>
+      <a class="nav-cta-mobile" href="book.html">Réserver</a>
+    </nav>
+    <div class="lang-switch">
+      <button type="button" aria-haspopup="true">FR</button>
+      <div class="lang-menu"><a href="../shop.html">English</a><a href="../de/shop.html">Deutsch</a><a href="#">Français</a></div>
+    </div>
+    <a class="nav-cta" href="book.html">Réserver</a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span></button>
+  </div>
+</header>
+</div>
+
+<section class="hero" style="background-image:linear-gradient(160deg, rgba(0,119,222,.82), rgba(4,91,171,.88)), url('https://static.wixstatic.com/media/aa792a_dd4f0746f5cf428fbfc25424dbf9be3f~mv2.jpg/v1/fill/w_1600,h_900,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/4F3A0013.jpg'); background-size:cover; background-position:center;">
+  <span class="ball b1"></span><span class="ball b2"></span><span class="ball b3"></span>
+  <div class="wrap hero-inner">
+    <h1>Shop</h1>
+    <p class="lede">Offre une session de padel, ou récupère une raquette directement à l'academy. Le paiement en ligne arrive bientôt — pour l'instant, ta commande part direct sur WhatsApp.</p>
+  </div>
+</section>
+
+<section id="vouchers">
+  <div class="wrap" style="max-width:600px;">
+    <h2>Bons cadeaux</h2>
+    <p class="section-lede">Chaque bon est un code Playtomic valable pour une soirée de jeu (20 CHF) pour une personne. Choisis ton pack :</p>
+
+    <form id="voucher-form" class="shop-form" method="POST" action="https://script.google.com/macros/s/AKfycbwLWTwsILcSkAHe9FSKjicU1pUk5s3nxSnS4PQ2Tws2RVejiHjBltJJ8gKpmIe3JLRe/exec">
+      <input type="hidden" name="formType" value="voucher">
+      <input type="hidden" name="price" id="voucher-price" value="20">
+      <input type="hidden" name="qty" id="voucher-qty" value="1">
+      <div class="shop-options" id="voucher-options">
+        <label class="shop-option">
+          <input type="radio" name="bundle" value="1x20" data-price="20" data-qty="1" checked>
+          <span class="shop-option-body"><strong>1×</strong><span>20 CHF</span></span>
+        </label>
+        <label class="shop-option">
+          <input type="radio" name="bundle" value="5x20" data-price="100" data-qty="5">
+          <span class="shop-option-body"><strong>5×</strong><span>100 CHF</span></span>
+        </label>
+        <label class="shop-option">
+          <input type="radio" name="bundle" value="10x20" data-price="200" data-qty="10">
+          <span class="shop-option-body"><strong>10×</strong><span>200 CHF</span></span>
+        </label>
+        <label class="shop-option">
+          <input type="radio" name="bundle" value="20x20" data-price="400" data-qty="20">
+          <span class="shop-option-body"><strong>20×</strong><span>400 CHF</span></span>
+        </label>
+      </div>
+
+      <label class="shop-field">
+        Ton nom
+        <input type="text" name="buyerName" required>
+      </label>
+      <label class="shop-field">
+        Ton email <span style="font-weight:400; opacity:.7;">(les bons seront envoyés ici)</span>
+        <input type="email" name="buyerEmail" required>
+      </label>
+      <label class="shop-field">
+        Message cadeau <span style="font-weight:400; opacity:.7;">(optionnel, affiché sur le bon)</span>
+        <textarea name="giftMessage" rows="3" maxlength="200"></textarea>
+      </label>
+
+      <button type="submit" class="btn btn-green" style="width:100%; text-align:center;">Continuer vers le paiement</button>
+    </form>
+  </div>
+</section>
+
+<section id="rackets" class="section-tight" style="background:var(--paper);">
+  <div class="wrap" style="max-width:600px;">
+    <h2>Raquettes</h2>
+    <p class="section-lede">Récupère ta raquette à l'academy — pas d'envoi postal. <em>Modèles &amp; prix à confirmer.</em></p>
+
+    <form id="racket-form" class="shop-form" method="POST" action="https://script.google.com/macros/s/AKfycbwLWTwsILcSkAHe9FSKjicU1pUk5s3nxSnS4PQ2Tws2RVejiHjBltJJ8gKpmIe3JLRe/exec">
+      <input type="hidden" name="formType" value="racket">
+      <label class="shop-field">
+        Modèle de raquette
+        <select name="racketModel" required>
+          <option value="">Choisis un modèle — à confirmer</option>
+          <option value="beginner">Raquette débutant — prix à confirmer</option>
+          <option value="intermediate">Raquette intermédiaire — prix à confirmer</option>
+          <option value="pro">Raquette pro — prix à confirmer</option>
+        </select>
+      </label>
+      <label class="shop-field">
+        Lieu de retrait
+        <select name="pickupLocation" required>
+          <option value="Salgesch">Salgesch</option>
+          <option value="Sion">Sion</option>
+        </select>
+      </label>
+      <label class="shop-field">
+        Ton nom
+        <input type="text" name="buyerName" required>
+      </label>
+      <label class="shop-field">
+        Ton email
+        <input type="email" name="buyerEmail" required>
+      </label>
+
+      <button type="submit" class="btn btn-green" style="width:100%; text-align:center;">Continuer vers le paiement</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="https://static.wixstatic.com/media/aa792a_a07ea1455a5d4b06b1295733d51a4805~mv2.png/v1/crop/x_476,y_1415,w_3010,h_1080/fill/w_234,h_84,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Rackets_Academy_Logo_white-on-transparent_horizontal_FINAL.png" alt="Rackets Academy" width="200" height="72" style="margin-bottom:8px;">
+    <p style="opacity:.85; margin:0 0 14px;">PLAY. COMPETE. ENJOY.</p>
+    <div class="footer-grid">
+      <div><h4>Salgesch</h4><a href="https://www.google.com/maps/search/?api=1&query=Littenstrasse+30+3970+Salgesch" target="_blank" rel="noopener">Littenstrasse 30, 3970 Salgesch</a></div>
+      <div><h4>Sion</h4><a href="https://www.google.com/maps/search/?api=1&query=Route+de+Pr%C3%A9jeux+16+1950+Sion" target="_blank" rel="noopener">Route de Préjeux 16, 1950 Sion</a></div>
+    </div>
+    <div class="sponsor-row">
+      <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/aa792a_09d6245ac02d49cbb0a9ed6b5b74224e~mv2.png/v1/fill/w_150,h_62,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/wilson-2-logo-black-and-white.png" alt="Wilson" loading="lazy"></a>
+      <a href="https://www.estrellagalicia.es" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/aa792a_cbb8a2bb53e849ad8bdcac94e56ff4fd~mv2.png/v1/fill/w_74,h_60,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/aa792a_cbb8a2bb53e849ad8bdcac94e56ff4fd~mv2.png" alt="Estrella Galicia" loading="lazy"></a>
+      <a href="https://www.decathlon.ch" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/aa792a_05b337f9b1ff43d29b138c6d03233e3d~mv2.png/v1/crop/x_0,y_0,w_6435,h_937/fill/w_153,h_22,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/aa792a_05b337f9b1ff43d29b138c6d03233e3d~mv2.png" alt="Decathlon" loading="lazy"></a>
+      <a href="https://www.coca-cola.com/ch/de/brands/powerade" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/aa792a_4606fdc8add84a9c9596a09b620e7d3f~mv2.png/v1/crop/x_0,y_35,w_973,h_357/fill/w_81,h_30,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/aa792a_4606fdc8add84a9c9596a09b620e7d3f~mv2.png" alt="Powerade" loading="lazy"></a>
+      <a href="https://tanguy.ch/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_a637bfd2ed6b4227b903ff852e23ac61~mv2.png/v1/fill/w_111,h_22,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/eb5c6b_a637bfd2ed6b4227b903ff852e23ac61~mv2.png" alt="Garage Tanguy" loading="lazy"></a>
+      <a href="https://tanguy.hyundai.ch/fr" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_853a1467d9f84463babbc15de6cc0d45~mv2.png/v1/fill/w_54,h_36,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/hyundai.png" alt="Hyundai" loading="lazy"></a>
+      <a href="https://www.scleanup.ch/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_7e7bba664be04699ab5d1bde255a1c8f~mv2.png/v1/fill/w_74,h_62,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/eb5c6b_7e7bba664be04699ab5d1bde255a1c8f~mv2.png" alt="S Clean-up" loading="lazy"></a>
+      <a href="https://shop.morand.ch/shop/category/sirops-65" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_1c29f776d1144d91899e11f5793296cf~mv2.png/v1/fill/w_108,h_62,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/eb5c6b_1c29f776d1144d91899e11f5793296cf~mv2.png" alt="Distillerie Morand" loading="lazy"></a>
+      <a href="https://rivella.ch/de/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_db0cf05530e94934abc4f38b00fe3703~mv2.png/v1/fill/w_86,h_60,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/rivella_logo-300x225.png" alt="Rivella" loading="lazy"></a>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Rackets Academy</span>
+      <span><a href="../terms-and-conditions.html">Conditions générales</a> · <a href="../privacy-policy.html">Politique de confidentialité</a></span>
+    </div>
+  </div>
+</footer>
+<script src="../nav.js?v=2"></script>
+</body>
+</html>
