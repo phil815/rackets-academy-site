@@ -238,9 +238,13 @@ footer{background:var(--ink); color:var(--white); padding:40px 0 22px; margin-to
 
 /* ---------- footer sponsors ---------- */
 .sponsor-row{
-  display:flex; flex-wrap:nowrap; align-items:center; gap:28px; margin-top:18px;
-  overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:4px;
+  overflow:hidden; margin-top:18px; width:100%;
 }
+.sponsor-track{
+  display:flex; align-items:center; gap:28px; width:max-content;
+  animation:sponsor-scroll 26s linear infinite;
+}
+.sponsor-row:hover .sponsor-track{animation-play-state:paused;}
 .sponsor-row a{
   display:flex; align-items:center; justify-content:center;
   padding:4px; height:26px; flex-shrink:0; opacity:.92; transition:opacity .15s;
@@ -248,7 +252,7 @@ footer{background:var(--ink); color:var(--white); padding:40px 0 22px; margin-to
 .sponsor-row a:hover{opacity:1;}
 .sponsor-row img{height:20px; width:auto; max-width:88px; object-fit:contain; display:block;}
 @media (max-width:820px){
-  .sponsor-row{gap:20px; justify-content:flex-start;}
+  .sponsor-track{gap:20px;}
   .sponsor-row a{height:20px;}
   .sponsor-row img{height:16px; max-width:70px;}
 }
@@ -308,6 +312,16 @@ a.card-link.offer img{
 a.card-link.offer .offer-text h3{margin:0 0 2px; font-size:1.02rem;}
 a.card-link.offer .offer-text p{margin:0; font-size:0.85rem; color:#045bab; line-height:1.35;}
 a.card-link.offer .card-cta{display:none;}
+a.card-link.offer{position:relative;}
+a.card-link.offer::after{
+  content:'→';
+  position:absolute; top:12px; right:12px;
+  width:26px; height:26px; border-radius:50%;
+  background:var(--green); color:var(--blue-dark);
+  display:flex; align-items:center; justify-content:center;
+  font-weight:800; font-size:0.9rem; line-height:1;
+  box-shadow:0 2px 6px rgba(11,26,43,.18);
+}
 
 /* community highlight box */
 /* community / promo highlight box — reusable "asset" for prominent free/bonus call-outs */
@@ -441,3 +455,11 @@ a.card-link.offer .card-cta{display:none;}
   margin-top:8px;
 }
 .next-event-badge--empty{background:var(--paper); color:var(--blue-dark); opacity:.8;}
+
+@keyframes sponsor-scroll{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-50%);}
+}
+@media (prefers-reduced-motion: reduce){
+  .sponsor-track{animation:none;}
+}
