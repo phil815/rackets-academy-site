@@ -563,3 +563,26 @@ a.card-link.offer::after{
 }
 .buy-modal h3{margin:0 12px 2px 0; font-size:1.15rem;}
 .buy-modal-price{color:var(--blue); font-weight:800; font-size:1.25rem; margin-bottom:18px;}
+
+/* ---------- location picker ---------- */
+#loc-picker{position:fixed; inset:0; z-index:300; background:rgba(11,26,43,.55); display:none; align-items:flex-end; justify-content:center;}
+#loc-picker.open{display:flex;}
+#loc-picker .loc-sheet{position:relative; background:var(--paper,#fff); width:100%; max-width:460px; border-radius:22px 22px 0 0; padding:26px 22px calc(22px + env(safe-area-inset-bottom,0px)); box-shadow:0 -10px 40px rgba(0,0,0,.2);}
+@media (min-width:700px){ #loc-picker{align-items:center;} #loc-picker .loc-sheet{border-radius:22px;} }
+#loc-picker h3{margin:0 0 16px; font-size:1.3rem; color:var(--blue-dark,#045bab);}
+#loc-picker .loc-sub{margin:0 0 2px; font-size:.8rem; text-transform:uppercase; letter-spacing:.06em; opacity:.6;}
+#loc-picker .loc-close{position:absolute; top:10px; right:14px; background:none; border:0; font-size:1.8rem; line-height:1; cursor:pointer; color:#667;}
+#loc-picker .loc-btn{display:flex; flex-direction:column; gap:2px; padding:16px 18px; margin-top:10px; border-radius:16px; background:var(--blue,#0077de); color:#fff; text-decoration:none;}
+#loc-picker .loc-btn strong{font-size:1.15rem;}
+#loc-picker .loc-btn span{font-size:.85rem; opacity:.85;}
+#loc-picker .loc-btn.last{box-shadow:0 0 0 3px var(--green,#6ffd1d);}
+
+/* ---------- sticky mobile booking bar ---------- */
+.sticky-book{display:none;}
+@media (max-width:900px){
+  .sticky-book{display:flex; gap:10px; position:fixed; left:0; right:0; bottom:0; z-index:150; padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px)); background:rgba(255,255,255,.96); backdrop-filter:blur(8px); box-shadow:0 -4px 18px rgba(0,40,90,.12);}
+  .sticky-book > *{flex:1; text-align:center; padding:13px 10px; border-radius:999px; font-weight:800; font-size:1rem; font-family:inherit; text-decoration:none; border:0; cursor:pointer;}
+  .sticky-book .sb-court{background:var(--green,#6ffd1d); color:var(--blue-dark,#045bab); flex:1.4;}
+  .sticky-book .sb-course{background:var(--blue,#0077de); color:#fff;}
+  body.has-sticky-book{padding-bottom:78px;}
+}

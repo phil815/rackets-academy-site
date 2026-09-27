@@ -14,6 +14,7 @@
     function send(name, p){ p=p||{}; p.page_lang=lang; p.page_path=location.pathname; p.transport_type='beacon'; gtag('event', name, p); }
     document.addEventListener('click', function(e){
       var a = e.target.closest && e.target.closest('a[href]');
+      if (a && a.hasAttribute('data-pick')) return;
       if (a) {
         var h = a.href;
         if (/playtomic\.com/.test(h)) return send('book_court', {link_url:h, link_text:(a.textContent||'').trim().slice(0,60)});
@@ -44,15 +45,23 @@
 <link rel="alternate" hreflang="fr" href="https://www.racketsacademy.ch/fr/">
 <link rel="alternate" hreflang="de" href="https://www.racketsacademy.ch/de/">
 <link rel="alternate" hreflang="x-default" href="https://www.racketsacademy.ch/">
-<link rel="stylesheet" href="../styles.css?v=9">
+<link rel="stylesheet" href="../styles.css?v=11">
+<meta property="og:title" content="Rackets Academy — Réservez un court de padel, pickleball &amp; tennis à Salgesch &amp; Sion">
+<meta property="og:description" content="Réservez un court de padel, pickleball ou tennis à la Rackets Academy à Salgesch ou Sion, Valais. Courts, coaching, spa, bar, et un agenda d'événements complet — réservez via Playtomic.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.racketsacademy.ch/fr/">
+<meta property="og:image" content="https://static.wixstatic.com/media/aa792a_668567b416ac45edb783841973e8b9e7f000.jpg">
+<meta property="og:locale" content="fr_CH">
+<meta property="og:site_name" content="Rackets Academy">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
 <div class="site-top">
 <div class="promo-banner">
   <div class="promo-track">
-    <span>🎾 COURTS OUVERTS — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener">Réservez sur Playtomic →</a></span>
-    <span>🎾 COURTS OUVERTS — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener">Réservez sur Playtomic →</a></span>
-    <span>🎾 COURTS OUVERTS — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener">Réservez sur Playtomic →</a></span>
+    <span>🎾 COURTS OUVERTS — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Réservez sur Playtomic →</a></span>
+    <span>🎾 COURTS OUVERTS — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Réservez sur Playtomic →</a></span>
+    <span>🎾 COURTS OUVERTS — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Réservez sur Playtomic →</a></span>
   </div>
 </div>
 
@@ -78,7 +87,7 @@
       <button type="button" aria-haspopup="true">FR</button>
       <div class="lang-menu"><a href="../index.html">English</a><a href="../de/index.html">Deutsch</a><a href="#">Français</a></div>
     </div>
-    <a class="nav-cta" href="../book.html">Réserver</a>
+    <a class="nav-cta" href="book.html">Réserver</a>
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span></button>
   </div>
 </header>
@@ -91,7 +100,7 @@
     <h1 class="hero-subtitle">Play. Compete. Enjoy.</h1>
     <p class="lede">Padel, pickleball et tennis en Valais, pour les débutants, les compétiteurs et tous ceux entre les deux.</p>
     <div class="hero-actions">
-      <a class="btn btn-green" href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" style="font-size:1.1rem; padding:16px 32px;">Réserver un court</a>
+      <a class="btn btn-green" href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" style="font-size:1.1rem; padding:16px 32px;" data-pick="court">Réserver un court</a>
     </div>
   </div>
 </section>
@@ -101,7 +110,11 @@
     <h2>Ce que nous offrons</h2>
     <p class="section-lede">Chaque carte t'emmène directement vers la réservation.</p>
     <div class="grid-3">
-      <a class="card card-link offer" href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener">
+      <a class="card card-link offer offer-courses" href="training.html">
+        <img src="../images/team/jesus.webp" alt="Cours de padel à la Rackets Academy" loading="lazy">
+        <div class="offer-text"><h3>Cours &amp; entraînement</h3><p>Cours en groupe pour enfants et adultes dès 19.– la séance, et cours privés.</p></div>
+      </a>
+      <a class="card card-link offer" href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">
         <img src="https://static.wixstatic.com/media/a958f5_b29aa49d308347d1b38696c66a01e37b~mv2.png/v1/crop/x_0,y_129,w_1014,h_1012/fill/w_240,h_240,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Capture%20d%E2%80%99%C3%A9cran%202025-12-28%20%C3%A0%2015_53_04.png" alt="Court de padel" loading="lazy">
         <div class="offer-text"><h3>Padel</h3><p>Courts intérieurs et extérieurs modernes, pour tous, du débutant au joueur confirmé.</p></div>
       </a>
@@ -113,23 +126,23 @@
         <img src="https://static.wixstatic.com/media/a958f5_7adda5712bcf431eaaeb6d3792d26b88~mv2.jpg/v1/crop/x_1023,y_0,w_4649,h_4654/fill/w_240,h_240,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/close-up-tennis-racket-balls-ground.jpg" alt="Tennis" loading="lazy">
         <div class="offer-text"><h3>Tennis</h3><p>Courts intérieurs pour jouer confortablement toute l'année.</p></div>
       </a>
-      <a class="card card-link offer" href="../events.html">
+      <a class="card card-link offer" href="ski-and-padel.html">
         <img src="https://static.wixstatic.com/media/aa792a_c77b4f1238aa482f8d4b728e42b877d3~mv2.jpeg/v1/crop/x_274,y_0,w_1331,h_1333/fill/w_240,h_240,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_2820.jpeg" alt="Camps" loading="lazy">
         <div class="offer-text"><h3>Camps</h3><p>Camps d'entraînement, MASTERclasses et week-ends sportifs animés par des coachs expérimentés.</p></div>
       </a>
-      <a class="card card-link offer" href="../spa-and-sauna.html">
+      <a class="card card-link offer" href="spa-and-sauna.html">
         <img src="https://static.wixstatic.com/media/aa792a_dd4f0746f5cf428fbfc25424dbf9be3f~mv2.jpg/v1/crop/x_1684,y_0,w_3347,h_3354/fill/w_240,h_240,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/4F3A0013.jpg" alt="Spa et sauna" loading="lazy">
-        <div class="offer-text"><h3>Spa | Sauna</h3><p>Détends-toi dans notre espace bien-être avec sauna, hammam et jacuzzi.</p></div>
+        <div class="offer-text"><h3>Spa</h3><p>Détends-toi dans notre espace bien-être avec sauna, hammam et jacuzzi.</p></div>
       </a>
-      <a class="card card-link offer" href="../events.html">
+      <a class="card card-link offer" href="events.html">
         <img src="https://static.wixstatic.com/media/e3d5bd_d1426c70e53c4b299c2a97ad9cdb1e9d~mv2.jpg/v1/crop/x_827,y_0,w_2905,h_2901/fill/w_240,h_240,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/4F3A9847.jpg" alt="Événements" loading="lazy">
         <div class="offer-text"><h3>Événements</h3><p>Des événements chaque mois entre sport, bonne bouffe et ambiance conviviale. Réservable en privé aussi.</p></div>
       </a>
-      <a class="card card-link offer" href="../company.html#discount">
+      <a class="card card-link offer" href="company.html#discount">
         <img src="https://static.wixstatic.com/media/e3d5bd_e5b48ebf98d64e2b8cc2572d60ca60ec~mv2.jpg/v1/crop/x_144,y_0,w_3397,h_3404/fill/w_240,h_240,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/4F3A9823.jpg" alt="Réduction entreprise" loading="lazy">
         <div class="offer-text"><h3>Réduction entreprise</h3><p>15% de réduction sur toutes les réservations avant 17h30 pour les employés d'entreprises partenaires.</p></div>
       </a>
-      <a class="card card-link offer" href="../company.html#events">
+      <a class="card card-link offer" href="company.html#events">
         <img src="https://static.wixstatic.com/media/aa792a_c239593216d84b37855d0f60aac2e273~mv2.jpg/v1/fill/w_240,h_240,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_2849_edited.jpg" alt="Événements d'entreprise" loading="lazy">
         <div class="offer-text"><h3>Événements d'entreprise</h3><p>Tournois, dîners, paella et fêtes pour ton équipe — sur demande.</p></div>
       </a>
@@ -167,8 +180,8 @@
     <h2>Tarifs des courts &amp; cours</h2>
     <p class="section-lede" style="margin-left:auto; margin-right:auto;">Les tarifs varient selon le sport, l'heure et la durée — voir les prix en direct sur Playtomic. Vous cherchez les cours de padel ? Tous les tarifs sont sur notre page Cours.</p>
     <div class="hero-actions" style="justify-content:center; display:flex; gap:14px; flex-wrap:wrap;">
-      <a class="btn btn-blue" href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener">Voir les tarifs sur Playtomic</a>
-      <a class="btn btn-outline" style="border-color:var(--blue); color:var(--blue);" href="../training.html">Voir les tarifs des cours</a>
+      <a class="btn btn-blue" href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Voir les tarifs sur Playtomic</a>
+      <a class="btn btn-outline" style="border-color:var(--blue); color:var(--blue);" href="training.html">Voir les tarifs des cours</a>
     </div>
   </div>
 </section>
@@ -294,11 +307,11 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Rackets Academy</span>
-      <span><a href="../terms-and-conditions.html">Conditions générales</a> · <a href="../privacy-policy.html">Politique de confidentialité</a></span>
+      <span><a href="terms-and-conditions.html">Conditions générales</a> · <a href="privacy-policy.html">Politique de confidentialité</a></span>
     </div>
   </div>
 </footer>
 
-<script src="../nav.js?v=5"></script>
+<script src="../nav.js?v=6"></script>
 </body>
 </html>

@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+  // first visit: follow the browser language (fr/de); explicit choice is remembered
+  (function(){try{var k='ra_lang';if(!localStorage.getItem(k)){var n=(navigator.language||'').slice(0,2).toLowerCase();if(n==='fr'||n==='de'){localStorage.setItem(k,n);var p=location.pathname.split('/').pop()||'index.html';location.replace(n+'/'+p+location.search+location.hash);}else{localStorage.setItem(k,'en');}}}catch(e){}})();
+</script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9T2GZHGS2"></script>
 <script>
@@ -14,6 +18,7 @@
     function send(name, p){ p=p||{}; p.page_lang=lang; p.page_path=location.pathname; p.transport_type='beacon'; gtag('event', name, p); }
     document.addEventListener('click', function(e){
       var a = e.target.closest && e.target.closest('a[href]');
+      if (a && a.hasAttribute('data-pick')) return;
       if (a) {
         var h = a.href;
         if (/playtomic\.com/.test(h)) return send('book_court', {link_url:h, link_text:(a.textContent||'').trim().slice(0,60)});
@@ -40,15 +45,27 @@
 <title>Ski &amp; Padel Weekends — Rackets Academy</title>
 <meta name="description" content="Join our all-inclusive Ski &amp; Padel weekend in Valais: morning skiing in Crans-Montana, afternoon padel at Rackets Academy, lodging, meals, spa and equipment included.">
 <link rel="canonical" href="https://www.racketsacademy.ch/ski-and-padel.html">
-<link rel="stylesheet" href="styles.css?v=9">
+<link rel="stylesheet" href="styles.css?v=11">
+<meta property="og:title" content="Ski &amp; Padel Weekends — Rackets Academy">
+<meta property="og:description" content="Join our all-inclusive Ski &amp; Padel weekend in Valais: morning skiing in Crans-Montana, afternoon padel at Rackets Academy, lodging, meals, spa and equipment included.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.racketsacademy.ch/ski-and-padel.html">
+<meta property="og:image" content="https://static.wixstatic.com/media/aa792a_668567b416ac45edb783841973e8b9e7f000.jpg">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="Rackets Academy">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://www.racketsacademy.ch/ski-and-padel.html">
+<link rel="alternate" hreflang="fr" href="https://www.racketsacademy.ch/fr/ski-and-padel.html">
+<link rel="alternate" hreflang="de" href="https://www.racketsacademy.ch/de/ski-and-padel.html">
+<link rel="alternate" hreflang="x-default" href="https://www.racketsacademy.ch/ski-and-padel.html">
 </head>
 <body>
 <div class="site-top">
 <div class="promo-banner">
   <div class="promo-track">
-    <span>🎾 COURTS OPEN NOW — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener">Book Now on Playtomic →</a></span>
-    <span>🎾 COURTS OPEN NOW — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener">Book Now on Playtomic →</a></span>
-    <span>🎾 COURTS OPEN NOW — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener">Book Now on Playtomic →</a></span>
+    <span>🎾 COURTS OPEN NOW — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Book Now on Playtomic →</a></span>
+    <span>🎾 COURTS OPEN NOW — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Book Now on Playtomic →</a></span>
+    <span>🎾 COURTS OPEN NOW — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Book Now on Playtomic →</a></span>
   </div>
 </div>
 <header>
@@ -95,7 +112,7 @@
       <span class="eyebrow-tag" style="background:rgba(255,255,255,.18);">Group discount</span>
       <p style="margin:14px 0 0; font-size:1.05rem;">Book as a group of 8 and pay <strong>CHF 849.–</strong> per person instead of 999.–</p>
     </div>
-    <a class="btn btn-green" href="https://wa.me/41772780115" target="_blank" rel="noopener">Message Mario on WhatsApp to book</a>
+    <a class="btn btn-green" href="https://wa.me/41772780115?text=Hola%21%20I%20have%20a%20question%20about%20Ski%20%26%20Padel." target="_blank" rel="noopener">Message Mario on WhatsApp to book</a>
   </div>
 </section>
 
@@ -216,7 +233,7 @@
 
 <section class="section-tight" style="text-align:center;">
   <div class="wrap">
-    <a class="btn btn-green" href="https://wa.me/41772780115" target="_blank" rel="noopener">Message Mario on WhatsApp to book</a>
+    <a class="btn btn-green" href="https://wa.me/41772780115?text=Hola%21%20I%20have%20a%20question%20about%20Ski%20%26%20Padel." target="_blank" rel="noopener">Message Mario on WhatsApp to book</a>
   </div>
 </section>
 
@@ -256,6 +273,6 @@
     </div>
   </div>
 </footer>
-<script src="nav.js?v=5"></script>
+<script src="nav.js?v=6"></script>
 </body>
 </html>

@@ -14,6 +14,7 @@
     function send(name, p){ p=p||{}; p.page_lang=lang; p.page_path=location.pathname; p.transport_type='beacon'; gtag('event', name, p); }
     document.addEventListener('click', function(e){
       var a = e.target.closest && e.target.closest('a[href]');
+      if (a && a.hasAttribute('data-pick')) return;
       if (a) {
         var h = a.href;
         if (/playtomic\.com/.test(h)) return send('book_court', {link_url:h, link_text:(a.textContent||'').trim().slice(0,60)});
@@ -40,21 +41,33 @@
 <title>Padel+Fitness — Padel &amp; Workout | Rackets Academy</title>
 <meta name="description" content="Padel+Fitness: kombiniere eine Fitness-Einheit mit Padel auf dem Platz für einen vollen Workout-Morgen in Salgesch.">
 <link rel="canonical" href="https://www.racketsacademy.ch/de/padel-fitness.html">
-<link rel="stylesheet" href="../styles.css?v=9">
+<link rel="stylesheet" href="../styles.css?v=11">
+<meta property="og:title" content="Padel+Fitness — Padel &amp; Workout | Rackets Academy">
+<meta property="og:description" content="Padel+Fitness: kombiniere eine Fitness-Einheit mit Padel auf dem Platz für einen vollen Workout-Morgen in Salgesch.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.racketsacademy.ch/de/padel-fitness.html">
+<meta property="og:image" content="https://static.wixstatic.com/media/aa792a_668567b416ac45edb783841973e8b9e7f000.jpg">
+<meta property="og:locale" content="de_CH">
+<meta property="og:site_name" content="Rackets Academy">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://www.racketsacademy.ch/padel-fitness.html">
+<link rel="alternate" hreflang="fr" href="https://www.racketsacademy.ch/fr/padel-fitness.html">
+<link rel="alternate" hreflang="de" href="https://www.racketsacademy.ch/de/padel-fitness.html">
+<link rel="alternate" hreflang="x-default" href="https://www.racketsacademy.ch/padel-fitness.html">
 </head>
 <body>
 <div class="site-top">
 <div class="promo-banner">
   <div class="promo-track">
-    <span>🎾 PLÄTZE JETZT OFFEN — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener">Jetzt auf Playtomic buchen →</a></span>
-    <span>🎾 PLÄTZE JETZT OFFEN — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener">Jetzt auf Playtomic buchen →</a></span>
-    <span>🎾 PLÄTZE JETZT OFFEN — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener">Jetzt auf Playtomic buchen →</a></span>
+    <span>🎾 PLÄTZE JETZT OFFEN — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Jetzt auf Playtomic buchen →</a></span>
+    <span>🎾 PLÄTZE JETZT OFFEN — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Jetzt auf Playtomic buchen →</a></span>
+    <span>🎾 PLÄTZE JETZT OFFEN — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Jetzt auf Playtomic buchen →</a></span>
   </div>
 </div>
 
 <header>
   <div class="nav">
-    <a href="../index.html" class="logo"><img src="https://static.wixstatic.com/media/aa792a_055b56096ef04c0697a7ed52660d5a0b~mv2.png/v1/crop/x_579,y_1441,w_2868,h_1003/fill/w_223,h_78,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Rackets_Academy_Logo_2xblue-on-white_horizontal_FINAL.png" alt="Rackets Academy logo" width="180" height="63"></a>
+    <a href="index.html" class="logo"><img src="https://static.wixstatic.com/media/aa792a_055b56096ef04c0697a7ed52660d5a0b~mv2.png/v1/crop/x_579,y_1441,w_2868,h_1003/fill/w_223,h_78,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Rackets_Academy_Logo_2xblue-on-white_horizontal_FINAL.png" alt="Rackets Academy logo" width="180" height="63"></a>
     <nav class="navlinks">
       <a href="book.html">Buchen</a>
       <a href="training.html">Training</a>
@@ -138,10 +151,10 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Rackets Academy</span>
-      <span><a href="../terms-and-conditions.html">AGB</a> · <a href="../privacy-policy.html">Datenschutz</a></span>
+      <span><a href="terms-and-conditions.html">AGB</a> · <a href="privacy-policy.html">Datenschutz</a></span>
     </div>
   </div>
 </footer>
-<script src="../nav.js?v=5"></script>
+<script src="../nav.js?v=6"></script>
 </body>
 </html>

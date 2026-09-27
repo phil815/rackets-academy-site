@@ -213,3 +213,85 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 })();
+
+// ------------------------------------------------------------------
+// Location picker (Salgesch / Sion), sticky mobile booking bar,
+// remembered language choice. Added Sep 2026.
+// ------------------------------------------------------------------
+(function () {
+  var L = (document.documentElement.lang || 'en').slice(0, 2);
+  var T = {
+    en: { title: 'Where do you want to play?', court: 'Book a court', course: 'Courses', sub: 'Pick your location', close: 'Close', sa: 'Padel · Pickleball · Tennis', si: 'Padel' },
+    fr: { title: 'Où veux-tu jouer ?', court: 'Réserver', course: 'Cours', sub: 'Choisis ton lieu', close: 'Fermer', sa: 'Padel · Pickleball · Tennis', si: 'Padel' },
+    de: { title: 'Wo möchtest du spielen?', court: 'Platz buchen', course: 'Kurse', sub: 'Wähle deinen Standort', close: 'Schliessen', sa: 'Padel · Pickleball · Tennis', si: 'Padel' }
+  }[L] || null;
+  if (!T) return;
+  var URLS = {
+    court: { sa: 'https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3', si: 'https://playtomic.com/tenant/c2ce2a9e-ab52-4191-bf7f-0c0aa70a2701' },
+    academy: { sa: 'https://tinyurl.com/Academy-Salgesch', si: 'https://tinyurl.com/Academy-Sion' }
+  };
+
+  function openPicker(kind) {
+    var u = URLS[kind] || URLS.court;
+    var ov = document.getElementById('loc-picker');
+    if (!ov) {
+      ov = document.createElement('div');
+      ov.id = 'loc-picker';
+      ov.setAttribute('role', 'dialog');
+      ov.setAttribute('aria-modal', 'true');
+      ov.innerHTML =
+        '<div class="loc-sheet">' +
+          '<button type="button" class="loc-close" aria-label="' + T.close + '">×</button>' +
+          '<p class="loc-sub">' + T.sub + '</p>' +
+          '<h3>' + T.title + '</h3>' +
+          '<a class="loc-btn" data-loc="sa" target="_blank" rel="noopener"><strong>Salgesch</strong><span>' + T.sa + '</span></a>' +
+          '<a class="loc-btn" data-loc="si" target="_blank" rel="noopener"><strong>Sion</strong><span>' + T.si + '</span></a>' +
+        '</div>';
+      document.body.appendChild(ov);
+      ov.addEventListener('click', function (e) {
+        if (e.target === ov || e.target.closest('.loc-close')) ov.classList.remove('open');
+        var b = e.target.closest('.loc-btn');
+        if (b) {
+          try { localStorage.setItem('ra_loc', b.getAttribute('data-loc')); } catch (err) {}
+          setTimeout(function () { ov.classList.remove('open'); }, 300);
+        }
+      });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') ov.classList.remove('open'); });
+    }
+    ov.querySelector('[data-loc="sa"]').href = u.sa;
+    ov.querySelector('[data-loc="si"]').href = u.si;
+    var last = null;
+    try { last = localStorage.getItem('ra_loc'); } catch (err) {}
+    ov.querySelectorAll('.loc-btn').forEach(function (b) { b.classList.toggle('last', b.getAttribute('data-loc') === last); });
+    ov.classList.add('open');
+  }
+  window.openLocationPicker = openPicker;
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('[data-pick]');
+    if (!a) return;
+    e.preventDefault();
+    openPicker(a.getAttribute('data-pick'));
+  });
+
+  // remember explicit language choice (used by the auto-language redirect)
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('.lang-menu a');
+    if (!a) return;
+    var h = a.getAttribute('href') || '';
+    var lang = h === '#' ? L : (/(^|\/)fr\//.test(h) ? 'fr' : (/(^|\/)de\//.test(h) ? 'de' : 'en'));
+    try { localStorage.setItem('ra_lang', lang); } catch (err) {}
+  });
+
+  // sticky booking bar (mobile only, via CSS)
+  document.addEventListener('DOMContentLoaded', function () {
+    if (document.querySelector('.sticky-book')) return;
+    var bar = document.createElement('div');
+    bar.className = 'sticky-book';
+    bar.innerHTML =
+      '<button type="button" class="sb-court" data-pick="court">' + T.court + '</button>' +
+      '<a class="sb-course" href="training.html">' + T.course + '</a>';
+    document.body.appendChild(bar);
+    document.body.classList.add('has-sticky-book');
+  });
+})();
