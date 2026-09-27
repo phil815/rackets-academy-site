@@ -494,3 +494,14 @@ a.card-link.offer::after{
 .racket-model{font-weight:800; font-size:0.92rem; color:var(--blue-dark);}
 .racket-variant{font-size:0.78rem; color:var(--blue-dark); opacity:.7;}
 .racket-price{font-weight:800; font-size:1rem; color:var(--blue); margin-top:4px;}
+
+/* Shop — top-level category selector */
+.shop-category-nav{
+  display:flex; gap:12px; justify-content:center; flex-wrap:wrap;
+}
+.shop-category-nav a{
+  background:var(--paper); color:var(--blue-dark); font-weight:800; font-size:0.95rem;
+  padding:12px 26px; border-radius:999px; border:2px solid transparent; text-decoration:none;
+  transition:border-color .15s, background .15s;
+}
+.shop-category-nav a:hover{border-color:var(--blue); background:var(--white);}
