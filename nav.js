@@ -102,6 +102,13 @@ function openBuyModal(type, opts) {
   var giftWrap = document.getElementById('modal-gift-wrap');
   if (giftWrap) giftWrap.style.display = type === 'voucher' ? '' : 'none';
 
+  var emailNote = document.getElementById('modal-email-note');
+  if (emailNote) {
+    emailNote.textContent = type === 'voucher'
+      ? emailNote.getAttribute('data-voucher')
+      : emailNote.getAttribute('data-racket');
+  }
+
   document.getElementById('buy-modal-overlay').classList.add('open');
 }
 
