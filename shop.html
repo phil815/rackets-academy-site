@@ -6,7 +6,7 @@
 <title>Shop — Gift Vouchers &amp; Rackets | Rackets Academy</title>
 <meta name="description" content="Buy a padel gift voucher (Playtomic game codes) or order a racket for pickup at Rackets Academy Salgesch or Sion.">
 <link rel="canonical" href="https://racketsacademy.ch/shop.html">
-<link rel="stylesheet" href="styles.css?v=4">
+<link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
 <div class="site-top">
@@ -108,22 +108,193 @@
 </section>
 
 <section id="rackets" class="section-tight" style="background:var(--paper);">
-  <div class="wrap" style="max-width:600px;">
+  <div class="wrap">
     <h2>Rackets</h2>
-    <p class="section-lede">Pick up your racket at the academy — no shipping. <em>Models &amp; prices to be confirmed.</em></p>
+    <p class="section-lede">Pick up your racket at the academy — no shipping.</p>
+
+    <div class="highlight-box" style="margin-bottom:32px;">
+      <span class="eyebrow-tag" style="background:rgba(255,255,255,.18);">Try before you buy</span>
+      <h2 style="color:var(--white); margin-top:14px;">Test any racket for 10 CHF</h2>
+      <p style="max-width:520px; margin:0 auto;">The big benefit of our club: try any racket on court for just 10 CHF. Buy it afterwards, and those 10 CHF come straight off the purchase price.</p>
+    </div>
 
     <form id="racket-form" class="shop-form" method="POST" action="https://script.google.com/macros/s/AKfycbwLWTwsILcSkAHe9FSKjicU1pUk5s3nxSnS4PQ2Tws2RVejiHjBltJJ8gKpmIe3JLRe/exec" target="_blank">
       <input type="hidden" name="formType" value="racket">
-      <label class="shop-field">
-        Racket model
-        <select name="racketModel" required>
-          <option value="">Select a model — TBD</option>
-          <option value="beginner">Beginner racket — TBD CHF</option>
-          <option value="intermediate">Intermediate racket — TBD CHF</option>
-          <option value="pro">Pro racket — TBD CHF</option>
-        </select>
+      <input type="hidden" name="price" id="racket-price">
+      <input type="hidden" name="racketLabel" id="racket-label">
+
+    <h3 class="racket-brand-heading">Babolat</h3>
+    <div class="racket-grid">
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="babolat-viper-2026-technical-soft" data-price="250" data-label="Babolat Viper 2026 — Technical Soft">
+        <span class="racket-monogram racket-monogram--babolat">B</span>
+        <span class="racket-model">Viper 2026</span>
+        <span class="racket-variant">Technical Soft</span>
+        <span class="racket-price">250 CHF</span>
       </label>
-      <label class="shop-field">
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="babolat-viper-2026-technical" data-price="250" data-label="Babolat Viper 2026 — Technical">
+        <span class="racket-monogram racket-monogram--babolat">B</span>
+        <span class="racket-model">Viper 2026</span>
+        <span class="racket-variant">Technical</span>
+        <span class="racket-price">250 CHF</span>
+      </label>
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="babolat-viper-2026-air" data-price="250" data-label="Babolat Viper 2026 — Air">
+        <span class="racket-monogram racket-monogram--babolat">B</span>
+        <span class="racket-model">Viper 2026</span>
+        <span class="racket-variant">Air</span>
+        <span class="racket-price">250 CHF</span>
+      </label>
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="babolat-veron-2026-technical" data-price="220" data-label="Babolat Veron 2026 — Technical">
+        <span class="racket-monogram racket-monogram--babolat">B</span>
+        <span class="racket-model">Veron 2026</span>
+        <span class="racket-variant">Technical</span>
+        <span class="racket-price">220 CHF</span>
+      </label>
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="babolat-veron-2026-air" data-price="220" data-label="Babolat Veron 2026 — Air">
+        <span class="racket-monogram racket-monogram--babolat">B</span>
+        <span class="racket-model">Veron 2026</span>
+        <span class="racket-variant">Air</span>
+        <span class="racket-price">220 CHF</span>
+      </label>
+    </div>
+    <h3 class="racket-brand-heading">Wilson</h3>
+    <div class="racket-grid">
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="wilson-endure-pro" data-price="250" data-label="Wilson Endure — Pro">
+        <span class="racket-monogram racket-monogram--wilson">W</span>
+        <span class="racket-model">Endure</span>
+        <span class="racket-variant">Pro</span>
+        <span class="racket-price">250 CHF</span>
+      </label>
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="wilson-endure" data-price="220" data-label="Wilson Endure">
+        <span class="racket-monogram racket-monogram--wilson">W</span>
+        <span class="racket-model">Endure</span>
+        
+        <span class="racket-price">220 CHF</span>
+      </label>
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="wilson-endure-ls" data-price="200" data-label="Wilson Endure — LS">
+        <span class="racket-monogram racket-monogram--wilson">W</span>
+        <span class="racket-model">Endure</span>
+        <span class="racket-variant">LS</span>
+        <span class="racket-price">200 CHF</span>
+      </label>
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="wilson-blade-ls-green" data-price="180" data-label="Wilson Blade — LS Green">
+        <span class="racket-monogram racket-monogram--wilson">W</span>
+        <span class="racket-model">Blade</span>
+        <span class="racket-variant">LS Green</span>
+        <span class="racket-price">180 CHF</span>
+      </label>
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="wilson-blade-ls-rosa" data-price="180" data-label="Wilson Blade — LS Rosa">
+        <span class="racket-monogram racket-monogram--wilson">W</span>
+        <span class="racket-model">Blade</span>
+        <span class="racket-variant">LS Rosa</span>
+        <span class="racket-price">180 CHF</span>
+      </label>
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="wilson-bela-pro" data-price="150" data-label="Wilson Bela — Pro">
+        <span class="racket-monogram racket-monogram--wilson">W</span>
+        <span class="racket-model">Bela</span>
+        <span class="racket-variant">Pro</span>
+        <span class="racket-price">150 CHF</span>
+      </label>
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="wilson-defy-white" data-price="220" data-label="Wilson Defy — White">
+        <span class="racket-monogram racket-monogram--wilson">W</span>
+        <span class="racket-model">Defy</span>
+        <span class="racket-variant">White</span>
+        <span class="racket-price">220 CHF</span>
+      </label>
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="wilson-defy-ls-white" data-price="200" data-label="Wilson Defy — LS White">
+        <span class="racket-monogram racket-monogram--wilson">W</span>
+        <span class="racket-model">Defy</span>
+        <span class="racket-variant">LS White</span>
+        <span class="racket-price">200 CHF</span>
+      </label>
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="wilson-defy-pro" data-price="220" data-label="Wilson Defy — Pro">
+        <span class="racket-monogram racket-monogram--wilson">W</span>
+        <span class="racket-model">Defy</span>
+        <span class="racket-variant">Pro</span>
+        <span class="racket-price">220 CHF</span>
+      </label>
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="wilson-defy" data-price="200" data-label="Wilson Defy">
+        <span class="racket-monogram racket-monogram--wilson">W</span>
+        <span class="racket-model">Defy</span>
+        
+        <span class="racket-price">200 CHF</span>
+      </label>
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="wilson-defy-ls" data-price="180" data-label="Wilson Defy — LS">
+        <span class="racket-monogram racket-monogram--wilson">W</span>
+        <span class="racket-model">Defy</span>
+        <span class="racket-variant">LS</span>
+        <span class="racket-price">180 CHF</span>
+      </label>
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="wilson-bela-v3" data-price="200" data-label="Wilson Bela v3">
+        <span class="racket-monogram racket-monogram--wilson">W</span>
+        <span class="racket-model">Bela v3</span>
+        
+        <span class="racket-price">200 CHF</span>
+      </label>
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="wilson-bela-v3-pro" data-price="230" data-label="Wilson Bela v3 — Pro">
+        <span class="racket-monogram racket-monogram--wilson">W</span>
+        <span class="racket-model">Bela v3</span>
+        <span class="racket-variant">Pro</span>
+        <span class="racket-price">230 CHF</span>
+      </label>
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="wilson-bela-v3-ls" data-price="180" data-label="Wilson Bela v3 — LS">
+        <span class="racket-monogram racket-monogram--wilson">W</span>
+        <span class="racket-model">Bela v3</span>
+        <span class="racket-variant">LS</span>
+        <span class="racket-price">180 CHF</span>
+      </label>
+    </div>
+    <h3 class="racket-brand-heading">Siux</h3>
+    <div class="racket-grid">
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="siux-diablo-pro-royal-blue-2026" data-price="250" data-label="Siux Diablo Pro — Royal Blue 2026">
+        <span class="racket-monogram racket-monogram--siux">S</span>
+        <span class="racket-model">Diablo Pro</span>
+        <span class="racket-variant">Royal Blue 2026</span>
+        <span class="racket-price">250 CHF</span>
+      </label>
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="siux-pegasus-pro-storm-grey-2026" data-price="250" data-label="Siux Pegasus Pro — Storm Grey 2026">
+        <span class="racket-monogram racket-monogram--siux">S</span>
+        <span class="racket-model">Pegasus Pro</span>
+        <span class="racket-variant">Storm Grey 2026</span>
+        <span class="racket-price">250 CHF</span>
+      </label>
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="siux-fenix-pro-2026-black-purple" data-price="250" data-label="Siux Fenix Pro — 2026 Black/Purple">
+        <span class="racket-monogram racket-monogram--siux">S</span>
+        <span class="racket-model">Fenix Pro</span>
+        <span class="racket-variant">2026 Black/Purple</span>
+        <span class="racket-price">250 CHF</span>
+      </label>
+      <label class="racket-card">
+        <input type="radio" name="racketModel" value="siux-trilogy-pro-2026-ash-green" data-price="250" data-label="Siux Trilogy Pro — 2026 Ash Green">
+        <span class="racket-monogram racket-monogram--siux">S</span>
+        <span class="racket-model">Trilogy Pro</span>
+        <span class="racket-variant">2026 Ash Green</span>
+        <span class="racket-price">250 CHF</span>
+      </label>
+    </div>
+
+      <label class="shop-field" style="margin-top:24px;">
         Pickup location
         <select name="pickupLocation" required>
           <option value="Salgesch">Salgesch</option>
@@ -159,6 +330,6 @@
     </div>
   </div>
 </footer>
-<script src="nav.js?v=2"></script>
+<script src="nav.js?v=3"></script>
 </body>
 </html>

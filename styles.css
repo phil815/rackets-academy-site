@@ -467,3 +467,30 @@ a.card-link.offer::after{
 @media (prefers-reduced-motion: reduce){
   .sponsor-track{animation:none;}
 }
+
+/* Shop — racket product catalog */
+.racket-brand-heading{
+  font-size:1.1rem; font-weight:800; color:var(--blue-dark); margin:28px 0 12px;
+  text-transform:uppercase; letter-spacing:.04em;
+}
+.racket-grid{
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:12px;
+  margin-bottom:8px;
+}
+.racket-card{
+  position:relative; background:var(--white); border:2px solid #d7e0ea; border-radius:14px;
+  padding:16px 12px; text-align:center; cursor:pointer; display:flex; flex-direction:column;
+  align-items:center; gap:4px; transition:border-color .15s, box-shadow .15s;
+}
+.racket-card input{position:absolute; opacity:0;}
+.racket-card:has(input:checked){border-color:var(--green); box-shadow:0 4px 14px rgba(11,26,43,.1);}
+.racket-monogram{
+  width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-weight:800; font-size:1.1rem; color:var(--white); margin-bottom:4px;
+}
+.racket-monogram--babolat{background:#0057b8;}
+.racket-monogram--wilson{background:#c8102e;}
+.racket-monogram--siux{background:#1a1a1a;}
+.racket-model{font-weight:800; font-size:0.92rem; color:var(--blue-dark);}
+.racket-variant{font-size:0.78rem; color:var(--blue-dark); opacity:.7;}
+.racket-price{font-weight:800; font-size:1rem; color:var(--blue); margin-top:4px;}

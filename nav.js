@@ -14,8 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  var langSwitch = document.querySelector('.lang-switch');
-  if (langSwitch) {
+  document.querySelectorAll('.lang-switch').forEach(function (langSwitch) {
     var langBtn = langSwitch.querySelector('button');
     langBtn.addEventListener('click', function (e) {
       e.stopPropagation();
@@ -24,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('click', function () {
       langSwitch.classList.remove('open');
     });
-  }
+  });
 });
 
 // "Before you book" info modal — shown once per session on primary booking links
@@ -90,6 +89,22 @@ document.addEventListener('DOMContentLoaded', function () {
       r.addEventListener('change', syncBundle);
     });
     syncBundle(); // set initial values from the pre-checked option
+  }
+
+  var racketForm = document.getElementById('racket-form');
+  if (racketForm) {
+    var racketPriceField = document.getElementById('racket-price');
+    var racketLabelField = document.getElementById('racket-label');
+    var syncRacket = function () {
+      var checked = racketForm.querySelector('input[name="racketModel"]:checked');
+      if (checked) {
+        racketPriceField.value = checked.getAttribute('data-price');
+        racketLabelField.value = checked.getAttribute('data-label');
+      }
+    };
+    racketForm.querySelectorAll('input[name="racketModel"]').forEach(function (r) {
+      r.addEventListener('change', syncRacket);
+    });
   }
 });
 
