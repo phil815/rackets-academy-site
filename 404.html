@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Rackets Academy</title>
+<script>
+// Redirect old Wix URLs to the new pages
+(function(){
+  var p = location.pathname.replace(/\/+$/,'').toLowerCase();
+  var lang = '';
+  var m = p.match(/^\/(fr|de|en)(\/|$)/);
+  if (m) { if (m[1] !== 'en') lang = m[1] + '/'; p = p.slice(m[0].length - (m[2] ? 1 : 0)); }
+  var map = [
+    [/^$|^\/home$|^\/accueil$|^\/startseite$/, 'index.html'],
+    [/^\/about(-us)?$|^\/a-propos|^\/ueber-uns/, 'about.html'],
+    [/^\/events?(-and-camps)?$|^\/event-details|^\/events-/, 'events.html'],
+    [/^\/category|^\/product-page|^\/shop|^\/store|^\/cart/, 'shop.html'],
+    [/^\/playtomic|^\/book/, 'book.html'],
+    [/^\/spa|^\/sauna/, 'spa-and-sauna.html'],
+    [/^\/ski/, 'ski-and-padel.html'],
+    [/^\/racketero/, 'racketero.html'],
+    [/^\/training|^\/coaching|^\/lessons|^\/cours/, 'training.html'],
+    [/^\/rackets-?plus|^\/membership/, 'rackets-plus.html'],
+    [/^\/company|^\/corporate|^\/firmen/, 'company.html'],
+    [/^\/privacy/, 'privacy-policy.html'],
+    [/^\/terms/, 'terms-and-conditions.html'],
+    [/^\/swiss-tennis/, 'swiss-tennis.html'],
+    [/^\/rivella/, 'rivella-league.html'],
+    [/^\/padel-wine/, 'padel-wine.html'],
+    [/^\/padel-fitness/, 'padel-fitness.html'],
+    [/^\/padel-paella/, 'padel-paella.html']
+  ];
+  var base = location.hostname.indexOf('github.io') > -1 ? '/rackets-academy-site/' : '/';
+  for (var i = 0; i < map.length; i++) {
+    if (map[i][0].test(p)) { location.replace(base + lang + map[i][1]); return; }
+  }
+  // unknown page: go home after a moment
+  setTimeout(function(){ location.replace(base + lang + 'index.html'); }, 2500);
+})();
+</script>
+<style>body{font-family:system-ui,sans-serif;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0;background:#0077de;color:#fff;text-align:center}a{color:#6ffd1d}</style>
+</head>
+<body><div><h1>Hola 👋</h1><p>This page moved. Taking you to <a href="/">Rackets Academy</a>…</p></div></body>
+</html>
