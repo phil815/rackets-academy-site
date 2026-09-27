@@ -14,14 +14,14 @@
   if (m) { if (m[1] !== 'en') lang = m[1] + '/'; p = p.slice(m[0].length - (m[2] ? 1 : 0)); }
   var map = [
     [/^$|^\/home$|^\/accueil$|^\/startseite$/, 'index.html'],
-    [/^\/about(-us)?$|^\/a-propos|^\/ueber-uns/, 'about.html'],
+    [/^\/about|^\/a-propos|^\/ueber-uns|^\/uber-uns/, 'about.html'],
     [/^\/events?(-and-camps)?$|^\/event-details|^\/events-/, 'events.html'],
     [/^\/category|^\/product-page|^\/shop|^\/store|^\/cart/, 'shop.html'],
     [/^\/playtomic|^\/book/, 'book.html'],
     [/^\/spa|^\/sauna/, 'spa-and-sauna.html'],
-    [/^\/ski/, 'ski-and-padel.html'],
+    [/^\/ski|ski/, 'ski-and-padel.html'],
     [/^\/racketero/, 'racketero.html'],
-    [/^\/training|^\/coaching|^\/lessons|^\/cours/, 'training.html'],
+    [/^\/coach.*camp|camp.*coach/, 'events.html'],\n    [/^\/training|^\/coach|^\/lessons|^\/cours/, 'training.html'],
     [/^\/rackets-?plus|^\/membership/, 'rackets-plus.html'],
     [/^\/company|^\/corporate|^\/firmen/, 'company.html'],
     [/^\/privacy/, 'privacy-policy.html'],
