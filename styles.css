@@ -491,6 +491,7 @@ a.card-link.offer::after{
 .racket-monogram--babolat{background:#0057b8;}
 .racket-monogram--wilson{background:#c8102e;}
 .racket-monogram--siux{background:#1a1a1a;}
+.racket-photo{width:100%; max-width:120px; aspect-ratio:3/4; object-fit:contain; margin-bottom:4px;}
 .racket-model{font-weight:800; font-size:0.92rem; color:var(--blue-dark);}
 .racket-variant{font-size:0.78rem; color:var(--blue-dark); opacity:.7;}
 .racket-price{font-weight:800; font-size:1rem; color:var(--blue); margin-top:4px;}
