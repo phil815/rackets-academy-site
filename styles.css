@@ -525,7 +525,7 @@ a.card-link.offer::after{
 .racket-monogram--babolat{background:#0057b8;}
 .racket-monogram--wilson{background:#c8102e;}
 .racket-monogram--siux{background:#1a1a1a;}
-.racket-photo{width:100%; max-width:120px; aspect-ratio:3/4; object-fit:contain; margin-bottom:4px; background:var(--white);}
+.racket-photo{width:100%; max-width:none; aspect-ratio:3/4; object-fit:contain; margin-bottom:4px; background:var(--white);}
 .racket-model{font-weight:800; font-size:0.92rem; color:var(--blue-dark);}
 .racket-variant{font-size:0.78rem; color:var(--blue-dark); opacity:.7; min-height:1.1em; display:block;}
 .buy-btn{
@@ -537,7 +537,7 @@ a.card-link.offer::after{
 @media (max-width:600px){
   .racket-grid{grid-template-columns:repeat(2, 1fr); gap:8px;}
   .racket-card{padding:10px 8px; gap:1px; border-radius:10px;}
-  .racket-photo{max-width:80px;}
+  .racket-photo{max-width:none;}
   .racket-monogram{width:32px; height:32px; font-size:0.9rem;}
   .racket-model{font-size:0.8rem;}
   .racket-variant{font-size:0.68rem; min-height:1em;}
