@@ -473,10 +473,6 @@ a.card-link.offer::after{
   font-size:1.1rem; font-weight:800; color:var(--blue-dark); margin:28px 0 12px;
   text-transform:uppercase; letter-spacing:.04em;
 }
-.racket-grid{
-  display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:12px;
-  margin-bottom:8px;
-}
 .racket-price{font-weight:800; font-size:1rem; color:var(--blue); margin-top:4px;}
 
 /* Shop — top-level category selector */
@@ -504,19 +500,23 @@ a.card-link.offer::after{
 }
 .shop-bubble:hover{transform:translateY(-4px);}
 .shop-bubble.active{border-color:var(--green);}
-.shop-bubble .bubble-icon{font-size:2.2rem;}
+.shop-bubble .bubble-icon{width:44px; height:44px;}
 @media (max-width:600px){
   .shop-bubble{width:130px; height:130px; font-size:0.85rem; padding:10px;}
-  .shop-bubble .bubble-icon{font-size:1.7rem;}
+  .shop-bubble .bubble-icon{width:32px; height:32px;}
 }
 
 .shop-panel{display:none;}
 .shop-panel.active{display:block;}
 
+.racket-grid{
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:12px;
+  margin-bottom:8px;
+}
 .racket-card{
   position:relative; background:var(--white); border:2px solid #d7e0ea; border-radius:14px;
   padding:16px 12px; text-align:center; display:flex; flex-direction:column;
-  align-items:center; gap:4px;
+  align-items:center; gap:2px;
 }
 .racket-monogram{
   width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center;
@@ -525,15 +525,26 @@ a.card-link.offer::after{
 .racket-monogram--babolat{background:#0057b8;}
 .racket-monogram--wilson{background:#c8102e;}
 .racket-monogram--siux{background:#1a1a1a;}
-.racket-photo{width:100%; max-width:120px; aspect-ratio:3/4; object-fit:contain; margin-bottom:4px;}
+.racket-photo{width:100%; max-width:120px; aspect-ratio:3/4; object-fit:contain; margin-bottom:4px; background:var(--white);}
 .racket-model{font-weight:800; font-size:0.92rem; color:var(--blue-dark);}
-.racket-variant{font-size:0.78rem; color:var(--blue-dark); opacity:.7;}
+.racket-variant{font-size:0.78rem; color:var(--blue-dark); opacity:.7; min-height:1.1em; display:block;}
 .buy-btn{
   margin-top:10px; width:100%; background:var(--green); color:var(--blue-dark); font-weight:800;
   font-size:0.85rem; padding:9px 14px; border-radius:999px; border:0; cursor:pointer;
   transition:background .15s;
 }
 .buy-btn:hover{background:#5ee00a;}
+@media (max-width:600px){
+  .racket-grid{grid-template-columns:repeat(2, 1fr); gap:8px;}
+  .racket-card{padding:10px 8px; gap:1px; border-radius:10px;}
+  .racket-photo{max-width:80px;}
+  .racket-monogram{width:32px; height:32px; font-size:0.9rem;}
+  .racket-model{font-size:0.8rem;}
+  .racket-variant{font-size:0.68rem; min-height:1em;}
+  .racket-price{font-size:0.85rem; margin-top:2px;}
+  .buy-btn{margin-top:6px; padding:7px 10px; font-size:0.78rem;}
+  .racket-brand-heading{font-size:0.95rem; margin:20px 0 8px;}
+}
 
 .buy-modal-overlay{
   position:fixed; inset:0; background:rgba(11,26,43,.6); display:none;
