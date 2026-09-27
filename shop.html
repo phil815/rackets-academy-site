@@ -6,7 +6,7 @@
 <title>Shop — Gift Vouchers &amp; Rackets | Rackets Academy</title>
 <meta name="description" content="Buy a padel gift voucher (Playtomic game codes) or order a racket for pickup at Rackets Academy Salgesch or Sion.">
 <link rel="canonical" href="https://racketsacademy.ch/shop.html">
-<link rel="stylesheet" href="styles.css?v=6">
+<link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body>
 <div class="site-top">
@@ -49,74 +49,51 @@
   <span class="ball b1"></span><span class="ball b2"></span><span class="ball b3"></span>
   <div class="wrap hero-inner">
     <h1>Shop</h1>
-    <p class="lede">Gift a padel session, or grab a racket for pickup at the academy. Choose a bundle or model, then pay securely online.</p>
+    <p class="lede">Gift a padel session, or grab a racket for pickup at the academy. Choose your category below.</p>
   </div>
 </section>
 
-<section class="section-tight" style="padding-top:20px; padding-bottom:20px;">
+<section class="section-tight" style="padding-top:32px; padding-bottom:12px;">
   <div class="wrap">
-    <nav class="shop-category-nav">
-      <a href="#vouchers">Gift Vouchers</a>
-      <a href="#rackets">Rackets</a>
-    </nav>
+    <div class="shop-bubbles">
+      <button type="button" class="shop-bubble" id="bubble-vouchers" onclick="showShopPanel('vouchers')">
+        <span class="bubble-icon">🎟️</span>Gift Vouchers
+      </button>
+      <button type="button" class="shop-bubble" id="bubble-rackets" onclick="showShopPanel('rackets')">
+        <span class="bubble-icon">🎾</span>Rackets
+      </button>
+    </div>
   </div>
 </section>
 
-<section id="vouchers">
+<section id="vouchers" class="shop-panel">
   <div class="wrap" style="max-width:600px;">
     <h2>Gift Vouchers</h2>
     <p class="section-lede">Each voucher is a Playtomic code worth one evening game (20 CHF) for one person. Choose a bundle:</p>
 
-    <form id="voucher-form" class="shop-form" method="POST" action="https://script.google.com/macros/s/AKfycbwLWTwsILcSkAHe9FSKjicU1pUk5s3nxSnS4PQ2Tws2RVejiHjBltJJ8gKpmIe3JLRe/exec" target="_blank">
-      <input type="hidden" name="formType" value="voucher">
-      <input type="hidden" name="price" id="voucher-price" value="20">
-      <input type="hidden" name="qty" id="voucher-qty" value="1">
-      <div class="shop-options" id="voucher-options">
-        <label class="shop-option">
-          <input type="radio" name="bundle" value="1x20" data-price="20" data-qty="1" checked>
-          <span class="shop-option-body"><strong>1×</strong><span>20 CHF</span></span>
-        </label>
-        <label class="shop-option">
-          <input type="radio" name="bundle" value="5x20" data-price="100" data-qty="5">
-          <span class="shop-option-body"><strong>5×</strong><span>100 CHF</span></span>
-        </label>
-        <label class="shop-option">
-          <input type="radio" name="bundle" value="10x20" data-price="200" data-qty="10">
-          <span class="shop-option-body"><strong>10×</strong><span>200 CHF</span></span>
-        </label>
-        <label class="shop-option">
-          <input type="radio" name="bundle" value="20x20" data-price="400" data-qty="20">
-          <span class="shop-option-body"><strong>20×</strong><span>400 CHF</span></span>
-        </label>
-      </div>
-
-      <label class="shop-field">
-        Which location?
-        <select name="location" required>
-          <option value="Salgesch">Salgesch</option>
-          <option value="Sion">Sion</option>
-        </select>
+    <div class="shop-options" id="voucher-options">
+      <label class="shop-option">
+        <input type="radio" name="bundle" value="1x20" data-price="20" data-qty="1" checked>
+        <span class="shop-option-body"><strong>1×</strong><span>20 CHF</span></span>
       </label>
-
-      <label class="shop-field">
-        Your name
-        <input type="text" name="buyerName" required>
+      <label class="shop-option">
+        <input type="radio" name="bundle" value="5x20" data-price="100" data-qty="5">
+        <span class="shop-option-body"><strong>5×</strong><span>100 CHF</span></span>
       </label>
-      <label class="shop-field">
-        Your email <span style="font-weight:400; opacity:.7;">(vouchers will be sent here)</span>
-        <input type="email" name="buyerEmail" required>
+      <label class="shop-option">
+        <input type="radio" name="bundle" value="10x20" data-price="200" data-qty="10">
+        <span class="shop-option-body"><strong>10×</strong><span>200 CHF</span></span>
       </label>
-      <label class="shop-field">
-        Gift message <span style="font-weight:400; opacity:.7;">(optional, shown on the voucher)</span>
-        <textarea name="giftMessage" rows="3" maxlength="200"></textarea>
+      <label class="shop-option">
+        <input type="radio" name="bundle" value="20x20" data-price="400" data-qty="20">
+        <span class="shop-option-body"><strong>20×</strong><span>400 CHF</span></span>
       </label>
-
-      <button type="submit" class="btn btn-green" style="width:100%; text-align:center;">Continue to payment</button>
-    </form>
+    </div>
+    <button type="button" class="btn btn-green" style="width:100%; text-align:center;" onclick="openVoucherModal()">Buy Now</button>
   </div>
 </section>
 
-<section id="rackets" class="section-tight" style="background:var(--paper);">
+<section id="rackets" class="shop-panel" style="background:var(--paper);">
   <div class="wrap">
     <h2>Rackets</h2>
     <p class="section-lede">Pick up your racket at the academy — no shipping.</p>
@@ -127,185 +104,194 @@
       <p style="max-width:520px; margin:0 auto;">The big benefit of our club: rent any racket for 10 CHF and try it out on court. Decide to buy it, and we credit that 10 CHF straight off the purchase price — so trying it out costs you nothing.</p>
     </div>
 
-    <form id="racket-form" class="shop-form" method="POST" action="https://script.google.com/macros/s/AKfycbwLWTwsILcSkAHe9FSKjicU1pUk5s3nxSnS4PQ2Tws2RVejiHjBltJJ8gKpmIe3JLRe/exec" target="_blank">
-      <input type="hidden" name="formType" value="racket">
-      <input type="hidden" name="price" id="racket-price">
-      <input type="hidden" name="racketLabel" id="racket-label">
-
     <h3 class="racket-brand-heading">Babolat</h3>
     <div class="racket-grid">
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="babolat-viper-2026-technical-soft" data-price="250" data-label="Babolat Viper 2026 — Technical Soft">
+      <div class="racket-card">
         <img class="racket-photo" src="images/rackets/babolat-viper-2026-technical-soft.jpg" alt="Babolat Viper 2026 — Technical Soft" loading="lazy">
         <span class="racket-model">Viper 2026</span>
         <span class="racket-variant">Technical Soft</span>
         <span class="racket-price">250 CHF</span>
-      </label>
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="babolat-viper-2026-technical" data-price="250" data-label="Babolat Viper 2026 — Technical">
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:250,racketModel:'babolat-viper-2026-technical-soft',racketLabel:'Babolat Viper 2026 — Technical Soft',title:'Babolat Viper 2026 — Technical Soft'})">Buy Now</button>
+      </div>
+      <div class="racket-card">
         <img class="racket-photo" src="images/rackets/babolat-viper-2026-technical.jpg" alt="Babolat Viper 2026 — Technical" loading="lazy">
         <span class="racket-model">Viper 2026</span>
         <span class="racket-variant">Technical</span>
         <span class="racket-price">250 CHF</span>
-      </label>
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="babolat-viper-2026-air" data-price="250" data-label="Babolat Viper 2026 — Air">
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:250,racketModel:'babolat-viper-2026-technical',racketLabel:'Babolat Viper 2026 — Technical',title:'Babolat Viper 2026 — Technical'})">Buy Now</button>
+      </div>
+      <div class="racket-card">
         <img class="racket-photo" src="images/rackets/babolat-viper-2026-air.jpg" alt="Babolat Viper 2026 — Air" loading="lazy">
         <span class="racket-model">Viper 2026</span>
         <span class="racket-variant">Air</span>
         <span class="racket-price">250 CHF</span>
-      </label>
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="babolat-veron-2026-technical" data-price="220" data-label="Babolat Veron 2026 — Technical">
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:250,racketModel:'babolat-viper-2026-air',racketLabel:'Babolat Viper 2026 — Air',title:'Babolat Viper 2026 — Air'})">Buy Now</button>
+      </div>
+      <div class="racket-card">
         <span class="racket-monogram racket-monogram--babolat">B</span>
         <span class="racket-model">Veron 2026</span>
         <span class="racket-variant">Technical</span>
         <span class="racket-price">220 CHF</span>
-      </label>
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="babolat-veron-2026-air" data-price="220" data-label="Babolat Veron 2026 — Air">
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:220,racketModel:'babolat-veron-2026-technical',racketLabel:'Babolat Veron 2026 — Technical',title:'Babolat Veron 2026 — Technical'})">Buy Now</button>
+      </div>
+      <div class="racket-card">
         <img class="racket-photo" src="images/rackets/babolat-veron-2026-air.jpg" alt="Babolat Veron 2026 — Air" loading="lazy">
         <span class="racket-model">Veron 2026</span>
         <span class="racket-variant">Air</span>
         <span class="racket-price">220 CHF</span>
-      </label>
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:220,racketModel:'babolat-veron-2026-air',racketLabel:'Babolat Veron 2026 — Air',title:'Babolat Veron 2026 — Air'})">Buy Now</button>
+      </div>
     </div>
     <h3 class="racket-brand-heading">Wilson</h3>
     <div class="racket-grid">
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="wilson-endure-pro" data-price="250" data-label="Wilson Endure — Pro">
+      <div class="racket-card">
         <img class="racket-photo" src="images/rackets/wilson-endure-pro.jpg" alt="Wilson Endure — Pro" loading="lazy">
         <span class="racket-model">Endure</span>
         <span class="racket-variant">Pro</span>
         <span class="racket-price">250 CHF</span>
-      </label>
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="wilson-endure" data-price="220" data-label="Wilson Endure">
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:250,racketModel:'wilson-endure-pro',racketLabel:'Wilson Endure — Pro',title:'Wilson Endure — Pro'})">Buy Now</button>
+      </div>
+      <div class="racket-card">
         <img class="racket-photo" src="images/rackets/wilson-endure.jpg" alt="Wilson Endure" loading="lazy">
         <span class="racket-model">Endure</span>
         
         <span class="racket-price">220 CHF</span>
-      </label>
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="wilson-endure-ls" data-price="200" data-label="Wilson Endure — LS">
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:220,racketModel:'wilson-endure',racketLabel:'Wilson Endure',title:'Wilson Endure'})">Buy Now</button>
+      </div>
+      <div class="racket-card">
         <img class="racket-photo" src="images/rackets/wilson-endure-ls.jpg" alt="Wilson Endure — LS" loading="lazy">
         <span class="racket-model">Endure</span>
         <span class="racket-variant">LS</span>
         <span class="racket-price">200 CHF</span>
-      </label>
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="wilson-blade-ls-green" data-price="180" data-label="Wilson Blade — LS Green">
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:200,racketModel:'wilson-endure-ls',racketLabel:'Wilson Endure — LS',title:'Wilson Endure — LS'})">Buy Now</button>
+      </div>
+      <div class="racket-card">
         <img class="racket-photo" src="images/rackets/wilson-blade-ls-green.jpg" alt="Wilson Blade — LS Green" loading="lazy">
         <span class="racket-model">Blade</span>
         <span class="racket-variant">LS Green</span>
         <span class="racket-price">180 CHF</span>
-      </label>
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="wilson-blade-ls-rosa" data-price="180" data-label="Wilson Blade — LS Rosa">
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:180,racketModel:'wilson-blade-ls-green',racketLabel:'Wilson Blade — LS Green',title:'Wilson Blade — LS Green'})">Buy Now</button>
+      </div>
+      <div class="racket-card">
         <img class="racket-photo" src="images/rackets/wilson-blade-ls-rosa.jpg" alt="Wilson Blade — LS Rosa" loading="lazy">
         <span class="racket-model">Blade</span>
         <span class="racket-variant">LS Rosa</span>
         <span class="racket-price">180 CHF</span>
-      </label>
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="wilson-bela-pro" data-price="150" data-label="Wilson Bela — Pro">
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:180,racketModel:'wilson-blade-ls-rosa',racketLabel:'Wilson Blade — LS Rosa',title:'Wilson Blade — LS Rosa'})">Buy Now</button>
+      </div>
+      <div class="racket-card">
         <span class="racket-monogram racket-monogram--wilson">W</span>
         <span class="racket-model">Bela</span>
         <span class="racket-variant">Pro</span>
         <span class="racket-price">150 CHF</span>
-      </label>
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="wilson-defy-white" data-price="220" data-label="Wilson Defy — White">
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:150,racketModel:'wilson-bela-pro',racketLabel:'Wilson Bela — Pro',title:'Wilson Bela — Pro'})">Buy Now</button>
+      </div>
+      <div class="racket-card">
         <span class="racket-monogram racket-monogram--wilson">W</span>
         <span class="racket-model">Defy</span>
         <span class="racket-variant">White</span>
         <span class="racket-price">220 CHF</span>
-      </label>
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="wilson-defy-ls-white" data-price="200" data-label="Wilson Defy — LS White">
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:220,racketModel:'wilson-defy-white',racketLabel:'Wilson Defy — White',title:'Wilson Defy — White'})">Buy Now</button>
+      </div>
+      <div class="racket-card">
         <img class="racket-photo" src="images/rackets/wilson-defy-ls-white.jpg" alt="Wilson Defy — LS White" loading="lazy">
         <span class="racket-model">Defy</span>
         <span class="racket-variant">LS White</span>
         <span class="racket-price">200 CHF</span>
-      </label>
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="wilson-defy-pro" data-price="220" data-label="Wilson Defy — Pro">
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:200,racketModel:'wilson-defy-ls-white',racketLabel:'Wilson Defy — LS White',title:'Wilson Defy — LS White'})">Buy Now</button>
+      </div>
+      <div class="racket-card">
         <img class="racket-photo" src="images/rackets/wilson-defy-pro.jpg" alt="Wilson Defy — Pro" loading="lazy">
         <span class="racket-model">Defy</span>
         <span class="racket-variant">Pro</span>
         <span class="racket-price">220 CHF</span>
-      </label>
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="wilson-defy" data-price="200" data-label="Wilson Defy">
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:220,racketModel:'wilson-defy-pro',racketLabel:'Wilson Defy — Pro',title:'Wilson Defy — Pro'})">Buy Now</button>
+      </div>
+      <div class="racket-card">
         <img class="racket-photo" src="images/rackets/wilson-defy.jpg" alt="Wilson Defy" loading="lazy">
         <span class="racket-model">Defy</span>
         
         <span class="racket-price">200 CHF</span>
-      </label>
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="wilson-defy-ls" data-price="180" data-label="Wilson Defy — LS">
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:200,racketModel:'wilson-defy',racketLabel:'Wilson Defy',title:'Wilson Defy'})">Buy Now</button>
+      </div>
+      <div class="racket-card">
         <img class="racket-photo" src="images/rackets/wilson-defy-ls.jpg" alt="Wilson Defy — LS" loading="lazy">
         <span class="racket-model">Defy</span>
         <span class="racket-variant">LS</span>
         <span class="racket-price">180 CHF</span>
-      </label>
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="wilson-bela-v3" data-price="200" data-label="Wilson Bela v3">
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:180,racketModel:'wilson-defy-ls',racketLabel:'Wilson Defy — LS',title:'Wilson Defy — LS'})">Buy Now</button>
+      </div>
+      <div class="racket-card">
         <img class="racket-photo" src="images/rackets/wilson-bela-v3.jpg" alt="Wilson Bela v3" loading="lazy">
         <span class="racket-model">Bela v3</span>
         
         <span class="racket-price">200 CHF</span>
-      </label>
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="wilson-bela-v3-pro" data-price="230" data-label="Wilson Bela v3 — Pro">
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:200,racketModel:'wilson-bela-v3',racketLabel:'Wilson Bela v3',title:'Wilson Bela v3'})">Buy Now</button>
+      </div>
+      <div class="racket-card">
         <span class="racket-monogram racket-monogram--wilson">W</span>
         <span class="racket-model">Bela v3</span>
         <span class="racket-variant">Pro</span>
         <span class="racket-price">230 CHF</span>
-      </label>
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="wilson-bela-v3-ls" data-price="180" data-label="Wilson Bela v3 — LS">
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:230,racketModel:'wilson-bela-v3-pro',racketLabel:'Wilson Bela v3 — Pro',title:'Wilson Bela v3 — Pro'})">Buy Now</button>
+      </div>
+      <div class="racket-card">
         <img class="racket-photo" src="images/rackets/wilson-bela-v3-ls.jpg" alt="Wilson Bela v3 — LS" loading="lazy">
         <span class="racket-model">Bela v3</span>
         <span class="racket-variant">LS</span>
         <span class="racket-price">180 CHF</span>
-      </label>
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:180,racketModel:'wilson-bela-v3-ls',racketLabel:'Wilson Bela v3 — LS',title:'Wilson Bela v3 — LS'})">Buy Now</button>
+      </div>
     </div>
     <h3 class="racket-brand-heading">Siux</h3>
     <div class="racket-grid">
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="siux-diablo-pro-royal-blue-2026" data-price="250" data-label="Siux Diablo Pro — Royal Blue 2026">
+      <div class="racket-card">
         <img class="racket-photo" src="images/rackets/siux-diablo-pro-royal-blue-2026.jpg" alt="Siux Diablo Pro — Royal Blue 2026" loading="lazy">
         <span class="racket-model">Diablo Pro</span>
         <span class="racket-variant">Royal Blue 2026</span>
         <span class="racket-price">250 CHF</span>
-      </label>
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="siux-pegasus-pro-storm-grey-2026" data-price="250" data-label="Siux Pegasus Pro — Storm Grey 2026">
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:250,racketModel:'siux-diablo-pro-royal-blue-2026',racketLabel:'Siux Diablo Pro — Royal Blue 2026',title:'Siux Diablo Pro — Royal Blue 2026'})">Buy Now</button>
+      </div>
+      <div class="racket-card">
         <img class="racket-photo" src="images/rackets/siux-pegasus-pro-storm-grey-2026.jpg" alt="Siux Pegasus Pro — Storm Grey 2026" loading="lazy">
         <span class="racket-model">Pegasus Pro</span>
         <span class="racket-variant">Storm Grey 2026</span>
         <span class="racket-price">250 CHF</span>
-      </label>
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="siux-fenix-pro-2026-black-purple" data-price="250" data-label="Siux Fenix Pro — 2026 Black/Purple">
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:250,racketModel:'siux-pegasus-pro-storm-grey-2026',racketLabel:'Siux Pegasus Pro — Storm Grey 2026',title:'Siux Pegasus Pro — Storm Grey 2026'})">Buy Now</button>
+      </div>
+      <div class="racket-card">
         <img class="racket-photo" src="images/rackets/siux-fenix-pro-2026-black-purple.jpg" alt="Siux Fenix Pro — 2026 Black/Purple" loading="lazy">
         <span class="racket-model">Fenix Pro</span>
         <span class="racket-variant">2026 Black/Purple</span>
         <span class="racket-price">250 CHF</span>
-      </label>
-      <label class="racket-card">
-        <input type="radio" name="racketModel" value="siux-trilogy-pro-2026-ash-green" data-price="250" data-label="Siux Trilogy Pro — 2026 Ash Green">
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:250,racketModel:'siux-fenix-pro-2026-black-purple',racketLabel:'Siux Fenix Pro — 2026 Black/Purple',title:'Siux Fenix Pro — 2026 Black/Purple'})">Buy Now</button>
+      </div>
+      <div class="racket-card">
         <img class="racket-photo" src="images/rackets/siux-trilogy-pro-2026-ash-green.jpg" alt="Siux Trilogy Pro — 2026 Ash Green" loading="lazy">
         <span class="racket-model">Trilogy Pro</span>
         <span class="racket-variant">2026 Ash Green</span>
         <span class="racket-price">250 CHF</span>
-      </label>
+        <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:250,racketModel:'siux-trilogy-pro-2026-ash-green',racketLabel:'Siux Trilogy Pro — 2026 Ash Green',title:'Siux Trilogy Pro — 2026 Ash Green'})">Buy Now</button>
+      </div>
     </div>
+  </div>
+</section>
 
-      <label class="shop-field" style="margin-top:24px;">
-        Pickup location
-        <select name="pickupLocation" required>
+<div class="buy-modal-overlay" id="buy-modal-overlay">
+  <div class="buy-modal">
+    <button type="button" class="buy-modal-close" id="buy-modal-close" aria-label="Close">&times;</button>
+    <h3 id="buy-modal-title"></h3>
+    <div class="buy-modal-price" id="buy-modal-price"></div>
+    <form id="buy-modal-form" class="shop-form" method="POST" action="https://script.google.com/macros/s/AKfycbwLWTwsILcSkAHe9FSKjicU1pUk5s3nxSnS4PQ2Tws2RVejiHjBltJJ8gKpmIe3JLRe/exec" target="_blank">
+      <input type="hidden" name="formType" id="modal-formType">
+      <input type="hidden" name="price" id="modal-price">
+      <input type="hidden" name="qty" id="modal-qty">
+      <input type="hidden" name="racketModel" id="modal-racketModel">
+      <input type="hidden" name="racketLabel" id="modal-racketLabel">
+
+      <label class="shop-field">
+        Which location?
+        <select id="modal-location" required>
           <option value="Salgesch">Salgesch</option>
           <option value="Sion">Sion</option>
         </select>
@@ -315,15 +301,18 @@
         <input type="text" name="buyerName" required>
       </label>
       <label class="shop-field">
-        Your email
+        Your email <span style="font-weight:400; opacity:.7;">(vouchers will be sent here)</span>
         <input type="email" name="buyerEmail" required>
+      </label>
+      <label class="shop-field" id="modal-gift-wrap">
+        Gift message <span style="font-weight:400; opacity:.7;">(optional, shown on the voucher)</span>
+        <textarea name="giftMessage" rows="3" maxlength="200"></textarea>
       </label>
 
       <button type="submit" class="btn btn-green" style="width:100%; text-align:center;">Continue to payment</button>
     </form>
   </div>
-</section>
-
+</div>
 
 <footer>
   <div class="wrap">
@@ -333,12 +322,34 @@
       <div><h4>Salgesch</h4><a href="https://www.google.com/maps/search/?api=1&query=Littenstrasse+30+3970+Salgesch" target="_blank" rel="noopener">Littenstrasse 30, 3970 Salgesch</a></div>
       <div><h4>Sion</h4><a href="https://www.google.com/maps/search/?api=1&query=Route+de+Pr%C3%A9jeux+16+1950+Sion" target="_blank" rel="noopener">Route de Préjeux 16, 1950 Sion</a></div>
     </div>
+    <div class="sponsor-row">
+      <div class="sponsor-track">
+      <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/aa792a_09d6245ac02d49cbb0a9ed6b5b74224e~mv2.png/v1/fill/w_150,h_62,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/wilson-2-logo-black-and-white.png" alt="Wilson" loading="lazy"></a>
+      <a href="https://www.estrellagalicia.es" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/aa792a_cbb8a2bb53e849ad8bdcac94e56ff4fd~mv2.png/v1/fill/w_74,h_60,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/aa792a_cbb8a2bb53e849ad8bdcac94e56ff4fd~mv2.png" alt="Estrella Galicia" loading="lazy"></a>
+      <a href="https://www.decathlon.ch" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/aa792a_05b337f9b1ff43d29b138c6d03233e3d~mv2.png/v1/crop/x_0,y_0,w_6435,h_937/fill/w_153,h_22,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/aa792a_05b337f9b1ff43d29b138c6d03233e3d~mv2.png" alt="Decathlon" loading="lazy"></a>
+      <a href="https://www.coca-cola.com/ch/de/brands/powerade" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/aa792a_4606fdc8add84a9c9596a09b620e7d3f~mv2.png/v1/crop/x_0,y_35,w_973,h_357/fill/w_81,h_30,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/aa792a_4606fdc8add84a9c9596a09b620e7d3f~mv2.png" alt="Powerade" loading="lazy"></a>
+      <a href="https://tanguy.ch/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_a637bfd2ed6b4227b903ff852e23ac61~mv2.png/v1/fill/w_111,h_22,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/eb5c6b_a637bfd2ed6b4227b903ff852e23ac61~mv2.png" alt="Garage Tanguy" loading="lazy"></a>
+      <a href="https://tanguy.hyundai.ch/fr" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_853a1467d9f84463babbc15de6cc0d45~mv2.png/v1/fill/w_54,h_36,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/hyundai.png" alt="Hyundai" loading="lazy"></a>
+      <a href="https://www.scleanup.ch/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_7e7bba664be04699ab5d1bde255a1c8f~mv2.png/v1/fill/w_74,h_62,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/eb5c6b_7e7bba664be04699ab5d1bde255a1c8f~mv2.png" alt="S Clean-up" loading="lazy"></a>
+      <a href="https://shop.morand.ch/shop/category/sirops-65" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_1c29f776d1144d91899e11f5793296cf~mv2.png/v1/fill/w_108,h_62,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/eb5c6b_1c29f776d1144d91899e11f5793296cf~mv2.png" alt="Distillerie Morand" loading="lazy"></a>
+      <a href="https://rivella.ch/de/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_db0cf05530e94934abc4f38b00fe3703~mv2.png/v1/fill/w_86,h_60,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/rivella_logo-300x225.png" alt="Rivella" loading="lazy"></a>
+      <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/aa792a_09d6245ac02d49cbb0a9ed6b5b74224e~mv2.png/v1/fill/w_150,h_62,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/wilson-2-logo-black-and-white.png" alt="Wilson" loading="lazy"></a>
+      <a href="https://www.estrellagalicia.es" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/aa792a_cbb8a2bb53e849ad8bdcac94e56ff4fd~mv2.png/v1/fill/w_74,h_60,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/aa792a_cbb8a2bb53e849ad8bdcac94e56ff4fd~mv2.png" alt="Estrella Galicia" loading="lazy"></a>
+      <a href="https://www.decathlon.ch" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/aa792a_05b337f9b1ff43d29b138c6d03233e3d~mv2.png/v1/crop/x_0,y_0,w_6435,h_937/fill/w_153,h_22,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/aa792a_05b337f9b1ff43d29b138c6d03233e3d~mv2.png" alt="Decathlon" loading="lazy"></a>
+      <a href="https://www.coca-cola.com/ch/de/brands/powerade" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/aa792a_4606fdc8add84a9c9596a09b620e7d3f~mv2.png/v1/crop/x_0,y_35,w_973,h_357/fill/w_81,h_30,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/aa792a_4606fdc8add84a9c9596a09b620e7d3f~mv2.png" alt="Powerade" loading="lazy"></a>
+      <a href="https://tanguy.ch/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_a637bfd2ed6b4227b903ff852e23ac61~mv2.png/v1/fill/w_111,h_22,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/eb5c6b_a637bfd2ed6b4227b903ff852e23ac61~mv2.png" alt="Garage Tanguy" loading="lazy"></a>
+      <a href="https://tanguy.hyundai.ch/fr" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_853a1467d9f84463babbc15de6cc0d45~mv2.png/v1/fill/w_54,h_36,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/hyundai.png" alt="Hyundai" loading="lazy"></a>
+      <a href="https://www.scleanup.ch/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_7e7bba664be04699ab5d1bde255a1c8f~mv2.png/v1/fill/w_74,h_62,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/eb5c6b_7e7bba664be04699ab5d1bde255a1c8f~mv2.png" alt="S Clean-up" loading="lazy"></a>
+      <a href="https://shop.morand.ch/shop/category/sirops-65" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_1c29f776d1144d91899e11f5793296cf~mv2.png/v1/fill/w_108,h_62,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/eb5c6b_1c29f776d1144d91899e11f5793296cf~mv2.png" alt="Distillerie Morand" loading="lazy"></a>
+      <a href="https://rivella.ch/de/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_db0cf05530e94934abc4f38b00fe3703~mv2.png/v1/fill/w_86,h_60,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/rivella_logo-300x225.png" alt="Rivella" loading="lazy"></a>
+      </div>
+    </div>
     <div class="footer-bottom">
       <span>© 2026 Rackets Academy</span>
       <span><a href="terms-and-conditions.html">Terms &amp; Conditions</a> · <a href="privacy-policy.html">Privacy Policy</a></span>
     </div>
   </div>
 </footer>
-<script src="nav.js?v=3"></script>
+<script src="nav.js?v=4"></script>
 </body>
 </html>

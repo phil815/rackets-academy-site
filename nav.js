@@ -73,39 +73,65 @@ document.addEventListener('DOMContentLoaded', function () {
 // voucher code pull / racket stock, email fulfillment). The form POSTs
 // directly (real page navigation, not fetch) so there's no CORS issue —
 // the Apps Script response redirects the browser to SumUp's hosted payment page.
+
+// Shop category bubbles: show only the chosen panel (Vouchers or Rackets).
+function showShopPanel(id) {
+  document.querySelectorAll('.shop-panel').forEach(function (panel) {
+    panel.classList.toggle('active', panel.id === id);
+  });
+  document.querySelectorAll('.shop-bubble').forEach(function (bubble) {
+    bubble.classList.toggle('active', bubble.id === 'bubble-' + id);
+  });
+  var target = document.getElementById(id);
+  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Shared "Buy Now" modal for both vouchers and rackets.
+function openBuyModal(type, opts) {
+  document.getElementById('modal-formType').value = type;
+  document.getElementById('buy-modal-title').textContent = opts.title || '';
+  document.getElementById('buy-modal-price').textContent = (opts.price || '') + ' CHF';
+  document.getElementById('modal-price').value = opts.price || '';
+  document.getElementById('modal-qty').value = opts.qty || '';
+  document.getElementById('modal-racketModel').value = opts.racketModel || '';
+  document.getElementById('modal-racketLabel').value = opts.racketLabel || '';
+
+  var locationSelect = document.getElementById('modal-location');
+  locationSelect.name = type === 'voucher' ? 'location' : 'pickupLocation';
+
+  var giftWrap = document.getElementById('modal-gift-wrap');
+  if (giftWrap) giftWrap.style.display = type === 'voucher' ? '' : 'none';
+
+  document.getElementById('buy-modal-overlay').classList.add('open');
+}
+
+function openVoucherModal() {
+  var checked = document.querySelector('#voucher-options input[name="bundle"]:checked');
+  if (!checked) return;
+  var qty = checked.getAttribute('data-qty');
+  var price = checked.getAttribute('data-price');
+  openBuyModal('voucher', {
+    title: qty + '× Gift Voucher',
+    price: price,
+    qty: qty
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
-  var voucherForm = document.getElementById('voucher-form');
-  if (voucherForm) {
-    var priceField = document.getElementById('voucher-price');
-    var qtyField = document.getElementById('voucher-qty');
-    var syncBundle = function () {
-      var checked = voucherForm.querySelector('input[name="bundle"]:checked');
-      if (checked) {
-        priceField.value = checked.getAttribute('data-price');
-        qtyField.value = checked.getAttribute('data-qty');
-      }
-    };
-    voucherForm.querySelectorAll('input[name="bundle"]').forEach(function (r) {
-      r.addEventListener('change', syncBundle);
+  var overlay = document.getElementById('buy-modal-overlay');
+  if (overlay) {
+    var closeBtn = document.getElementById('buy-modal-close');
+    if (closeBtn) closeBtn.addEventListener('click', function () {
+      overlay.classList.remove('open');
     });
-    syncBundle(); // set initial values from the pre-checked option
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) overlay.classList.remove('open');
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') overlay.classList.remove('open');
+    });
   }
 
-  var racketForm = document.getElementById('racket-form');
-  if (racketForm) {
-    var racketPriceField = document.getElementById('racket-price');
-    var racketLabelField = document.getElementById('racket-label');
-    var syncRacket = function () {
-      var checked = racketForm.querySelector('input[name="racketModel"]:checked');
-      if (checked) {
-        racketPriceField.value = checked.getAttribute('data-price');
-        racketLabelField.value = checked.getAttribute('data-label');
-      }
-    };
-    racketForm.querySelectorAll('input[name="racketModel"]').forEach(function (r) {
-      r.addEventListener('change', syncRacket);
-    });
-  }
 });
 
 // "Next event" badges — reads live from the public Google Calendars
