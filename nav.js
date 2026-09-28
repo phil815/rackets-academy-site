@@ -346,3 +346,54 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!get()) setTimeout(show, 900);
   });
 })();
+
+// ------------------------------------------------------------------
+// Shop checkout via fetch → Apps Script returns JSON {ok,url} → redirect
+// to SumUp in the same tab. (Apps Script HTML pages run in a sandboxed
+// iframe that can't auto-redirect — that caused the white screen.)
+// ------------------------------------------------------------------
+(function () {
+  var L = (document.documentElement.lang || 'en').slice(0, 2);
+  var MSG = {
+    en: { wait: 'Preparing secure payment…', err: 'Something went wrong. Please try again or message us on WhatsApp.' },
+    fr: { wait: 'Préparation du paiement sécurisé…', err: "Un problème est survenu. Réessaie ou écris-nous sur WhatsApp." },
+    de: { wait: 'Sichere Zahlung wird vorbereitet…', err: 'Da ist etwas schiefgelaufen. Bitte versuch es nochmal oder schreib uns auf WhatsApp.' }
+  }[L] || { wait: '…', err: 'Error' };
+
+  document.addEventListener('submit', function (e) {
+    var form = e.target;
+    if (!form || form.id !== 'buy-modal-form' || form.dataset.fallback === '1') return;
+    e.preventDefault();
+    var btn = form.querySelector('button[type="submit"]');
+    var label = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = MSG.wait; }
+    var err = form.querySelector('.checkout-error');
+    if (err) err.remove();
+
+    var data = new URLSearchParams(new FormData(form));
+    data.set('mode', 'json');
+    fetch(form.action, { method: 'POST', body: data })
+      .then(function (r) { return r.text(); })
+      .then(function (txt) {
+        var url = null;
+        try { var j = JSON.parse(txt); if (j.ok && j.url) url = j.url; else if (j.error) throw new Error(j.error); }
+        catch (x) {
+          var m = txt.match(/https:(?:\\?\/){2}[^"'\s<\\]*sumup[^"'\s<\\]*/i);
+          if (m) url = m[0].replace(/\\\//g, '/');
+          else if (x && x.message && txt.charAt(0) === '{') throw x;
+        }
+        if (!url) throw new Error('no checkout url');
+        window.location.href = url;
+      })
+      .catch(function (x) {
+        if (x instanceof TypeError) { form.dataset.fallback = '1'; form.target = '_self'; form.submit(); return; }
+        if (btn) { btn.disabled = false; btn.textContent = label; }
+        var p = document.createElement('p');
+        p.className = 'checkout-error';
+        p.style.cssText = 'color:#c0392b; font-size:.9rem; margin:10px 0 0;';
+        p.textContent = MSG.err + (x && x.message && x.message !== 'no checkout url' && !/fetch|network/i.test(x.message) ? ' (' + x.message + ')' : '');
+        form.appendChild(p);
+        if (window.console) console.error('checkout', x);
+      });
+  });
+})();
