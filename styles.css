@@ -634,3 +634,5 @@ a.card-link.offer::after{
 .pay-done{text-align:center; padding:18px 6px;}
 .pay-done h3{color:var(--blue-dark); margin:0 0 8px;}
 .buy-modal{max-height:92vh; overflow-y:auto;}
+.racket-card.sold-out .racket-photo{opacity:.45; filter:grayscale(.6);}
+.racket-card.sold-out .buy-btn{background:#d7e0ea; color:#667; cursor:not-allowed;}
