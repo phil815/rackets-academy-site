@@ -586,3 +586,15 @@ a.card-link.offer::after{
   .sticky-book .sb-course{background:var(--blue,#0077de); color:#fff;}
   body.has-sticky-book{padding-bottom:78px;}
 }
+
+/* ---------- beginner banner (homepage) ---------- */
+.beginner-banner{padding:22px 0 0;}
+.beginner-banner .bb-inner{display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap; background:var(--blue-dark); color:#fff; border-radius:22px; padding:22px 24px; position:relative; overflow:hidden;}
+.beginner-banner .bb-inner::after{content:""; position:absolute; right:-45px; top:-45px; width:95px; height:95px; border-radius:50%; background:var(--green); opacity:.9;}
+.beginner-banner .bb-text{position:relative; z-index:1; max-width:560px;}
+.beginner-banner .bb-kicker{margin:0 0 4px; color:var(--green); font-weight:800; text-transform:uppercase; letter-spacing:.06em; font-size:.8rem;}
+.beginner-banner h2{margin:0 0 6px; color:#fff; font-size:1.35rem; line-height:1.25;}
+.beginner-banner p{margin:0; opacity:.9;}
+.beginner-banner .bb-btn{position:relative; z-index:1; background:var(--green); color:var(--blue-dark); font-weight:800; padding:13px 24px; border-radius:999px; text-decoration:none; white-space:nowrap;}
+.footer-grid{grid-template-columns:1fr 1fr 1fr; max-width:760px;}
+@media (max-width:760px){ .footer-grid{grid-template-columns:1fr;} }
