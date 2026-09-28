@@ -487,7 +487,7 @@ document.addEventListener('DOMContentLoaded', function () {
 (function () {
   function build() {
     var cards = document.querySelectorAll('.racket-card');
-    if (!cards.length || document.getElementById('ld-products')) return;
+    if (!cards.length || document.getElementById('ld-products') || document.getElementById('ld-product')) return;
     var items = [];
     cards.forEach(function (card, i) {
       var btn = card.querySelector('.buy-btn');
@@ -525,3 +525,88 @@ document.addEventListener('DOMContentLoaded', function () {
   // after live stock (or 4s fallback)
   document.addEventListener('DOMContentLoaded', function () { setTimeout(build, 4000); });
 })();
+
+// ------------------------------------------------------------------
+// Racket detail: pop-up on the shop page (URL = real product page, so
+// Google indexes it and a refresh/share opens the full page).
+// ------------------------------------------------------------------
+(function () {
+  var L = (document.documentElement.lang || 'en').slice(0, 2);
+  var T = {
+    en: { h: 'Test it first', p: 'Rent this racket for 10 CHF and play a real match with it. If you buy it, we credit the 10 CHF to the price — completely risk-free.', btn: 'Book a test on WhatsApp', wa: "Hola! I'd like to test the {l}.", pick: 'Pick up in Salgesch or Sion', close: 'Close' },
+    fr: { h: "Teste-la d'abord", p: "Loue cette raquette pour 10 CHF et joue un vrai match avec. Si tu l'achètes, on déduit les 10 CHF du prix — sans aucun risque.", btn: 'Réserver un test sur WhatsApp', wa: "Hola ! J'aimerais tester la {l}.", pick: 'Retrait à Salgesch ou Sion', close: 'Fermer' },
+    de: { h: 'Erst testen', p: 'Miete dieses Racket für 10 CHF und spiel damit ein echtes Match. Kaufst du es, schreiben wir dir die 10 CHF gut — ganz ohne Risiko.', btn: 'Test per WhatsApp buchen', wa: 'Hola! Ich möchte das {l} testen.', pick: 'Abholung in Salgesch oder Sion', close: 'Schliessen' }
+  }[L];
+  if (!T) return;
+  var shopUrl = null, ov = null;
+
+  function close(fromPop) {
+    if (!ov || !ov.classList.contains('open')) return;
+    ov.classList.remove('open');
+    document.body.style.overflow = '';
+    if (!fromPop && shopUrl) history.back();
+    shopUrl = null;
+  }
+
+  function open(link) {
+    var card = link.closest('.racket-card');
+    var btn = card.querySelector('.buy-btn');
+    var call = (btn && (btn.getAttribute('onclick') || btn.dataset.onclick)) || '';
+    var label = ((call.match(/racketLabel:'([^']+)'/) || [])[1] || '').replace(' — ', ' ');
+    var img = card.querySelector('img').src;
+    var price = (card.querySelector('.racket-price') || {}).textContent || '';
+    if (!ov) {
+      ov = document.createElement('div');
+      ov.id = 'product-modal';
+      ov.innerHTML = '<div class="pm-sheet" role="dialog" aria-modal="true"><button type="button" class="pm-close" aria-label="' + T.close + '">×</button><div class="pm-body"></div></div>';
+      document.body.appendChild(ov);
+      ov.addEventListener('click', function (e) { if (e.target === ov || e.target.closest('.pm-close')) close(false); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(false); });
+      window.addEventListener('popstate', function () { close(true); });
+    }
+    var wa = 'https://wa.me/41772780115?text=' + encodeURIComponent(T.wa.replace('{l}', label));
+    var sold = card.classList.contains('sold-out');
+    ov.querySelector('.pm-body').innerHTML =
+      '<div class="pm-grid"><img src="' + img + '" alt="">' +
+      '<div><p class="product-brand">' + label.split(' ')[0] + '</p><h2 class="pm-title">' + label + '</h2>' +
+      '<div class="pm-price">' + price + '</div><p class="product-pickup">' + T.pick + '</p>' +
+      '<button type="button" class="buy-btn pm-buy"' + (sold ? ' disabled' : '') + '>' + btn.textContent + '</button>' +
+      '<div class="product-test"><h3>' + T.h + '</h3><p>' + T.p + '</p><a class="btn product-test-btn" href="' + wa + '" target="_blank" rel="noopener">' + T.btn + '</a></div></div></div>';
+    ov.querySelector('.pm-buy').addEventListener('click', function () {
+      close(false);
+      setTimeout(function () { if (!sold) new Function(call)(); }, 60);
+    });
+    ov.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    shopUrl = location.href;
+    history.pushState({ racket: true }, '', link.getAttribute('href'));
+    if (typeof gtag === 'function') gtag('event', 'view_item', { item_name: label });
+  }
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a.racket-link');
+    if (!a || e.metaKey || e.ctrlKey) return;
+    e.preventDefault();
+    open(a);
+  });
+
+  // product pages: keep structured data in sync with live price / stock
+  document.addEventListener('DOMContentLoaded', function () {
+    var ld = document.getElementById('ld-product'), buy = document.querySelector('.product-buy');
+    if (!ld || !buy) return;
+    setTimeout(function () {
+      try {
+        var d = JSON.parse(ld.textContent);
+        d.offers.price = (buy.querySelector('.racket-price').textContent || '').replace(/[^\d.]/g, '') || d.offers.price;
+        d.offers.availability = 'https://schema.org/' + (buy.classList.contains('sold-out') ? 'OutOfStock' : 'InStock');
+        ld.textContent = JSON.stringify(d);
+      } catch (x) {}
+    }, 4000);
+  });
+})();
+
+// open the right shop panel from a #vouchers / #rackets link
+document.addEventListener('DOMContentLoaded', function () {
+  var h = (location.hash || '').slice(1);
+  if ((h === 'rackets' || h === 'vouchers') && document.getElementById(h) && typeof showShopPanel === 'function') showShopPanel(h);
+});

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<base href="../">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T9T2GZHGS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    analytics_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'
+  });
+  gtag('js', new Date());
+  gtag('config', 'G-T9T2GZHGS2');
+  // Rackets Academy conversion events
+  (function(){
+    var lang = (location.pathname.match(/\/(fr|de)\//)||[,'en'])[1];
+    function send(name, p){ p=p||{}; p.page_lang=lang; p.page_path=location.pathname; p.transport_type='beacon'; gtag('event', name, p); }
+    document.addEventListener('click', function(e){
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (a && a.hasAttribute('data-pick')) return;
+      if (a) {
+        var h = a.href;
+        if (/playtomic\.com/.test(h)) return send('book_court', {link_url:h, link_text:(a.textContent||'').trim().slice(0,60)});
+        if (/wa\.me|whatsapp\.com/.test(h)) return send('whatsapp_click', {link_url:h});
+        if (/tinyurl\.com\/RA-Plus/i.test(h)) return send('rackets_plus_signup', {link_url:h});
+        if (/docs\.google\.com\/forms|forms\.gle/.test(h)) return send('form_click', {link_url:h});
+        return;
+      }
+      var b = e.target.closest && e.target.closest('button[onclick*="openBuyModal"], button[onclick*="openVoucherModal"]');
+      if (b) {
+        var card = b.closest('.card, .racket-card, div');
+        var t = card && card.querySelector('h3');
+        send('shop_buy_click', {item_name: t ? t.textContent.trim().slice(0,80) : (/Voucher/.test(b.getAttribute('onclick')) ? 'Voucher' : 'unknown')});
+      }
+    }, true);
+    document.addEventListener('submit', function(e){
+      var f = e.target;
+      if (f && /script\.google/.test(f.action||'')) send('begin_checkout', {form_type: (f.querySelector('[name="type"]')||{}).value || ''});
+    }, true);
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Babolat Viper 2026 Technical – tester &amp; acheter</title>
+<meta name="description" content="Babolat Viper 2026 Technical à 249 CHF à la Rackets Academy en Valais. Teste-la d&#x27;abord pour 10 CHF, déduits si tu achètes. Retrait à Salgesch ou Sion.">
+<link rel="canonical" href="https://www.racketsacademy.ch/fr/rackets/babolat-viper-2026-technical.html">
+<link rel="stylesheet" href="../styles.css?v=16">
+<meta property="og:title" content="Babolat Viper 2026 Technical – tester &amp; acheter">
+<meta property="og:description" content="Babolat Viper 2026 Technical à 249 CHF à la Rackets Academy en Valais. Teste-la d&#x27;abord pour 10 CHF, déduits si tu achètes. Retrait à Salgesch ou Sion.">
+<meta property="og:type" content="product">
+<meta property="og:url" content="https://www.racketsacademy.ch/fr/rackets/babolat-viper-2026-technical.html">
+<meta property="og:image" content="https://www.racketsacademy.ch/images/rackets/babolat-viper-2026-technical.jpg">
+<meta property="og:locale" content="fr_CH">
+<meta property="og:site_name" content="Rackets Academy">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://www.racketsacademy.ch/rackets/babolat-viper-2026-technical.html">
+<link rel="alternate" hreflang="fr" href="https://www.racketsacademy.ch/fr/rackets/babolat-viper-2026-technical.html">
+<link rel="alternate" hreflang="de" href="https://www.racketsacademy.ch/de/rackets/babolat-viper-2026-technical.html">
+<link rel="alternate" hreflang="x-default" href="https://www.racketsacademy.ch/rackets/babolat-viper-2026-technical.html">
+<script type="application/ld+json" id="ld-product">{"@context": "https://schema.org", "@type": "Product", "name": "Babolat Viper 2026 Technical", "sku": "babolat-viper-2026-technical", "brand": {"@type": "Brand", "name": "Babolat"}, "image": "https://www.racketsacademy.ch/images/rackets/babolat-viper-2026-technical.jpg", "description": "Babolat Viper 2026 Technical à 249 CHF à la Rackets Academy en Valais. Teste-la d'abord pour 10 CHF, déduits si tu achètes. Retrait à Salgesch ou Sion.", "offers": {"@type": "Offer", "price": "249", "priceCurrency": "CHF", "url": "https://www.racketsacademy.ch/fr/rackets/babolat-viper-2026-technical.html", "availability": "https://schema.org/InStock", "itemCondition": "https://schema.org/NewCondition", "seller": {"@type": "Organization", "name": "Rackets Academy"}}}</script>
+</head>
+<body>
+<div class="site-top">
+<div class="promo-banner">
+  <div class="promo-track">
+    <span>🎾 COURTS OUVERTS — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Réservez sur Playtomic →</a></span>
+    <span>🎾 COURTS OUVERTS — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Réservez sur Playtomic →</a></span>
+    <span>🎾 COURTS OUVERTS — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Réservez sur Playtomic →</a></span>
+  </div>
+</div>
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo"><img src="https://static.wixstatic.com/media/aa792a_055b56096ef04c0697a7ed52660d5a0b~mv2.png/v1/crop/x_579,y_1441,w_2868,h_1003/fill/w_223,h_78,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Rackets_Academy_Logo_2xblue-on-white_horizontal_FINAL.png" alt="Rackets Academy logo" width="180" height="63"></a>
+    <nav class="navlinks">
+      <a href="book.html">Réserver</a>
+      <a href="training.html">Cours</a>
+      <a href="events.html">Événements</a>
+      <a href="rackets-plus.html">Membres</a>
+      <a href="ski-and-padel.html">Camps</a>
+      <a href="spa-and-sauna.html">Spa</a>
+      <a href="shop.html" class="active">Shop</a>
+      <a href="about.html">À propos</a>
+      <div class="lang-switch">
+        <button type="button" aria-haspopup="true">FR</button>
+        <div class="lang-menu"><a href="../rackets/babolat-viper-2026-technical.html">English</a><a href="../de/rackets/babolat-viper-2026-technical.html">Deutsch</a><a href="rackets/babolat-viper-2026-technical.html">Français</a></div>
+      </div>
+      <a class="nav-cta-mobile" href="book.html">Réserver</a>
+    </nav>
+    <div class="lang-switch">
+      <button type="button" aria-haspopup="true">FR</button>
+      <div class="lang-menu"><a href="../rackets/babolat-viper-2026-technical.html">English</a><a href="../de/rackets/babolat-viper-2026-technical.html">Deutsch</a><a href="rackets/babolat-viper-2026-technical.html">Français</a></div>
+    </div>
+    <a class="nav-cta" href="book.html">Réserver</a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span></button>
+  </div>
+</header>
+<section class="product-page" data-product="babolat-viper-2026-technical">
+  <div class="wrap">
+    <a class="product-back" href="shop.html#rackets">← Retour à la boutique</a>
+    <div class="product-grid">
+      <div class="racket-card product-card">
+        <img class="racket-photo" src="../images/rackets/babolat-viper-2026-technical.jpg?v=2" alt="Babolat Viper 2026 Technical">
+      </div>
+      <div class="product-info">
+        <p class="product-brand">Babolat</p>
+        <h1>Babolat Viper 2026 Technical</h1>
+        <div class="racket-card product-buy">
+          <span class="racket-price">249 CHF</span>
+          <span class="product-pickup">Retrait à Salgesch ou Sion</span>
+          <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:249,racketModel:'babolat-viper-2026-technical',racketLabel:'Babolat Viper 2026 — Technical',title:'Babolat Viper 2026 — Technical'})">Acheter</button>
+        </div>
+        <div class="product-test">
+          <h2>Teste-la d'abord</h2>
+          <p>Loue cette raquette pour 10 CHF et joue un vrai match avec. Si tu l'achètes, on déduit les 10 CHF du prix — sans aucun risque.</p>
+          <a class="btn product-test-btn" href="https://wa.me/41772780115?text=Hola%20%21%20J%27aimerais%20tester%20la%20Babolat%20Viper%202026%20Technical." target="_blank" rel="noopener">Réserver un test sur WhatsApp</a>
+        </div>
+        <ul class="product-facts"><li>Revendeur officiel Babolat</li><li>Retrait à l'academy à Salgesch ou Sion</li><li>Test à 10 CHF — déduit si tu achètes</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="buy-modal-overlay" id="buy-modal-overlay">
+  <div class="buy-modal">
+    <button type="button" class="buy-modal-close" id="buy-modal-close" aria-label="Fermer">&times;</button>
+    <h3 id="buy-modal-title"></h3>
+    <div class="buy-modal-price" id="buy-modal-price"></div>
+    <form id="buy-modal-form" class="shop-form" method="POST" action="https://script.google.com/macros/s/AKfycbwLWTwsILcSkAHe9FSKjicU1pUk5s3nxSnS4PQ2Tws2RVejiHjBltJJ8gKpmIe3JLRe/exec" target="_blank">
+      <input type="hidden" name="formType" id="modal-formType">
+      <input type="hidden" name="price" id="modal-price">
+      <input type="hidden" name="qty" id="modal-qty">
+      <input type="hidden" name="racketModel" id="modal-racketModel">
+      <input type="hidden" name="racketLabel" id="modal-racketLabel">
+
+      <label class="shop-field">
+        Quel site ?
+        <select id="modal-location" required>
+          <option value="Salgesch">Salgesch</option>
+          <option value="Sion">Sion</option>
+        </select>
+      </label>
+      <label class="shop-field">
+        Ton nom
+        <input type="text" name="buyerName" required>
+      </label>
+      <label class="shop-field">
+        Ton email <span id="modal-email-note" data-voucher="(les bons seront envoyés ici)" data-racket="(ta confirmation sera envoyée ici)" style="font-weight:400; opacity:.7;">(les bons seront envoyés ici)</span>
+        <input type="email" name="buyerEmail" required>
+      </label>
+      <label class="shop-field" id="modal-gift-wrap">
+        Message cadeau <span style="font-weight:400; opacity:.7;">(optionnel, affiché sur le bon)</span>
+        <textarea name="giftMessage" rows="3" maxlength="200"></textarea>
+      </label>
+
+      <button type="submit" class="btn btn-green" style="width:100%; text-align:center;">Continuer vers le paiement</button>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <img src="https://static.wixstatic.com/media/aa792a_a07ea1455a5d4b06b1295733d51a4805~mv2.png/v1/crop/x_476,y_1415,w_3010,h_1080/fill/w_234,h_84,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Rackets_Academy_Logo_white-on-transparent_horizontal_FINAL.png" alt="Rackets Academy" width="200" height="72" style="margin-bottom:8px;">
+    <p style="opacity:.85; margin:0 0 14px;">PLAY. COMPETE. ENJOY.</p>
+    <div class="footer-grid">
+      <div><h4>Salgesch</h4><a href="https://www.google.com/maps/search/?api=1&query=Littenstrasse+30+3970+Salgesch" target="_blank" rel="noopener">Littenstrasse 30, 3970 Salgesch</a></div>
+      <div><h4>Sion</h4><a href="https://www.google.com/maps/search/?api=1&query=Route+de+Pr%C3%A9jeux+16+1950+Sion" target="_blank" rel="noopener">Route de Préjeux 16, 1950 Sion</a></div>
+      <div class="footer-contact"><h4>Contact</h4><a href="mailto:phil@racketsacademy.ch">phil@racketsacademy.ch</a></div>
+    </div>
+    <div class="sponsor-row">
+      <div class="sponsor-track">
+      <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/aa792a_09d6245ac02d49cbb0a9ed6b5b74224e~mv2.png/v1/fill/w_150,h_62,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/wilson-2-logo-black-and-white.png" alt="Wilson" loading="lazy"></a>
+      <a href="https://www.estrellagalicia.es" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/aa792a_cbb8a2bb53e849ad8bdcac94e56ff4fd~mv2.png/v1/fill/w_74,h_60,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/aa792a_cbb8a2bb53e849ad8bdcac94e56ff4fd~mv2.png" alt="Estrella Galicia" loading="lazy"></a>
+      <a href="https://www.decathlon.ch" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/aa792a_05b337f9b1ff43d29b138c6d03233e3d~mv2.png/v1/crop/x_0,y_0,w_6435,h_937/fill/w_153,h_22,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/aa792a_05b337f9b1ff43d29b138c6d03233e3d~mv2.png" alt="Decathlon" loading="lazy"></a>
+      <a href="https://www.coca-cola.com/ch/de/brands/powerade" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/aa792a_4606fdc8add84a9c9596a09b620e7d3f~mv2.png/v1/crop/x_0,y_35,w_973,h_357/fill/w_81,h_30,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/aa792a_4606fdc8add84a9c9596a09b620e7d3f~mv2.png" alt="Powerade" loading="lazy"></a>
+      <a href="https://tanguy.ch/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_a637bfd2ed6b4227b903ff852e23ac61~mv2.png/v1/fill/w_111,h_22,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/eb5c6b_a637bfd2ed6b4227b903ff852e23ac61~mv2.png" alt="Garage Tanguy" loading="lazy"></a>
+      <a href="https://tanguy.hyundai.ch/fr" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_853a1467d9f84463babbc15de6cc0d45~mv2.png/v1/fill/w_54,h_36,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/hyundai.png" alt="Hyundai" loading="lazy"></a>
+      <a href="https://www.scleanup.ch/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_7e7bba664be04699ab5d1bde255a1c8f~mv2.png/v1/fill/w_74,h_62,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/eb5c6b_7e7bba664be04699ab5d1bde255a1c8f~mv2.png" alt="S Clean-up" loading="lazy"></a>
+      <a href="https://shop.morand.ch/shop/category/sirops-65" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_1c29f776d1144d91899e11f5793296cf~mv2.png/v1/fill/w_108,h_62,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/eb5c6b_1c29f776d1144d91899e11f5793296cf~mv2.png" alt="Distillerie Morand" loading="lazy"></a>
+      <a href="https://rivella.ch/de/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_db0cf05530e94934abc4f38b00fe3703~mv2.png/v1/fill/w_86,h_60,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/rivella_logo-300x225.png" alt="Rivella" loading="lazy"></a>
+      <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/aa792a_09d6245ac02d49cbb0a9ed6b5b74224e~mv2.png/v1/fill/w_150,h_62,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/wilson-2-logo-black-and-white.png" alt="Wilson" loading="lazy"></a>
+      <a href="https://www.estrellagalicia.es" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/aa792a_cbb8a2bb53e849ad8bdcac94e56ff4fd~mv2.png/v1/fill/w_74,h_60,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/aa792a_cbb8a2bb53e849ad8bdcac94e56ff4fd~mv2.png" alt="Estrella Galicia" loading="lazy"></a>
+      <a href="https://www.decathlon.ch" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/aa792a_05b337f9b1ff43d29b138c6d03233e3d~mv2.png/v1/crop/x_0,y_0,w_6435,h_937/fill/w_153,h_22,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/aa792a_05b337f9b1ff43d29b138c6d03233e3d~mv2.png" alt="Decathlon" loading="lazy"></a>
+      <a href="https://www.coca-cola.com/ch/de/brands/powerade" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/aa792a_4606fdc8add84a9c9596a09b620e7d3f~mv2.png/v1/crop/x_0,y_35,w_973,h_357/fill/w_81,h_30,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/aa792a_4606fdc8add84a9c9596a09b620e7d3f~mv2.png" alt="Powerade" loading="lazy"></a>
+      <a href="https://tanguy.ch/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_a637bfd2ed6b4227b903ff852e23ac61~mv2.png/v1/fill/w_111,h_22,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/eb5c6b_a637bfd2ed6b4227b903ff852e23ac61~mv2.png" alt="Garage Tanguy" loading="lazy"></a>
+      <a href="https://tanguy.hyundai.ch/fr" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_853a1467d9f84463babbc15de6cc0d45~mv2.png/v1/fill/w_54,h_36,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/hyundai.png" alt="Hyundai" loading="lazy"></a>
+      <a href="https://www.scleanup.ch/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_7e7bba664be04699ab5d1bde255a1c8f~mv2.png/v1/fill/w_74,h_62,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/eb5c6b_7e7bba664be04699ab5d1bde255a1c8f~mv2.png" alt="S Clean-up" loading="lazy"></a>
+      <a href="https://shop.morand.ch/shop/category/sirops-65" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_1c29f776d1144d91899e11f5793296cf~mv2.png/v1/fill/w_108,h_62,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/eb5c6b_1c29f776d1144d91899e11f5793296cf~mv2.png" alt="Distillerie Morand" loading="lazy"></a>
+      <a href="https://rivella.ch/de/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/eb5c6b_db0cf05530e94934abc4f38b00fe3703~mv2.png/v1/fill/w_86,h_60,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/rivella_logo-300x225.png" alt="Rivella" loading="lazy"></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Rackets Academy</span>
+      <span><a href="terms-and-conditions.html">Conditions générales</a> · <a href="privacy-policy.html">Politique de confidentialité</a></span>
+    </div>
+  </div>
+</footer>
+<script src="../nav.js?v=13"></script>
+</body>
+</html>
