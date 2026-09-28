@@ -417,6 +417,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var data = new URLSearchParams(new FormData(form));
     data.set('mode', 'json');
+    data.set('lang', L);
     fetch(form.action, { method: 'POST', body: data })
       .then(function (r) { return r.text(); })
       .then(function (txt) {
