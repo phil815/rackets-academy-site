@@ -436,3 +436,46 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   });
 })();
+
+// ------------------------------------------------------------------
+// Shop: live racket prices + stock from the RacketStock sheet
+// (Apps Script doGet ?action=stock). Static HTML stays as fallback.
+// ------------------------------------------------------------------
+(function () {
+  document.addEventListener('DOMContentLoaded', function () {
+    var cards = document.querySelectorAll('.racket-card');
+    var form = document.getElementById('buy-modal-form');
+    if (!cards.length || !form || !form.action) return;
+    var L = (document.documentElement.lang || 'en').slice(0, 2);
+    var SOLD = { en: 'Sold out', fr: 'Épuisé', de: 'Ausverkauft' }[L] || 'Sold out';
+    var BUY = { en: 'Buy Now', fr: 'Acheter', de: 'Jetzt kaufen' }[L] || 'Buy Now';
+    fetch(form.action + '?action=stock')
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (!j || !j.ok || !j.rackets) return;
+        cards.forEach(function (card) {
+          var btn = card.querySelector('.buy-btn');
+          var src = (btn && (btn.getAttribute('onclick') || btn.dataset.onclick)) || '';
+          var m = src.match(/racketModel:'([^']+)'/);
+          if (!m || !j.rackets[m[1]]) return;
+          var info = j.rackets[m[1]];
+          var priceEl = card.querySelector('.racket-price');
+          if (priceEl && info.price) priceEl.textContent = info.price + ' CHF';
+          var call = src.replace(/price:\d+(\.\d+)?/, 'price:' + info.price);
+          if (info.qty > 0) {
+            card.classList.remove('sold-out');
+            btn.disabled = false;
+            btn.textContent = BUY;
+            btn.setAttribute('onclick', call);
+          } else {
+            card.classList.add('sold-out');
+            btn.dataset.onclick = call;
+            btn.removeAttribute('onclick');
+            btn.disabled = true;
+            btn.textContent = SOLD;
+          }
+        });
+      })
+      .catch(function () { /* keep static prices */ });
+  });
+})();
