@@ -10,6 +10,10 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    analytics_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'
+  });
   gtag('js', new Date());
   gtag('config', 'G-T9T2GZHGS2');
   // Rackets Academy conversion events
@@ -42,7 +46,7 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rackets Academy — Book Padel, Pickleball &amp; Tennis in Salgesch &amp; Sion</title>
+<title>Rackets Academy — Padel, Pickleball &amp; Tennis in Valais</title>
 <meta name="description" content="Book a padel, pickleball or tennis court at Rackets Academy in Salgesch or Sion, Valais. Courts, coaching, spa, bar, and a full events calendar — book instantly via Playtomic.">
 <link rel="canonical" href="https://www.racketsacademy.ch/">
 <link rel="alternate" hreflang="en" href="https://www.racketsacademy.ch/">
@@ -55,7 +59,7 @@
 <meta property="og:url" content="https://www.racketsacademy.ch/">
 <meta property="og:image" content="https://static.wixstatic.com/media/aa792a_668567b416ac45edb783841973e8b9e7f000.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="styles.css?v=12">
+<link rel="stylesheet" href="styles.css?v=13">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -418,6 +422,6 @@
 </footer>
 
 
-<script src="nav.js?v=6"></script>
+<script src="nav.js?v=7"></script>
 </body>
 </html>

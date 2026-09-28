@@ -6,6 +6,10 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    analytics_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'
+  });
   gtag('js', new Date());
   gtag('config', 'G-T9T2GZHGS2');
   // Rackets Academy conversion events
@@ -41,7 +45,7 @@
 <title>Ski &amp; Padel Wochenenden — Rackets Academy</title>
 <meta name="description" content="Erlebe unser All-Inclusive Ski &amp; Padel Wochenende im Wallis: Skifahren am Morgen in Crans-Montana, Padel am Nachmittag in der Rackets Academy, Unterkunft, Verpflegung, Spa und Ausrüstung inklusive.">
 <link rel="canonical" href="https://www.racketsacademy.ch/de/ski-and-padel.html">
-<link rel="stylesheet" href="../styles.css?v=12">
+<link rel="stylesheet" href="../styles.css?v=13">
 <meta property="og:title" content="Ski &amp; Padel Wochenenden — Rackets Academy">
 <meta property="og:description" content="Erlebe unser All-Inclusive Ski &amp; Padel Wochenende im Wallis: Skifahren am Morgen in Crans-Montana, Padel am Nachmittag in der Rackets Academy, Unterkunft, Verpflegung, Spa und Ausrüstung inklusive.">
 <meta property="og:type" content="website">
@@ -271,6 +275,6 @@
     </div>
   </div>
 </footer>
-<script src="../nav.js?v=6"></script>
+<script src="../nav.js?v=7"></script>
 </body>
 </html>

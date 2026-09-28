@@ -598,3 +598,29 @@ a.card-link.offer::after{
 .beginner-banner .bb-btn{position:relative; z-index:1; background:var(--green); color:var(--blue-dark); font-weight:800; padding:13px 24px; border-radius:999px; text-decoration:none; white-space:nowrap;}
 .footer-grid{grid-template-columns:1fr 1fr 1fr; max-width:760px;}
 @media (max-width:760px){ .footer-grid{grid-template-columns:1fr;} }
+
+/* ---------- cookie consent: "Your serve" ---------- */
+#serve-banner{position:fixed; z-index:260; left:14px; right:14px; bottom:14px; max-width:430px; display:flex; gap:14px; align-items:stretch;
+  background:var(--blue-dark); color:#fff; border-radius:20px; padding:16px; box-shadow:0 14px 40px rgba(0,30,70,.35);
+  animation:svIn .45s cubic-bezier(.2,.9,.3,1.2);}
+@media (max-width:900px){ body.has-sticky-book #serve-banner{bottom:88px;} }
+@keyframes svIn{from{transform:translateY(40px); opacity:0}to{transform:none; opacity:1}}
+#serve-banner.hit-in{animation:svOutR .6s ease-in forwards;}
+#serve-banner.hit-out{animation:svOutD .6s ease-in forwards;}
+@keyframes svOutR{to{transform:translate(120%,-30px) rotate(8deg); opacity:0}}
+@keyframes svOutD{to{transform:translateY(140%); opacity:0}}
+#serve-banner .sv-court{position:relative; flex:0 0 58px; border-radius:12px; background:var(--blue); overflow:hidden;
+  background-image:linear-gradient(90deg,transparent 48%,rgba(255,255,255,.55) 48%,rgba(255,255,255,.55) 52%,transparent 52%);}
+#serve-banner .sv-net{position:absolute; left:0; right:0; top:50%; height:3px; margin-top:-1px; background:#fff; opacity:.9;}
+#serve-banner .sv-ball{position:absolute; left:50%; width:16px; height:16px; margin-left:-8px; border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#d9ff7a,var(--green) 60%,#4fc70f); box-shadow:0 2px 4px rgba(0,0,0,.3);
+  animation:svRally 1.6s ease-in-out infinite;}
+@keyframes svRally{0%{top:8px}50%{top:calc(100% - 24px)}100%{top:8px}}
+@media (prefers-reduced-motion:reduce){ #serve-banner .sv-ball{animation:none; top:20px;} #serve-banner{animation:none;} }
+#serve-banner .sv-title{margin:0 0 4px; font-weight:800; font-size:1.05rem; color:var(--green);}
+#serve-banner .sv-text{margin:0 0 12px; font-size:.85rem; line-height:1.4; opacity:.92;}
+#serve-banner .sv-text a{color:#fff; text-decoration:underline;}
+#serve-banner .sv-btns{display:flex; gap:8px;}
+#serve-banner .sv-btns button{flex:1; white-space:nowrap; border-radius:999px; padding:10px 12px; font:inherit; font-weight:800; font-size:.9rem; cursor:pointer;}
+#serve-banner .sv-yes{background:var(--green); color:var(--blue-dark); border:2px solid var(--green);}
+#serve-banner .sv-no{background:transparent; color:#fff; border:2px solid rgba(255,255,255,.6);}

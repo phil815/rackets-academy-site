@@ -6,6 +6,10 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    analytics_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'
+  });
   gtag('js', new Date());
   gtag('config', 'G-T9T2GZHGS2');
   // Rackets Academy conversion events
@@ -41,7 +45,7 @@
 <title>Datenschutz — Rackets Academy</title>
 <meta name="description" content="Datenschutzerklärung der Rackets Academy Salgesch: welche Daten wir sammeln, wie wir sie nutzen und schützen, und deine Rechte.">
 <link rel="canonical" href="https://www.racketsacademy.ch/de/privacy-policy.html">
-<link rel="stylesheet" href="../styles.css?v=12">
+<link rel="stylesheet" href="../styles.css?v=13">
 <meta property="og:title" content="Datenschutz — Rackets Academy">
 <meta property="og:description" content="Datenschutzerklärung der Rackets Academy Salgesch: welche Daten wir sammeln, wie wir sie nutzen und schützen, und deine Rechte.">
 <meta property="og:type" content="website">
@@ -117,7 +121,7 @@ b) Automatisch erfasste Daten: Bei der Nutzung unserer Website erfassen wir auto
 <p>Unsere Website verwendet Cookies und ähnliche Technologien, um die Nutzerfreundlichkeit zu verbessern und bestimmte Funktionen zu ermöglichen. Du kannst die Verwendung von Cookies in deinen Browser-Einstellungen deaktivieren, dies kann jedoch die Funktionalität unserer Website einschränken.</p>
 
 <h3>Google Analytics</h3>
-<p>Diese Website nutzt Google Analytics 4, einen Webanalysedienst von Google Ireland Ltd. / Google LLC. Dabei werden Cookies verwendet, um zu analysieren, wie Besucher die Website nutzen (z.B. besuchte Seiten, Klicks auf Buchungs-Buttons, Gerät und ungefährer Standort). Google Analytics 4 speichert keine IP-Adressen. Daten können auf Server in den USA übertragen werden. Du kannst das Tracking mit dem <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google-Analytics-Deaktivierungs-Add-on</a> oder durch Blockieren von Cookies in deinem Browser verhindern.</p>
+<p>Diese Website nutzt Google Analytics 4, einen Webanalysedienst von Google Ireland Ltd. / Google LLC. Dabei werden Cookies verwendet, um zu analysieren, wie Besucher die Website nutzen (z.B. besuchte Seiten, Klicks auf Buchungs-Buttons, Gerät und ungefährer Standort). Analyse-Cookies werden erst nach deiner Zustimmung im Cookie-Banner gesetzt; du kannst deine Wahl jederzeit über «Cookie-Einstellungen» im Footer ändern. Google Analytics 4 speichert keine IP-Adressen. Daten können auf Server in den USA übertragen werden. Du kannst das Tracking mit dem <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google-Analytics-Deaktivierungs-Add-on</a> oder durch Blockieren von Cookies in deinem Browser verhindern.</p>
 
 <h3>Änderungen dieser Datenschutzerklärung</h3>
 <p>Wir behalten uns vor, diese Datenschutzerklärung von Zeit zu Zeit zu aktualisieren. Die aktuelle Version ist auf unserer Website verfügbar. Über wesentliche Änderungen informieren wir dich per E-Mail oder durch einen Hinweis auf unserer Website.</p>
@@ -165,6 +169,6 @@ b) Automatisch erfasste Daten: Bei der Nutzung unserer Website erfassen wir auto
     </div>
   </div>
 </footer>
-<script src="../nav.js?v=6"></script>
+<script src="../nav.js?v=7"></script>
 </body>
 </html>

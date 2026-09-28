@@ -295,3 +295,54 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.classList.add('has-sticky-book');
   });
 })();
+
+// ------------------------------------------------------------------
+// Cookie consent — "Your serve" (Google Consent Mode v2)
+// ------------------------------------------------------------------
+(function () {
+  var L = (document.documentElement.lang || 'en').slice(0, 2);
+  var T = {
+    en: { t: 'Your serve', p: 'We use cookies for anonymous visitor stats — no ads, no tracking across sites. The ball is in your court.', yes: 'In · accept', no: 'Out · decline', more: 'Privacy', set: 'Cookie settings' },
+    fr: { t: 'À toi de servir', p: 'On utilise des cookies pour des statistiques anonymes — pas de pub, pas de pistage. La balle est dans ton camp.', yes: 'In · accepter', no: 'Out · refuser', more: 'Confidentialité', set: 'Paramètres cookies' },
+    de: { t: 'Dein Aufschlag', p: 'Wir nutzen Cookies für anonyme Besucherstatistiken — keine Werbung, kein Tracking. Der Ball liegt bei dir.', yes: 'In · annehmen', no: 'Out · ablehnen', more: 'Datenschutz', set: 'Cookie-Einstellungen' }
+  }[L] || null;
+  if (!T) return;
+  function get() { try { return localStorage.getItem('ra_consent'); } catch (e) { return null; } }
+  function choose(v) {
+    try { localStorage.setItem('ra_consent', v); } catch (e) {}
+    if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: v });
+    var el = document.getElementById('serve-banner');
+    if (el) { el.classList.add('hit-' + (v === 'granted' ? 'in' : 'out')); setTimeout(function () { el.remove(); }, 650); }
+  }
+  function show() {
+    if (document.getElementById('serve-banner')) return;
+    var el = document.createElement('div');
+    el.id = 'serve-banner';
+    el.setAttribute('role', 'dialog');
+    el.setAttribute('aria-label', T.t);
+    el.innerHTML =
+      '<div class="sv-court" aria-hidden="true"><span class="sv-net"></span><span class="sv-ball"></span></div>' +
+      '<div class="sv-body">' +
+        '<p class="sv-title">' + T.t + ' <span aria-hidden="true">🎾</span></p>' +
+        '<p class="sv-text">' + T.p + ' <a href="privacy-policy.html">' + T.more + '</a></p>' +
+        '<div class="sv-btns">' +
+          '<button type="button" class="sv-no">' + T.no + '</button>' +
+          '<button type="button" class="sv-yes">' + T.yes + '</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(el);
+    el.querySelector('.sv-yes').addEventListener('click', function () { choose('granted'); });
+    el.querySelector('.sv-no').addEventListener('click', function () { choose('denied'); });
+  }
+  window.openCookieSettings = show;
+  document.addEventListener('DOMContentLoaded', function () {
+    var fb = document.querySelector('.footer-bottom');
+    if (fb && !fb.querySelector('.cookie-settings')) {
+      var s = document.createElement('span');
+      s.innerHTML = '<a href="#" class="cookie-settings">' + T.set + '</a>';
+      fb.appendChild(s);
+      s.firstChild.addEventListener('click', function (e) { e.preventDefault(); show(); });
+    }
+    if (!get()) setTimeout(show, 900);
+  });
+})();

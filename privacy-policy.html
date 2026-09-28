@@ -10,6 +10,10 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    analytics_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'
+  });
   gtag('js', new Date());
   gtag('config', 'G-T9T2GZHGS2');
   // Rackets Academy conversion events
@@ -45,7 +49,7 @@
 <title>Privacy Policy — Rackets Academy</title>
 <meta name="description" content="How Rackets Academy collects, uses and protects your personal data in Salgesch and Sion.">
 <link rel="canonical" href="https://www.racketsacademy.ch/privacy-policy.html">
-<link rel="stylesheet" href="styles.css?v=12">
+<link rel="stylesheet" href="styles.css?v=13">
 <meta property="og:title" content="Privacy Policy — Rackets Academy">
 <meta property="og:description" content="How Rackets Academy collects, uses and protects your personal data in Salgesch and Sion.">
 <meta property="og:type" content="website">
@@ -119,7 +123,7 @@ b) Automatically Collected Data: When using our website, we automatically collec
 <p>Our website uses cookies and similar technologies to improve usability and enable certain features. You can disable the use of cookies in your browser settings, but this may limit the functionality of our website.</p>
 
 <h3>Google Analytics</h3>
-<p>This website uses Google Analytics 4, a web analytics service provided by Google Ireland Ltd. / Google LLC. It uses cookies to analyse how visitors use the site (e.g. pages visited, clicks on booking buttons, device and approximate location). IP addresses are not stored by Google Analytics 4. Data may be transferred to servers in the USA. You can prevent tracking with the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics opt-out add-on</a> or by blocking cookies in your browser.</p>
+<p>This website uses Google Analytics 4, a web analytics service provided by Google Ireland Ltd. / Google LLC. It uses cookies to analyse how visitors use the site (e.g. pages visited, clicks on booking buttons, device and approximate location). Analytics cookies are only set after you accept them in the cookie banner; you can change your choice at any time via "Cookie settings" in the footer. IP addresses are not stored by Google Analytics 4. Data may be transferred to servers in the USA. You can prevent tracking with the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics opt-out add-on</a> or by blocking cookies in your browser.</p>
 
 <h3>Changes to This Privacy Policy</h3>
 <p>We reserve the right to update this privacy policy from time to time. The current version is available on our website. We will notify you of significant changes via email or through a notice on our website.</p>
@@ -167,6 +171,6 @@ b) Automatically Collected Data: When using our website, we automatically collec
       </div>
     </div>
 </footer>
-<script src="nav.js?v=6"></script>
+<script src="nav.js?v=7"></script>
 </body>
 </html>

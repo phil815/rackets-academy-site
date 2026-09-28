@@ -10,6 +10,10 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    analytics_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'
+  });
   gtag('js', new Date());
   gtag('config', 'G-T9T2GZHGS2');
   // Rackets Academy conversion events
@@ -45,7 +49,7 @@
 <title>Terms &amp; Conditions — Rackets Academy</title>
 <meta name="description" content="Terms and conditions for using Rackets Academy facilities, courts, courses and events in Salgesch and Sion.">
 <link rel="canonical" href="https://www.racketsacademy.ch/terms-and-conditions.html">
-<link rel="stylesheet" href="styles.css?v=12">
+<link rel="stylesheet" href="styles.css?v=13">
 <meta property="og:title" content="Terms &amp; Conditions — Rackets Academy">
 <meta property="og:description" content="Terms and conditions for using Rackets Academy facilities, courts, courses and events in Salgesch and Sion.">
 <meta property="og:type" content="website">
@@ -166,6 +170,6 @@ c) Swiss law applies.</p>
       </div>
     </div>
 </footer>
-<script src="nav.js?v=6"></script>
+<script src="nav.js?v=7"></script>
 </body>
 </html>

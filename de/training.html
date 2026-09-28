@@ -6,6 +6,10 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    analytics_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'
+  });
   gtag('js', new Date());
   gtag('config', 'G-T9T2GZHGS2');
   // Rackets Academy conversion events
@@ -38,11 +42,11 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Training — Padel-Kurse für Kids, Erwachsene &amp; Privatstunden | Rackets Academy</title>
+<title>Padel-Kurse &amp; Privatstunden | Rackets Academy</title>
 <meta name="description" content="Buche Padel-Kurse bei der Rackets Academy: Kids-Kurse, Erwachsenen-Gruppenkurse und Privatstunden in Salgesch und Sion. Alle Preise 2026/2027.">
 <link rel="canonical" href="https://www.racketsacademy.ch/de/training.html">
-<link rel="stylesheet" href="../styles.css?v=12">
-<meta property="og:title" content="Training — Padel-Kurse für Kids, Erwachsene &amp; Privatstunden | Rackets Academy">
+<link rel="stylesheet" href="../styles.css?v=13">
+<meta property="og:title" content="Padel-Kurse &amp; Privatstunden | Rackets Academy">
 <meta property="og:description" content="Buche Padel-Kurse bei der Rackets Academy: Kids-Kurse, Erwachsenen-Gruppenkurse und Privatstunden in Salgesch und Sion. Alle Preise 2026/2027.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.racketsacademy.ch/de/training.html">
@@ -295,6 +299,6 @@
     </div>
   </div>
 </footer>
-<script src="../nav.js?v=6"></script>
+<script src="../nav.js?v=7"></script>
 </body>
 </html>

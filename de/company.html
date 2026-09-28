@@ -6,6 +6,10 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    analytics_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'
+  });
   gtag('js', new Date());
   gtag('config', 'G-T9T2GZHGS2');
   // Rackets Academy conversion events
@@ -41,7 +45,7 @@
 <title>Firmenrabatt &amp; Firmenevents — Rackets Academy Wallis</title>
 <meta name="description" content="15% Rabatt auf alle Padel-, Pickleball- und Tennisbuchungen vor 17:30 Uhr für Mitarbeitende von Partnerfirmen, plus Firmen-Padel-Events — Turniere, Dinner, Paella, Raclette und Partys — organisiert auf Anfrage in Salgesch und Sion.">
 <link rel="canonical" href="https://www.racketsacademy.ch/de/company.html">
-<link rel="stylesheet" href="../styles.css?v=12">
+<link rel="stylesheet" href="../styles.css?v=13">
 <meta property="og:title" content="Firmenrabatt &amp; Firmenevents — Rackets Academy Wallis">
 <meta property="og:description" content="15% Rabatt auf alle Padel-, Pickleball- und Tennisbuchungen vor 17:30 Uhr für Mitarbeitende von Partnerfirmen, plus Firmen-Padel-Events — Turniere, Dinner, Paella, Raclette und Partys — organisiert auf Anfrage in Salgesch und Sion.">
 <meta property="og:type" content="website">
@@ -176,6 +180,6 @@
     </div>
   </div>
 </footer>
-<script src="../nav.js?v=6"></script>
+<script src="../nav.js?v=7"></script>
 </body>
 </html>
