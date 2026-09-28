@@ -88,6 +88,10 @@ function showShopPanel(id) {
 
 // Shared "Buy Now" modal for both vouchers and rackets.
 function openBuyModal(type, opts) {
+  var oldPane = document.querySelector('#buy-modal-overlay .pay-pane');
+  if (oldPane) oldPane.remove();
+  var bf = document.getElementById('buy-modal-form');
+  if (bf) { bf.style.display = ''; var bb = bf.querySelector('button[type="submit"]'); if (bb && bb.dataset.label) { bb.disabled = false; bb.textContent = bb.dataset.label; } }
   document.getElementById('modal-formType').value = type;
   document.getElementById('buy-modal-title').textContent = opts.title || '';
   document.getElementById('buy-modal-price').textContent = (opts.price || '') + ' CHF';
@@ -348,52 +352,86 @@ document.addEventListener('DOMContentLoaded', function () {
 })();
 
 // ------------------------------------------------------------------
-// Shop checkout via fetch → Apps Script returns JSON {ok,url} → redirect
-// to SumUp in the same tab. (Apps Script HTML pages run in a sandboxed
-// iframe that can't auto-redirect — that caused the white screen.)
+// Shop checkout: Apps Script creates the SumUp checkout and returns JSON
+// {ok,id,url}; payment then happens in the SumUp card widget inside our
+// modal (pop-up). Fallback: SumUp hosted payment page.
 // ------------------------------------------------------------------
 (function () {
   var L = (document.documentElement.lang || 'en').slice(0, 2);
-  var MSG = {
-    en: { wait: 'Preparing secure payment…', err: 'Something went wrong. Please try again or message us on WhatsApp.' },
-    fr: { wait: 'Préparation du paiement sécurisé…', err: "Un problème est survenu. Réessaie ou écris-nous sur WhatsApp." },
-    de: { wait: 'Sichere Zahlung wird vorbereitet…', err: 'Da ist etwas schiefgelaufen. Bitte versuch es nochmal oder schreib uns auf WhatsApp.' }
-  }[L] || { wait: '…', err: 'Error' };
+  var M = {
+    en: { wait: 'Preparing secure payment…', err: 'Something went wrong. Please try again or message us on WhatsApp.', secure: 'Secure payment via SumUp', alt: 'Pay on the SumUp page instead', ok: 'Payment successful! 🎾', okText: 'Thank you! You will receive a confirmation by email within a few minutes.', fail: 'The payment did not go through. Please check your details or try another card.', loc: 'en-GB' },
+    fr: { wait: 'Préparation du paiement sécurisé…', err: 'Un problème est survenu. Réessaie ou écris-nous sur WhatsApp.', secure: 'Paiement sécurisé via SumUp', alt: 'Payer plutôt sur la page SumUp', ok: 'Paiement réussi ! 🎾', okText: 'Merci ! Tu recevras une confirmation par e-mail dans quelques minutes.', fail: "Le paiement n'a pas abouti. Vérifie tes données ou essaie une autre carte.", loc: 'fr-CH' },
+    de: { wait: 'Sichere Zahlung wird vorbereitet…', err: 'Da ist etwas schiefgelaufen. Bitte versuch es nochmal oder schreib uns auf WhatsApp.', secure: 'Sichere Zahlung über SumUp', alt: 'Stattdessen auf der SumUp-Seite bezahlen', ok: 'Zahlung erfolgreich! 🎾', okText: 'Danke! Du bekommst in wenigen Minuten eine Bestätigung per E-Mail.', fail: 'Die Zahlung hat nicht geklappt. Bitte prüf deine Angaben oder versuch eine andere Karte.', loc: 'de-CH' }
+  }[L] || null;
+  if (!M) return;
+  var SDK = 'https://gateway.sumup.com/gateway/ecom/card/v2/sdk.js';
+
+  function loadSdk(cb, fail) {
+    if (window.SumUpCard) return cb();
+    var t = setTimeout(fail, 8000), sc = document.createElement('script');
+    sc.src = SDK;
+    sc.onload = function () { clearTimeout(t); window.SumUpCard ? cb() : fail(); };
+    sc.onerror = function () { clearTimeout(t); fail(); };
+    document.head.appendChild(sc);
+  }
+
+  function showPay(form, j) {
+    form.style.display = 'none';
+    var pane = document.createElement('div');
+    pane.className = 'pay-pane';
+    pane.innerHTML =
+      '<div class="pay-secure"><span aria-hidden="true">🔒</span> ' + M.secure + '</div>' +
+      '<div id="sumup-card"></div>' +
+      '<a class="pay-alt" href="' + j.url + '">' + M.alt + '</a>';
+    form.parentNode.appendChild(pane);
+    loadSdk(function () {
+      try {
+        window.SumUpCard.mount({
+          id: 'sumup-card',
+          checkoutId: j.id,
+          locale: M.loc,
+          currency: 'CHF',
+          amount: j.amount ? String(j.amount) : undefined,
+          onResponse: function (type, body) {
+            if (type === 'success') {
+              pane.innerHTML = '<div class="pay-done"><h3>' + M.ok + '</h3><p>' + M.okText + '</p></div>';
+              if (typeof gtag === 'function') gtag('event', 'purchase', { value: Number(j.amount) || 0, currency: 'CHF', transaction_id: j.id });
+            } else if (type === 'fail' || type === 'error') {
+              var n = pane.querySelector('.pay-note') || document.createElement('p');
+              n.className = 'pay-note'; n.textContent = M.fail;
+              pane.insertBefore(n, pane.querySelector('#sumup-card'));
+            }
+          }
+        });
+      } catch (x) { window.location.href = j.url; }
+    }, function () { window.location.href = j.url; });
+  }
 
   document.addEventListener('submit', function (e) {
     var form = e.target;
     if (!form || form.id !== 'buy-modal-form' || form.dataset.fallback === '1') return;
     e.preventDefault();
     var btn = form.querySelector('button[type="submit"]');
-    var label = btn ? btn.textContent : '';
-    if (btn) { btn.disabled = true; btn.textContent = MSG.wait; }
-    var err = form.querySelector('.checkout-error');
-    if (err) err.remove();
+    if (btn) { if (!btn.dataset.label) btn.dataset.label = btn.textContent; btn.disabled = true; btn.textContent = M.wait; }
+    var old = form.querySelector('.checkout-error'); if (old) old.remove();
 
     var data = new URLSearchParams(new FormData(form));
     data.set('mode', 'json');
     fetch(form.action, { method: 'POST', body: data })
       .then(function (r) { return r.text(); })
       .then(function (txt) {
-        var url = null;
-        try { var j = JSON.parse(txt); if (j.ok && j.url) url = j.url; else if (j.error) throw new Error(j.error); }
-        catch (x) {
-          var m = txt.match(/https:(?:\\?\/){2}[^"'\s<\\]*sumup[^"'\s<\\]*/i);
-          if (m) url = m[0].replace(/\\\//g, '/');
-          else if (x && x.message && txt.charAt(0) === '{') throw x;
-        }
-        if (!url) throw new Error('no checkout url');
-        window.location.href = url;
+        var j;
+        try { j = JSON.parse(txt); } catch (x) { throw new Error('bad response'); }
+        if (!j.ok) throw new Error(j.error || 'error');
+        if (j.id) showPay(form, j); else window.location.href = j.url;
       })
       .catch(function (x) {
         if (x instanceof TypeError) { form.dataset.fallback = '1'; form.target = '_self'; form.submit(); return; }
-        if (btn) { btn.disabled = false; btn.textContent = label; }
+        if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label; }
         var p = document.createElement('p');
         p.className = 'checkout-error';
-        p.style.cssText = 'color:#c0392b; font-size:.9rem; margin:10px 0 0;';
-        p.textContent = MSG.err + (x && x.message && x.message !== 'no checkout url' && !/fetch|network/i.test(x.message) ? ' (' + x.message + ')' : '');
+        p.textContent = M.err + (x && x.message && x.message !== 'bad response' ? ' (' + x.message + ')' : '');
         form.appendChild(p);
-        if (window.console) console.error('checkout', x);
       });
   });
 })();
