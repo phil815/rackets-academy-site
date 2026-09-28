@@ -1,0 +1,27 @@
+# Rackets Academy
+
+> Padel, pickleball and tennis club with two locations in Valais, Switzerland: Salgesch (padel, pickleball, tennis) and Sion (padel). Court booking, coaching for kids and adults, events, racket shop, spa and bar. Website in English, French and German.
+
+## Key facts
+- Locations: Littenstrasse 30, 3970 Salgesch · Route de Préjeux 16, 1950 Sion
+- Opening hours: daily 07:00–23:30
+- Court booking: online via Playtomic (live availability for both locations)
+- Coaching: group courses for kids and adults from CHF 19 per session; private lessons from CHF 55 per person
+- Beginner course: every Saturday at 10:00, bookable on Playtomic
+- Racket shop: official reseller of Babolat, Wilson and Siux. Any racket can be tested for CHF 10; the fee is credited when you buy. Pick-up in Salgesch or Sion.
+- Gift vouchers: CHF 20 per voucher (one evening game), valid without time limit, bought online
+- Membership: RACKETS+ loyalty programme via WhatsApp
+- Contact: phil@racketsacademy.ch · WhatsApp +41 77 278 01 15 (Salgesch) · +41 76 291 43 69 (Sion)
+
+## Pages
+- [Home](https://www.racketsacademy.ch/): overview of both locations and offers
+- [Book a court](https://www.racketsacademy.ch/book.html): Playtomic booking for Salgesch and Sion
+- [Courses & coaching](https://www.racketsacademy.ch/training.html): kids, adults, private lessons, prices
+- [Events](https://www.racketsacademy.ch/events.html): Racketero, Rivella League, Padel & Wine, Padel & Paella, Swiss Tennis tournaments
+- [Shop](https://www.racketsacademy.ch/shop.html): gift vouchers and padel rackets (one page per racket under /rackets/)
+- [Camps](https://www.racketsacademy.ch/ski-and-padel.html): Ski & Padel weekends and camps
+- [Spa](https://www.racketsacademy.ch/spa-and-sauna.html): sauna, hammam and jacuzzi
+- [Companies](https://www.racketsacademy.ch/company.html): corporate discount and company events
+- [Membership](https://www.racketsacademy.ch/rackets-plus.html): RACKETS+
+- [About](https://www.racketsacademy.ch/about.html): team and story
+- French: https://www.racketsacademy.ch/fr/ · German: https://www.racketsacademy.ch/de/

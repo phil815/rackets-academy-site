@@ -6,22 +6,22 @@
 
 @font-face{
   font-family:'Galano Grotesque';
-  src:url('fonts/Galano_Grotesque.otf') format('opentype');
+  src:url('fonts/Galano_Grotesque.woff2') format('woff2'), url('fonts/Galano_Grotesque.otf') format('opentype');
   font-weight:400; font-style:normal; font-display:swap;
 }
 @font-face{
   font-family:'Galano Grotesque';
-  src:url('fonts/Galano_Grotesque_Medium.otf') format('opentype');
+  src:url('fonts/Galano_Grotesque_Medium.woff2') format('woff2'), url('fonts/Galano_Grotesque_Medium.otf') format('opentype');
   font-weight:500; font-style:normal; font-display:swap;
 }
 @font-face{
   font-family:'Galano Grotesque';
-  src:url('fonts/Galano_Grotesque_Bold.otf') format('opentype');
+  src:url('fonts/Galano_Grotesque_Bold.woff2') format('woff2'), url('fonts/Galano_Grotesque_Bold.otf') format('opentype');
   font-weight:700; font-style:normal; font-display:swap;
 }
 @font-face{
   font-family:'Galano Grotesque';
-  src:url('fonts/Galano_Grotesque_Extra_Bold.otf') format('opentype');
+  src:url('fonts/Galano_Grotesque_Extra_Bold.woff2') format('woff2'), url('fonts/Galano_Grotesque_Extra_Bold.otf') format('opentype');
   font-weight:800; font-style:normal; font-display:swap;
 }
 
@@ -665,3 +665,13 @@ a.card-link.offer::after{
 #product-modal .pm-grid img{width:100%; aspect-ratio:1/1; object-fit:contain; border-radius:16px;}
 #product-modal .pm-title{margin:4px 0 8px; color:var(--blue-dark); font-size:1.5rem;}
 @media (max-width:640px){ #product-modal .pm-grid{grid-template-columns:1fr;} #product-modal .pm-grid img{max-height:40vh;} #product-modal{align-items:flex-end; padding:0;} #product-modal .pm-sheet{border-radius:22px 22px 0 0;} }
+
+/* similar rackets */
+.similar-title{margin:44px 0 14px; font-size:1.3rem; color:var(--blue-dark);}
+.similar-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+@media (max-width:760px){ .similar-grid{grid-template-columns:repeat(2,1fr);} }
+.similar-card{display:flex; flex-direction:column; gap:4px; background:#fff; border:2px solid #d7e0ea; border-radius:14px; padding:10px; text-decoration:none; color:var(--blue-dark); font-size:.85rem;}
+.similar-card img{width:100%; aspect-ratio:1/1; object-fit:contain;}
+.similar-card strong{font-size:.95rem;}
+/* keyboard focus */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{outline:3px solid var(--green); outline-offset:2px;}

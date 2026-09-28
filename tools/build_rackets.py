@@ -9,17 +9,17 @@ T = {
  'en': dict(test_h='Test it first', test_p='Rent this racket for 10 CHF and play a real match with it. If you buy it, we credit the 10 CHF to the price — completely risk-free.',
             facts=['Official {brand} reseller', 'Pick up at the academy in Salgesch or Sion', 'Test for 10 CHF — credited when you buy'],
             test_btn='Book a test on WhatsApp', back='← Back to shop', wa="Hola! I'd like to test the {label}.",
-            suffix=' – test & buy', brand_suffix=' | Rackets Academy', pickup='Pick up in Salgesch or Sion',
+            suffix=' – test & buy', similar='You might also like', brand_suffix=' | Rackets Academy', pickup='Pick up in Salgesch or Sion',
             meta='{label} for {price} CHF at Rackets Academy in Valais. Test it for 10 CHF first — credited when you buy. Pick up in Salgesch or Sion.'),
  'fr': dict(test_h="Teste-la d'abord", test_p="Loue cette raquette pour 10 CHF et joue un vrai match avec. Si tu l'achètes, on déduit les 10 CHF du prix — sans aucun risque.",
             facts=['Revendeur officiel {brand}', "Retrait à l'academy à Salgesch ou Sion", 'Test à 10 CHF — déduit si tu achètes'],
             test_btn='Réserver un test sur WhatsApp', back='← Retour à la boutique', wa="Hola ! J'aimerais tester la {label}.",
-            suffix=' – tester & acheter', brand_suffix=' | Rackets Academy', pickup='Retrait à Salgesch ou Sion',
+            suffix=' – tester & acheter', similar='Tu aimeras aussi', brand_suffix=' | Rackets Academy', pickup='Retrait à Salgesch ou Sion',
             meta="{label} à {price} CHF à la Rackets Academy en Valais. Teste-la d'abord pour 10 CHF, déduits si tu achètes. Retrait à Salgesch ou Sion."),
  'de': dict(test_h='Erst testen', test_p='Miete dieses Racket für 10 CHF und spiel damit ein echtes Match. Kaufst du es, schreiben wir dir die 10 CHF gut — ganz ohne Risiko.',
             facts=['Offizieller {brand}-Händler', 'Abholung in der Academy in Salgesch oder Sion', 'Test für 10 CHF — beim Kauf angerechnet'],
             test_btn='Test per WhatsApp buchen', back='← Zurück zum Shop', wa='Hola! Ich möchte das {label} testen.',
-            suffix=' – testen & kaufen', brand_suffix=' | Rackets Academy', pickup='Abholung in Salgesch oder Sion',
+            suffix=' – testen & kaufen', similar='Das könnte dir auch gefallen', brand_suffix=' | Rackets Academy', pickup='Abholung in Salgesch oder Sion',
             meta='{label} für {price} CHF bei der Rackets Academy im Wallis. Erst für 10 CHF testen, beim Kauf angerechnet. Abholung in Salgesch oder Sion.'),
 }
 CARD_RE = re.compile(r'<div class="racket-card[^"]*">\n.*?\n      </div>\n', re.S)
@@ -85,6 +85,10 @@ def build(lang):
                          'seller': {'@type': 'Organization', 'name': 'Rackets Academy'}}}
         page_top = page_top.replace('</head>', '<script type="application/ld+json" id="ld-product">' + json.dumps(ld, ensure_ascii=False) + '</script>\n</head>', 1)
         wa = 'https://wa.me/' + WA + '?text=' + urllib.parse.quote(t['wa'].format(label=label))
+        same = [x for x in items if x['model'] != slug and x['model'].split('-')[0] == slug.split('-')[0] and not x['sold']]
+        other = [x for x in items if x['model'] != slug and x not in same and not x['sold']]
+        pick = (same + other)[:4]
+        similar = ''.join('<a class="similar-card" href="rackets/' + x['model'] + '.html"><img src="' + x['img'] + '" alt="' + html.escape(x['label'].replace(' — ', ' ')) + '" loading="lazy"><span>' + html.escape(x['label'].replace(' — ', ' ')) + '</span><strong>' + x['price'] + ' CHF</strong></a>' for x in pick)
         facts = ''.join('<li>' + html.escape(f.format(brand=brand), quote=False) + '</li>' for f in t['facts'])
         body = f'''
 <section class="product-page" data-product="{slug}">
@@ -110,6 +114,8 @@ def build(lang):
         <ul class="product-facts">{facts}</ul>
       </div>
     </div>
+    <h2 class="similar-title">{t['similar']}</h2>
+    <div class="similar-grid">{similar}</div>
   </div>
 </section>
 
