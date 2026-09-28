@@ -479,3 +479,49 @@ document.addEventListener('DOMContentLoaded', function () {
       .catch(function () { /* keep static prices */ });
   });
 })();
+
+// ------------------------------------------------------------------
+// Shop: Product structured data (Google free listings / rich results),
+// built from the racket cards after live prices are applied.
+// ------------------------------------------------------------------
+(function () {
+  function build() {
+    var cards = document.querySelectorAll('.racket-card');
+    if (!cards.length || document.getElementById('ld-products')) return;
+    var items = [];
+    cards.forEach(function (card, i) {
+      var btn = card.querySelector('.buy-btn');
+      var src = (btn && (btn.getAttribute('onclick') || btn.dataset.onclick)) || '';
+      var label = (src.match(/racketLabel:'([^']+)'/) || [])[1];
+      var model = (src.match(/racketModel:'([^']+)'/) || [])[1];
+      var price = ((card.querySelector('.racket-price') || {}).textContent || '').replace(/[^\d.]/g, '');
+      var img = card.querySelector('img');
+      if (!label || !price) return;
+      items.push({
+        '@type': 'ListItem', position: i + 1,
+        item: {
+          '@type': 'Product',
+          name: label.replace(' — ', ' '),
+          sku: model,
+          brand: { '@type': 'Brand', name: label.split(' ')[0] },
+          image: img ? img.src : undefined,
+          description: label + ' – padel racket, test it at Rackets Academy (Salgesch / Sion) before you buy.',
+          offers: {
+            '@type': 'Offer', price: price, priceCurrency: 'CHF',
+            availability: card.classList.contains('sold-out') ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock',
+            url: location.href.split('#')[0] + '#rackets',
+            itemCondition: 'https://schema.org/NewCondition',
+            seller: { '@type': 'Organization', name: 'Rackets Academy' }
+          }
+        }
+      });
+    });
+    if (!items.length) return;
+    var s = document.createElement('script');
+    s.type = 'application/ld+json'; s.id = 'ld-products';
+    s.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'ItemList', name: 'Padel rackets', itemListElement: items });
+    document.head.appendChild(s);
+  }
+  // after live stock (or 4s fallback)
+  document.addEventListener('DOMContentLoaded', function () { setTimeout(build, 4000); });
+})();
