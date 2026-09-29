@@ -31,7 +31,7 @@
         if (/docs\.google\.com\/forms|forms\.gle/.test(h)) return send('form_click', {link_url:h});
         return;
       }
-      var b = e.target.closest && e.target.closest('button[onclick*="openBuyModal"], button[onclick*="openVoucherModal"]');
+      var b = e.target.closest && e.target.closest('button[onclick*="openBuyModal"], button[onclick*="openVoucherModal"], button[onclick*="openLessonModal"]');
       if (b) {
         var card = b.closest('.card, .racket-card, div');
         var t = card && card.querySelector('h3');
@@ -49,7 +49,7 @@
 <title>Shop — Gift Vouchers &amp; Rackets | Rackets Academy</title>
 <meta name="description" content="Buy a padel gift voucher (Playtomic game codes) or order a racket for pickup at Rackets Academy Salgesch or Sion.">
 <link rel="canonical" href="https://www.racketsacademy.ch/shop.html">
-<link rel="stylesheet" href="styles.css?v=17">
+<link rel="stylesheet" href="styles.css?v=18">
 <meta property="og:title" content="Shop — Gift Vouchers &amp; Rackets | Rackets Academy">
 <meta property="og:description" content="Buy a padel gift voucher (Playtomic game codes) or order a racket for pickup at Rackets Academy Salgesch or Sion.">
 <meta property="og:type" content="website">
@@ -145,6 +145,23 @@
       </label>
     </div>
     <button type="button" class="btn btn-green" style="width:100%; text-align:center;" onclick="openVoucherModal()">Buy Now</button>
+
+    <h2 style="margin-top:48px;">Coaching Vouchers</h2>
+    <p class="section-lede">A Playtomic code for one coaching session with our coaches — the perfect gift for anyone who wants to improve their game.</p>
+    <div class="shop-options" id="lesson-options">
+      <label class="shop-option">
+        <input type="radio" name="lesson" value="60" data-price="40" checked>
+        <span class="shop-option-body"><strong>60 Min</strong><span>40 CHF</span></span>
+      </label>
+      <label class="shop-option">
+        <input type="radio" name="lesson" value="90" data-price="50">
+        <span class="shop-option-body"><strong>90 Min</strong><span>50 CHF</span></span>
+      </label>
+    </div>
+    <label class="lesson-qty">Quantity
+      <select id="lesson-qty"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="10">10</option></select>
+    </label>
+    <button type="button" class="btn btn-green" style="width:100%; text-align:center;" onclick="openLessonModal()">Buy Now</button>
   </div>
 </section>
 
@@ -369,6 +386,7 @@
       <input type="hidden" name="formType" id="modal-formType">
       <input type="hidden" name="price" id="modal-price">
       <input type="hidden" name="qty" id="modal-qty">
+      <input type="hidden" name="duration" id="modal-duration">
       <input type="hidden" name="racketModel" id="modal-racketModel">
       <input type="hidden" name="racketLabel" id="modal-racketLabel">
 
@@ -434,6 +452,6 @@
     </div>
   </div>
 </footer>
-<script src="nav.js?v=14"></script>
+<script src="nav.js?v=15"></script>
 </body>
 </html>

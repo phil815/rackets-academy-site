@@ -31,7 +31,7 @@
         if (/docs\.google\.com\/forms|forms\.gle/.test(h)) return send('form_click', {link_url:h});
         return;
       }
-      var b = e.target.closest && e.target.closest('button[onclick*="openBuyModal"], button[onclick*="openVoucherModal"]');
+      var b = e.target.closest && e.target.closest('button[onclick*="openBuyModal"], button[onclick*="openVoucherModal"], button[onclick*="openLessonModal"]');
       if (b) {
         var card = b.closest('.card, .racket-card, div');
         var t = card && card.querySelector('h3');
@@ -59,7 +59,7 @@
 <meta property="og:url" content="https://www.racketsacademy.ch/">
 <meta property="og:image" content="https://static.wixstatic.com/media/aa792a_668567b416ac45edb783841973e8b9e7f000.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="styles.css?v=17">
+<link rel="stylesheet" href="styles.css?v=18">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -459,6 +459,6 @@
 </footer>
 
 
-<script src="nav.js?v=14"></script>
+<script src="nav.js?v=15"></script>
 </body>
 </html>

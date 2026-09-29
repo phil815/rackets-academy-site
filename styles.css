@@ -675,3 +675,5 @@ a.card-link.offer::after{
 .similar-card strong{font-size:.95rem;}
 /* keyboard focus */
 a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{outline:3px solid var(--green); outline-offset:2px;}
+.lesson-qty{display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 0 14px; font-weight:700; color:var(--blue-dark);}
+.lesson-qty select{font:inherit; padding:8px 12px; border-radius:10px; border:2px solid #d7e0ea; min-width:90px;}

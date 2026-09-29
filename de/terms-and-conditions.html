@@ -27,7 +27,7 @@
         if (/docs\.google\.com\/forms|forms\.gle/.test(h)) return send('form_click', {link_url:h});
         return;
       }
-      var b = e.target.closest && e.target.closest('button[onclick*="openBuyModal"], button[onclick*="openVoucherModal"]');
+      var b = e.target.closest && e.target.closest('button[onclick*="openBuyModal"], button[onclick*="openVoucherModal"], button[onclick*="openLessonModal"]');
       if (b) {
         var card = b.closest('.card, .racket-card, div');
         var t = card && card.querySelector('h3');
@@ -45,7 +45,7 @@
 <title>AGB — Rackets Academy</title>
 <meta name="description" content="Allgemeine Geschäftsbedingungen der Rackets Academy Salgesch &amp; Sion: Buchungen, Stornierungen, Verhalten vor Ort und anwendbares Recht.">
 <link rel="canonical" href="https://www.racketsacademy.ch/de/terms-and-conditions.html">
-<link rel="stylesheet" href="../styles.css?v=17">
+<link rel="stylesheet" href="../styles.css?v=18">
 <meta property="og:title" content="AGB — Rackets Academy">
 <meta property="og:description" content="Allgemeine Geschäftsbedingungen der Rackets Academy Salgesch &amp; Sion: Buchungen, Stornierungen, Verhalten vor Ort und anwendbares Recht.">
 <meta property="og:type" content="website">
@@ -168,6 +168,6 @@ c) Es gilt Schweizer Recht.</p>
     </div>
   </div>
 </footer>
-<script src="../nav.js?v=14"></script>
+<script src="../nav.js?v=15"></script>
 </body>
 </html>

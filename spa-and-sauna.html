@@ -31,7 +31,7 @@
         if (/docs\.google\.com\/forms|forms\.gle/.test(h)) return send('form_click', {link_url:h});
         return;
       }
-      var b = e.target.closest && e.target.closest('button[onclick*="openBuyModal"], button[onclick*="openVoucherModal"]');
+      var b = e.target.closest && e.target.closest('button[onclick*="openBuyModal"], button[onclick*="openVoucherModal"], button[onclick*="openLessonModal"]');
       if (b) {
         var card = b.closest('.card, .racket-card, div');
         var t = card && card.querySelector('h3');
@@ -49,7 +49,7 @@
 <title>Spa &amp; Sauna — Rackets Academy Salgesch</title>
 <meta name="description" content="Relax in our wellness area with sauna, hammam and jacuzzi at Rackets Academy Salgesch. See prices and book via Playtomic.">
 <link rel="canonical" href="https://www.racketsacademy.ch/spa-and-sauna.html">
-<link rel="stylesheet" href="styles.css?v=17">
+<link rel="stylesheet" href="styles.css?v=18">
 <meta property="og:title" content="Spa &amp; Sauna — Rackets Academy Salgesch">
 <meta property="og:description" content="Relax in our wellness area with sauna, hammam and jacuzzi at Rackets Academy Salgesch. See prices and book via Playtomic.">
 <meta property="og:type" content="website">
@@ -211,6 +211,6 @@
     </div>
 </footer>
 
-<script src="nav.js?v=14"></script>
+<script src="nav.js?v=15"></script>
 </body>
 </html>

@@ -101,14 +101,16 @@ function openBuyModal(type, opts) {
   document.getElementById('modal-racketLabel').value = opts.racketLabel || '';
 
   var locationSelect = document.getElementById('modal-location');
-  locationSelect.name = type === 'voucher' ? 'location' : 'pickupLocation';
+  locationSelect.name = type === 'racket' ? 'pickupLocation' : 'location';
+  var durEl = document.getElementById('modal-duration');
+  if (durEl) durEl.value = opts.duration || '';
 
   var giftWrap = document.getElementById('modal-gift-wrap');
-  if (giftWrap) giftWrap.style.display = type === 'voucher' ? '' : 'none';
+  if (giftWrap) giftWrap.style.display = type === 'racket' ? 'none' : '';
 
   var emailNote = document.getElementById('modal-email-note');
   if (emailNote) {
-    emailNote.textContent = type === 'voucher'
+    emailNote.textContent = type !== 'racket'
       ? emailNote.getAttribute('data-voucher')
       : emailNote.getAttribute('data-racket');
   }
@@ -121,11 +123,21 @@ function openVoucherModal() {
   if (!checked) return;
   var qty = checked.getAttribute('data-qty');
   var price = checked.getAttribute('data-price');
+  var VL = { en: 'Gift Voucher', fr: 'Bon cadeau', de: 'Geschenkgutschein' }[(document.documentElement.lang || 'en').slice(0, 2)] || 'Gift Voucher';
   openBuyModal('voucher', {
-    title: qty + '× Gift Voucher',
+    title: qty + '× ' + VL,
     price: price,
     qty: qty
   });
+}
+
+function openLessonModal() {
+  var checked = document.querySelector('#lesson-options input[name="lesson"]:checked');
+  if (!checked) return;
+  var qty = parseInt((document.getElementById('lesson-qty') || {}).value || '1', 10);
+  var dur = checked.value, price = qty * Number(checked.getAttribute('data-price'));
+  var LL = { en: 'Coaching Voucher', fr: 'Bon de cours', de: 'Kurs-Gutschein' }[(document.documentElement.lang || 'en').slice(0, 2)] || 'Coaching Voucher';
+  openBuyModal('lesson', { title: qty + '× ' + LL + ' ' + dur + ' Min', price: price, qty: qty, duration: dur });
 }
 
 document.addEventListener('DOMContentLoaded', function () {
