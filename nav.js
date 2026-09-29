@@ -533,9 +533,9 @@ document.addEventListener('DOMContentLoaded', function () {
 (function () {
   var L = (document.documentElement.lang || 'en').slice(0, 2);
   var T = {
-    en: { h: 'Test it first', p: 'Rent this racket for 10 CHF and play a real match with it. If you buy it, we credit the 10 CHF to the price — completely risk-free.', btn: 'Book a test on WhatsApp', wa: "Hola! I'd like to test the {l}.", pick: 'Pick up in Salgesch or Sion', close: 'Close' },
-    fr: { h: "Teste-la d'abord", p: "Loue cette raquette pour 10 CHF et joue un vrai match avec. Si tu l'achètes, on déduit les 10 CHF du prix — sans aucun risque.", btn: 'Réserver un test sur WhatsApp', wa: "Hola ! J'aimerais tester la {l}.", pick: 'Retrait à Salgesch ou Sion', close: 'Fermer' },
-    de: { h: 'Erst testen', p: 'Miete dieses Racket für 10 CHF und spiel damit ein echtes Match. Kaufst du es, schreiben wir dir die 10 CHF gut — ganz ohne Risiko.', btn: 'Test per WhatsApp buchen', wa: 'Hola! Ich möchte das {l} testen.', pick: 'Abholung in Salgesch oder Sion', close: 'Schliessen' }
+    en: { h: 'Test it first', p: 'Rent this racket for 10 CHF and play a real match with it. If you buy it, we credit the 10 CHF to the price — completely risk-free.', btn: 'Book a test on WhatsApp', wa: "Hola! I'd like to test the {l}.", pick: 'Pick up in Salgesch or Sion · ready the next day', close: 'Close' },
+    fr: { h: "Teste-la d'abord", p: "Loue cette raquette pour 10 CHF et joue un vrai match avec. Si tu l'achètes, on déduit les 10 CHF du prix — sans aucun risque.", btn: 'Réserver un test sur WhatsApp', wa: "Hola ! J'aimerais tester la {l}.", pick: 'Retrait à Salgesch ou Sion · prête dès le lendemain', close: 'Fermer' },
+    de: { h: 'Erst testen', p: 'Miete dieses Racket für 10 CHF und spiel damit ein echtes Match. Kaufst du es, schreiben wir dir die 10 CHF gut — ganz ohne Risiko.', btn: 'Test per WhatsApp buchen', wa: 'Hola! Ich möchte das {l} testen.', pick: 'Abholung in Salgesch oder Sion · abholbereit ab dem nächsten Tag', close: 'Schliessen' }
   }[L];
   if (!T) return;
   var shopUrl = null, ov = null;
