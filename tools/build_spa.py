@@ -15,10 +15,10 @@ T = {
            ('🌫️','Grey autumn days','When the fog sits in the valley, bring the warmth in: an evening of sweating, steaming and switching off.'),
            ('🎾','After your match','The spa is right next to the courts. Shower, sauna, jacuzzi — the best recovery there is.')],
   inside_h="What's waiting for you",
-  gallery=[('spa-sauna','Finnish sauna · 80 °C'),('spa-area','Jacuzzi & spa area'),('spa-relax','Relaxation room'),('spa-shower','Hot & cold rain shower')],
-  facilities=['Finnish sauna · 80 °C','Bio-sauna · 65 °C','Hammam (steam bath)','Jacuzzi','Two foot baths','Relaxation room','Hot & cold rain shower'],
+  gallery=[('spa-sauna','Finnish sauna · 80 °C'),('spa-biosauna','Bio-sauna · 48 °C'),('spa-hammam','Hammam'),('spa-area','Jacuzzi'),('spa-footbath','Foot baths'),('spa-relax','Relaxation room'),('spa-shower','Hot & cold rain shower'),('spa-sauna-area','Sauna area')],
+  facilities=['Finnish sauna · 80 °C','Bio-sauna · 48 °C, 65 % humidity','Hammam (steam bath)','Jacuzzi','Two foot baths','Relaxation room','Hot & cold rain shower'],
   ritual_h='Your spa ritual', ritual_sub='Our tip for the perfect evening — repeat 2–3 rounds.',
-  ritual=[('Warm up','Start gently in the bio-sauna at 65 °C or the hammam.'),('Heat','Move on to the Finnish sauna at 80 °C for 8–12 minutes.'),('Cool down','Cold rain shower and a warm foot bath.'),('Relax','Jacuzzi, then lie back in the relaxation room.')],
+  ritual=[('Warm up','Start gently in the bio-sauna at 48 °C or the hammam.'),('Heat','Move on to the Finnish sauna at 80 °C for 8–12 minutes.'),('Cool down','Cold rain shower and a warm foot bath.'),('Relax','Jacuzzi, then lie back in the relaxation room.')],
   private_h='Private spa for your group', private_p='Book the whole spa for 2 hours for up to 8 people — 120 CHF, that is from 15 CHF per person. Perfect for birthdays, team evenings or a girls’ night after skiing.',
   private_cta='Request private spa', private_wa='Hola! I would like to book the private spa (2h, max 8 people). Date: ',
   prices_h='Prices & memberships', scroll='↔ Scroll to see all prices',
@@ -44,10 +44,10 @@ T = {
            ('🌫️',"Journées grises d'automne","Quand le brouillard reste dans la vallée, fais entrer la chaleur : une soirée pour transpirer, se détendre et décrocher."),
            ('🎾','Après ton match','Le spa est juste à côté des terrains. Douche, sauna, jacuzzi — la meilleure récupération qui soit.')],
   inside_h="Ce qui t'attend",
-  gallery=[('spa-sauna','Sauna finlandais · 80 °C'),('spa-area','Jacuzzi & espace spa'),('spa-relax','Salle de repos'),('spa-shower','Douche pluie chaude & froide')],
-  facilities=['Sauna finlandais · 80 °C','Bio-sauna · 65 °C','Hammam (bain de vapeur)','Jacuzzi','Deux bains de pieds','Salle de repos','Douche pluie chaude & froide'],
+  gallery=[('spa-sauna','Sauna finlandais · 80 °C'),('spa-biosauna','Bio-sauna · 48 °C'),('spa-hammam','Hammam'),('spa-area','Jacuzzi'),('spa-footbath','Bains de pieds'),('spa-relax','Salle de repos'),('spa-shower','Douche pluie chaude & froide'),('spa-sauna-area','Espace sauna')],
+  facilities=['Sauna finlandais · 80 °C','Bio-sauna · 48 °C, 65 % humidity','Hammam (bain de vapeur)','Jacuzzi','Deux bains de pieds','Salle de repos','Douche pluie chaude & froide'],
   ritual_h='Ton rituel spa', ritual_sub='Notre conseil pour une soirée parfaite — à répéter 2–3 fois.',
-  ritual=[('Se réchauffer','Commence en douceur au bio-sauna à 65 °C ou au hammam.'),('Transpirer','Passe au sauna finlandais à 80 °C pendant 8–12 minutes.'),('Se rafraîchir','Douche pluie froide et bain de pieds chaud.'),('Se détendre','Jacuzzi, puis repos dans la salle de relaxation.')],
+  ritual=[('Se réchauffer','Commence en douceur au bio-sauna à 48 °C ou au hammam.'),('Transpirer','Passe au sauna finlandais à 80 °C pendant 8–12 minutes.'),('Se rafraîchir','Douche pluie froide et bain de pieds chaud.'),('Se détendre','Jacuzzi, puis repos dans la salle de relaxation.')],
   private_h='Spa privé pour ton groupe', private_p="Réserve tout le spa pendant 2 heures pour 8 personnes max — 120 CHF, soit dès 15 CHF par personne. Idéal pour un anniversaire, une soirée d'équipe ou entre amies après le ski.",
   private_cta='Demander le spa privé', private_wa="Hola ! J'aimerais réserver le spa privé (2h, 8 personnes max). Date : ",
   prices_h='Prix & abonnements', scroll='↔ Faire défiler pour voir tous les prix',
@@ -73,10 +73,10 @@ T = {
            ('🌫️','Graue Herbsttage','Wenn der Nebel im Tal hängt, hol dir die Wärme rein: ein Abend zum Schwitzen, Dampfen und Abschalten.'),
            ('🎾','Nach dem Match','Das Spa liegt direkt neben den Plätzen. Dusche, Sauna, Jacuzzi — bessere Regeneration gibt es nicht.')],
   inside_h='Das erwartet dich',
-  gallery=[('spa-sauna','Finnische Sauna · 80 °C'),('spa-area','Jacuzzi & Spa-Bereich'),('spa-relax','Ruheraum'),('spa-shower','Warm-kalte Regendusche')],
-  facilities=['Finnische Sauna · 80 °C','Bio-Sauna · 65 °C','Hammam (Dampfbad)','Jacuzzi','Zwei Fussbäder','Ruheraum','Warm-kalte Regendusche'],
+  gallery=[('spa-sauna','Finnische Sauna · 80 °C'),('spa-biosauna','Bio-Sauna · 48 °C'),('spa-hammam','Hammam'),('spa-area','Jacuzzi'),('spa-footbath','Fussbäder'),('spa-relax','Ruheraum'),('spa-shower','Warm-kalte Regendusche'),('spa-sauna-area','Saunabereich')],
+  facilities=['Finnische Sauna · 80 °C','Bio-Sauna · 48 °C, 65 % Luftfeuchtigkeit','Hammam (Dampfbad)','Jacuzzi','Zwei Fussbäder','Ruheraum','Warm-kalte Regendusche'],
   ritual_h='Dein Spa-Ritual', ritual_sub='Unser Tipp für den perfekten Abend — 2–3 Runden wiederholen.',
-  ritual=[('Aufwärmen','Sanft starten in der Bio-Sauna bei 65 °C oder im Hammam.'),('Schwitzen','Weiter in die finnische Sauna bei 80 °C für 8–12 Minuten.'),('Abkühlen','Kalte Regendusche und ein warmes Fussbad.'),('Entspannen','Jacuzzi, danach zurücklehnen im Ruheraum.')],
+  ritual=[('Aufwärmen','Sanft starten in der Bio-Sauna bei 48 °C oder im Hammam.'),('Schwitzen','Weiter in die finnische Sauna bei 80 °C für 8–12 Minuten.'),('Abkühlen','Kalte Regendusche und ein warmes Fussbad.'),('Entspannen','Jacuzzi, danach zurücklehnen im Ruheraum.')],
   private_h='Privat-Spa für deine Gruppe', private_p='Buch das ganze Spa für 2 Stunden für bis zu 8 Personen — 120 CHF, also ab 15 CHF pro Person. Perfekt für Geburtstage, Team-Abende oder den Mädelsabend nach dem Skitag.',
   private_cta='Privat-Spa anfragen', private_wa='Hola! Ich möchte das Privat-Spa buchen (2 Std., max. 8 Personen). Datum: ',
   prices_h='Preise & Abos', scroll='↔ Wischen für alle Preise',
@@ -143,7 +143,7 @@ def body(t, pre):
 <section class="section-tight" id="private">
   <div class="wrap">
     <div class="spa-private">
-      <img src="{img('spa-relax-sm')}" alt="{t['gallery'][2][1]}" loading="lazy">
+      <img src="{img('spa-relax-sm')}" alt="{t['gallery'][5][1]}" loading="lazy">
       <div>
         <h2>{t['private_h']}</h2>
         <p>{t['private_p']}</p>
