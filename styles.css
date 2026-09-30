@@ -735,3 +735,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .spa-faq summary{cursor:pointer; font-weight:800; color:var(--blue-dark);}
 .spa-faq details p{margin:10px 0 0;}
 @media (max-width:760px){ .spa-near{grid-template-columns:1fr 1fr;} }
+/* hide Safari/iOS native play overlay if autoplay is blocked — poster stays clean */
+.hero-video video::-webkit-media-controls-start-playback-button{display:none !important; -webkit-appearance:none;}
+.hero-video video::-webkit-media-controls{display:none !important;}
+.hero-video video::-webkit-media-controls-overlay-play-button{display:none !important;}
+.hero-video .hero-bg{pointer-events:none;}

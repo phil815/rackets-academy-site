@@ -643,12 +643,13 @@ document.addEventListener('DOMContentLoaded', function () {
     [['.mp4', 'video/mp4'], ['.webm', 'video/webm']].forEach(function (s) {
       var el = document.createElement('source'); el.src = base + s[0]; el.type = s[1]; v.appendChild(el);
     });
-    v.muted = true; v.defaultMuted = true; v.setAttribute('muted', '');
+    v.muted = true; v.defaultMuted = true; v.setAttribute('muted', ''); v.controls = false; v.disablePictureInPicture = true;
+    v.addEventListener('pause', function () { if (!document.hidden) setTimeout(go, 300); });
     v.load();
     function go() { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
     v.addEventListener('canplay', go, { once: true });
     go();
-    ['touchstart', 'scroll', 'click'].forEach(function (ev) {
+    ['touchstart', 'scroll', 'click', 'mousemove', 'keydown'].forEach(function (ev) {
       window.addEventListener(ev, function once() { if (v.paused) go(); window.removeEventListener(ev, once); }, { passive: true });
     });
   });
