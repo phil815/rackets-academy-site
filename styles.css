@@ -742,3 +742,29 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .hero-video .hero-bg{pointer-events:none;}
 @media (max-width:1000px){ .spa-gallery{grid-template-columns:repeat(2,1fr);} }
 @media (max-width:760px){ .spa-gallery{grid-template-columns:repeat(2,1fr); gap:8px;} .spa-shot figcaption{font-size:.72rem; padding:4px 9px; left:8px; bottom:8px;} }
+
+/* ---------- coaching page ---------- */
+.co-hero{min-height:72vh;}
+.co-bens{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+.co-ben{background:var(--paper); border-radius:18px; padding:20px;}
+.co-ben h3{margin:8px 0 6px; color:var(--blue-dark); font-size:1.05rem;}
+.co-ben p{margin:0; font-size:.93rem;}
+.co-example-wrap{background:var(--blue-dark);}
+.co-example-wrap h2{color:#fff;}
+.co-example{display:grid; grid-template-columns:1.2fr 1fr; gap:16px;}
+.co-mail, .co-plan{position:relative; background:#fff; border-radius:18px; padding:22px 22px 18px; box-shadow:0 10px 30px rgba(0,0,0,.18);}
+.co-tag{position:absolute; top:14px; right:14px; background:var(--green); color:var(--blue-dark); font-weight:800; font-size:.72rem; padding:3px 10px; border-radius:999px; text-transform:uppercase; letter-spacing:.05em;}
+.co-mail-sub{margin:0 0 4px; font-weight:800; color:var(--blue-dark);}
+.co-mail-focus{margin:0 0 14px; font-size:.9rem; opacity:.8; color:var(--blue-dark);}
+.co-row{display:flex; justify-content:space-between; border-bottom:1px solid #e3e9f0; padding:8px 0; font-size:.95rem; color:var(--blue-dark);}
+.co-lvl b{color:#1a9b3c;}
+.co-mail-note{margin:14px 0 0; font-style:italic; color:var(--blue-dark);}
+.co-mail-note span{font-style:normal; font-weight:700; font-size:.85rem;}
+.co-plan ol{list-style:none; padding:0; margin:10px 0 0;}
+.co-plan li{display:flex; gap:12px; align-items:center; padding:7px 0; border-bottom:1px solid #e3e9f0; color:var(--blue-dark); font-size:.95rem;}
+.co-wk{flex:0 0 auto; min-width:64px; font-weight:800; font-size:.78rem; color:var(--blue); text-transform:uppercase;}
+.co-wk::before{content:'W ';}
+.co-steps{grid-template-columns:repeat(3,1fr);}
+.co-season{margin:10px 0 0; font-size:.88rem; color:var(--blue-dark); opacity:.8;}
+@media (max-width:900px){ .co-bens{grid-template-columns:1fr 1fr;} .co-example{grid-template-columns:1fr;} }
+@media (max-width:760px){ .co-bens, .co-steps{grid-template-columns:1fr;} }
