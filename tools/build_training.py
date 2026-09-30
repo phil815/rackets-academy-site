@@ -91,25 +91,42 @@ T = {
   sub_new='Monat / Quartal / Jahr — inkl. Trainingsplan &amp; Feedback nach jedem Training. Meld dich bei unserem Coach:'),
 }
 
-def top(t, pre):
-    hero_img = pre + ('images/coaching/coaching-hero.jpg' if os.path.exists('images/coaching/coaching-hero.jpg') else 'images/wix/7298765d839c.png')
-    side_img = pre + 'images/coaching/coaching-2.jpg' if os.path.exists('images/coaching/coaching-2.jpg') else None
+S = {
+ 'en': dict(lede='Group courses for adults and kids in Salgesch and Sion.',
+   b=[('📋','A plan for every week','12-week cycle with one clear goal per session.'),
+      ('📩','Your rating after every session','Your coach scores your shots (0–7) and emails you a summary.'),
+      ('🎓','Certified coaches','Trained by M3 Coaching or the Spanish Padel Federation.')],
+   proof_h='Your progress, in black and white', proof_cap='Example of a feedback email',
+   price='From <b>19.–</b> per session with a subscription — up to 35 % less than drop-in.'),
+ 'fr': dict(lede='Cours en groupe pour adultes et enfants à Salgesch et Sion.',
+   b=[('📋','Un plan pour chaque semaine','Cycle de 12 semaines, un objectif clair par séance.'),
+      ('📩','Ton évaluation après chaque séance','Ton coach note tes coups (0–7) et t’envoie un résumé par e-mail.'),
+      ('🎓','Coachs certifiés','Formés par M3 Coaching ou la Fédération espagnole de padel.')],
+   proof_h='Tes progrès, noir sur blanc', proof_cap='Exemple d’e-mail de retour',
+   price='Dès <b>19.–</b> la séance avec un abonnement — jusqu’à 35 % de moins qu’en drop-in.'),
+ 'de': dict(lede='Gruppenkurse für Erwachsene und Kinder in Salgesch und Sion.',
+   b=[('📋','Ein Plan für jede Woche','12-Wochen-Zyklus mit einem klaren Ziel pro Training.'),
+      ('📩','Dein Rating nach jedem Training','Dein Coach bewertet deine Schläge (0–7) und schickt dir die Zusammenfassung per E-Mail.'),
+      ('🎓','Zertifizierte Coaches','Ausgebildet von M3 Coaching oder vom Spanischen Padelverband.')],
+   proof_h='Dein Fortschritt, schwarz auf weiss', proof_cap='Beispiel einer Feedback-E-Mail',
+   price='Ab <b>19.–</b> pro Lektion mit Abo — bis zu 35 % günstiger als Drop-in.'),
+}
+
+def top(t, pre, lang):
+    x = S[lang]
+    img = lambda n: pre + 'images/coaching/' + n + '.jpg'
     wa = lambda n: 'https://wa.me/' + n + '?text=' + urllib.parse.quote(t['wa'])
-    chips = ''.join(f'<span class="spa-chip">{c}</span>' for c in t['chips'])
-    ben = ''.join(f'<div class="co-ben"><span class="spa-emoji">{e}</span><h3>{h}</h3><p>{p}</p></div>' for e, h, p in t['ben'])
+    ben = ''.join(f'<div class="co2-b"><span class="co2-ic">{e}</span><h3>{h}</h3><p>{p}</p></div>' for e, h, p in x['b'])
     m = t['mail']
     rows = ''.join(f'<div class="co-row"><span>{s}</span><span class="co-lvl">{(a + " → <b>" + b + " ↑</b>") if b != a else a}</span></div>' for s, a, b in m['rows'])
-    plan = ''.join(f'<li><span class="co-wk">{w}</span>{o}</li>' for w, o in t['plan'])
-    steps = ''.join(f'<li><span class="spa-step">{i+1}</span><div><strong>{h}</strong><p>{p}</p></div></li>' for i, (h, p) in enumerate(t['steps']))
     jump = ''.join(f'<a href="{h}">{l}</a>' for h, l in t['jump'])
     return f'''
-<section class="spa-hero co-hero" style="background-image:url('{hero_img}'); background-position:center 60%;">
+<section class="spa-hero co-hero" style="background-image:url('{img("coaching-hero")}'); background-position:center 60%;">
   <div class="spa-hero-shade"></div>
   <div class="wrap spa-hero-inner">
     <p class="spa-kicker">{t['kicker']}</p>
     <h1>{t['h1']}</h1>
-    <p class="lede">{t['lede']}</p>
-    <div class="spa-chips">{chips}</div>
+    <p class="lede">{x['lede']}</p>
     <div class="hero-actions">
       <a class="btn btn-green spa-cta" href="#plans">{t['cta']}</a>
       <a class="btn spa-cta-ghost" href="{wa(WA_SI)}" target="_blank" rel="noopener">{t['cta2']}</a>
@@ -117,41 +134,33 @@ def top(t, pre):
   </div>
 </section>
 
-<section class="section-tight">
+<section class="co2-sec">
   <div class="wrap">
-    <h2>{t['ben_h']}</h2>
-    <div class="co-bens">{ben}</div>
+    <h2 class="co2-h">{t['ben_h']}</h2>
+    <div class="co2-bens">{ben}</div>
   </div>
 </section>
 
-<section class="co-strip">
-  <img src="{pre}images/coaching/coaching-2.jpg" alt="" loading="lazy"><img src="{pre}images/coaching/coaching-3.jpg" alt="" loading="lazy"><img src="{pre}images/coaching/coaching-4.jpg" alt="" loading="lazy"><img src="{pre}images/coaching/coaching-5.jpg" alt="" loading="lazy">
-</section>
-
-<section class="section-tight co-example-wrap">
-  <div class="wrap">
-    <h2>{t['ex_h']}</h2>
-    <div class="co-example">
+<section class="co2-sec co2-proof">
+  <div class="wrap co2-split">
+    <img class="co2-photo" src="{img('coaching-3')}" alt="" loading="lazy">
+    <div>
+      <h2 class="co2-h">{x['proof_h']}</h2>
       <div class="co-mail">
-        <span class="co-tag">{t['ex_tag']}</span>
         <p class="co-mail-sub">📩 {m['sub']}</p>
         <p class="co-mail-focus">{m['focus']}</p>
         {rows}
         <p class="co-mail-note">{m['note']}<br><span>{m['sig']}</span></p>
       </div>
-      <div class="co-plan">
-        <span class="co-tag">{t['ex_tag']}</span>
-        <p class="co-mail-sub">📋 {t['plan_h']}</p>
-        <ol>{plan}</ol>
-      </div>
+      <p class="co2-cap">{x['proof_cap']}</p>
     </div>
   </div>
 </section>
 
-<section class="section-tight">
-  <div class="wrap">
-    <h2>{t['steps_h']}</h2>
-    <ol class="spa-ritual co-steps">{steps}</ol>
+<section class="co2-sec">
+  <div class="wrap co2-price">
+    <p>{x['price']}</p>
+    <a class="btn btn-green spa-cta" href="#plans">{t['cta']}</a>
   </div>
 </section>
 
@@ -172,7 +181,7 @@ for lang, t in T.items():
     a = s.index('<section class="hero"') if '<section class="hero"' in s else s.index('<section class="spa-hero co-hero"')
     # end: the section containing the holiday note-box (keep it) -> cut until that section
     b = s.index('<section class="section-tight">\n  <div class="wrap">\n    <div class="note-box">', a)
-    s = s[:a] + top(t, pre).lstrip('\n') + '\n' + s[b:]
+    s = s[:a] + top(t, pre, lang).lstrip('\n') + '\n' + s[b:]
     s = s.replace(t['sub_old'], t['sub_new'])
     # adults before kids
     ki = s.index('<section id="' + t['ids'][0] + '"'); ad = s.index('<section id="' + t['ids'][1] + '"')
