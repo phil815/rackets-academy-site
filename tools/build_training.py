@@ -103,7 +103,7 @@ def top(t, pre):
     steps = ''.join(f'<li><span class="spa-step">{i+1}</span><div><strong>{h}</strong><p>{p}</p></div></li>' for i, (h, p) in enumerate(t['steps']))
     jump = ''.join(f'<a href="{h}">{l}</a>' for h, l in t['jump'])
     return f'''
-<section class="spa-hero co-hero" style="background-image:url('{hero_img}');">
+<section class="spa-hero co-hero" style="background-image:url('{hero_img}'); background-position:center 60%;">
   <div class="spa-hero-shade"></div>
   <div class="wrap spa-hero-inner">
     <p class="spa-kicker">{t['kicker']}</p>
@@ -122,6 +122,10 @@ def top(t, pre):
     <h2>{t['ben_h']}</h2>
     <div class="co-bens">{ben}</div>
   </div>
+</section>
+
+<section class="co-strip">
+  <img src="{pre}images/coaching/coaching-2.jpg" alt="" loading="lazy"><img src="{pre}images/coaching/coaching-3.jpg" alt="" loading="lazy"><img src="{pre}images/coaching/coaching-4.jpg" alt="" loading="lazy"><img src="{pre}images/coaching/coaching-5.jpg" alt="" loading="lazy">
 </section>
 
 <section class="section-tight co-example-wrap">
