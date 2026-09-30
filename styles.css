@@ -677,3 +677,10 @@ a.card-link.offer::after{
 a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{outline:3px solid var(--green); outline-offset:2px;}
 .lesson-qty{display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 0 14px; font-weight:700; color:var(--blue-dark);}
 .lesson-qty select{font:inherit; padding:8px 12px; border-radius:10px; border:2px solid #d7e0ea; min-width:90px;}
+
+/* ---------- homepage hero video ---------- */
+.hero.hero-video{position:relative; overflow:hidden;}
+.hero-video .hero-bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0;}
+.hero-video .hero-shade{position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(4,30,70,.35) 0%, rgba(4,30,70,.55) 100%);}
+.hero-video .hero-inner{z-index:2;}
+.hero-video h1, .hero-video .hero-welcome, .hero-video .lede{text-shadow:0 2px 12px rgba(0,0,0,.35);}

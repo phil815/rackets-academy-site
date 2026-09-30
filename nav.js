@@ -622,3 +622,20 @@ document.addEventListener('DOMContentLoaded', function () {
   var h = (location.hash || '').slice(1);
   if ((h === 'rackets' || h === 'vouchers') && document.getElementById(h) && typeof showShopPanel === 'function') showShopPanel(h);
 });
+
+// ------------------------------------------------------------------
+// Homepage hero video: pick size by screen, skip on reduced motion / data saver
+// ------------------------------------------------------------------
+(function () {
+  document.addEventListener('DOMContentLoaded', function () {
+    var v = document.querySelector('video.hero-bg');
+    if (!v) return;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var save = navigator.connection && navigator.connection.saveData;
+    if (reduce || save) return; // poster image stays
+    v.src = window.innerWidth <= 760 ? v.getAttribute('data-mobile') : v.getAttribute('data-desktop');
+    v.muted = true;
+    var p = v.play();
+    if (p && p.catch) p.catch(function () {});
+  });
+})();
