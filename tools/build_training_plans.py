@@ -58,6 +58,7 @@ L = {
          'Verpasste Lektionen: Wo möglich bieten wir eine Ersatzlektion in einer anderen Gruppe an, ohne Garantie. Rückerstattung mit Arztzeugnis.',
          'Zahlung: Drop-in über Playtomic, Abos im Voraus im Club.']),
 }
+BDAY = {'en': '🎂 Planning a birthday? Padel party for up to 12 kids →', 'fr': '🎂 Un anniversaire ? Fête padel jusqu’à 12 enfants →', 'de': '🎂 Geburtstag geplant? Padel-Party für bis zu 12 Kinder →'}
 wa = lambda n, txt: 'https://wa.me/' + n + '?text=' + urllib.parse.quote(txt)
 chf = lambda v: ("{:,}".format(v)).replace(',', "'") + '.–'
 
@@ -107,7 +108,7 @@ def build(lang, pre):
   </div>
 </section>
 {block(t, t['ids'][0], img('coaching-2'), t['ad_h'], t['ad_p'], ADULT, t['wa_ad'])}
-{block(t, t['ids'][1], img('coaching-4'), t['ki_h'], t['ki_p'], KIDS, t['wa_ki'], '<p class="co3-sched">' + t['ki_sched'] + '</p>')}
+{block(t, t['ids'][1], img('coaching-4'), t['ki_h'], t['ki_p'], KIDS, t['wa_ki'], '<p class="co3-sched">' + t['ki_sched'] + '</p><p class="co3-bday"><a href="kids-birthday.html">' + BDAY[lang] + '</a></p>')}
 <section class="co3-sec" id="{t['ids'][2]}">
   <div class="wrap co3-card">
     <img class="co3-img" src="{img('coaching-5')}" alt="" loading="lazy">
