@@ -528,6 +528,7 @@ document.addEventListener('DOMContentLoaded', function () {
             availability: card.classList.contains('sold-out') ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock',
             url: location.href.split('#')[0] + '#rackets',
             itemCondition: 'https://schema.org/NewCondition',
+            hasMerchantReturnPolicy: { '@type': 'MerchantReturnPolicy', applicableCountry: 'CH', returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted' },
             shippingDetails: { '@type': 'OfferShippingDetails', doesNotShip: true, shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'CH' } },
             seller: { '@type': 'Organization', name: 'Rackets Academy' }
           }
