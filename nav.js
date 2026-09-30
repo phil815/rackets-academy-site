@@ -307,6 +307,11 @@ document.addEventListener('DOMContentLoaded', function () {
     bar.innerHTML =
       '<button type="button" class="sb-court" data-pick="court">' + T.court + '</button>' +
       '<a class="sb-course" href="training.html">' + T.course + '</a>';
+    if (/spa-and-sauna/.test(location.pathname)) {
+      var SP = { en: 'Book spa', fr: 'Réserver le spa', de: 'Spa buchen' }[L] || 'Book spa';
+      bar.innerHTML = '<a class="sb-court" href="https://playtomic.com/clubs/rackets-academy-salgesch" target="_blank" rel="noopener">' + SP + '</a>' +
+        '<a class="sb-course" href="#private">' + ({ en: 'Private spa', fr: 'Spa privé', de: 'Privat-Spa' }[L] || 'Private spa') + '</a>';
+    }
     document.body.appendChild(bar);
     document.body.classList.add('has-sticky-book');
   });
