@@ -848,3 +848,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 @media (max-width:860px){ .co3-t td small{display:block; font-size:.66rem;} }
 .co3-u{font-size:.72rem; opacity:.7; margin-left:1px;}
+/* company events */
+.ev-mods .co2-b{background:var(--paper); border-radius:20px; padding:22px;}
+.ev-day ol li{font-size:1.05rem; padding:11px 0;}
+.ev-time{min-width:70px;} .ev-time::before{content:'';}
+.ev-price{margin:14px 0 0; font-weight:800; font-size:1.2rem; color:var(--blue);}
+.ev-refs-sec{padding:40px 0;}
+.ev-ref-h{margin:0 0 14px; font-weight:800; text-transform:uppercase; letter-spacing:.08em; font-size:.85rem; color:var(--blue-dark); opacity:.7;}
+.ev-refs{display:flex; flex-wrap:wrap; justify-content:center; gap:14px;}
+.ev-ref{font-weight:800; font-size:1.3rem; color:var(--blue-dark); background:var(--paper); padding:12px 24px; border-radius:999px;}
