@@ -163,15 +163,6 @@ def top(t, pre, lang):
     <a class="btn btn-green spa-cta" href="#plans">{t['cta']}</a>
   </div>
 </section>
-
-<section class="section-tight" id="plans">
-  <div class="wrap">
-    <h2>{t['plans_h']}</h2>
-    <p class="section-lede">{t['plans_p']}</p>
-    <nav class="jump-nav">{jump}</nav>
-    <p class="co-season">{t['season']}</p>
-  </div>
-</section>
 '''
 
 for lang, t in T.items():
@@ -180,12 +171,12 @@ for lang, t in T.items():
     s = open(f).read()
     a = s.index('<section class="hero"') if '<section class="hero"' in s else s.index('<section class="spa-hero co-hero"')
     # end: the section containing the holiday note-box (keep it) -> cut until that section
-    b = s.index('<section class="section-tight">\n  <div class="wrap">\n    <div class="note-box">', a)
+    b = s.index('<section class="co3-head" id="plans">', a)
     s = s[:a] + top(t, pre, lang).lstrip('\n') + '\n' + s[b:]
     s = s.replace(t['sub_old'], t['sub_new'])
     # adults before kids
-    ki = s.index('<section id="' + t['ids'][0] + '"'); ad = s.index('<section id="' + t['ids'][1] + '"')
-    if ki < ad:
+    ki = s.find('<section id="' + t['ids'][0] + '"'); ad = s.find('<section id="' + t['ids'][1] + '"')
+    if 0 <= ki < ad:
         kend = ad; aend = s.index('<section', ad + 10)
         kids = s[ki:kend]; adults = s[ad:aend]
         s = s[:ki] + adults + kids + s[aend:]
