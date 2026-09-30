@@ -82,6 +82,8 @@ def build(lang):
               'offers': {'@type': 'Offer', 'price': price, 'priceCurrency': 'CHF', 'url': url,
                          'availability': 'https://schema.org/' + ('OutOfStock' if it['sold'] else 'InStock'),
                          'itemCondition': 'https://schema.org/NewCondition',
+                         'shippingDetails': {'@type': 'OfferShippingDetails', 'doesNotShip': True,
+                                             'shippingDestination': {'@type': 'DefinedRegion', 'addressCountry': 'CH'}},
                          'seller': {'@type': 'Organization', 'name': 'Rackets Academy'}}}
         page_top = page_top.replace('</head>', '<script type="application/ld+json" id="ld-product">' + json.dumps(ld, ensure_ascii=False) + '</script>\n</head>', 1)
         wa = 'https://wa.me/' + WA + '?text=' + urllib.parse.quote(t['wa'].format(label=label))
