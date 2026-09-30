@@ -629,7 +629,8 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // ------------------------------------------------------------------
-// Homepage hero video: pick size by screen, skip on reduced motion / data saver
+// Homepage hero video: pick size by screen, WebM + MP4 sources,
+// retry on first interaction (iOS low-power / autoplay policies)
 // ------------------------------------------------------------------
 (function () {
   document.addEventListener('DOMContentLoaded', function () {
@@ -638,9 +639,17 @@ document.addEventListener('DOMContentLoaded', function () {
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var save = navigator.connection && navigator.connection.saveData;
     if (reduce || save) return; // poster image stays
-    v.src = window.innerWidth <= 760 ? v.getAttribute('data-mobile') : v.getAttribute('data-desktop');
-    v.muted = true;
-    var p = v.play();
-    if (p && p.catch) p.catch(function () {});
+    var base = (window.innerWidth <= 760 ? v.getAttribute('data-mobile') : v.getAttribute('data-desktop')).replace(/\.mp4$/, '');
+    [['.mp4', 'video/mp4'], ['.webm', 'video/webm']].forEach(function (s) {
+      var el = document.createElement('source'); el.src = base + s[0]; el.type = s[1]; v.appendChild(el);
+    });
+    v.muted = true; v.defaultMuted = true; v.setAttribute('muted', '');
+    v.load();
+    function go() { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    v.addEventListener('canplay', go, { once: true });
+    go();
+    ['touchstart', 'scroll', 'click'].forEach(function (ev) {
+      window.addEventListener(ev, function once() { if (v.paused) go(); window.removeEventListener(ev, once); }, { passive: true });
+    });
   });
 })();
