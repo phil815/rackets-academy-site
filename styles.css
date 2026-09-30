@@ -727,3 +727,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .spa-moments, .spa-gallery, .spa-ritual{grid-template-columns:1fr;}
   .spa-private{grid-template-columns:1fr;} .spa-private > div{padding:0 22px 24px;}
 }
+.spa-near{display:grid; grid-template-columns:repeat(4,1fr); gap:12px;}
+.spa-near-item{background:var(--paper); border-radius:16px; padding:16px; text-align:center;}
+.spa-near-item strong{display:block; color:var(--blue-dark); font-size:1.05rem;}
+.spa-near-item span{color:var(--blue); font-weight:800;}
+.spa-faq details{background:#fff; border:2px solid #d7e0ea; border-radius:14px; padding:14px 18px; margin-bottom:10px;}
+.spa-faq summary{cursor:pointer; font-weight:800; color:var(--blue-dark);}
+.spa-faq details p{margin:10px 0 0;}
+@media (max-width:760px){ .spa-near{grid-template-columns:1fr 1fr;} }

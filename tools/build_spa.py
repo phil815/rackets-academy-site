@@ -4,8 +4,8 @@ PT = 'https://playtomic.com/clubs/rackets-academy-salgesch'
 WA = 'https://wa.me/41772780115?text='
 T = {
 'en': dict(
-  title='Spa & Sauna in Salgesch | Rackets Academy',
-  desc='Finnish sauna, bio-sauna, hammam and jacuzzi in Salgesch (Valais). From 25 CHF, daily 14:00–22:00. Perfect after skiing or on a grey day.',
+  title='Spa & Sauna Salgesch · near Sierre, Sion, Crans-Montana',
+  desc='Sauna, hammam & jacuzzi in Salgesch – 10 min from Sierre, 20 min from Crans-Montana, 25 min from Sion. From 25 CHF, daily 14:00–22:00.',
   kicker='Spa & Sauna · Salgesch', h1='Grey outside? Warm inside.',
   lede='Finnish sauna, bio-sauna, hammam and jacuzzi right next to our courts — your escape after the slopes, on foggy autumn days or after your match.',
   chips=['From 25 CHF', 'Daily 14:00–22:00', 'Book in 1 minute'],
@@ -25,10 +25,16 @@ T = {
   rows=[('1 entry','25 CHF'),('Private spa 2h (max 8 people)','120 CHF'),('10+1 entries','250 CHF'),('1 month','150 CHF'),('3 months','130 CHF / month'),('6 months','100 CHF / month'),('12 months','80 CHF / month')],
   prices_note='Single entries and 10+1 packs are booked on Playtomic. Monthly, quarterly and yearly memberships are set up at the club — message us on WhatsApp.',
   member_cta='Membership on WhatsApp', member_wa='Hola! I am interested in a spa membership.',
+  near_h='Just around the corner', near_p='Our spa is in Salgesch, right between Sierre and the Leuk region — quick to reach after a ski day or from anywhere in Central Valais.',
+  near=[('Sierre','≈ 10 min'),('Crans-Montana','≈ 20 min'),('Sion','≈ 25 min'),('Leuk','≈ 10 min')],
+  faq_h='Good to know',
+  faq=[('Is there a sauna near Crans-Montana?','Yes — our spa in Salgesch is about 20 minutes by car from Crans-Montana. Ideal after a day on the slopes: Finnish sauna, bio-sauna, hammam and jacuzzi from 25 CHF.'),
+       ('Where can I go to the sauna near Sierre or Sion?','Rackets Academy Spa is in Salgesch, about 10 minutes from Sierre and 25 minutes from Sion. Open daily 14:00–22:00, book your entry on Playtomic.'),
+       ('Can I book the spa privately?','Yes. You can privatise the whole spa for 2 hours for up to 8 people for 120 CHF — perfect for birthdays or team evenings.')],
   final_h='Your warm-up is waiting.', final_p='Open daily 14:00–22:00 · Littenstrasse 30, 3970 Salgesch'),
 'fr': dict(
-  title='Spa & sauna à Salgesch | Rackets Academy',
-  desc='Sauna finlandais, bio-sauna, hammam et jacuzzi à Salgesch (Valais). Dès 25 CHF, tous les jours 14h–22h. Idéal après le ski ou par temps gris.',
+  title='Spa & sauna Salgesch · près de Sierre, Sion, Crans-Montana',
+  desc='Sauna, hammam et jacuzzi à Salgesch – à 10 min de Sierre, 20 min de Crans-Montana, 25 min de Sion. Dès 25 CHF, tous les jours 14h–22h.',
   kicker='Spa & Sauna · Salgesch', h1='Gris dehors ? Chaud dedans.',
   lede='Sauna finlandais, bio-sauna, hammam et jacuzzi juste à côté de nos terrains — ton refuge après les pistes, les jours de brouillard ou après ton match.',
   chips=['Dès 25 CHF', 'Tous les jours 14h–22h', 'Réservé en 1 minute'],
@@ -48,10 +54,16 @@ T = {
   rows=[('1 entrée','25 CHF'),('Spa privé 2h (8 pers. max)','120 CHF'),('10+1 entrées','250 CHF'),('1 mois','150 CHF'),('3 mois','130 CHF / mois'),('6 mois','100 CHF / mois'),('12 mois','80 CHF / mois')],
   prices_note="Les entrées simples et les packs 10+1 se réservent sur Playtomic. Les abonnements mensuels, trimestriels et annuels se font au club — écris-nous sur WhatsApp.",
   member_cta='Abonnement via WhatsApp', member_wa="Hola ! Je suis intéressé(e) par un abonnement spa.",
+  near_h='Tout près de chez toi', near_p="Notre spa se trouve à Salgesch, entre Sierre et la région de Loèche — vite accessible après une journée de ski ou depuis tout le Valais central.",
+  near=[('Sierre','≈ 10 min'),('Crans-Montana','≈ 20 min'),('Sion','≈ 25 min'),('Loèche','≈ 10 min')],
+  faq_h='Bon à savoir',
+  faq=[('Y a-t-il un sauna près de Crans-Montana ?',"Oui — notre spa à Salgesch est à environ 20 minutes en voiture de Crans-Montana. Idéal après les pistes : sauna finlandais, bio-sauna, hammam et jacuzzi dès 25 CHF."),
+       ('Où aller au sauna près de Sierre ou de Sion ?',"Le spa de la Rackets Academy est à Salgesch, à environ 10 minutes de Sierre et 25 minutes de Sion. Ouvert tous les jours de 14h à 22h, réservation sur Playtomic."),
+       ('Peut-on privatiser le spa ?',"Oui. Tu peux privatiser tout le spa pendant 2 heures pour 8 personnes max pour 120 CHF — idéal pour un anniversaire ou une soirée d'équipe.")],
   final_h="Ta pause chaleur t'attend.", final_p='Tous les jours 14h–22h · Littenstrasse 30, 3970 Salgesch'),
 'de': dict(
-  title='Spa & Sauna in Salgesch | Rackets Academy',
-  desc='Finnische Sauna, Bio-Sauna, Hammam und Jacuzzi in Salgesch (Wallis). Ab 25 CHF, täglich 14–22 Uhr. Perfekt nach dem Skitag oder an grauen Tagen.',
+  title='Spa & Sauna Salgesch · bei Siders, Sitten, Crans-Montana',
+  desc='Sauna, Hammam & Jacuzzi in Salgesch – 10 Min. von Siders, 20 Min. von Crans-Montana, 25 Min. von Sitten. Ab 25 CHF, täglich 14–22 Uhr.',
   kicker='Spa & Sauna · Salgesch', h1='Grau draussen? Warm drinnen.',
   lede='Finnische Sauna, Bio-Sauna, Hammam und Jacuzzi direkt neben unseren Plätzen — dein Rückzugsort nach der Piste, an nebligen Herbsttagen oder nach dem Match.',
   chips=['Ab 25 CHF', 'Täglich 14–22 Uhr', 'In 1 Minute gebucht'],
@@ -71,6 +83,12 @@ T = {
   rows=[('1 Eintritt','25 CHF'),('Privat-Spa 2 Std. (max. 8 Pers.)','120 CHF'),('10+1 Eintritte','250 CHF'),('1 Monat','150 CHF'),('3 Monate','130 CHF / Monat'),('6 Monate','100 CHF / Monat'),('12 Monate','80 CHF / Monat')],
   prices_note='Einzeleintritte und 10+1-Pakete bucht ihr auf Playtomic. Monats-, Quartals- und Jahresabos richten wir im Club ein — schreib uns auf WhatsApp.',
   member_cta='Abo per WhatsApp', member_wa='Hola! Ich interessiere mich für ein Spa-Abo.',
+  near_h='Gleich um die Ecke', near_p='Unser Spa liegt in Salgesch, zwischen Siders und der Region Leuk — schnell erreichbar nach dem Skitag oder aus dem ganzen Mittelwallis.',
+  near=[('Siders (Sierre)','≈ 10 Min.'),('Crans-Montana','≈ 20 Min.'),('Sitten (Sion)','≈ 25 Min.'),('Leuk','≈ 10 Min.')],
+  faq_h='Gut zu wissen',
+  faq=[('Gibt es eine Sauna in der Nähe von Crans-Montana?','Ja — unser Spa in Salgesch liegt rund 20 Autominuten von Crans-Montana entfernt. Ideal nach dem Skitag: finnische Sauna, Bio-Sauna, Hammam und Jacuzzi ab 25 CHF.'),
+       ('Wo gibt es eine Sauna bei Siders oder Sitten?','Das Spa der Rackets Academy liegt in Salgesch, rund 10 Minuten von Siders und 25 Minuten von Sitten. Täglich 14–22 Uhr geöffnet, Eintritt auf Playtomic buchen.'),
+       ('Kann man das Spa privat mieten?','Ja. Du kannst das ganze Spa für 2 Stunden für bis zu 8 Personen für 120 CHF mieten — perfekt für Geburtstage oder Team-Abende.')],
   final_h='Deine Aufwärmrunde wartet.', final_p='Täglich 14–22 Uhr · Littenstrasse 30, 3970 Salgesch'),
 }
 def body(t, pre):
@@ -81,6 +99,8 @@ def body(t, pre):
     fac = ''.join(f'<li>{x}</li>' for x in t['facilities'])
     rit = ''.join(f'<li><span class="spa-step">{i+1}</span><div><strong>{h}</strong><p>{p}</p></div></li>' for i, (h, p) in enumerate(t['ritual']))
     rows = ''.join(f'<tr><td class="lead">{a}</td><td>{b}</td></tr>' for a, b in t['rows'])
+    near = ''.join(f'<div class="spa-near-item"><strong>{c}</strong><span>{d}</span></div>' for c, d in t['near'])
+    faq = ''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in t['faq'])
     pwa = WA + urllib.parse.quote(t['private_wa']); mwa = WA + urllib.parse.quote(t['member_wa'])
     return f'''
 <section class="spa-hero" style="background-image:url('{img("spa-jacuzzi")}');">
@@ -150,6 +170,21 @@ def body(t, pre):
   </div>
 </section>
 
+<section class="section-tight">
+  <div class="wrap">
+    <h2>{t['near_h']}</h2>
+    <p class="section-lede">{t['near_p']}</p>
+    <div class="spa-near">{near}</div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="wrap">
+    <h2>{t['faq_h']}</h2>
+    <div class="spa-faq">{faq}</div>
+  </div>
+</section>
+
 <section class="spa-final" style="background-image:url('{img("spa-sauna")}');">
   <div class="spa-hero-shade"></div>
   <div class="wrap spa-final-inner">
@@ -172,4 +207,15 @@ for lang, t in T.items():
         s = re.sub(r'<meta ' + k + ' content="[^"]*"', '<meta ' + k + ' content="' + t['desc'] + '"', s)
     s = re.sub(r'<meta property="og:title" content="[^"]*"', '<meta property="og:title" content="' + t['title'] + '"', s)
     s = re.sub(r'<meta property="og:image" content="[^"]*"', '<meta property="og:image" content="https://www.racketsacademy.ch/images/spa/spa-jacuzzi.jpg"', s)
-    open(f, 'w').write(s); print(f, len(t['title']))
+    import json
+    ld = {'@context': 'https://schema.org', '@graph': [
+      {'@type': 'DaySpa', 'name': 'Rackets Academy Spa & Sauna', 'url': 'https://www.racketsacademy.ch/' + ('' if lang == 'en' else lang + '/') + 'spa-and-sauna.html',
+       'image': 'https://www.racketsacademy.ch/images/spa/spa-jacuzzi.jpg', 'telephone': '+41772780115', 'priceRange': 'CHF 25–120',
+       'address': {'@type': 'PostalAddress', 'streetAddress': 'Littenstrasse 30', 'postalCode': '3970', 'addressLocality': 'Salgesch', 'addressRegion': 'VS', 'addressCountry': 'CH'},
+       'openingHoursSpecification': [{'@type': 'OpeningHoursSpecification', 'dayOfWeek': ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'], 'opens': '14:00', 'closes': '22:00'}],
+       'areaServed': ['Salgesch', 'Sierre', 'Siders', 'Sion', 'Sitten', 'Crans-Montana', 'Leuk', 'Valais', 'Wallis'],
+       'amenityFeature': [{'@type': 'LocationFeatureSpecification', 'name': x, 'value': True} for x in t['facilities']]},
+      {'@type': 'FAQPage', 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in t['faq']]}]}
+    s = re.sub(r'<script type="application/ld\+json" id="ld-spa">.*?</script>\n', '', s, flags=re.S)
+    s = s.replace('</head>', '<script type="application/ld+json" id="ld-spa">' + json.dumps(ld, ensure_ascii=False) + '</script>\n</head>', 1)
+    open(f, 'w').write(s); print(f, len(t['title']), len(t['desc']))
