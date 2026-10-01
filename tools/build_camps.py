@@ -8,7 +8,7 @@ SCRIPT = 'https://script.google.com/macros/s/AKfycbwLWTwsILcSkAHe9FSKjicU1pUk5s3
 WA = 'https://wa.me/41772780115?text='
 IMG = 'https://www.racketsacademy.ch/images/wix/'
 SP = 'https://www.racketsacademy.ch/uploads/ski-padel/'
-def imgsrc(i): return SP + i[3:] + '.jpg' if i.startswith('SP:') else IMG + i + '.jpg'
+def imgsrc(i): return SP + i[3:].replace('_DSC', 'ski-padel-') + '.jpg' if i.startswith('SP:') else IMG + i + '.jpg'
 GALLERY = ['_DSC7791','_DSC8084','_DSC8386','_DSC7651','_DSC8709','_DSC8531','_DSC7952','_DSC9129','_DSC8416','_DSC8045',
            '_DSC7983','_DSC9403','_DSC8224','_DSC8829','_DSC8015','_DSC8329','_DSC9256','_DSC8618','_DSC8438','_DSC7739',
            '_DSC9170','_DSC8781','_DSC9278','_DSC8250','_DSC9023','_DSC9314']
@@ -43,7 +43,7 @@ b.addEventListener('touchend',function(e){if(x0===null)return;var d=e.changedTou
 '''
 def gallery(lang):
     h, p = GAL_T[lang]
-    items = ''.join(f'<a href="{SP}{g}.jpg" class="gal-item"><img src="{SP}{g}.jpg" alt="Ski & Padel weekend at Rackets Academy" loading="lazy"></a>' for g in GALLERY)
+    items = ''.join(f'<a href="{SP}{g.replace("_DSC", "ski-padel-")}.jpg" class="gal-item"><img src="{SP}{g.replace("_DSC", "ski-padel-")}.jpg" alt="Ski & Padel weekend at Rackets Academy" loading="lazy"></a>' for g in GALLERY)
     return f'''
 <section class="section-tight" id="gallery">
   <div class="wrap">
@@ -210,7 +210,7 @@ def body(t, pre):
     chips = ''.join(f'<span>{c}</span>' for c in t['chips'])
     wa = WA + quote(t['wa_msg'])
     return f'''
-<section class="hero" style="background-image:linear-gradient(160deg, rgba(0,119,222,.82), rgba(4,91,171,.88)), url('https://www.racketsacademy.ch/uploads/ski-padel/_DSC7791.jpg'); background-size:cover; background-position:center;">
+<section class="hero" style="background-image:linear-gradient(160deg, rgba(0,119,222,.82), rgba(4,91,171,.88)), url('https://www.racketsacademy.ch/uploads/ski-padel/ski-padel-7791.jpg'); background-size:cover; background-position:center;">
   <span class="ball b1"></span><span class="ball b2"></span><span class="ball b3"></span>
   <div class="wrap hero-inner">
     <h1>{t['h1']}</h1>
