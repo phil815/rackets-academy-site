@@ -882,3 +882,51 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 @media (max-width:1000px){ .ow-mores{grid-template-columns:1fr 1fr;} }
 @media (max-width:760px){ .ow-mores{grid-template-columns:1fr;} }
 .location-ow{margin:6px 0 10px;} .location-ow a{font-weight:800; color:var(--blue); font-size:.95rem;}
+
+/* ---------- Ski & Padel camp booking (ski-and-padel.html) ---------- */
+.camp-chips{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 28px;}
+.camp-chips span{background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.35); border-radius:999px; padding:6px 14px; font-size:.9rem; font-weight:700;}
+.camp-book{background:var(--paper);}
+.camp-step{font-weight:800; color:var(--blue-dark); font-size:1.05rem; margin:0 0 12px;}
+.camp-dates, .camp-packs{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:0 0 30px;}
+.camp-opt{position:relative; display:block; cursor:pointer;}
+.camp-opt input{position:absolute; opacity:0; pointer-events:none;}
+.camp-opt .camp-tile{display:block; height:100%; background:#fff; border:2px solid #d7e0ea; border-radius:var(--radius-md); padding:18px 20px; transition:border-color .15s, box-shadow .15s;}
+.camp-opt input:checked + .camp-tile{border-color:var(--blue); box-shadow:0 0 0 3px rgba(0,119,222,.18);}
+.camp-opt input:focus-visible + .camp-tile{outline:3px solid var(--blue); outline-offset:2px;}
+.camp-opt input:disabled + .camp-tile{opacity:.45; cursor:not-allowed;}
+.camp-opt .camp-tile.camp-ticket{display:grid; grid-template-columns:auto 1fr; gap:2px 16px; align-items:center;}
+.camp-ticket strong, .camp-ticket .camp-spots{grid-column:2;}
+.camp-day{grid-row:1 / span 2; grid-column:1; text-align:center; background:var(--blue); color:#fff; border-radius:12px; padding:8px 12px; line-height:1.05;}
+.camp-day b{display:block; font-size:1.7rem; color:#fff;}
+.camp-day small{display:block; color:#fff;}
+.camp-day small{font-size:.75rem; font-weight:700;}
+.camp-ticket strong{color:var(--blue-dark); font-size:1.08rem;}
+.camp-spots{font-size:.88rem; font-weight:700; color:var(--blue);}
+.camp-spots.low{color:#c0392b;}
+.camp-pack-name{display:block; font-weight:800; color:var(--blue-dark); font-size:1.08rem;}
+.camp-pack-price{display:block; font-size:1.9rem; font-weight:800; color:var(--blue); margin:6px 0 2px; line-height:1.1;}
+.camp-pack-price small{font-size:.9rem; font-weight:700;}
+.camp-pack-note{display:block; font-size:.9rem; color:#045bab;}
+.camp-save{display:inline-block; background:var(--green); color:var(--blue-dark); font-weight:800; font-size:.8rem; border-radius:999px; padding:3px 10px; margin-top:8px;}
+.camp-summary{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px; background:var(--blue); color:#fff; border-radius:var(--radius-md); padding:18px 22px;}
+.camp-summary p{margin:0; font-weight:700;}
+.camp-summary .btn{border:0; cursor:pointer; font:inherit; font-weight:800;}
+.camp-summary .btn:disabled{opacity:.5; cursor:not-allowed;}
+.camp-summary .camp-total{font-size:1.35rem; font-weight:800;}
+.camp-rules{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+.camp-rule{background:var(--blue); color:#fff; border-radius:var(--radius-md); padding:24px;}
+.camp-rule h3{color:#fff; margin:0 0 10px; font-size:1.2rem;}
+.camp-rule p{margin:0; opacity:.95;}
+.camp-rule .camp-level{display:inline-block; background:var(--green); color:var(--blue-dark); font-weight:800; border-radius:8px; padding:4px 10px; margin:0 0 12px;}
+.camp-stay{margin-top:16px; border:2px dashed var(--blue); border-radius:var(--radius-md); padding:22px 24px; background:#fff;}
+.camp-stay h3{margin:0 0 8px; color:var(--blue-dark);}
+.camp-stay p{margin:0 0 10px; color:#045bab;}
+.camp-stay ul{margin:0; padding-left:20px; color:#045bab;}
+.camp-check{display:flex; gap:10px; align-items:flex-start; font-weight:400; font-size:.88rem; color:var(--blue-dark); margin:0 0 12px;}
+.camp-check input{margin-top:3px; width:18px; height:18px; flex:0 0 auto; accent-color:var(--blue);}
+@media (max-width:720px){
+  .camp-dates, .camp-packs, .camp-rules{grid-template-columns:1fr;}
+  .camp-summary{flex-direction:column; align-items:stretch; text-align:center;}
+}
+@media (prefers-reduced-motion:reduce){ .camp-opt .camp-tile{transition:none;} }
