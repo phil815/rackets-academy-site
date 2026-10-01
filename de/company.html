@@ -58,6 +58,18 @@
 <link rel="alternate" hreflang="fr" href="https://www.racketsacademy.ch/fr/company.html">
 <link rel="alternate" hreflang="de" href="https://www.racketsacademy.ch/de/company.html">
 <link rel="alternate" hreflang="x-default" href="https://www.racketsacademy.ch/company.html">
+<style>
+.cform{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left;margin-top:8px}
+.cform label{display:flex;flex-direction:column;gap:5px;font-size:.85rem;font-weight:700;color:var(--blue-dark)}
+.cform .full{grid-column:1/-1}
+.cform input,.cform select{font:inherit;font-weight:400;font-size:1rem;padding:12px 14px;border:2px solid #d6e6f6;border-radius:14px;background:#fff;color:var(--ink)}
+.cform input:focus,.cform select:focus{outline:none;border-color:var(--blue)}
+.cform button{grid-column:1/-1;justify-self:center;border:0;cursor:pointer;margin-top:6px}
+.cform .hp{position:absolute;left:-5000px}
+.cform-note{font-size:.8rem;color:#7a8ea3;margin-top:12px}
+.cform-ok{background:#eaffd9;border-radius:18px;padding:22px;font-weight:600;color:var(--ink)}
+@media(max-width:560px){.cform{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <div class="site-top">
@@ -135,13 +147,24 @@
 </section>
 
 <section id="apply" class="section-tight" style="background:var(--paper);">
-  <div class="wrap" style="max-width:600px; text-align:center;">
+  <div class="wrap" style="max-width:640px; text-align:center;">
     <h2>Für den Partnerrabatt anmelden</h2>
-    <p class="section-lede" style="margin-left:auto; margin-right:auto;">Erzähl uns von deiner Firma, und wir richten den 15%-Rabatt für dein Team ein.</p>
-    <a class="btn btn-green" href="https://wa.me/41762914369?text=Hola%21%20Ich%20habe%20eine%20Frage%20zu%20Rackets%20Academy%20f%C3%BCr%20Firmen." target="_blank" rel="noopener">Auf WhatsApp anfragen</a>
-    <p style="margin-top:20px; font-size:0.85rem; color:#4a90d9;">Lieber ein Formular? Ein kurzes Anmeldeformular kommt hier bald.</p>
+    <p class="section-lede" style="margin-left:auto; margin-right:auto;">Melde dich mit deinen Firmenangaben an — wir aktivieren deinen 15%-Rabatt in Playtomic und bestätigen dir per E-Mail.</p>
+    <form id="company-form" class="cform" novalidate>
+      <label>Vorname<input name="first_name" required autocomplete="given-name"></label>
+      <label>Nachname<input name="last_name" required autocomplete="family-name"></label>
+      <label>E-Mail<input name="email" type="email" required autocomplete="email"></label>
+      <label>Telefon (für Playtomic)<input name="phone" type="tel" required autocomplete="tel" placeholder="+41 79 …"></label>
+      <label>Firma<input name="company" required autocomplete="organization"></label>
+      <label>Wo spielst du?<select name="location"><option>Beide</option><option>Salgesch</option><option>Sion</option></select></label>
+      <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="btn btn-green" type="submit">Rabatt aktivieren</button>
+    </form>
+    <p id="company-form-ok" class="cform-ok" hidden>Danke! Wir haben deine Anmeldung erhalten und aktivieren deinen Rabatt innert 1–2 Arbeitstagen. Eine Bestätigung ist unterwegs in dein Postfach.</p>
+    <p class="cform-note">Eine Anmeldung pro Person. Deine Angaben verwenden wir nur für den Rabatt.<br><a href="https://wa.me/41762914369?text=Hola%21%20Ich%20habe%20eine%20Frage%20zu%20Rackets%20Academy%20f%C3%BCr%20Firmen." target="_blank" rel="noopener" style="text-decoration:underline;">Fragen? Schreib uns auf WhatsApp</a></p>
   </div>
 </section>
+<script src="../company-form.js?v=1" defer></script>
 
 <footer>
   <div class="wrap">
