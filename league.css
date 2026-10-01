@@ -1,0 +1,55 @@
+/* Rackets Rivella League — live widget */
+#league{ max-width:var(--max,1120px); margin:0 auto; padding:0 16px; }
+.lg-loading{ text-align:center; color:var(--blue-dark); font-weight:600; padding:40px 0; }
+.lg-bar{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; margin-bottom:14px; }
+.lg-tabs, .lg-halves{ display:inline-flex; background:#e8f1fb; border-radius:999px; padding:4px; gap:4px; }
+.lg-halves{ margin-bottom:18px; }
+.lg-tabs button, .lg-halves button{ border:0; background:transparent; font:inherit; font-weight:700; font-size:.92rem; color:var(--blue-dark); padding:9px 16px; border-radius:999px; cursor:pointer; }
+.lg-tabs button.on, .lg-halves button.on{ background:var(--blue); color:#fff; box-shadow:0 2px 8px rgba(0,119,222,.25); }
+.lg-search{ flex:1 1 220px; max-width:320px; font:inherit; font-size:.95rem; padding:10px 14px; border:2px solid #d6e6f6; border-radius:999px; outline:none; }
+.lg-search:focus{ border-color:var(--blue); }
+.lg-round{ font-size:1rem; text-transform:uppercase; letter-spacing:.04em; color:var(--blue-dark); margin:22px 0 10px; }
+.lg-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:12px; }
+.lg-grid.sm{ grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:8px; }
+.lg-match{ background:#fff; border:1px solid #e1ecf7; border-radius:14px; padding:8px 12px; box-shadow:0 1px 3px rgba(11,26,43,.04); }
+.lg-match.done{ border-left:4px solid var(--green); }
+.lg-label{ font-size:.72rem; font-weight:700; color:#7a8ea3; text-transform:uppercase; letter-spacing:.04em; margin-bottom:2px; }
+.lg-side{ display:flex; justify-content:space-between; align-items:center; gap:8px; padding:5px 0; font-size:.95rem; }
+.lg-side + .lg-side{ border-top:1px dashed #e6eef7; }
+.lg-team small{ color:#9aabbd; font-weight:600; font-size:.72rem; margin-left:4px; }
+.lg-side.win .lg-team{ font-weight:800; color:var(--ink); }
+.lg-side.win .lg-team::after{ content:" ✓"; color:#2fa600; }
+.lg-side.ph .lg-team{ color:#9aabbd; font-style:italic; }
+.lg-sets{ display:flex; gap:6px; flex-shrink:0; }
+.lg-sets b{ display:inline-block; min-width:24px; text-align:center; background:#f1f6fc; border-radius:6px; padding:2px 0; font-variant-numeric:tabular-nums; }
+.lg-side.win .lg-sets b{ background:var(--green); color:var(--ink); }
+.lg-sets em{ font-style:normal; font-size:.75rem; color:#9aabbd; }
+.lg-side + .lg-side .lg-sets em{ display:none; }
+.lg-groups{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; }
+.lg-group{ background:#fff; border:1px solid #e1ecf7; border-radius:18px; padding:14px 14px 10px; }
+.lg-group h3{ margin:0 0 8px; font-size:1.05rem; color:var(--blue-dark); }
+.lg-table{ width:100%; border-collapse:collapse; font-size:.92rem; }
+.lg-table th{ text-align:left; font-size:.72rem; text-transform:uppercase; color:#7a8ea3; padding:4px 6px; }
+.lg-table th:nth-child(n+3), .lg-table td:nth-child(n+3){ text-align:center; width:42px; }
+.lg-table td{ padding:7px 6px; border-top:1px solid #eef4fa; }
+.lg-table td.pos{ width:22px; font-weight:800; color:var(--blue); }
+.lg-table tr:nth-child(-n+2) td.pos{ color:#2fa600; }
+.lg-table td.tn{ font-weight:600; }
+.pos-d{ color:#2fa600; font-weight:700; } .neg-d{ color:#c0392b; }
+.lg-group details{ margin-top:8px; }
+.lg-group summary{ cursor:pointer; font-weight:700; color:var(--blue); font-size:.9rem; padding:6px 0; }
+.lg-rd h4{ margin:10px 0 6px; font-size:.8rem; text-transform:uppercase; color:#7a8ea3; }
+.hit, tr.hit td{ background:#eaffd9 !important; }
+.lg-side.hit{ border-radius:8px; padding-left:6px; padding-right:6px; }
+.lg-empty{ text-align:center; color:#7a8ea3; padding:20px 0; }
+.lg-foot{ text-align:center; font-size:.82rem; color:#7a8ea3; margin:22px 0 0; }
+.lg-foot a{ color:var(--blue-dark); text-decoration:underline; }
+.lg-foot .dot{ display:inline-block; width:8px; height:8px; border-radius:50%; background:#2fa600; margin-right:6px; animation:lgpulse 1.6s infinite; }
+@keyframes lgpulse{ 50%{ opacity:.3; } }
+@media (max-width:560px){
+  .lg-bar{ flex-direction:column; align-items:stretch; }
+  .lg-tabs{ align-self:center; }
+  .lg-search{ max-width:none; }
+  .lg-halves{ display:flex; } .lg-halves button{ flex:1; padding:9px 8px; font-size:.85rem; }
+  .lg-groups{ grid-template-columns:1fr; }
+}

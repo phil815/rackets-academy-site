@@ -67,6 +67,7 @@
 <link rel="alternate" hreflang="fr" href="https://www.racketsacademy.ch/fr/rivella-league.html">
 <link rel="alternate" hreflang="de" href="https://www.racketsacademy.ch/de/rivella-league.html">
 <link rel="alternate" hreflang="x-default" href="https://www.racketsacademy.ch/rivella-league.html">
+<link rel="stylesheet" href="league.css?v=1">
 </head>
 <body>
 <div class="site-top">
@@ -115,18 +116,9 @@
 </section>
 
 <section class="section-tight">
-  <div class="wrap">
-    <p class="sheet-scroll-hint">↔ Swipe inside the table to see all columns</p>
-  </div>
-  <div class="sheet-embed">
-      <iframe src="https://docs.google.com/spreadsheets/d/1NjDd0YZtWGeiAPa5kK63ijzxMfuoaksbag3G8s3uxbo/htmlview?widget=true&amp;headers=false" title="Rackets Rivella League — live standings"></iframe>
-  </div>
-  <div class="wrap">
-    <p style="text-align:center; margin-top:16px; font-size:0.85rem; color:#045bab;">
-      Table not loading? <a href="https://docs.google.com/spreadsheets/d/1NjDd0YZtWGeiAPa5kK63ijzxMfuoaksbag3G8s3uxbo/edit?usp=sharing" target="_blank" rel="noopener" style="text-decoration:underline;">Open the standings directly</a>.
-    </p>
-  </div>
+  <div id="league"></div>
 </section>
+<script src="league.js?v=1" defer></script>
 
 <footer>
   <div class="wrap">
