@@ -627,7 +627,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // open the right shop panel from a #vouchers / #rackets link
 document.addEventListener('DOMContentLoaded', function () {
   var h = (location.hash || '').slice(1);
-  if ((h === 'rackets' || h === 'vouchers') && document.getElementById(h) && typeof showShopPanel === 'function') showShopPanel(h);
+  if ((h === 'rackets' || h === 'vouchers' || h === 'floky') && document.getElementById(h) && typeof showShopPanel === 'function') showShopPanel(h);
 });
 
 // ------------------------------------------------------------------
