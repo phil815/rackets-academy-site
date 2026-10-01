@@ -41,17 +41,17 @@ var x0=null;b.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;
 b.addEventListener('touchend',function(e){if(x0===null)return;var d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>40)show(i+(d<0?1:-1));x0=null;});})();
 </script>
 '''
-CREW_T = {'en': ('Serious sport. Zero dress code.', 'Skis on the padel court, a yellow onesie at the net, someone hanging from the goal — just a normal Thursday at Ski &amp;Padel. Come for the sport, stay for the crew.', 'Join the crew'),
-          'fr': ('Du sport sérieux. Zéro dress code.', 'Des skis sur le court de padel, une combinaison jaune au filet, quelqu’un suspendu au but — un jeudi normal au Ski &amp;Padel. Viens pour le sport, reste pour la bande.', 'Rejoins la bande'),
-          'de': ('Ernsthafter Sport. Null Dresscode.', 'Ski auf dem Padelcourt, ein gelber Onesie am Netz, einer hängt am Tor — ein ganz normaler Donnerstag beim Ski &amp;Padel. Komm für den Sport, bleib für die Crew.', 'Sei dabei')}
+CREW_T = {'en': ('Small group, real community', 'Twelve players per weekend, mixed levels and nationalities. You ski together in the morning, play together in the afternoon and share dinner in the evening — most guests leave with new padel partners.', 'Book your place'),
+          'fr': ('Petit groupe, vraie communauté', 'Douze joueurs par week-end, niveaux et nationalités mélangés. On skie ensemble le matin, on joue ensemble l’après-midi et on dîne ensemble le soir — la plupart repartent avec de nouveaux partenaires de padel.', 'Réserve ta place'),
+          'de': ('Kleine Gruppe, echte Community', 'Zwölf Spieler pro Wochenende, gemischte Levels und Nationalitäten. Morgens gemeinsam auf der Piste, nachmittags auf dem Court, abends am selben Tisch — die meisten fahren mit neuen Padel-Partnern nach Hause.', 'Platz buchen')}
 CREW_CSS = r'''<style>.crew-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:32px;align-items:center}.crew-img{width:100%;border-radius:24px;box-shadow:0 12px 30px rgba(11,26,43,.15);transform:rotate(-1.5deg)}@media(max-width:760px){.crew-grid{grid-template-columns:1fr;gap:18px}.crew-img{transform:none}}</style>'''
 def crew(lang):
     h, p, c = CREW_T[lang]
     return f'''
 <section class="section-tight crew-block">
   <div class="wrap crew-grid">
-    <img src="{SP}ski-padel-crew.jpg" alt="Ski &amp;Padel crew on the padel court in ski gear" class="crew-img">
-    <div><h2>{h}</h2><p class="section-lede">{p}</p><a class="btn btn-green" href="#camp-book">{c} →</a></div>
+    <img src="{SP}ski-padel-crew.jpg" alt="Ski &amp;Padel group on the padel court at Rackets Academy" class="crew-img">
+    <div><h2>{h}</h2><p class="section-lede">{p}</p><a class="btn btn-green" href="#camp-book">{c}</a></div>
   </div>
 </section>
 '''+CREW_CSS+'''
