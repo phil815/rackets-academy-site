@@ -7,6 +7,52 @@ import re
 SCRIPT = 'https://script.google.com/macros/s/AKfycbwLWTwsILcSkAHe9FSKjicU1pUk5s3nxSnS4PQ2Tws2RVejiHjBltJJ8gKpmIe3JLRe/exec'
 WA = 'https://wa.me/41772780115?text='
 IMG = 'https://www.racketsacademy.ch/images/wix/'
+SP = 'https://www.racketsacademy.ch/uploads/ski-padel/'
+def imgsrc(i): return SP + i[3:] + '.jpg' if i.startswith('SP:') else IMG + i + '.jpg'
+GALLERY = ['_DSC7791','_DSC8084','_DSC8386','_DSC7651','_DSC8709','_DSC8531','_DSC7952','_DSC9129','_DSC8416','_DSC8045',
+           '_DSC7983','_DSC9403','_DSC8224','_DSC8829','_DSC8015','_DSC8329','_DSC9256','_DSC8618','_DSC8438','_DSC7739',
+           '_DSC9170','_DSC8781','_DSC9278','_DSC8250','_DSC9023','_DSC9314']
+GAL_T = {'en': ('The weekend in pictures', 'Powder in the morning, padel in the afternoon, spa at night. Tap a photo to enlarge.'),
+         'fr': ('Le week-end en images', 'Poudreuse le matin, padel l’après-midi, spa le soir. Touche une photo pour l’agrandir.'),
+         'de': ('Das Wochenende in Bildern', 'Pulverschnee am Morgen, Padel am Nachmittag, Spa am Abend. Tippe auf ein Foto zum Vergrössern.')}
+GAL_ASSETS = r'''<div class="gal-box" hidden><button class="gal-x" aria-label="Close">&times;</button><button class="gal-prev" aria-label="Previous">&#8249;</button><img alt=""><button class="gal-next" aria-label="Next">&#8250;</button></div>
+<style>
+.gal{columns:3 260px;column-gap:12px}
+.gal-item{display:block;break-inside:avoid;margin-bottom:12px;border-radius:14px;overflow:hidden;cursor:zoom-in}
+.gal-item img{width:100%;display:block;transition:transform .3s}
+.gal-item:hover img{transform:scale(1.04)}
+.gal-box{position:fixed;inset:0;background:rgba(5,15,28,.94);z-index:1000;display:flex;align-items:center;justify-content:center}
+.gal-box[hidden]{display:none}
+.gal-box img{max-width:94vw;max-height:88vh;border-radius:10px}
+.gal-box button{position:absolute;background:rgba(255,255,255,.12);color:#fff;border:0;font-size:2.4rem;line-height:1;width:52px;height:52px;border-radius:50%;cursor:pointer}
+.gal-x{top:16px;right:16px}.gal-prev{left:12px}.gal-next{right:12px}
+@media(max-width:600px){.gal{columns:2 140px;column-gap:8px}.gal-item{margin-bottom:8px;border-radius:10px}.gal-prev,.gal-next{bottom:20px;top:auto}}
+</style>
+<script>
+(function(){var a=[].slice.call(document.querySelectorAll('.gal-item')),b=document.querySelector('.gal-box'),im=b.querySelector('img'),i=0;
+function show(n){i=(n+a.length)%a.length;im.src=a[i].href;b.hidden=false;document.body.style.overflow='hidden';}
+function hide(){b.hidden=true;document.body.style.overflow='';}
+a.forEach(function(x,n){x.addEventListener('click',function(e){e.preventDefault();show(n);if(window.gtag)gtag('event','gallery_open');});});
+b.querySelector('.gal-x').onclick=hide;b.querySelector('.gal-prev').onclick=function(e){e.stopPropagation();show(i-1);};
+b.querySelector('.gal-next').onclick=function(e){e.stopPropagation();show(i+1);};
+b.addEventListener('click',function(e){if(e.target===b)hide();});
+document.addEventListener('keydown',function(e){if(b.hidden)return;if(e.key==='Escape')hide();if(e.key==='ArrowLeft')show(i-1);if(e.key==='ArrowRight')show(i+1);});
+var x0=null;b.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
+b.addEventListener('touchend',function(e){if(x0===null)return;var d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>40)show(i+(d<0?1:-1));x0=null;});})();
+</script>
+'''
+def gallery(lang):
+    h, p = GAL_T[lang]
+    items = ''.join(f'<a href="{SP}{g}.jpg" class="gal-item"><img src="{SP}{g}.jpg" alt="Ski & Padel weekend at Rackets Academy" loading="lazy"></a>' for g in GALLERY)
+    return f'''
+<section class="section-tight" id="gallery">
+  <div class="wrap">
+    <h2>{h}</h2>
+    <p class="section-lede">{p}</p>
+    <div class="gal">{items}</div>
+  </div>
+</section>
+'''+GAL_ASSETS+''''''
 
 # id, day numbers, month index (for labels)
 CAMPS = [('ski-padel-2027-02-18', 18, 21), ('ski-padel-2027-02-25', 25, 28)]
@@ -35,11 +81,11 @@ T = {
   stay_h='Sports lodge, not a hotel', stay_p='You sleep in simple, sporty rooms for two at WYN Skillpark, in the same building as our courts and spa. No room service, no minibar — but a location that is hard to beat:',
   stay=['20 seconds from the padel courts and the spa — no cold walks after the sauna', '20 minutes by car to Crans-Montana, transport to the slopes included', '15 minutes on foot to Salgesch station, free parking on site'],
   inc_h="What's included", inc_p='One price, everything sorted — you just bring your ski clothes.',
-  cards=[('b65e1ed85a80', '3 days of skiing', '3-day ski pass for Crans-Montana: 140 km of pistes, 20 minutes from Rackets Academy.'),
-         ('ce520bbd0e90', '3 days of padel', 'Afternoon sessions with tips from an M3 Assistant coach and a tournament on Sunday.'),
-         ('31a6ca943bdc', 'Ski equipment', 'Free rental skis, poles and boots from our sponsor Decathlon — travel light.'),
-         ('950a45839222', 'Padel equipment', 'Test different rackets for free, courtesy of our sponsor Wilson.'),
-         ('2a1109c44da3', 'Unlimited spa', 'Finnish sauna, bio-sauna, hammam, jacuzzi, foot baths and relax zone, every evening.'),
+  cards=[('SP:_DSC8084', '3 days of skiing', '3-day ski pass for Crans-Montana: 140 km of pistes, 20 minutes from Rackets Academy.'),
+         ('SP:_DSC8709', '3 days of padel', 'Afternoon sessions with tips from an M3 Assistant coach and a tournament on Sunday.'),
+         ('SP:_DSC9170', 'Ski equipment', 'Free rental skis, poles and boots from our sponsor Decathlon — travel light.'),
+         ('SP:_DSC9314', 'Padel equipment', 'Test different rackets for free, courtesy of our sponsor Wilson.'),
+         ('SP:_DSC9403', 'Unlimited spa', 'Finnish sauna, bio-sauna, hammam, jacuzzi, foot baths and relax zone, every evening.'),
          ('98c88169a3e4', 'Lodging', '3 nights in simple shared rooms for two at WYN Skillpark, right next to the courts.'),
          ('cc07951f3023', 'Transport', 'Transport to the ski resort and back is included each day.'),
          ('6af4057e8e3f', 'Meals', 'Breakfast and dinner included, lunch on the slopes is on you. Free water and coffee all day.'),
@@ -76,11 +122,11 @@ T = {
   stay_h='Un lodge sportif, pas un hôtel', stay_p='Tu dors dans des chambres simples et sportives pour deux au WYN Skillpark, dans le même bâtiment que nos terrains et le spa. Pas de room service, pas de minibar — mais un emplacement imbattable :',
   stay=['20 secondes des terrains de padel et du spa — pas de marche dans le froid après le sauna', '20 minutes en voiture de Crans-Montana, transport aux pistes inclus', '15 minutes à pied de la gare de Salgesch, parking gratuit sur place'],
   inc_h='Ce qui est inclus', inc_p='Un prix, tout est organisé — tu n\'apportes que tes habits de ski.',
-  cards=[('b65e1ed85a80', '3 jours de ski', 'Forfait 3 jours pour Crans-Montana : 140 km de pistes, à 20 minutes de la Rackets Academy.'),
-         ('ce520bbd0e90', '3 jours de padel', 'Sessions l\'après-midi avec les conseils d\'un coach M3 Assistant et un tournoi le dimanche.'),
-         ('31a6ca943bdc', 'Matériel de ski', 'Skis, bâtons et chaussures de location offerts par notre sponsor Decathlon — voyage léger.'),
-         ('950a45839222', 'Matériel de padel', 'Teste différentes raquettes gratuitement, grâce à notre sponsor Wilson.'),
-         ('2a1109c44da3', 'Spa illimité', 'Sauna finlandais, bio-sauna, hammam, jacuzzi, bains de pieds et espace détente, chaque soir.'),
+  cards=[('SP:_DSC8084', '3 jours de ski', 'Forfait 3 jours pour Crans-Montana : 140 km de pistes, à 20 minutes de la Rackets Academy.'),
+         ('SP:_DSC8709', '3 jours de padel', 'Sessions l\'après-midi avec les conseils d\'un coach M3 Assistant et un tournoi le dimanche.'),
+         ('SP:_DSC9170', 'Matériel de ski', 'Skis, bâtons et chaussures de location offerts par notre sponsor Decathlon — voyage léger.'),
+         ('SP:_DSC9314', 'Matériel de padel', 'Teste différentes raquettes gratuitement, grâce à notre sponsor Wilson.'),
+         ('SP:_DSC9403', 'Spa illimité', 'Sauna finlandais, bio-sauna, hammam, jacuzzi, bains de pieds et espace détente, chaque soir.'),
          ('98c88169a3e4', 'Logement', '3 nuits en chambres simples pour deux au WYN Skillpark, juste à côté des terrains.'),
          ('cc07951f3023', 'Transport', 'Le trajet aller-retour vers la station est inclus chaque jour.'),
          ('6af4057e8e3f', 'Repas', 'Petit-déjeuner et souper inclus, le dîner sur les pistes est à ta charge. Eau et café offerts toute la journée.'),
@@ -117,11 +163,11 @@ T = {
   stay_h='Sport-Lodge, kein Hotel', stay_p='Du schläfst in einfachen, sportlichen Zimmern für zwei im WYN Skillpark, im selben Gebäude wie unsere Courts und das Spa. Kein Zimmerservice, keine Minibar — dafür eine Lage, die kaum zu schlagen ist:',
   stay=['20 Sekunden zu den Padel-Courts und zum Spa — kein kalter Weg nach der Sauna', '20 Minuten mit dem Auto nach Crans-Montana, Transport zur Piste inklusive', '15 Minuten zu Fuss zum Bahnhof Salgesch, gratis Parkplätze vor Ort'],
   inc_h='Was inklusive ist', inc_p='Ein Preis, alles organisiert — du bringst nur deine Skikleider mit.',
-  cards=[('b65e1ed85a80', '3 Tage Skifahren', '3-Tages-Skipass für Crans-Montana: 140 km Pisten, 20 Minuten von der Rackets Academy.'),
-         ('ce520bbd0e90', '3 Tage Padel', 'Nachmittags Sessions mit Tipps von einem M3-Assistant-Coach und ein Turnier am Sonntag.'),
-         ('31a6ca943bdc', 'Skiausrüstung', 'Gratis Mietski, Stöcke und Schuhe von unserem Sponsor Decathlon — reise mit leichtem Gepäck.'),
-         ('950a45839222', 'Padelausrüstung', 'Teste verschiedene Rackets gratis, dank unserem Sponsor Wilson.'),
-         ('2a1109c44da3', 'Unbegrenzt Spa', 'Finnische Sauna, Bio-Sauna, Hammam, Jacuzzi, Fussbäder und Ruhezone, jeden Abend.'),
+  cards=[('SP:_DSC8084', '3 Tage Skifahren', '3-Tages-Skipass für Crans-Montana: 140 km Pisten, 20 Minuten von der Rackets Academy.'),
+         ('SP:_DSC8709', '3 Tage Padel', 'Nachmittags Sessions mit Tipps von einem M3-Assistant-Coach und ein Turnier am Sonntag.'),
+         ('SP:_DSC9170', 'Skiausrüstung', 'Gratis Mietski, Stöcke und Schuhe von unserem Sponsor Decathlon — reise mit leichtem Gepäck.'),
+         ('SP:_DSC9314', 'Padelausrüstung', 'Teste verschiedene Rackets gratis, dank unserem Sponsor Wilson.'),
+         ('SP:_DSC9403', 'Unbegrenzt Spa', 'Finnische Sauna, Bio-Sauna, Hammam, Jacuzzi, Fussbäder und Ruhezone, jeden Abend.'),
          ('98c88169a3e4', 'Unterkunft', '3 Nächte in einfachen Zimmern für zwei im WYN Skillpark, direkt neben den Courts.'),
          ('cc07951f3023', 'Transport', 'Fahrt ins Skigebiet und zurück ist jeden Tag inklusive.'),
          ('6af4057e8e3f', 'Essen', 'Frühstück und Abendessen inklusive, das Mittagessen auf der Piste zahlst du selbst. Wasser und Kaffee gratis.'),
@@ -151,7 +197,7 @@ def body(t, pre):
         </label>''' for i, (cid, a, b) in enumerate(CAMPS))
     cards = ''.join(f'''
       <div class="card">
-        <img src="{IMG}{img}.jpg" alt="{h}" loading="lazy" style="width:100%; height:140px; object-fit:cover; border-radius:12px; margin-bottom:14px;">
+        <img src="{imgsrc(img)}" alt="{h}" loading="lazy" style="width:100%; height:140px; object-fit:cover; border-radius:12px; margin-bottom:14px;">
         <h3>{h}</h3>
         <p>{p}</p>
       </div>''' for img, h, p in t['cards'])
@@ -164,7 +210,7 @@ def body(t, pre):
     chips = ''.join(f'<span>{c}</span>' for c in t['chips'])
     wa = WA + quote(t['wa_msg'])
     return f'''
-<section class="hero" style="background-image:linear-gradient(160deg, rgba(0,119,222,.82), rgba(4,91,171,.88)), url('{IMG}96f05bf2d108.jpg'); background-size:cover; background-position:center;">
+<section class="hero" style="background-image:linear-gradient(160deg, rgba(0,119,222,.82), rgba(4,91,171,.88)), url('https://www.racketsacademy.ch/uploads/ski-padel/_DSC7791.jpg'); background-size:cover; background-position:center;">
   <span class="ball b1"></span><span class="ball b2"></span><span class="ball b3"></span>
   <div class="wrap hero-inner">
     <h1>{t['h1']}</h1>
@@ -233,6 +279,7 @@ def body(t, pre):
   </div>
 </section>
 
+{gallery(next(k for k, v in T.items() if v is t))}
 <section class="section-tight" style="background:var(--paper);">
   <div class="wrap">
     <h2>{t['it_h']}</h2>
