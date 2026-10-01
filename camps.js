@@ -1,12 +1,12 @@
-// Ski & Padel camp booking: weekend + package picker, live spots from the
+// Ski &Padel camp booking: weekend + package picker, live spots from the
 // Shop Apps Script (?action=camps), and the shared SumUp pop-up modal
 // (payment itself is handled by the checkout block in nav.js).
 (function () {
   var L = (document.documentElement.lang || 'en').slice(0, 2);
   var S = {
-    en: { left: function (n) { return n === 1 ? 'Last spot!' : n + ' of 12 spots left'; }, sold: 'Sold out', total: 'Total', pp: 'per person', people: function (n) { return n === 1 ? '1 person' : n + ' people'; }, solo: 'Solo', group: 'Group of 4' },
-    fr: { left: function (n) { return n === 1 ? 'Dernière place !' : n + ' places sur 12'; }, sold: 'Complet', total: 'Total', pp: 'par personne', people: function (n) { return n === 1 ? '1 personne' : n + ' personnes'; }, solo: 'Solo', group: 'Groupe de 4' },
-    de: { left: function (n) { return n === 1 ? 'Letzter Platz!' : 'Noch ' + n + ' von 12 Plätzen'; }, sold: 'Ausgebucht', total: 'Total', pp: 'pro Person', people: function (n) { return n === 1 ? '1 Person' : n + ' Personen'; }, solo: 'Solo', group: '4er-Gruppe' }
+    en: { left: function (n) { return n === 1 ? 'Last spot!' : n + ' of 12 spots left'; }, sold: 'Sold out', total: 'Total', pp: 'per person', people: function (n) { return n === 1 ? '1 person' : n + ' people'; }, solo: 'Individual', group: 'Group of 4' },
+    fr: { left: function (n) { return n === 1 ? 'Dernière place !' : n + ' places sur 12'; }, sold: 'Complet', total: 'Total', pp: 'par personne', people: function (n) { return n === 1 ? '1 personne' : n + ' personnes'; }, solo: 'Individuel', group: 'Groupe de 4' },
+    de: { left: function (n) { return n === 1 ? 'Letzter Platz!' : 'Noch ' + n + ' von 12 Plätzen'; }, sold: 'Ausgebucht', total: 'Total', pp: 'pro Person', people: function (n) { return n === 1 ? '1 Person' : n + ' Personen'; }, solo: 'Einzelplatz', group: '4er-Gruppe' }
   }[L] || null;
   if (!S) return;
   var PACKS = { single: { people: 1, pp: 1199 }, group4: { people: 4, pp: 999 } };
