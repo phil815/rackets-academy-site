@@ -1,7 +1,7 @@
 /* Company discount sign-up → Apps Script web app (sheet + email to Phil + confirmation to applicant).
    Until ENDPOINT is set, submitting opens WhatsApp prefilled with the form data. */
 (function () {
-  var ENDPOINT = ''; // Apps Script web app URL (…/exec)
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbzfVMFLKr8rg6Dmcz4JnA009tllWbZBAot5kcqf_gUVP0wu2tS4eDk6BTr_9Ut93uiXQw/exec';
   var WA = '41762914369';
   var f = document.getElementById('company-form');
   if (!f) return;
