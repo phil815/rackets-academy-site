@@ -19,7 +19,7 @@
 - [Courses & coaching](https://www.racketsacademy.ch/training.html): kids, adults, private lessons, prices
 - [Events](https://www.racketsacademy.ch/events.html): Racketero, Rivella League, Padel & Wine, Padel & Paella, Swiss Tennis tournaments
 - [Shop](https://www.racketsacademy.ch/shop.html): gift vouchers and padel rackets (one page per racket under /rackets/)
-- [Ski & Padel weekends](https://www.racketsacademy.ch/ski-and-padel.html): all-inclusive Ski & Padel weekends in Salgesch, Valais (Switzerland), 18–21 and 25–28 Feb 2027; skiing in Crans-Montana, padel, spa, lodging, breakfast and dinner; solo 1199 CHF, group of 4 999 CHF per person; bookable online
+- [Ski & Padel weekends](https://www.racketsacademy.ch/ski-and-padel.html): all-inclusive Ski & Padel weekends in Salgesch, Valais (Switzerland), 18–21 and 25–28 Feb 2027; skiing in Crans-Montana, Leukerbad, Grimentz-Zinal or the 4 Vallées depending on conditions, padel, spa, lodging, breakfast and dinner; solo 1199 CHF, group of 4 999 CHF per person; bookable online
 - [Spa](https://www.racketsacademy.ch/spa-and-sauna.html): sauna, hammam and jacuzzi
 - [Companies](https://www.racketsacademy.ch/company.html): corporate discount and company events
 - [Membership](https://www.racketsacademy.ch/rackets-plus.html): RACKETS+
