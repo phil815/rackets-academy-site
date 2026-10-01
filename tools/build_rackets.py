@@ -24,6 +24,16 @@ T = {
 }
 CARD_RE = re.compile(r'<div class="racket-card[^"]*">\n.*?\n      </div>\n', re.S)
 
+MPN = {
+  'babolat-viper-2026-technical-soft': '150179', 'babolat-viper-2026-technical': '150175', 'babolat-viper-2026-air': '150176',
+  'babolat-viper-2026-counter': '150177', 'babolat-viper-2026-lebron': '150195', 'babolat-viper-soft-jl-3-1': '150196',
+  'babolat-veron-2026-technical': '150183', 'babolat-veron-2026-air': '150180',
+  'wilson-endure-pro': 'WR190311U2', 'wilson-endure': 'WR190411U2', 'wilson-endure-ls': 'WR190511U2',
+  'wilson-blade-ls-green': 'WR203711U2', 'wilson-blade-ls-rosa': 'WR203721U2',
+  'wilson-defy-white': 'WR214511U2', 'wilson-defy-ls-white': 'WR214611U2', 'wilson-defy-pro': 'WR173611U2',
+  'wilson-defy': 'WR173711U2', 'wilson-defy-ls': 'WR173811U2',
+  'wilson-bela-v3': 'WR186511U2', 'wilson-bela-v3-pro': 'WR186411U2', 'wilson-bela-v3-ls': 'WR186711U2'}
+
 def cards(shop):
     out = []
     for m in CARD_RE.finditer(shop):
@@ -78,6 +88,7 @@ def build(lang):
                           lambda m: m.group(1) + m.group(2).replace('href="#"', 'href="rackets/' + slug + '.html"').replace('shop.html', 'rackets/' + slug + '.html') + m.group(3),
                           page_top, flags=re.S)
         ld = {'@context': 'https://schema.org', '@type': 'Product', 'name': label, 'sku': slug,
+              **({'mpn': MPN[slug]} if slug in MPN else {}),
               'brand': {'@type': 'Brand', 'name': brand}, 'image': img_abs, 'description': meta,
               'offers': {'@type': 'Offer', 'price': price, 'priceCurrency': 'CHF', 'url': url,
                          'availability': 'https://schema.org/' + ('OutOfStock' if it['sold'] else 'InStock'),
