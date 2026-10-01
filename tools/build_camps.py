@@ -13,9 +13,16 @@ CAMPS = [('ski-padel-2027-02-18', 18, 21), ('ski-padel-2027-02-25', 25, 28)]
 
 T = {
 'en': dict(
-  title='Ski &amp; Padel Weekends February 2027 — Rackets Academy',
+  faq_h='Good to know',
+  faq=[('Where does the Ski & Padel weekend take place?', 'At Rackets Academy in Salgesch, Valais (Switzerland). Padel, spa and lodging are in the same building; skiing is in Crans-Montana, about 20 minutes away by car. Transport to the slopes is included.'),
+       ('How do I get there from London, Paris or Berlin?', 'Fly to Geneva or Zurich. From Geneva Airport the train takes about 2.5 hours, from Zurich Airport about 3 hours. Salgesch station is a 15-minute walk from the Academy, and there is free parking if you come by car.'),
+       ('Can I join on my own?', 'Yes. A solo place costs 1\'199 CHF. Rooms are for two, so we pair you with another guest. Groups of 4 pay 999 CHF per person.'),
+       ('What level do I need?', 'Skiing: confident parallel turns on all pistes, including red runs — there are no beginner lessons. Padel: Playtomic level 1.5 or higher, so you know the rules and can keep a rally going.'),
+       ('What is included and what is not?', 'Included: 3-day ski pass for Crans-Montana, rental skis, poles and boots, daily transport, padel sessions with a coach and a tournament, rental rackets, unlimited spa, 3 nights of lodging, breakfast and dinner. Not included: lunch on the slopes, drinks at the bar and travel to Salgesch.'),
+       ('Is the lodging a hotel?', 'No. You stay in simple, sporty shared rooms for two at WYN Skillpark, right next to the courts and the spa. No hotel service, but an unbeatable location.')],
+  title='Ski &amp; Padel Weekends Switzerland · Feb 2027 | Rackets Academy',
   desc='Ski &amp; Padel weekends in Valais, 18–21 and 25–28 February 2027: 3 days skiing in Crans-Montana, padel, spa, lodging and meals. 1199 CHF, groups of 4: 999 CHF per person.',
-  h1='Ski &amp; Padel', lede='Skiing in Crans-Montana every morning, padel every afternoon, spa every evening. Two long weekends in February 2027 — 12 places each.',
+  h1='Ski &amp; Padel weekends in the Swiss Alps', lede='Skiing in Crans-Montana every morning, padel every afternoon, spa every evening. Two long weekends in February 2027 — 12 places each.',
   chips=['Thu–Sun · 3 nights', '12 places per weekend', 'From 999 CHF'], cta='Choose your weekend',
   mon='Feb', dlabel='Thu {a} – Sun {b} Feb 2027', dsub='Thursday to Sunday · 3 nights · 3 ski days',
   book_h='Book your place', s1='1. Pick your weekend', s2='2. Solo or with your crew?',
@@ -47,9 +54,16 @@ T = {
   m_lvl='Everyone in my booking meets the minimum ski and padel level.', m_stay='I understand the rooms are simple shared sports lodging, not a hotel.',
   m_btn='Continue to payment'),
 'fr': dict(
-  title='Week-ends Ski &amp; Padel février 2027 — Rackets Academy',
+  faq_h='Bon à savoir',
+  faq=[('Où a lieu le week-end Ski & Padel ?', 'À la Rackets Academy à Salgesch, en Valais (Suisse). Padel, spa et logement sont dans le même bâtiment ; le ski se fait à Crans-Montana, à environ 20 minutes en voiture. Le transport aux pistes est inclus.'),
+       ('Comment venir depuis Paris, Londres ou Berlin ?', 'En avion jusqu\'à Genève ou Zurich. Depuis l\'aéroport de Genève, le train met environ 2h30, depuis l\'aéroport de Zurich environ 3 heures. La gare de Salgesch est à 15 minutes à pied de l\'Academy, parking gratuit si tu viens en voiture.'),
+       ('Puis-je venir seul·e ?', 'Oui. Une place solo coûte 1\'199 CHF. Les chambres sont pour deux, on te met avec un autre participant. Les groupes de 4 paient 999 CHF par personne.'),
+       ('Quel niveau faut-il ?', 'Ski : virages parallèles sûrs sur toutes les pistes, y compris les rouges — pas de cours débutant. Padel : niveau Playtomic 1.5 ou plus, tu connais les règles et tu tiens un échange.'),
+       ('Qu\'est-ce qui est inclus ou non ?', 'Inclus : forfait 3 jours à Crans-Montana, skis, bâtons et chaussures de location, transport quotidien, sessions de padel avec coach et tournoi, raquettes, spa illimité, 3 nuits, petit-déjeuner et souper. Non inclus : le dîner sur les pistes, les boissons au bar et le voyage jusqu\'à Salgesch.'),
+       ('Le logement est-il un hôtel ?', 'Non. Tu dors dans des chambres simples et sportives pour deux au WYN Skillpark, juste à côté des terrains et du spa. Pas de service hôtelier, mais un emplacement imbattable.')],
+  title='Week-end Ski &amp; Padel en Suisse · février 2027 | Rackets Academy',
   desc='Week-ends Ski &amp; Padel en Valais, 18–21 et 25–28 février 2027 : 3 jours de ski à Crans-Montana, padel, spa, logement et repas. 1199 CHF, groupe de 4 : 999 CHF par personne.',
-  h1='Ski &amp; Padel', lede='Ski à Crans-Montana le matin, padel l\'après-midi, spa le soir. Deux longs week-ends en février 2027 — 12 places chacun.',
+  h1='Week-ends Ski &amp; Padel dans les Alpes suisses', lede='Ski à Crans-Montana le matin, padel l\'après-midi, spa le soir. Deux longs week-ends en février 2027 — 12 places chacun.',
   chips=['Jeu–dim · 3 nuits', '12 places par week-end', 'Dès 999 CHF'], cta='Choisir mon week-end',
   mon='fév', dlabel='Jeu {a} – dim {b} février 2027', dsub='Du jeudi au dimanche · 3 nuits · 3 jours de ski',
   book_h='Réserve ta place', s1='1. Choisis ton week-end', s2='2. Solo ou avec ta bande ?',
@@ -81,9 +95,16 @@ T = {
   m_lvl='Toutes les personnes de ma réservation ont le niveau minimum en ski et en padel.', m_stay='J\'ai compris que les chambres sont un logement sportif simple et partagé, pas un hôtel.',
   m_btn='Continuer vers le paiement'),
 'de': dict(
-  title='Ski &amp; Padel Wochenenden Februar 2027 — Rackets Academy',
+  faq_h='Gut zu wissen',
+  faq=[('Wo findet das Ski & Padel Wochenende statt?', 'In der Rackets Academy in Salgesch, Wallis (Schweiz). Padel, Spa und Unterkunft sind im selben Gebäude; Skifahren in Crans-Montana, rund 20 Minuten mit dem Auto. Der Transport zur Piste ist inklusive.'),
+       ('Wie komme ich aus Berlin, London oder Paris hin?', 'Flug nach Genf oder Zürich. Ab Flughafen Genf dauert die Zugfahrt rund 2,5 Stunden, ab Flughafen Zürich rund 3 Stunden. Der Bahnhof Salgesch liegt 15 Gehminuten von der Academy, mit dem Auto gibt es gratis Parkplätze.'),
+       ('Kann ich alleine mitkommen?', 'Ja. Ein Solo-Platz kostet 1\'199 CHF. Die Zimmer sind für zwei, wir teilen dich mit einem anderen Gast ein. 4er-Gruppen zahlen 999 CHF pro Person.'),
+       ('Welches Niveau brauche ich?', 'Ski: sicher parallel auf allen Pisten, auch auf roten — es gibt keinen Anfängerkurs. Padel: Playtomic-Level 1.5 oder höher, du kennst die Regeln und kannst einen Ballwechsel halten.'),
+       ('Was ist inklusive, was nicht?', 'Inklusive: 3-Tages-Skipass Crans-Montana, Mietski, Stöcke und Schuhe, täglicher Transport, Padel-Sessions mit Coach und Turnier, Rackets, unbegrenzt Spa, 3 Nächte, Frühstück und Abendessen. Nicht inklusive: Mittagessen auf der Piste, Getränke an der Bar und die Anreise nach Salgesch.'),
+       ('Ist die Unterkunft ein Hotel?', 'Nein. Du schläfst in einfachen, sportlichen Zimmern für zwei im WYN Skillpark, direkt neben den Courts und dem Spa. Kein Hotelservice, dafür eine unschlagbare Lage.')],
+  title='Ski &amp; Padel Wochenende Schweiz · Feb. 2027 | Rackets Academy',
   desc='Ski &amp; Padel Wochenenden im Wallis, 18.–21. und 25.–28. Februar 2027: 3 Tage Skifahren in Crans-Montana, Padel, Spa, Unterkunft und Essen. 1199 CHF, 4er-Gruppe: 999 CHF pro Person.',
-  h1='Ski &amp; Padel', lede='Morgens Skifahren in Crans-Montana, nachmittags Padel, abends Spa. Zwei lange Wochenenden im Februar 2027 — je 12 Plätze.',
+  h1='Ski &amp; Padel Wochenenden in den Schweizer Alpen', lede='Morgens Skifahren in Crans-Montana, nachmittags Padel, abends Spa. Zwei lange Wochenenden im Februar 2027 — je 12 Plätze.',
   chips=['Do–So · 3 Nächte', '12 Plätze pro Wochenende', 'Ab 999 CHF'], cta='Wochenende wählen',
   mon='Feb', dlabel='Do {a}. – So {b}. Februar 2027', dsub='Donnerstag bis Sonntag · 3 Nächte · 3 Skitage',
   book_h='Platz buchen', s1='1. Wochenende wählen', s2='2. Solo oder mit deiner Crew?',
@@ -224,7 +245,15 @@ def body(t, pre):
 
 def final(t):
     from urllib.parse import quote
-    return f'''<section class="section-tight" style="text-align:center;">
+    faq = ''.join(f'<details class="card" style="margin-bottom:12px;"><summary style="font-weight:700; color:var(--blue-dark); cursor:pointer;">{q}</summary><p style="margin-top:10px;">{a}</p></details>' for q, a in t['faq'])
+    return f'''<section class="section-tight">
+  <div class="wrap" style="max-width:760px;">
+    <h2>{t['faq_h']}</h2>
+    {faq}
+  </div>
+</section>
+
+<section class="section-tight" style="text-align:center;">
   <div class="wrap">
     <h2>{t['final_h']}</h2>
     <p class="section-lede" style="margin-left:auto; margin-right:auto;">{t['final_p']}</p>
@@ -283,7 +312,7 @@ for lang, t in T.items():
     s = s.replace('</body>', f'<script src="{pre}camps.js?v=1"></script>\n</body>', 1)
     import json
     url = 'https://www.racketsacademy.ch/' + ('' if lang == 'en' else lang + '/') + 'ski-and-padel.html'
-    ev = [{'@type': 'Event', 'name': t['h1'].replace('&amp;', '&') + ' — ' + t['dlabel'].format(a=a2, b=b2),
+    ev = [{'@type': 'Event', 'name': 'Ski & Padel — ' + t['dlabel'].format(a=a2, b=b2),
            'startDate': '2027-02-%02dT18:00:00+01:00' % a2, 'endDate': '2027-02-%02dT18:00:00+01:00' % b2,
            'eventStatus': 'https://schema.org/EventScheduled', 'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode',
            'maximumAttendeeCapacity': 12, 'image': IMG + '96f05bf2d108.jpg', 'description': t['desc'].replace('&amp;', '&'),
@@ -292,6 +321,8 @@ for lang, t in T.items():
            'offers': [{'@type': 'Offer', 'price': '1199', 'priceCurrency': 'CHF', 'url': url + '#camp-book', 'availability': 'https://schema.org/InStock', 'validFrom': '2026-10-01'},
                       {'@type': 'Offer', 'name': 'Group of 4 (per person)', 'price': '999', 'priceCurrency': 'CHF', 'url': url + '#camp-book', 'availability': 'https://schema.org/InStock', 'validFrom': '2026-10-01'}]}
           for cid, a2, b2 in CAMPS]
+    ev.append({'@type': 'FAQPage', 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in t['faq']]})
+    ev.append({'@type': 'BreadcrumbList', 'itemListElement': [{'@type': 'ListItem', 'position': 1, 'name': 'Rackets Academy', 'item': 'https://www.racketsacademy.ch/' + ('' if lang == 'en' else lang + '/')}, {'@type': 'ListItem', 'position': 2, 'name': 'Ski & Padel', 'item': url}]})
     s = re.sub(r'<script type="application/ld\+json" id="ld-camps">.*?</script>\n', '', s, flags=re.S)
     s = s.replace('</head>', '<script type="application/ld+json" id="ld-camps">' + json.dumps({'@context': 'https://schema.org', '@graph': ev}, ensure_ascii=False) + '</script>\n</head>', 1)
     open(f, 'w').write(s)
