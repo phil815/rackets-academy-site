@@ -9,7 +9,7 @@ WA = 'https://wa.me/41772780115?text='
 IMG = 'https://www.racketsacademy.ch/images/wix/'
 SP = 'https://www.racketsacademy.ch/uploads/ski-padel/'
 def imgsrc(i): return SP + i[3:].replace('_DSC', 'ski-padel-') + '.jpg' if i.startswith('SP:') else IMG + i + '.jpg'
-GALLERY = ['_DSC7791','_DSC8084','_DSC8386','_DSC7651','_DSC8709','_DSC8531','_DSC7952','_DSC9129','_DSC8416','_DSC8045',
+GALLERY = ['crew','_DSC7791','_DSC8084','_DSC8386','_DSC7651','_DSC8709','_DSC8531','_DSC7952','_DSC9129','_DSC8416','_DSC8045',
            '_DSC7983','_DSC9403','_DSC8224','_DSC8829','_DSC8015','_DSC8329','_DSC9256','_DSC8618','_DSC8438','_DSC7739',
            '_DSC9170','_DSC8781','_DSC9278','_DSC8250','_DSC9023','_DSC9314']
 GAL_T = {'en': ('The weekend in pictures', 'Powder in the morning, padel in the afternoon, spa at night. Tap a photo to enlarge.'),
@@ -41,9 +41,25 @@ var x0=null;b.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;
 b.addEventListener('touchend',function(e){if(x0===null)return;var d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>40)show(i+(d<0?1:-1));x0=null;});})();
 </script>
 '''
+CREW_T = {'en': ('Serious sport. Zero dress code.', 'Skis on the padel court, a yellow onesie at the net, someone hanging from the goal — just a normal Thursday at Ski &amp;Padel. Come for the sport, stay for the crew.', 'Join the crew'),
+          'fr': ('Du sport sérieux. Zéro dress code.', 'Des skis sur le court de padel, une combinaison jaune au filet, quelqu’un suspendu au but — un jeudi normal au Ski &amp;Padel. Viens pour le sport, reste pour la bande.', 'Rejoins la bande'),
+          'de': ('Ernsthafter Sport. Null Dresscode.', 'Ski auf dem Padelcourt, ein gelber Onesie am Netz, einer hängt am Tor — ein ganz normaler Donnerstag beim Ski &amp;Padel. Komm für den Sport, bleib für die Crew.', 'Sei dabei')}
+CREW_CSS = r'''<style>.crew-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:32px;align-items:center}.crew-img{width:100%;border-radius:24px;box-shadow:0 12px 30px rgba(11,26,43,.15);transform:rotate(-1.5deg)}@media(max-width:760px){.crew-grid{grid-template-columns:1fr;gap:18px}.crew-img{transform:none}}</style>'''
+def crew(lang):
+    h, p, c = CREW_T[lang]
+    return f'''
+<section class="section-tight crew-block">
+  <div class="wrap crew-grid">
+    <img src="{SP}ski-padel-crew.jpg" alt="Ski &amp;Padel crew on the padel court in ski gear" class="crew-img">
+    <div><h2>{h}</h2><p class="section-lede">{p}</p><a class="btn btn-green" href="#camp-book">{c} →</a></div>
+  </div>
+</section>
+'''+CREW_CSS+'''
+'''
+def gname(g): return 'ski-padel-' + g.replace('_DSC', '')
 def gallery(lang):
     h, p = GAL_T[lang]
-    items = ''.join(f'<a href="{SP}{g.replace("_DSC", "ski-padel-")}.jpg" class="gal-item"><img src="{SP}{g.replace("_DSC", "ski-padel-")}.jpg" alt="Ski &Padel weekend at Rackets Academy" loading="lazy"></a>' for g in GALLERY)
+    items = ''.join(f'<a href="{SP}{gname(g)}.jpg" class="gal-item"><img src="{SP}{gname(g)}.jpg" alt="Ski &Padel weekend at Rackets Academy" loading="lazy"></a>' for g in GALLERY)
     return f'''
 <section class="section-tight" id="gallery">
   <div class="wrap">
@@ -220,6 +236,7 @@ def body(t, pre):
   </div>
 </section>
 
+{crew(next(k for k, v in T.items() if v is t))}
 <section class="section-tight camp-book" id="camp-book">
   <div class="wrap">
     <h2>{t['book_h']}</h2>
