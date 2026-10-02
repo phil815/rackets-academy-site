@@ -66,6 +66,7 @@
 .cform input:focus,.cform select:focus{outline:none;border-color:var(--blue)}
 .cform button{grid-column:1/-1;justify-self:center;border:0;cursor:pointer;margin-top:6px}
 .cform .hp{position:absolute;left:-5000px}
+.cform-hint{margin:0;font-size:.85rem;color:var(--blue-dark);background:#e8f1fb;border-radius:12px;padding:10px 12px}
 .cform-note{font-size:.8rem;color:#7a8ea3;margin-top:12px}
 .cform-ok{background:#eaffd9;border-radius:18px;padding:22px;font-weight:600;color:var(--ink)}
 @media(max-width:560px){.cform{grid-template-columns:1fr}}
@@ -155,7 +156,11 @@
       <label>Nachname<input name="last_name" required autocomplete="family-name"></label>
       <label>E-Mail<input name="email" type="email" required autocomplete="email"></label>
       <label>Telefon (für Playtomic)<input name="phone" type="tel" required autocomplete="tel" placeholder="+41 79 …"></label>
-      <label>Firma<input name="company" required autocomplete="organization"></label>
+      <label>Firma<select name="company" required><option value="" disabled selected>Wähle deine Firma</option><option>ACOR Immobilier</option><option>CSS</option><option>Florey Rent</option><option>Lonza</option><option>Novartis</option><option>Renotec</option><option value="__other">Andere / neue Firma</option></select></label>
+      <label class="co-other" hidden>Firmenname<input name="company_other" autocomplete="organization"></label>
+      <label class="co-other full" hidden>HR-Kontakt oder E-Mail (optional)<input name="hr_contact"></label>
+      <p class="co-other full cform-hint" hidden>Noch keine Partnerfirma? Gib deine Firma an — wir kontaktieren sie für eine Partnerschaft.</p>
+      <input type="hidden" name="source">
       <label>Wo spielst du?<select name="location"><option>Beide</option><option>Salgesch</option><option>Sion</option></select></label>
       <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
       <button class="btn btn-green" type="submit">Rabatt aktivieren</button>
@@ -164,7 +169,7 @@
     <p class="cform-note">Eine Anmeldung pro Person. Deine Angaben verwenden wir nur für den Rabatt.<br><a href="https://wa.me/41762914369?text=Hola%21%20Ich%20habe%20eine%20Frage%20zu%20Rackets%20Academy%20f%C3%BCr%20Firmen." target="_blank" rel="noopener" style="text-decoration:underline;">Fragen? Schreib uns auf WhatsApp</a></p>
   </div>
 </section>
-<script src="../company-form.js?v=2" defer></script>
+<script src="../company-form.js?v=3" defer></script>
 
 <footer>
   <div class="wrap">

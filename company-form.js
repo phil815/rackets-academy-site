@@ -11,6 +11,16 @@
     fr: { sending: 'Envoi…', fail: 'Oups, ça n’a pas marché — réessaie ou écris-nous sur WhatsApp.' },
     de: { sending: 'Wird gesendet…', fail: 'Das hat nicht geklappt — bitte nochmals versuchen oder schreib uns auf WhatsApp.' }
   }[lang] || {};
+  // Quelle merken (z.B. ?src=foire-du-valais vom QR-Code am Stand)
+  var qs = new URLSearchParams(location.search), src = qs.get('src') || qs.get('utm_source') || '';
+  try { if (src) sessionStorage.setItem('ra_src', src); else src = sessionStorage.getItem('ra_src') || ''; } catch (e) {}
+  f.elements.source.value = src || (document.referrer ? 'web:' + new URL(document.referrer).hostname : 'direct');
+  var sel = f.elements.company, others = f.querySelectorAll('.co-other');
+  sel.addEventListener('change', function () {
+    var o = sel.value === '__other';
+    others.forEach(function (el) { el.hidden = !o; });
+    f.elements.company_other.required = o;
+  });
   f.addEventListener('submit', function (e) {
     e.preventDefault();
     if (!f.reportValidity()) return;
@@ -18,7 +28,7 @@
     data.set('lang', lang);
     var btn = f.querySelector('button[type=submit]'), label = btn.textContent;
     if (!ENDPOINT) {
-      var t = ['Company discount', data.get('company'), data.get('first_name') + ' ' + data.get('last_name'), data.get('email'), data.get('phone'), data.get('location')].filter(Boolean).join('\n');
+      var t = ['Company discount', data.get('company') === '__other' ? data.get('company_other') : data.get('company'), data.get('first_name') + ' ' + data.get('last_name'), data.get('email'), data.get('phone'), data.get('location')].filter(Boolean).join('\n');
       window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(t), '_blank');
       return;
     }
@@ -27,7 +37,7 @@
       .then(function () {
         f.hidden = true;
         document.getElementById('company-form-ok').hidden = false;
-        if (window.gtag) gtag('event', 'generate_lead', { form: 'company_discount', company: data.get('company') });
+        if (window.gtag) gtag('event', 'generate_lead', { form: 'company_discount', company: data.get('company') === '__other' ? 'new:' + data.get('company_other') : data.get('company'), lead_source: data.get('source'), new_company: data.get('company') === '__other' });
       })
       .catch(function () { btn.disabled = false; btn.textContent = label; alert(msg.fail); });
   });
