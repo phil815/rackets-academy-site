@@ -75,6 +75,11 @@
 .cform-ok{background:#eaffd9;border-radius:18px;padding:22px;font-weight:600;color:var(--ink)}
 @media(max-width:560px){.cform{grid-template-columns:1fr}}
 </style>
+<script>
+/* Flyer Foire du Valais: QR zeigt auf /company.html (EN) → Besucher in ihre Sprache + direkt zum Formular, UTM bleibt erhalten */
+(function(){var q=location.search;if(!/utm_source=foire/i.test(q))return;var l=(navigator.language||'fr').slice(0,2);
+var base=l==='de'?'/de/company.html':l==='en'?null:'/fr/company.html';if(base)location.replace(base+q+'#apply');else if(location.hash!=='#apply')location.hash='apply';})();
+</script>
 </head>
 <body>
 <div class="site-top">
