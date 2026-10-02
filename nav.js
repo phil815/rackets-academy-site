@@ -187,7 +187,9 @@ document.addEventListener('DOMContentLoaded', function () {
     { k: ['beer'], l: { en: 'Padel+Beer', fr: 'Padel+Beer', de: 'Padel+Beer' }, wa: 'Padel+Beer' },
     { k: ['fitness'], l: { en: 'Padel+Fitness', fr: 'Padel+Fitness', de: 'Padel+Fitness' }, h: 'padel-fitness.html' },
     { k: ['rivella'], l: { en: 'Rivella League Final', fr: 'Finale de la Rivella League', de: 'Rivella League Finale' }, h: 'rivella-league.html' },
-    { k: ['swisstennis', 'hyundai'], l: null, h: 'swiss-tennis.html' }
+    { k: ['swisstennis', 'hyundai'], l: null, h: 'swiss-tennis.html' },
+    { k: ['veyras tennis tournament kids'], l: { en: 'TC Veyras · Kids tennis tournament', fr: 'TC Veyras · Tournoi de tennis enfants', de: 'TC Veyras · Kinder-Tennisturnier' }, wa: 'TC Veyras', n: '41795885483' },
+    { k: ['veyras'], l: { en: 'TC Veyras · Doubles tennis tournament', fr: 'TC Veyras · Tournoi de tennis en double', de: 'TC Veyras · Doppel-Tennisturnier' }, wa: 'TC Veyras', n: '41795885483' }
   ];
   var WA_MSG = { en: 'Hola! I am interested in {e}. Please keep me posted.', fr: 'Hola ! Je suis intéressé·e par {e}. Tenez-moi au courant.', de: 'Hola! Ich interessiere mich für {e}. Haltet mich auf dem Laufenden.' };
 
@@ -259,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function () {
           var key = m.k[0]; perSeries[key] = (perSeries[key] || 0) + 1;
           if (perSeries[key] > 2) return; // keep weekly series from flooding the list
           var label = m.l ? (m.l[L] || m.l.en) : (ev.summary || '').replace(/swisstennis/i, 'Swiss Tennis');
-          var href = m.h || (WA + encodeURIComponent((WA_MSG[L] || WA_MSG.en).replace('{e}', label)));
+          var href = m.h || ((m.n ? 'https://wa.me/' + m.n + '?text=' : WA) + encodeURIComponent((WA_MSG[L] || WA_MSG.en).replace('{e}', label)));
           var s = start(ev), e = end(ev);
           var when = shortDate(s) + (e && e.toDateString() !== s.toDateString() ? ' – ' + shortDate(e) : '');
           rows.push('<a class="ev-row" href="' + esc(href) + '"' + (m.h ? '' : ' target="_blank" rel="noopener"') + '><span class="ev-when">' + esc(when) + '</span><span class="ev-what">' + esc(label) + '</span><span class="ev-go">→</span></a>');
