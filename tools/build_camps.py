@@ -87,9 +87,10 @@ T = {
   h1='Ski &amp;Padel weekends in the Swiss Alps', lede='Skiing wherever the snow is best every morning, padel every afternoon, spa every evening. Two long weekends in February 2027 — 12 places each.',
   chips=['Thu–Sun · 3 nights', '12 places per weekend', 'From 999 CHF'], cta='Choose your weekend',
   mon='Feb', dlabel='Thu {a} – Sun {b} Feb 2027', dsub='Thursday to Sunday · 3 nights · 3 ski days',
-  book_h='Book your place', s1='1. Pick your weekend', s2='2. Individual place or with your crew?',
+  book_h='Book your place', s1='1. Pick your weekend', s2='2. Individual, duo or crew of 4?',
+  duo='Duo', duo_note='Two places, one room for the two of you. 2\'398 CHF total.',
   solo='Individual', solo_note='One place. Rooms are for two — we pair you with another guest.',
-  grp='Group of 4', grp_note='Four places, two rooms for your group. Paid in one go.', grp_total='3\'996 CHF total', save='Save 800 CHF',
+  grp='Crew of 4', grp_note='Four places, two rooms for your group. Paid in one go.', grp_total='3\'996 CHF total', save='Save 800 CHF',
   pp='per person', go='Book &amp; pay', vat='Prices in CHF, VAT included. Secure card payment via SumUp — confirmation by email.',
   rules_h='Before you book: minimum level', rules_p='The weekend only works if everyone can keep up — on the slopes and on court. Please check honestly.',
   ski_h='Ski', ski_lvl='Intermediate to advanced', ski_p='You ski parallel turns confidently on all pistes, including red runs. There are no beginner lessons — the group skis together.',
@@ -112,7 +113,7 @@ T = {
   final_h='12 places per weekend.', final_p='Questions about levels, rooms or groups? Message Mario on WhatsApp.', wa_cta='Ask on WhatsApp',
   wa_msg='Hola! I have a question about the Ski &Padel weekends.',
   m_name='Your name', m_email='Your email <span style="font-weight:400; opacity:.7;">(confirmation is sent here)</span>', m_phone='Mobile number <span style="font-weight:400; opacity:.7;">(for last-minute updates)</span>',
-  m_group='Names of the other 3 participants', m_notes='Anything we should know? <span style="font-weight:400; opacity:.7;">(optional — diet, arrival time)</span>',
+  m_group='Name and age of every participant', m_pers='Person', m_you='you', m_pname='Name', m_age='Age', m_notes='Anything we should know? <span style="font-weight:400; opacity:.7;">(optional — diet, arrival time)</span>',
   m_lvl='Everyone in my booking meets the minimum ski and padel level.', m_stay='I understand the rooms are simple shared sports lodging, not a hotel.',
   m_btn='Continue to payment'),
 'fr': dict(
@@ -128,9 +129,10 @@ T = {
   h1='Week-ends Ski &amp;Padel dans les Alpes suisses', lede='Ski le matin là où la neige est la meilleure, padel l\'après-midi, spa le soir. Deux longs week-ends en février 2027 — 12 places chacun.',
   chips=['Jeu–dim · 3 nuits', '12 places par week-end', 'Dès 999 CHF'], cta='Choisir mon week-end',
   mon='fév', dlabel='Jeu {a} – dim {b} février 2027', dsub='Du jeudi au dimanche · 3 nuits · 3 jours de ski',
-  book_h='Réserve ta place', s1='1. Choisis ton week-end', s2='2. Place individuelle ou avec ta bande ?',
+  book_h='Réserve ta place', s1='1. Choisis ton week-end', s2='2. Individuel, duo ou bande de 4 ?',
+  duo='Duo', duo_note='Deux places, une chambre pour vous deux. 2\'398 CHF au total.',
   solo='Individuel', solo_note='Une place. Les chambres sont pour deux — on te met avec un autre participant.',
-  grp='Groupe de 4', grp_note='Quatre places, deux chambres pour ton groupe. Payé en une fois.', grp_total='3\'996 CHF au total', save='800 CHF d\'économie',
+  grp='Bande de 4', grp_note='Quatre places, deux chambres pour ton groupe. Payé en une fois.', grp_total='3\'996 CHF au total', save='800 CHF d\'économie',
   pp='par personne', go='Réserver &amp; payer', vat='Prix en CHF, TVA incluse. Paiement sécurisé par carte via SumUp — confirmation par e-mail.',
   rules_h='Avant de réserver : niveau minimum', rules_p='Le week-end ne fonctionne que si tout le monde suit — sur les pistes comme sur le terrain. Merci de vérifier honnêtement.',
   ski_h='Ski', ski_lvl='Intermédiaire à avancé', ski_p='Tu skies en virages parallèles avec aisance sur toutes les pistes, y compris les rouges. Pas de cours débutant — le groupe skie ensemble.',
@@ -153,7 +155,7 @@ T = {
   final_h='12 places par week-end.', final_p='Des questions sur le niveau, les chambres ou les groupes ? Écris à Mario sur WhatsApp.', wa_cta='Demander sur WhatsApp',
   wa_msg='Hola ! J\'ai une question sur les week-ends Ski &Padel.',
   m_name='Ton nom', m_email='Ton e-mail <span style="font-weight:400; opacity:.7;">(la confirmation sera envoyée ici)</span>', m_phone='Numéro de mobile <span style="font-weight:400; opacity:.7;">(pour les infos de dernière minute)</span>',
-  m_group='Noms des 3 autres participants', m_notes='Quelque chose à savoir ? <span style="font-weight:400; opacity:.7;">(facultatif — alimentation, heure d\'arrivée)</span>',
+  m_group='Nom et âge de chaque participant', m_pers='Personne', m_you='toi', m_pname='Nom', m_age='Âge', m_notes='Quelque chose à savoir ? <span style="font-weight:400; opacity:.7;">(facultatif — alimentation, heure d\'arrivée)</span>',
   m_lvl='Toutes les personnes de ma réservation ont le niveau minimum en ski et en padel.', m_stay='J\'ai compris que les chambres sont un logement sportif simple et partagé, pas un hôtel.',
   m_btn='Continuer vers le paiement'),
 'de': dict(
@@ -169,9 +171,10 @@ T = {
   h1='Ski &amp;Padel Wochenenden in den Schweizer Alpen', lede='Morgens Skifahren, wo der Schnee am besten ist, nachmittags Padel, abends Spa. Zwei lange Wochenenden im Februar 2027 — je 12 Plätze.',
   chips=['Do–So · 3 Nächte', '12 Plätze pro Wochenende', 'Ab 999 CHF'], cta='Wochenende wählen',
   mon='Feb', dlabel='Do {a}. – So {b}. Februar 2027', dsub='Donnerstag bis Sonntag · 3 Nächte · 3 Skitage',
-  book_h='Platz buchen', s1='1. Wochenende wählen', s2='2. Einzelplatz oder mit deiner Crew?',
+  book_h='Platz buchen', s1='1. Wochenende wählen', s2='2. Einzelplatz, Duo oder 4er-Crew?',
+  duo='Duo', duo_note='Zwei Plätze, ein gemeinsames Zimmer. 2\'398 CHF total.',
   solo='Einzelplatz', solo_note='Ein Platz. Die Zimmer sind für zwei — wir teilen dich mit einem anderen Gast ein.',
-  grp='4er-Gruppe', grp_note='Vier Plätze, zwei Zimmer für eure Gruppe. In einem Mal bezahlt.', grp_total='3\'996 CHF total', save='800 CHF gespart',
+  grp='4er-Crew', grp_note='Vier Plätze, zwei Zimmer für eure Gruppe. In einem Mal bezahlt.', grp_total='3\'996 CHF total', save='800 CHF gespart',
   pp='pro Person', go='Buchen &amp; bezahlen', vat='Preise in CHF inkl. MWST. Sichere Kartenzahlung über SumUp — Bestätigung per E-Mail.',
   rules_h='Vor dem Buchen: Mindestniveau', rules_p='Das Wochenende funktioniert nur, wenn alle mithalten — auf der Piste und auf dem Court. Bitte ehrlich prüfen.',
   ski_h='Ski', ski_lvl='Mittel bis fortgeschritten', ski_p='Du fährst sicher parallel auf allen Pisten, auch auf roten. Es gibt keinen Anfängerkurs — die Gruppe fährt zusammen.',
@@ -194,7 +197,7 @@ T = {
   final_h='12 Plätze pro Wochenende.', final_p='Fragen zu Niveau, Zimmern oder Gruppen? Schreib Mario auf WhatsApp.', wa_cta='Auf WhatsApp fragen',
   wa_msg='Hola! Ich habe eine Frage zu den Ski &Padel Wochenenden.',
   m_name='Dein Name', m_email='Deine E-Mail <span style="font-weight:400; opacity:.7;">(Bestätigung geht hierhin)</span>', m_phone='Handynummer <span style="font-weight:400; opacity:.7;">(für kurzfristige Infos)</span>',
-  m_group='Namen der anderen 3 Teilnehmenden', m_notes='Sollen wir etwas wissen? <span style="font-weight:400; opacity:.7;">(optional — Ernährung, Ankunftszeit)</span>',
+  m_group='Name und Alter aller Teilnehmenden', m_pers='Person', m_you='du', m_pname='Name', m_age='Alter', m_notes='Sollen wir etwas wissen? <span style="font-weight:400; opacity:.7;">(optional — Ernährung, Ankunftszeit)</span>',
   m_lvl='Alle Personen meiner Buchung erfüllen das Mindestniveau in Ski und Padel.', m_stay='Mir ist klar, dass die Zimmer eine einfache, geteilte Sport-Unterkunft sind und kein Hotel.',
   m_btn='Weiter zur Zahlung'),
 }
@@ -251,6 +254,14 @@ def body(t, pre):
           <span class="camp-pack-name">{t['solo']}</span>
           <span class="camp-pack-price">1'199 CHF <small>{t['pp']}</small></span>
           <span class="camp-pack-note">{t['solo_note']}</span>
+        </span>
+      </label>
+      <label class="camp-opt">
+        <input type="radio" name="pack" value="duo">
+        <span class="camp-tile">
+          <span class="camp-pack-name">{t['duo']}</span>
+          <span class="camp-pack-price">1'199 CHF <small>{t['pp']}</small></span>
+          <span class="camp-pack-note">{t['duo_note']}</span>
         </span>
       </label>
       <label class="camp-opt">
@@ -341,7 +352,8 @@ def final(t):
       <label class="shop-field">{t['m_name']}<input type="text" name="buyerName" required autocomplete="name"></label>
       <label class="shop-field">{t['m_email']}<input type="email" name="buyerEmail" required autocomplete="email"></label>
       <label class="shop-field">{t['m_phone']}<input type="tel" name="phone" required autocomplete="tel"></label>
-      <label class="shop-field" id="modal-group-wrap" style="display:none;">{t['m_group']}<textarea name="participants" rows="3" maxlength="300"></textarea></label>
+      <div class="shop-field" id="modal-group-wrap" data-pers="{t['m_pers']}" data-you="{t['m_you']}" data-name="{t['m_pname']}" data-age="{t['m_age']}">{t['m_group']}<div id="modal-people"></div><input type="hidden" name="participants"></div>
+      <style>#modal-people{{display:grid;gap:8px;margin-top:6px}}.pp-row{{display:grid;grid-template-columns:1fr 84px;gap:8px}}.pp-row input{{width:100%}}.pp-lbl{{font-size:.78rem;font-weight:700;color:#7a8ea3;margin-bottom:-4px}}.camp-packs{{grid-template-columns:repeat(3,1fr)!important}}@media(max-width:720px){{.camp-packs{{grid-template-columns:1fr!important}}}}</style>
       <label class="shop-field">{t['m_notes']}<textarea name="notes" rows="2" maxlength="300"></textarea></label>
       <label class="camp-check"><input type="checkbox" name="levelOk" value="yes" required><span>{t['m_lvl']}</span></label>
       <label class="camp-check"><input type="checkbox" name="lodgingOk" value="yes" required><span>{t['m_stay']}</span></label>
@@ -373,7 +385,7 @@ for lang, t in T.items():
     s = re.sub(r'styles\.css\?v=\d+', 'styles.css?v=35', s)
     s = re.sub(r'<script src="(\.\./)?camps\.js[^"]*"></script>\n', '', s)
     s = re.sub(r'(<script src="(?:\.\./)?nav\.js\?v=)\d+("></script>)', r'\g<1>22\2', s)
-    s = s.replace('</body>', f'<script src="{pre}camps.js?v=2"></script>\n</body>', 1)
+    s = s.replace('</body>', f'<script src="{pre}camps.js?v=3"></script>\n</body>', 1)
     import json
     url = 'https://www.racketsacademy.ch/' + ('' if lang == 'en' else lang + '/') + 'ski-and-padel.html'
     ev = [{'@type': 'Event', 'name': 'Ski &Padel — ' + t['dlabel'].format(a=a2, b=b2),

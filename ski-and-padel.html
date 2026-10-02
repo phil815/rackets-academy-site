@@ -142,7 +142,7 @@
           </span>
         </label>
     </div>
-    <p class="camp-step">2. Individual place or with your crew?</p>
+    <p class="camp-step">2. Individual, duo or crew of 4?</p>
     <div class="camp-packs">
       <label class="camp-opt">
         <input type="radio" name="pack" value="single" checked>
@@ -153,9 +153,17 @@
         </span>
       </label>
       <label class="camp-opt">
+        <input type="radio" name="pack" value="duo">
+        <span class="camp-tile">
+          <span class="camp-pack-name">Duo</span>
+          <span class="camp-pack-price">1'199 CHF <small>per person</small></span>
+          <span class="camp-pack-note">Two places, one room for the two of you. 2'398 CHF total.</span>
+        </span>
+      </label>
+      <label class="camp-opt">
         <input type="radio" name="pack" value="group4">
         <span class="camp-tile">
-          <span class="camp-pack-name">Group of 4</span>
+          <span class="camp-pack-name">Crew of 4</span>
           <span class="camp-pack-price">999 CHF <small>per person</small></span>
           <span class="camp-pack-note">Four places, two rooms for your group. Paid in one go. 3'996 CHF total.</span>
           <span class="camp-save">Save 800 CHF</span>
@@ -359,7 +367,8 @@ b.addEventListener('touchend',function(e){if(x0===null)return;var d=e.changedTou
       <label class="shop-field">Your name<input type="text" name="buyerName" required autocomplete="name"></label>
       <label class="shop-field">Your email <span style="font-weight:400; opacity:.7;">(confirmation is sent here)</span><input type="email" name="buyerEmail" required autocomplete="email"></label>
       <label class="shop-field">Mobile number <span style="font-weight:400; opacity:.7;">(for last-minute updates)</span><input type="tel" name="phone" required autocomplete="tel"></label>
-      <label class="shop-field" id="modal-group-wrap" style="display:none;">Names of the other 3 participants<textarea name="participants" rows="3" maxlength="300"></textarea></label>
+      <div class="shop-field" id="modal-group-wrap" data-pers="Person" data-you="you" data-name="Name" data-age="Age">Name and age of every participant<div id="modal-people"></div><input type="hidden" name="participants"></div>
+      <style>#modal-people{display:grid;gap:8px;margin-top:6px}.pp-row{display:grid;grid-template-columns:1fr 84px;gap:8px}.pp-row input{width:100%}.pp-lbl{font-size:.78rem;font-weight:700;color:#7a8ea3;margin-bottom:-4px}.camp-packs{grid-template-columns:repeat(3,1fr)!important}@media(max-width:720px){.camp-packs{grid-template-columns:1fr!important}}</style>
       <label class="shop-field">Anything we should know? <span style="font-weight:400; opacity:.7;">(optional — diet, arrival time)</span><textarea name="notes" rows="2" maxlength="300"></textarea></label>
       <label class="camp-check"><input type="checkbox" name="levelOk" value="yes" required><span>Everyone in my booking meets the minimum ski and padel level.</span></label>
       <label class="camp-check"><input type="checkbox" name="lodgingOk" value="yes" required><span>I understand the rooms are simple shared sports lodging, not a hotel.</span></label>
@@ -406,6 +415,6 @@ b.addEventListener('touchend',function(e){if(x0===null)return;var d=e.changedTou
   </div>
 </footer>
 <script src="nav.js?v=22"></script>
-<script src="camps.js?v=2"></script>
+<script src="camps.js?v=3"></script>
 </body>
 </html>
