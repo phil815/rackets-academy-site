@@ -157,43 +157,72 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-// "Next event" badges — reads live from the public Google Calendars
-// (Events - Salgesch / Events - Sion). Needs a restricted Google Calendar
-// API key filled in below (see instructions). Matches badges by keyword
-// against event titles, e.g. <span data-next-event="Racketero"></span>.
+// "Next event" badges + events agenda — reads live from the public Google
+// Calendars (Events - Salgesch / Events - Sion). Badges match keywords against
+// event titles, e.g. <span data-next-event="Racketero"></span>.
+// <div data-agenda="8"></div> renders the next public events; only titles that
+// match AGENDA below are shown, so internal entries (team events, cleaning…)
+// never appear on the site.
 (function () {
-  function formatFullDate(d) {
-    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    var day = d.getDate();
-    var suffix = 'th';
-    if (day % 10 === 1 && day !== 11) suffix = 'st';
-    else if (day % 10 === 2 && day !== 12) suffix = 'nd';
-    else if (day % 10 === 3 && day !== 13) suffix = 'rd';
-    return days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + day + suffix;
-  }
+  var L = (document.documentElement.lang || 'en').slice(0, 2);
+  var LOC = { en: 'en-GB', fr: 'fr-CH', de: 'de-CH' }[L] || 'en-GB';
+  var TXT = {
+    en: { next: 'Next: ', none: 'Ask us for the next date', empty: 'New dates coming soon — follow us on Instagram.' },
+    fr: { next: 'Prochaine date : ', none: 'Demande-nous la prochaine date', empty: 'Nouvelles dates bientôt — suis-nous sur Instagram.' },
+    de: { next: 'Nächstes Datum: ', none: 'Frag uns nach dem nächsten Datum', empty: 'Neue Daten folgen bald — folg uns auf Instagram.' }
+  }[L] || {};
+  var WA = 'https://wa.me/41772780115?text=';
+  // keyword(s) in calendar title → label + link per language (first match wins)
+  var AGENDA = [
+    { k: ['24h'], l: { en: 'NTO24 · 24h padel tournament', fr: 'NTO24 · tournoi de padel 24 h', de: 'NTO24 · 24-Std.-Padelturnier' }, wa: 'NTO24' },
+    { k: ['amazonia', 'dine'], l: { en: 'Padel+Dine feat. Instinct Amazonia', fr: 'Padel+Dine feat. Instinct Amazonia', de: 'Padel+Dine feat. Instinct Amazonia' }, wa: 'Padel+Dine' },
+    { k: ['ski'], l: { en: 'Ski &Padel weekend', fr: 'Week-end Ski &Padel', de: 'Ski &Padel Wochenende' }, h: 'ski-and-padel.html' },
+    { k: ['rackemix'], l: { en: 'Rackemix', fr: 'Rackemix', de: 'Rackemix' }, wa: 'Rackemix' },
+    { k: ['racketero - beginner'], l: { en: 'Racketero · Beginner', fr: 'Racketero · Débutants', de: 'Racketero · Einsteiger' }, h: 'racketero.html' },
+    { k: ['racketero - intermediate'], l: { en: 'Racketero · Intermediate', fr: 'Racketero · Intermédiaires', de: 'Racketero · Fortgeschrittene' }, h: 'racketero.html' },
+    { k: ['racketero'], l: { en: 'Racketero', fr: 'Racketero', de: 'Racketero' }, h: 'racketero.html' },
+    { k: ['pickleball'], l: { en: 'Pickleball Mix & Match', fr: 'Pickleball Mix & Match', de: 'Pickleball Mix & Match' }, wa: 'Pickleball Mix & Match' },
+    { k: ['paella'], l: { en: 'Padel+Paella', fr: 'Padel+Paella', de: 'Padel+Paella' }, h: 'padel-paella.html' },
+    { k: ['wine'], l: { en: 'Padel+Wine', fr: 'Padel+Wine', de: 'Padel+Wine' }, h: 'padel-wine.html' },
+    { k: ['beer'], l: { en: 'Padel+Beer', fr: 'Padel+Beer', de: 'Padel+Beer' }, wa: 'Padel+Beer' },
+    { k: ['fitness'], l: { en: 'Padel+Fitness', fr: 'Padel+Fitness', de: 'Padel+Fitness' }, h: 'padel-fitness.html' },
+    { k: ['rivella'], l: { en: 'Rivella League Final', fr: 'Finale de la Rivella League', de: 'Rivella League Finale' }, h: 'rivella-league.html' },
+    { k: ['swisstennis', 'hyundai'], l: null, h: 'swiss-tennis.html' }
+  ];
+  var WA_MSG = { en: 'Hola! I am interested in {e}. Please keep me posted.', fr: 'Hola ! Je suis intéressé·e par {e}. Tenez-moi au courant.', de: 'Hola! Ich interessiere mich für {e}. Haltet mich auf dem Laufenden.' };
+
   var API_KEY = 'AIzaSyDm1T-ofSLpJVzfpMOzhp7LLzMK1Pg9vpM';
   var CALENDARS = [
     'c_06fae67e3da9afefbea72735459e8b237c81650b84fff9332d50ddaa66509191@group.calendar.google.com', // Events - Salgesch
     'c_3ef252ff359c72bd0187f71d11f948958588fceca659a6d89ae3888ee6710d68@group.calendar.google.com'  // Events - Sion
   ];
 
+  function start(ev) { var s = ev.start.dateTime || ev.start.date; return s.length === 10 ? new Date(s + 'T12:00:00') : new Date(s); }
+  function end(ev) { if (!ev.end) return null; var s = ev.end.dateTime || ev.end.date; return s.length === 10 ? new Date(new Date(s + 'T12:00:00').getTime() - 864e5) : new Date(s); }
+  function fullDate(d) { var t = d.toLocaleDateString(LOC, { weekday: 'long', day: 'numeric', month: 'long' }); return t.charAt(0).toUpperCase() + t.slice(1); }
+  function shortDate(d) { return d.toLocaleDateString(LOC, { weekday: 'short', day: 'numeric', month: 'short' }); }
+  function esc(x) { return String(x).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function find(title) {
+    var t = (title || '').toLowerCase();
+    for (var i = 0; i < AGENDA.length; i++) if (AGENDA[i].k.some(function (k) { return t.indexOf(k) > -1; })) return AGENDA[i];
+    return null;
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     var badges = document.querySelectorAll('[data-next-event]');
-    if (!badges.length || !API_KEY) return;
+    var agendas = document.querySelectorAll('[data-agenda]');
+    if ((!badges.length && !agendas.length) || !API_KEY) return;
 
     var now = new Date().toISOString();
-    var future = new Date(Date.now() + 1000 * 60 * 60 * 24 * 120).toISOString(); // 120-day window
+    var future = new Date(Date.now() + 1000 * 60 * 60 * 24 * 300).toISOString(); // ~10-month window
 
-    var timeout = new Promise(function (resolve) {
-      setTimeout(function () { resolve([]); }, 6000); // never leave badges stuck
-    });
+    var timeout = new Promise(function (resolve) { setTimeout(function () { resolve([]); }, 6000); });
 
     Promise.race([
       Promise.all(CALENDARS.map(function (calId) {
         var url = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(calId) +
           '/events?key=' + API_KEY + '&timeMin=' + now + '&timeMax=' + future +
-          '&singleEvents=true&orderBy=startTime&maxResults=100';
+          '&singleEvents=true&orderBy=startTime&maxResults=250';
         return fetch(url).then(function (r) {
           if (!r.ok) { console.warn('Calendar fetch failed for', calId, r.status); return { items: [] }; }
           return r.json();
@@ -201,30 +230,41 @@ document.addEventListener('DOMContentLoaded', function () {
       })),
       timeout
     ]).then(function (results) {
-      var allEvents = results.flatMap(function (r) { return r.items || []; });
+      var all = (results || []).flatMap(function (r) { return r.items || []; })
+        .filter(function (ev) { return ev.status !== 'cancelled' && ev.start; })
+        .filter(function (ev, i, arr) { var k = (ev.summary || '') + '|' + (ev.start.dateTime || ev.start.date); return arr.findIndex(function (x) { return (x.summary || '') + '|' + (x.start.dateTime || x.start.date) === k; }) === i; })
+        .sort(function (a, b) { return start(a) - start(b); });
 
       badges.forEach(function (el) {
         var keywords = el.getAttribute('data-next-event').toLowerCase().split(',').map(function (k) { return k.trim(); });
-        var match = allEvents
-          .filter(function (ev) {
-            var title = (ev.summary || '').toLowerCase();
-            return keywords.some(function (k) { return title.includes(k); });
-          })
-          .sort(function (a, b) {
-            var da = new Date(a.start.dateTime || a.start.date);
-            var db = new Date(b.start.dateTime || b.start.date);
-            return da - db;
-          })[0];
-
+        var match = all.filter(function (ev) {
+          var title = (ev.summary || '').toLowerCase();
+          return keywords.some(function (k) { return title.indexOf(k) > -1; });
+        })[0];
         if (match) {
-          var d = new Date(match.start.dateTime || match.start.date);
-          var formatted = formatFullDate(d);
-          el.textContent = 'Next: ' + formatted;
+          el.textContent = (TXT.next || 'Next: ') + fullDate(start(match));
           el.classList.add('next-event-badge');
         } else {
-          el.textContent = 'Ask us for the next date';
+          el.textContent = TXT.none || 'Ask us for the next date';
           el.classList.add('next-event-badge', 'next-event-badge--empty');
         }
+      });
+
+      agendas.forEach(function (box) {
+        var max = parseInt(box.getAttribute('data-agenda'), 10) || 8;
+        var perSeries = {}, rows = [];
+        all.forEach(function (ev) {
+          if (rows.length >= max) return;
+          var m = find(ev.summary); if (!m) return;
+          var key = m.k[0]; perSeries[key] = (perSeries[key] || 0) + 1;
+          if (perSeries[key] > 2) return; // keep weekly series from flooding the list
+          var label = m.l ? (m.l[L] || m.l.en) : (ev.summary || '').replace(/swisstennis/i, 'Swiss Tennis');
+          var href = m.h || (WA + encodeURIComponent((WA_MSG[L] || WA_MSG.en).replace('{e}', label)));
+          var s = start(ev), e = end(ev);
+          var when = shortDate(s) + (e && e.toDateString() !== s.toDateString() ? ' – ' + shortDate(e) : '');
+          rows.push('<a class="ev-row" href="' + esc(href) + '"' + (m.h ? '' : ' target="_blank" rel="noopener"') + '><span class="ev-when">' + esc(when) + '</span><span class="ev-what">' + esc(label) + '</span><span class="ev-go">→</span></a>');
+        });
+        box.innerHTML = rows.length ? rows.join('') : '<p class="ev-empty">' + esc(TXT.empty || '') + '</p>';
       });
     });
   });

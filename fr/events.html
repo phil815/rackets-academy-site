@@ -43,11 +43,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Événements &amp; tournois de padel | Rackets Academy</title>
-<meta name="description" content="Événements Rackets Academy : Racketero, Rivella League, Padel &amp; Wine, Padel &amp; Fitness et tournois Swiss Tennis padel en Valais.">
+<meta name="description" content="Événements Rackets Academy en Valais : tournoi 24 h NTO24, Padel+Dine, week-ends Ski &amp;Padel, Racketero, Rackemix, Pickleball Mix &amp; Match, Padel+Paella/Wine/Beer/Fitness, Swiss Tennis et Rivella League.">
 <link rel="canonical" href="https://www.racketsacademy.ch/fr/events.html">
 <link rel="stylesheet" href="../styles.css?v=34">
 <meta property="og:title" content="Événements &amp; tournois de padel | Rackets Academy">
-<meta property="og:description" content="Événements Rackets Academy : Racketero, Rivella League, Padel &amp; Wine, Padel &amp; Fitness et tournois Swiss Tennis padel en Valais.">
+<meta property="og:description" content="Événements Rackets Academy en Valais : tournoi 24 h NTO24, Padel+Dine, week-ends Ski &amp;Padel, Racketero, Rackemix, Pickleball Mix &amp; Match, Padel+Paella/Wine/Beer/Fitness, Swiss Tennis et Rivella League.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.racketsacademy.ch/fr/events.html">
 <meta property="og:image" content="https://www.racketsacademy.ch/images/wix/66ac72740d6a.jpg">
@@ -58,6 +58,19 @@
 <link rel="alternate" hreflang="fr" href="https://www.racketsacademy.ch/fr/events.html">
 <link rel="alternate" hreflang="de" href="https://www.racketsacademy.ch/de/events.html">
 <link rel="alternate" hreflang="x-default" href="https://www.racketsacademy.ch/events.html">
+<style id="ev-hub-css">
+.ev-agenda-sec{padding-bottom:0}
+.ev-agenda{display:grid;gap:8px;max-width:760px}
+.ev-row{display:grid;grid-template-columns:minmax(150px,auto) 1fr auto;gap:14px;align-items:center;padding:12px 16px;border-radius:12px;background:var(--paper,#f4f7fb);text-decoration:none;color:inherit;transition:transform .15s}
+.ev-row:hover{transform:translateX(3px)}
+.ev-when{font-weight:800;color:var(--blue-dark,#045bab);font-size:.9rem;white-space:nowrap}
+.ev-what{font-weight:600}
+.ev-go{opacity:.6}
+.ev-empty,.ev-agenda-loading{opacity:.7;margin:0}
+.ev-new{display:inline-block;background:var(--green,#c6f432);color:var(--blue-dark,#045bab);font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:999px;margin-bottom:8px}
+.ev-own{margin-top:22px;text-align:center;opacity:.9}
+@media (max-width:560px){.ev-row{grid-template-columns:1fr auto}.ev-when{grid-column:1/-1;white-space:normal}}
+</style>
 </head>
 <body>
 <div class="site-top">
@@ -101,54 +114,95 @@
   <span class="ball b1"></span><span class="ball b2"></span><span class="ball b3"></span>
   <div class="wrap hero-inner">
     <h1>Événements</h1>
-    <p class="lede">Tournois hebdomadaires, une ligue sur toute la saison, soirées conviviales et compétitions officielles Swiss Tennis Padel. Choisis-en un ci-dessous et inscris-toi.</p>
+    <p class="lede">Soirées conviviales, tournois réguliers, un marathon de 24 heures, des week-ends de ski et des compétitions officielles Swiss Tennis. Les dates se mettent à jour en direct depuis notre calendrier.</p>
+  </div>
+</section>
+
+<section class="ev-agenda-sec">
+  <div class="wrap">
+    <h2>À venir</h2>
+    <div class="ev-agenda" data-agenda="8"><p class="ev-agenda-loading">Chargement des dates…</p></div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
+    <h2>Tous nos événements</h2>
     <div class="grid-3">
+      <a class="card card-link" href="https://wa.me/41772780115?text=Hola%20%21%20Je%20suis%20int%C3%A9ress%C3%A9%C2%B7e%20par%20NTO24%20%C2%B7%2024h.%20Tenez-moi%20au%20courant." target="_blank" rel="noopener">
+        <span class="ev-new">Nouveau</span><h3>NTO24 · 24h</h3>
+        <p>24 heures de padel non-stop : des équipes de 6 tournent pour ne jamais quitter le terrain. La dernière équipe debout gagne.</p>
+        <span data-next-event="24h">Prochaine date en chargement…</span>
+        <span class="card-cta">Demander sur WhatsApp →</span>
+      </a>
+      <a class="card card-link" href="https://wa.me/41772780115?text=Hola%20%21%20Je%20suis%20int%C3%A9ress%C3%A9%C2%B7e%20par%20Padel%2BDine%20feat.%20Instinct%20Amazonia.%20Tenez-moi%20au%20courant." target="_blank" rel="noopener">
+        <span class="ev-new">Nouveau</span><h3>Padel+Dine feat. Instinct Amazonia</h3>
+        <p>D'abord le padel, ensuite le dîner par Instinct Amazonia, le restaurant de Granges.</p>
+        <span data-next-event="amazonia,dine">Prochaine date en chargement…</span>
+        <span class="card-cta">Demander sur WhatsApp →</span>
+      </a>
+      <a class="card card-link" href="ski-and-padel.html">
+        <h3>Ski &amp;Padel</h3>
+        <p>Ski le jour, padel le soir. Week-ends de 4 jours en février, petit groupe, chambres simples et sportives à Salgesch.</p>
+        <span data-next-event="ski">Prochaine date en chargement…</span>
+        <span class="card-cta">Voir les camps →</span>
+      </a>
       <a class="card card-link" href="racketero.html">
         <h3>Racketero</h3>
-        <p>Notre tournoi amical hebdomadaire — nouveaux adversaires, ton niveau, chaque semaine.</p>
-        <span data-next-event="Racketero">Prochaine date en cours...</span>
-        <span class="card-cta">Voir Racketero →</span>
+        <p>Notre tournoi convivial pour débutants et intermédiaires — nouveaux adversaires, ton niveau.</p>
+        <span data-next-event="racketero">Prochaine date en chargement…</span>
+        <span class="card-cta">En savoir plus →</span>
       </a>
-      <a class="card card-link" href="rivella-league.html">
-        <h3>Rivella League</h3>
-        <p>32 équipes, 8 groupes, avril–novembre. Deviens le champion de l'Academy.</p>
-        <span class="card-cta">Voir le classement →</span>
+      <a class="card card-link" href="https://wa.me/41772780115?text=Hola%20%21%20Je%20suis%20int%C3%A9ress%C3%A9%C2%B7e%20par%20Rackemix.%20Tenez-moi%20au%20courant." target="_blank" rel="noopener">
+        <span class="ev-new">Nouveau</span><h3>Rackemix</h3>
+        <p>Notre soirée mix mensuelle sur le terrain — nouveaux partenaires, bonne ambiance, un verre après.</p>
+        <span data-next-event="rackemix">Prochaine date en chargement…</span>
+        <span class="card-cta">Demander sur WhatsApp →</span>
+      </a>
+      <a class="card card-link" href="https://wa.me/41772780115?text=Hola%20%21%20Je%20suis%20int%C3%A9ress%C3%A9%C2%B7e%20par%20Pickleball%20Mix%20%26%20Match.%20Tenez-moi%20au%20courant." target="_blank" rel="noopener">
+        <span class="ev-new">Nouveau</span><h3>Pickleball Mix &amp; Match</h3>
+        <p>Chaque dimanche : on mélange les partenaires, on équilibre les niveaux, on joue au pickleball. Débutants bienvenus.</p>
+        <span data-next-event="pickleball">Prochaine date en chargement…</span>
+        <span class="card-cta">Demander sur WhatsApp →</span>
       </a>
       <a class="card card-link" href="padel-paella.html">
         <h3>Padel+Paella</h3>
-        <p>2 heures de padel, puis une paella fraîche et un verre. Max 16 places.</p>
-        <span data-next-event="Paella">Prochaine date en cours...</span>
+        <p>2 heures de padel, puis une paella fraîche et une boisson. Max. 16 places.</p>
+        <span data-next-event="paella">Prochaine date en chargement…</span>
         <span class="card-cta">En savoir plus →</span>
       </a>
       <a class="card card-link" href="padel-wine.html">
         <h3>Padel+Wine</h3>
         <p>Joue, puis détends-toi avec un verre de vin valaisan.</p>
-        <span data-next-event="Wine">Prochaine date en cours...</span>
+        <span data-next-event="wine">Prochaine date en chargement…</span>
         <span class="card-cta">En savoir plus →</span>
+      </a>
+      <a class="card card-link" href="https://wa.me/41772780115?text=Hola%20%21%20Je%20suis%20int%C3%A9ress%C3%A9%C2%B7e%20par%20Padel%2BBeer.%20Tenez-moi%20au%20courant." target="_blank" rel="noopener">
+        <span class="ev-new">Nouveau</span><h3>Padel+Beer</h3>
+        <p>Joue, puis une bière fraîche au bar avec tout le monde.</p>
+        <span data-next-event="beer">Prochaine date en chargement…</span>
+        <span class="card-cta">Demander sur WhatsApp →</span>
       </a>
       <a class="card card-link" href="padel-fitness.html">
         <h3>Padel+Fitness</h3>
-        <p>Combine padel sur le court et séance de fitness pour une matinée complète.</p>
-        <span data-next-event="Fitness">Prochaine date en cours...</span>
+        <p>Padel sur le terrain et séance de fitness pour une matinée d'entraînement complète.</p>
+        <span data-next-event="fitness">Prochaine date en chargement…</span>
         <span class="card-cta">En savoir plus →</span>
       </a>
       <a class="card card-link" href="swiss-tennis.html">
         <h3>Tournois Swiss Tennis</h3>
-        <p>La Rackets Hyundai Cup et les compétitions officielles Swiss Tennis Padel.</p>
-        <span data-next-event="p20,p50,p100,p200,hyundai">Prochaine date en cours...</span>
+        <p>La Rackets Hyundai Cup et les compétitions officielles Swiss Tennis Padel (P20 à P200).</p>
+        <span data-next-event="swisstennis,p20,p50,p100,p200,hyundai">Prochaine date en chargement…</span>
         <span class="card-cta">Voir les tournois →</span>
       </a>
-      <a class="card card-link" href="https://www.instagram.com/racketsacademy.ch" target="_blank" rel="noopener">
-        <h3>Et tout le reste</h3>
-        <p>Camps, bourses pour les enfants, soirées surprises — suis-nous pour le calendrier complet.</p>
-        <span class="card-cta">Suivre sur Instagram →</span>
+      <a class="card card-link" href="rivella-league.html">
+        <h3>Rivella League</h3>
+        <p>32 équipes, 8 groupes, d'avril à novembre. La finale désigne le champion de l'Academy.</p>
+        <span data-next-event="rivella">Prochaine date en chargement…</span>
+        <span class="card-cta">Voir le classement →</span>
       </a>
     </div>
+    <p class="ev-own">Tu organises ton propre événement ? <a href="company-events.html">Événements d'entreprise</a> · <a href="kids-birthday.html">Anniversaires enfants</a> · <a href="https://www.instagram.com/racketsacademy.ch" target="_blank" rel="noopener">Instagram</a></p>
   </div>
 </section>
 
@@ -189,6 +243,6 @@
     </div>
   </div>
 </footer>
-<script src="../nav.js?v=21"></script>
+<script src="../nav.js?v=22"></script>
 </body>
 </html>
