@@ -4,7 +4,7 @@
 (function () {
   var L = (document.documentElement.lang || 'en').slice(0, 2);
   var EVENT = 'padel-dine-2026-11-07';
-  var OPEN = new Date('2026-10-05T00:00:00+02:00').getTime();
+  var OPEN = new Date('2026-10-03T00:00:00+02:00').getTime();
   var EVENT_START = new Date('2026-11-07T10:00:00+01:00').getTime();
   var S = {
     en: { left: function (n, c) { return n === 1 ? 'Last place!' : n + ' of ' + c + ' places left'; }, sold: 'Sold out', total: 'Total', soon: 'Ticket sales open on Monday 5 October', over: 'Ticket sales are closed', team: 'Tournament + Dinner Party · team of 2', dinner: function (q) { return 'Dinner Party · ' + q + (q === 1 ? ' ticket' : ' tickets'); }, p: 'Player', g: 'Guest', you: 'you', name: 'First and last name', lvl: 'Playtomic level' },

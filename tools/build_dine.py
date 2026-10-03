@@ -357,8 +357,8 @@ def ld(L, t, url):
          'maximumAttendeeCapacity': 100, 'image': FOOD[0], 'inLanguage': L,
          'location': {'@type': 'Place', 'name': 'Rackets Academy Salgesch', 'address': {'@type': 'PostalAddress', 'streetAddress': 'Littenstrasse 30', 'postalCode': '3970', 'addressLocality': 'Salgesch', 'addressRegion': 'VS', 'addressCountry': 'CH'}},
          'organizer': [{'@type': 'Organization', 'name': 'Rackets Academy', 'url': base}, {'@type': 'Restaurant', 'name': 'Instinct Amazonia', 'url': 'https://www.amazoniarestaurant.ch/'}],
-         'offers': [{'@type': 'Offer', 'name': t['t1_name'], 'price': '79', 'priceCurrency': 'CHF', 'url': url + '#tk-book', 'availability': 'https://schema.org/InStock', 'validFrom': '2026-10-05T00:00:00+02:00'},
-                    {'@type': 'Offer', 'name': t['t2_name'], 'price': '59', 'priceCurrency': 'CHF', 'url': url + '#tk-book', 'availability': 'https://schema.org/InStock', 'validFrom': '2026-10-05T00:00:00+02:00'}]},
+         'offers': [{'@type': 'Offer', 'name': t['t1_name'], 'price': '79', 'priceCurrency': 'CHF', 'url': url + '#tk-book', 'availability': 'https://schema.org/InStock', 'validFrom': '2026-10-03T00:00:00+02:00'},
+                    {'@type': 'Offer', 'name': t['t2_name'], 'price': '59', 'priceCurrency': 'CHF', 'url': url + '#tk-book', 'availability': 'https://schema.org/InStock', 'validFrom': '2026-10-03T00:00:00+02:00'}]},
         {'@type': 'FAQPage', 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in t['faq']]}]}
 
 for L, t in T.items():
@@ -379,6 +379,6 @@ for L, t in T.items():
     url = 'https://www.racketsacademy.ch/' + d + SLUG
     s = s.replace('</head>', '<script type="application/ld+json" id="ld-dine">' + json.dumps(ld(L, t, url), ensure_ascii=False) + '</script>\n' + CSS + '</head>', 1)
     s = s.replace('class="active"', '')
-    s = re.sub(r'<script src="(?:\.\./)?nav\.js\?v=\d+"></script>', lambda m: m.group(0) + '\n<script src="' + pre + 'dine.js?v=1"></script>', s, count=1)
+    s = re.sub(r'<script src="(?:\.\./)?nav\.js\?v=\d+"></script>', lambda m: m.group(0) + '\n<script src="' + pre + 'dine.js?v=2"></script>', s, count=1)
     open(d + SLUG, 'w').write(s)
     print(d + SLUG, len(t['title']), len(t['desc']))

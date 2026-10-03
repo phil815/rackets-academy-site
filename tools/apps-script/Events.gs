@@ -21,7 +21,7 @@
 
 var EVENTS_ = {
   'padel-dine-2026-11-07': {
-    start: '2026-11-07T10:00:00+01:00', salesOpen: '2026-10-05T00:00:00+02:00', articleProp: 'KLARA_DINE_ARTICLE',
+    start: '2026-11-07T10:00:00+01:00', salesOpen: '2026-10-03T00:00:00+02:00', articleProp: 'KLARA_DINE_ARTICLE',
     name: { de: 'Padel+Dine feat. Instinct Amazonia', fr: 'Padel+Dine feat. Instinct Amazonia', en: 'Padel+Dine feat. Instinct Amazonia' },
     date: { de: 'Samstag, 7. November 2026, 10 – 2 Uhr', fr: 'samedi 7 novembre 2026, de 10h à 2h', en: 'Saturday 7 November 2026, 10am – 2am' },
     refund: { de: 'Sonntag, 1. November 2026', fr: 'dimanche 1er novembre 2026', en: 'Sunday 1 November 2026' },
