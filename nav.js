@@ -349,7 +349,10 @@ document.addEventListener('DOMContentLoaded', function () {
     bar.innerHTML =
       '<button type="button" class="sb-court" data-pick="court">' + T.court + '</button>' +
       '<a class="sb-course" href="training.html">' + T.course + '</a>';
-    if (/spa-and-sauna/.test(location.pathname)) {
+    if (/padel-dine/.test(location.pathname)) {
+      var TK = { en: 'Get your tickets', fr: 'Prendre mes billets', de: 'Tickets sichern' }[L] || 'Get your tickets';
+      bar.innerHTML = '<a class="sb-court" href="#tk-book">' + TK + '</a>';
+    } else if (/spa-and-sauna/.test(location.pathname)) {
       var SP = { en: 'Book spa', fr: 'Réserver le spa', de: 'Spa buchen' }[L] || 'Book spa';
       bar.innerHTML = '<a class="sb-court" href="https://playtomic.com/clubs/rackets-academy-salgesch" target="_blank" rel="noopener">' + SP + '</a>' +
         '<a class="sb-course" href="#private">' + ({ en: 'Private spa', fr: 'Spa privé', de: 'Privat-Spa' }[L] || 'Private spa') + '</a>';
