@@ -9,7 +9,7 @@ MSG = {'en': 'Hola! I am interested in {e}. Please keep me posted.',
 # (key, title, href or None=WhatsApp, calendar keywords, is_new)
 CARDS = [
  ('nto24', 'NTO24 · 24h', None, '24h', True),
- ('dine', 'Padel+Dine feat. Instinct Amazonia', None, 'amazonia,dine', True),
+ ('dine', 'Padel+Dine feat. Instinct Amazonia', 'padel-dine.html', 'amazonia,dine', True),
  ('ski', 'Ski &amp;Padel', 'ski-and-padel.html', 'ski', False),
  ('racketero', 'Racketero', 'racketero.html', 'racketero', False),
  ('rackemix', 'Rackemix', None, 'rackemix', True),
@@ -27,11 +27,11 @@ T = {
 'en': dict(desc='Rackets Academy events in Valais: NTO24 24h tournament, Padel+Dine, Ski &Padel weekends, Racketero, Rackemix, Pickleball Mix & Match, Padel+Paella/Wine/Beer/Fitness, Swiss Tennis and Rivella League.',
   lede='Social nights, weekly tournaments, a 24-hour marathon, ski weekends and official Swiss Tennis competitions. Dates update live from our calendar.',
   agenda_h='Coming up', all_h='All our events', new='New', loading='Loading dates…', wait='Next date loading…',
-  more='Learn more →', ask='Ask on WhatsApp →', camps='See the camps →', standings='See standings →', tourn='See tournaments →',
+  more='Learn more →', ask='Ask on WhatsApp →', camps='See the camps →', tickets='Get tickets →', standings='See standings →', tourn='See tournaments →',
   own='Planning your own event? <a href="company-events.html">Company events</a> · <a href="kids-birthday.html">Kids’ birthdays</a> · <a href="https://www.instagram.com/racketsacademy.ch" target="_blank" rel="noopener">Instagram</a>',
   t={'swiss': 'Swiss Tennis Tournaments', 'veyras': 'TC Veyras Tennis Tournaments'},
   p={'nto24': '24 hours of non-stop padel: teams of 6 rotate so their team never leaves the court. Last team standing wins.',
-     'dine': 'Padel first, then dinner by Instinct Amazonia, the restaurant from Granges.',
+     'dine': 'Padel tournament by day, Dinner Party by night: Instinct Amazonia’s nikkei buffet and a DJ until 2am. From 59 CHF.',
      'ski': 'Ski by day, padel by night. 4-day weekends in February, small group, simple sporty rooms in Salgesch.',
      'racketero': 'Our friendly tournament for beginners and intermediates — new opponents, your level.',
      'rackemix': 'Our monthly mix night on court — new partners, good vibes, a drink after.',
@@ -46,11 +46,11 @@ T = {
 'fr': dict(desc="Événements Rackets Academy en Valais : tournoi 24 h NTO24, Padel+Dine, week-ends Ski &Padel, Racketero, Rackemix, Pickleball Mix & Match, Padel+Paella/Wine/Beer/Fitness, Swiss Tennis et Rivella League.",
   lede="Soirées conviviales, tournois réguliers, un marathon de 24 heures, des week-ends de ski et des compétitions officielles Swiss Tennis. Les dates se mettent à jour en direct depuis notre calendrier.",
   agenda_h='À venir', all_h='Tous nos événements', new='Nouveau', loading='Chargement des dates…', wait='Prochaine date en chargement…',
-  more='En savoir plus →', ask='Demander sur WhatsApp →', camps='Voir les camps →', standings='Voir le classement →', tourn='Voir les tournois →',
+  more='En savoir plus →', ask='Demander sur WhatsApp →', camps='Voir les camps →', tickets='Prendre mes billets →', standings='Voir le classement →', tourn='Voir les tournois →',
   own="Tu organises ton propre événement ? <a href=\"company-events.html\">Événements d'entreprise</a> · <a href=\"kids-birthday.html\">Anniversaires enfants</a> · <a href=\"https://www.instagram.com/racketsacademy.ch\" target=\"_blank\" rel=\"noopener\">Instagram</a>",
   t={'swiss': 'Tournois Swiss Tennis', 'veyras': 'Tournois de tennis du TC Veyras'},
   p={'nto24': "24 heures de padel non-stop : des équipes de 6 tournent pour ne jamais quitter le terrain. La dernière équipe debout gagne.",
-     'dine': "D'abord le padel, ensuite le dîner par Instinct Amazonia, le restaurant de Granges.",
+     'dine': "Tournoi de padel le jour, Dinner Party le soir : buffet nikkei d'Instinct Amazonia et DJ jusqu'à 2h. Dès 59 CHF.",
      'ski': "Ski le jour, padel le soir. Week-ends de 4 jours en février, petit groupe, chambres simples et sportives à Salgesch.",
      'racketero': "Notre tournoi convivial pour débutants et intermédiaires — nouveaux adversaires, ton niveau.",
      'rackemix': "Notre soirée mix mensuelle sur le terrain — nouveaux partenaires, bonne ambiance, un verre après.",
@@ -65,11 +65,11 @@ T = {
 'de': dict(desc='Rackets Academy Events im Wallis: NTO24 24-Std.-Turnier, Padel+Dine, Ski &Padel Wochenenden, Racketero, Rackemix, Pickleball Mix & Match, Padel+Paella/Wine/Beer/Fitness, Swiss Tennis und Rivella League.',
   lede='Gesellige Abende, regelmässige Turniere, ein 24-Stunden-Marathon, Ski-Wochenenden und offizielle Swiss Tennis Wettkämpfe. Die Daten kommen live aus unserem Kalender.',
   agenda_h='Demnächst', all_h='Alle unsere Events', new='Neu', loading='Daten werden geladen…', wait='Nächstes Datum wird geladen…',
-  more='Mehr erfahren →', ask='Per WhatsApp fragen →', camps='Zu den Camps →', standings='Zur Tabelle →', tourn='Zu den Turnieren →',
+  more='Mehr erfahren →', ask='Per WhatsApp fragen →', camps='Zu den Camps →', tickets='Tickets sichern →', standings='Zur Tabelle →', tourn='Zu den Turnieren →',
   own='Du planst deinen eigenen Anlass? <a href="company-events.html">Firmenevents</a> · <a href="kids-birthday.html">Kindergeburtstage</a> · <a href="https://www.instagram.com/racketsacademy.ch" target="_blank" rel="noopener">Instagram</a>',
   t={'swiss': 'Swiss Tennis Turniere', 'veyras': 'TC Veyras Tennisturniere'},
   p={'nto24': '24 Stunden Padel nonstop: 6er-Teams wechseln sich ab, damit ihr Team nie vom Platz geht. Das letzte Team gewinnt.',
-     'dine': 'Zuerst Padel, dann Abendessen von Instinct Amazonia, dem Restaurant aus Granges.',
+     'dine': 'Tagsüber Padelturnier, abends Dinner Party: Nikkei-Buffet von Instinct Amazonia und DJ bis 2 Uhr. Ab 59 CHF.',
      'ski': 'Tagsüber Ski, abends Padel. 4-tägige Wochenenden im Februar, kleine Gruppe, einfache sportliche Zimmer in Salgesch.',
      'racketero': 'Unser Freundschaftsturnier für Einsteiger und Fortgeschrittene — neue Gegner, dein Level.',
      'rackemix': 'Unser monatlicher Mix-Abend auf dem Platz — neue Partner, gute Stimmung, ein Drink danach.',
@@ -103,7 +103,7 @@ def section(lang, t):
         plain = re.sub('<[^>]+>', '', title).replace('&amp;', '&')
         if href:
             link = f'href="{href}"'
-            cta = {'ski': t['camps'], 'rivella': t['standings'], 'swiss': t['tourn']}.get(key, t['more'])
+            cta = {'ski': t['camps'], 'rivella': t['standings'], 'swiss': t['tourn'], 'dine': t['tickets']}.get(key, t['more'])
         else:
             link = 'href="' + WA_NUM.get(key, WA) + urllib.parse.quote(MSG[lang].format(e=plain)) + '" target="_blank" rel="noopener"'
             cta = t['ask']
