@@ -25,6 +25,7 @@ T = {
   chips=['Samedi 7 novembre 2026', '10h – 2h', 'Salgesch'], cta='Prendre mes billets', cta2='Le programme',
   concept_h='Un nouveau concept : jouer, manger, danser.',
   concept_p="On réunit le padel et la cuisine d'Instinct Amazonia, le restaurant nikkei de Granges, pour une journée qui ne s'arrête pas au dernier point. Tu joues le tournoi avec ton ou ta partenaire, puis tout le monde se retrouve pour la Dinner Party.",
+  pad_h='Le tournoi', pad_k='Le jour · dès 10h', pad_l=['En équipe de 2', 'Qualifications le matin, tableau final l’après-midi', 'Balles incluses, raquettes à louer sur place', 'Remise des prix avant la Dinner Party'],
   tk_h='Deux billets, une seule soirée',
   t1_name='Tournoi + Dinner Party', t1_price='79 CHF', t1_unit='par personne', t1_note="Inscription en équipe de 2 · 158 CHF par équipe · 48 places",
   t1_inc=['Tournoi : qualifications puis tableau final', 'Balles incluses', 'Buffet signature Instinct Amazonia', '1 boisson incluse', 'Soirée DJ jusqu’à 2h'],
@@ -60,6 +61,7 @@ T = {
   chips=['Samstag, 7. November 2026', '10 – 2 Uhr', 'Salgesch'], cta='Tickets sichern', cta2='Zum Programm',
   concept_h='Ein neues Konzept: spielen, essen, tanzen.',
   concept_p='Wir bringen Padel und die Küche von Instinct Amazonia zusammen, dem Nikkei-Restaurant aus Granges. Ein Tag, der nicht mit dem letzten Punkt endet: Du spielst das Turnier mit deinem Partner oder deiner Partnerin, danach treffen sich alle zur Dinner Party.',
+  pad_h='Das Turnier', pad_k='Am Tag · ab 10 Uhr', pad_l=['Im 2er-Team', 'Qualifikation am Morgen, Haupttableau am Nachmittag', 'Bälle inklusive, Schläger vor Ort mietbar', 'Siegerehrung vor der Dinner Party'],
   tk_h='Zwei Tickets, ein Abend',
   t1_name='Turnier + Dinner Party', t1_price='79 CHF', t1_unit='pro Person', t1_note='Anmeldung als 2er-Team · 158 CHF pro Team · 48 Plätze',
   t1_inc=['Turnier: Qualifikation, dann Haupttableau', 'Bälle inklusive', 'Signature-Buffet von Instinct Amazonia', '1 Getränk inklusive', 'DJ-Party bis 2 Uhr'],
@@ -95,6 +97,7 @@ T = {
   chips=['Saturday 7 November 2026', '10am – 2am', 'Salgesch'], cta='Get your tickets', cta2='See the programme',
   concept_h='A new concept: play, eat, dance.',
   concept_p='We bring together padel and the cooking of Instinct Amazonia, the nikkei restaurant from Granges, for a day that doesn’t end with the last point. Play the tournament with your partner, then everyone meets for the Dinner Party.',
+  pad_h='The tournament', pad_k='By day · from 10am', pad_l=['Teams of 2', 'Qualifying round in the morning, main draw in the afternoon', 'Balls included, rental rackets on site', 'Prize-giving before the Dinner Party'],
   tk_h='Two tickets, one night',
   t1_name='Tournament + Dinner Party', t1_price='79 CHF', t1_unit='per person', t1_note='Sign up as a team of 2 · 158 CHF per team · 48 places',
   t1_inc=['Tournament: qualifying round, then main draw', 'Balls included', 'Instinct Amazonia signature buffet', '1 drink included', 'DJ party until 2am'],
@@ -148,6 +151,16 @@ CSS = '''<style id="dine-css">
 .dn-dark .dn-h{color:#fff}
 .dn-sec p,.dn-sec li,.dn-menu div,.dn-book p{color:var(--jungle)}.dn-dark p,.dn-dark li,.dn-dark span{color:#fff}
 .dn-concept{max-width:760px;font-size:1.15rem;line-height:1.55}
+.dn-vid{position:relative;overflow:hidden;background:var(--jungle)}
+.dn-vid-txt{position:relative;z-index:1}
+.dn-vid .dn-h{color:#fff}
+.dn-vid ul{list-style:none;padding:0;margin:0 0 26px;max-width:520px}
+.dn-vid li{color:#fff;padding:9px 0 9px 30px;position:relative;font-size:1.05rem;border-top:1px solid rgba(255,255,255,.15)}
+.dn-vid li:before{content:"✓";position:absolute;left:4px;color:var(--gold);font-weight:800}
+.dn-vid-in{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center;padding-top:72px;padding-bottom:72px}
+.dn-vid video{width:100%;max-width:380px;aspect-ratio:9/16;object-fit:cover;border-radius:22px;justify-self:end;box-shadow:0 20px 50px rgba(0,0,0,.35);border:3px solid var(--gold)}
+@media (max-width:860px){.dn-vid{min-height:880px;display:flex;align-items:flex-end}.dn-vid-in{display:block;padding-top:480px;padding-bottom:56px}.dn-vid video{position:absolute;inset:0;width:100%;height:100%;object-position:center 30%;max-width:none;aspect-ratio:auto;border-radius:0;border:0;box-shadow:none}.dn-vid:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,46,39,0) 0%,rgba(15,46,39,0) 42%,rgba(15,46,39,.85) 62%,rgba(15,46,39,.97) 80%)}.dn-vid-txt{z-index:2}}
+@media (prefers-reduced-motion:reduce){.dn-vid video{display:none}}
 .dn-tks{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:8px}
 .dn-tk{background:#fff;border-radius:22px;padding:28px;border:2px solid #e7dcc4;position:relative}
 .dn-tk.main{border-color:var(--gold);box-shadow:0 12px 32px rgba(15,46,39,.12)}
@@ -203,7 +216,8 @@ def body(L, t, pre):
     menu = ''.join(f'<div><b>{a}</b>{b}</div>' for a, b in t['food'])
     bar = ''.join(f'<div><span>{a}</span><b>{b}</b></div>' for a, b in t['bar'])
     faq = ''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in t['faq'])
-    hero_img = pre + 'images/coaching/coaching-hero.jpg'
+    hero_img = pre + 'images/dine/padel-salgesch.jpg'
+    padl = ''.join(f'<li>{x}</li>' for x in t['pad_l'])
     return f'''
 <section class="dn-hero" style="background-image:url('{hero_img}')">
   <div class="wrap dn-hero-in">
@@ -225,6 +239,18 @@ def body(L, t, pre):
   <div class="wrap">
     <h2 class="dn-h">{t['concept_h']}</h2>
     <p class="dn-concept">{t['concept_p']}</p>
+  </div>
+</section>
+
+<section class="dn-vid" aria-label="{t['pad_h']}">
+  <div class="wrap dn-vid-in">
+    <div class="dn-vid-txt">
+      <p class="dn-kicker">{t['pad_k']}</p>
+      <h2 class="dn-h">{t['pad_h']}</h2>
+      <ul>{padl}</ul>
+      <a class="btn dn-btn-gold" href="#tk-book">{t['cta']}</a>
+    </div>
+    <video autoplay muted loop playsinline preload="metadata" poster="{pre}images/dine/padel-loop-poster.jpg"><source src="{pre}images/dine/padel-loop.mp4" type="video/mp4"></video>
   </div>
 </section>
 
@@ -383,6 +409,8 @@ for L, t in T.items():
     url = 'https://www.racketsacademy.ch/' + d + SLUG
     s = s.replace('</head>', '<script type="application/ld+json" id="ld-dine">' + json.dumps(ld(L, t, url), ensure_ascii=False) + '</script>\n' + CSS + '</head>', 1)
     s = s.replace('class="active"', '')
+    s = re.sub(r'<a class="nav-cta-mobile" href="book.html">[^<]*</a>', '<a class="nav-cta-mobile" href="#tk-book">' + t['cta'] + '</a>', s)
+    s = re.sub(r'<a class="nav-cta" href="book.html">[^<]*</a>', '<a class="nav-cta" href="#tk-book">' + t['cta'] + '</a>', s)
     s = re.sub(r'<script src="(?:\.\./)?nav\.js\?v=\d+"></script>', lambda m: m.group(0) + '\n<script src="' + pre + 'dine.js?v=2"></script>', s, count=1)
     open(d + SLUG, 'w').write(s)
     print(d + SLUG, len(t['title']), len(t['desc']))
