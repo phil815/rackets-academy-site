@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // keyword(s) in calendar title → label + link per language (first match wins)
   var AGENDA = [
     { k: ['24h'], l: { en: 'NTO24 · 24h padel tournament', fr: 'NTO24 · tournoi de padel 24 h', de: 'NTO24 · 24-Std.-Padelturnier' }, wa: 'NTO24' },
-    { k: ['amazonia', 'dine'], l: { en: 'Padel+Dine feat. Instinct Amazonia', fr: 'Padel+Dine feat. Instinct Amazonia', de: 'Padel+Dine feat. Instinct Amazonia' }, h: 'padel-dine.html' },
+    { k: ['amazonia', 'dine'], l: { en: 'Padel +Dine powered by Instinct Amazonia', fr: 'Padel +Dine powered by Instinct Amazonia', de: 'Padel +Dine powered by Instinct Amazonia' }, h: 'padel-dine.html' },
     { k: ['ski'], l: { en: 'Ski &Padel weekend', fr: 'Week-end Ski &Padel', de: 'Ski &Padel Wochenende' }, h: 'ski-and-padel.html' },
     { k: ['rackemix'], l: { en: 'Rackemix', fr: 'Rackemix', de: 'Rackemix' }, wa: 'Rackemix' },
     { k: ['racketero - beginner'], l: { en: 'Racketero · Beginner', fr: 'Racketero · Débutants', de: 'Racketero · Einsteiger' }, h: 'racketero.html' },

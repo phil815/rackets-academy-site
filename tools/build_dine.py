@@ -1,4 +1,4 @@
-"""Padel+Dine feat. Instinct Amazonia (padel-dine.html, EN/FR/DE), built from the spa page shell.
+"""Padel +Dine powered by Instinct Amazonia (padel-dine.html, EN/FR/DE), built from the spa page shell.
 Tickets: Tournament + Dinner Party 79 CHF pp (teams of 2, 48 places), Dinner Party 59 CHF (52 places).
 Booking via dine.js -> Shop Apps Script (Events.gs, formType=ticket) -> SumUp pop-up."""
 import re, json
@@ -18,11 +18,11 @@ LEAVES = wix('a3a56a_52c8e9bfce6440ab90806a235307620e~mv2.webp', 'leaves.webp', 
 
 T = {
 'fr': dict(
-  title='Padel+Dine feat. Instinct Amazonia · 7 novembre | Rackets Academy',
+  title='Padel +Dine powered by Instinct Amazonia · 7 novembre | Rackets Academy',
   desc="Samedi 7 novembre 2026 à Salgesch : tournoi de padel en équipe de 2, buffet signature nikkei d'Instinct Amazonia et soirée DJ jusqu'à 2h. Tournoi + Dinner Party 79 CHF, Dinner Party 59 CHF.",
-  kicker='Rackets Academy × Instinct Amazonia', h1='Padel+Dine', h1b='feat. Instinct Amazonia',
+  kicker='Rackets Academy × Instinct Amazonia', h1='Padel <b>+Dine</b>', h1b='powered by Instinct Amazonia',
   lede="Tournoi de padel le jour, Dinner Party le soir. Buffet signature nikkei, DJ et ambiance jungle jusqu'à 2h du matin.",
-  chips=['Samedi 7 novembre 2026', '10h – 2h', 'Salgesch'], cta='Prendre mes billets', cta2='Le programme',
+  chips=['Samedi 7 novembre 2026', '<b>Tournoi</b> dès 10h', '<b>Dinner Party</b> dès 20h', 'Salgesch'], cta='Prendre mes billets', cta2='Le programme',
   concept_h='Un nouveau concept : jouer, manger, danser.',
   concept_p="On réunit le padel et la cuisine d'Instinct Amazonia, le restaurant nikkei de Granges, pour une journée qui ne s'arrête pas au dernier point. Tu joues le tournoi avec ton ou ta partenaire, puis tout le monde se retrouve pour la Dinner Party.",
   pad_h='Le tournoi', pad_k='Le jour · dès 10h', pad_l=['En équipe de 2', 'Qualifications le matin, tableau final l’après-midi', 'Balles incluses, raquettes à louer sur place', 'Remise des prix avant la Dinner Party'],
@@ -32,7 +32,7 @@ T = {
   t2_name='Dinner Party', t2_price='59 CHF', t2_unit='par personne', t2_note='Pour celles et ceux qui viennent pour la soirée · 52 places',
   t2_inc=['Buffet signature Instinct Amazonia', '1 boisson incluse', 'Soirée DJ jusqu’à 2h'],
   extra='Raquettes à louer sur place. Autres boissons au bar.',
-  prog_h='Le programme', prog=[('10h', 'Accueil et qualifications du tournoi'), ('Après-midi', 'Tableau final et remise des prix'), ('Soir', 'Dinner Party : buffet signature Instinct Amazonia'), ('Jusqu’à 2h', 'Soirée DJ')],
+  prog_h='Le programme', prog=[('10h', 'Accueil et qualifications du tournoi'), ('Après-midi', 'Tableau final et remise des prix'), ('20h', 'Dinner Party : buffet signature Instinct Amazonia'), ('Jusqu’à 2h', 'Soirée DJ')],
   food_h='Le buffet signature', food_p='Une sélection généreuse aux influences nikkei : finger food à partager et plats chauds à savourer en assiette.',
   food=[('Côté froid', 'Sushis, salades, bouchées aux saveurs nikkei et autres créations froides'), ('À partager', 'Karaage croustillant, baos et autres spécialités de la maison'), ('Côté chaud', 'Ribs de porc cuits à basse température, curry de poulet, poulet satay, viandes grillées'), ('Accompagnements', 'Riz sauté, légumes sautés et autres accompagnements')],
   food_cap='Sélection indicative, la composition finale dépend des produits de saison. Photos : Instinct Amazonia.',
@@ -41,7 +41,7 @@ T = {
   bar_cap='Bières, vins et boissons sans alcool également disponibles. Prix indicatifs.',
   book_h='Réserve tes billets', step1='1. Choisis ton billet', qty_l='Nombre de billets', go='Réserver & payer',
   pay_note='Prix en CHF, TVA incluse. Paiement sécurisé par carte via SumUp, confirmation par e-mail. Remboursement possible jusqu’au dimanche 1er novembre 2026.',
-  partner_h='Instinct Amazonia', partner_p='Cuisine nikkei, food & party : le restaurant de Granges marie les saveurs japonaises et péruviennes, avec cocktails créatifs et ambiance festive. Pour Padel+Dine, toute l’équipe vient cuisiner chez nous.', partner_a='Découvrir le restaurant',
+  partner_h='Instinct Amazonia', partner_p='Cuisine nikkei, food & party : le restaurant de Granges marie les saveurs japonaises et péruviennes, avec cocktails créatifs et ambiance festive. Pour Padel +Dine, toute l’équipe vient cuisiner chez nous.', partner_a='Découvrir le restaurant',
   faq_h='Bon à savoir',
   faq=[('Comment fonctionne le tournoi ?', 'Tu t’inscris en équipe de 2. Le matin, on joue les qualifications, puis les équipes passent dans le tableau final. Les balles sont fournies.'),
        ('Je n’ai pas de raquette, c’est grave ?', 'Pas du tout : tu peux louer une raquette sur place.'),
@@ -54,11 +54,11 @@ T = {
   m_people='Noms des participant·es', m_notes='Allergies ou remarques ?', m_notes2='(facultatif)', m_ok='J’ai lu les conditions : remboursement possible jusqu’au dimanche 1er novembre 2026.', m_go='Continuer vers le paiement',
   cap1='48 places', cap2='52 places', t1_sub='Équipe de 2', t2_sub='Billet individuel'),
 'de': dict(
-  title='Padel+Dine feat. Instinct Amazonia · 7. November | Rackets Academy',
+  title='Padel +Dine powered by Instinct Amazonia · 7. November | Rackets Academy',
   desc='Samstag, 7. November 2026 in Salgesch: Padelturnier im 2er-Team, Nikkei-Signature-Buffet von Instinct Amazonia und DJ-Party bis 2 Uhr. Turnier + Dinner Party 79 CHF, Dinner Party 59 CHF.',
-  kicker='Rackets Academy × Instinct Amazonia', h1='Padel+Dine', h1b='feat. Instinct Amazonia',
+  kicker='Rackets Academy × Instinct Amazonia', h1='Padel <b>+Dine</b>', h1b='powered by Instinct Amazonia',
   lede='Tagsüber Padelturnier, abends Dinner Party. Nikkei-Signature-Buffet, DJ und Jungle-Vibes bis 2 Uhr morgens.',
-  chips=['Samstag, 7. November 2026', '10 – 2 Uhr', 'Salgesch'], cta='Tickets sichern', cta2='Zum Programm',
+  chips=['Samstag, 7. November 2026', '<b>Turnier</b> ab 10 Uhr', '<b>Dinner Party</b> ab 20 Uhr', 'Salgesch'], cta='Tickets sichern', cta2='Zum Programm',
   concept_h='Ein neues Konzept: spielen, essen, tanzen.',
   concept_p='Wir bringen Padel und die Küche von Instinct Amazonia zusammen, dem Nikkei-Restaurant aus Granges. Ein Tag, der nicht mit dem letzten Punkt endet: Du spielst das Turnier mit deinem Partner oder deiner Partnerin, danach treffen sich alle zur Dinner Party.',
   pad_h='Das Turnier', pad_k='Am Tag · ab 10 Uhr', pad_l=['Im 2er-Team', 'Qualifikation am Morgen, Haupttableau am Nachmittag', 'Bälle inklusive, Schläger vor Ort mietbar', 'Siegerehrung vor der Dinner Party'],
@@ -68,7 +68,7 @@ T = {
   t2_name='Dinner Party', t2_price='59 CHF', t2_unit='pro Person', t2_note='Für alle, die nur zur Party kommen · 52 Plätze',
   t2_inc=['Signature-Buffet von Instinct Amazonia', '1 Getränk inklusive', 'DJ-Party bis 2 Uhr'],
   extra='Schläger können vor Ort gemietet werden. Weitere Getränke an der Bar.',
-  prog_h='Das Programm', prog=[('10 Uhr', 'Empfang und Qualifikationsrunde'), ('Nachmittag', 'Haupttableau und Siegerehrung'), ('Abend', 'Dinner Party: Signature-Buffet von Instinct Amazonia'), ('Bis 2 Uhr', 'DJ-Party')],
+  prog_h='Das Programm', prog=[('10 Uhr', 'Empfang und Qualifikationsrunde'), ('Nachmittag', 'Haupttableau und Siegerehrung'), ('20 Uhr', 'Dinner Party: Signature-Buffet von Instinct Amazonia'), ('Bis 2 Uhr', 'DJ-Party')],
   food_h='Das Signature-Buffet', food_p='Eine grosszügige Auswahl mit Nikkei-Einflüssen: Fingerfood zum Teilen und warme Gerichte auf dem Teller.',
   food=[('Kalt', 'Sushi, Salate, Nikkei-Häppchen und weitere kalte Kreationen'), ('Zum Teilen', 'Knuspriges Karaage, Baos und weitere Spezialitäten des Hauses'), ('Warm', 'Niedergegarte Schweinerippchen, Hähnchen-Curry, Saté-Spiesse, Grilliertes'), ('Beilagen', 'Gebratener Reis, Wokgemüse und weitere Beilagen')],
   food_cap='Auswahl unverbindlich, die finale Zusammenstellung richtet sich nach den Saisonprodukten. Fotos: Instinct Amazonia.',
@@ -77,7 +77,7 @@ T = {
   bar_cap='Bier, Wein und alkoholfreie Getränke ebenfalls erhältlich. Preise unverbindlich.',
   book_h='Tickets sichern', step1='1. Wähl dein Ticket', qty_l='Anzahl Tickets', go='Buchen & bezahlen',
   pay_note='Preise in CHF, inkl. MWST. Sichere Kartenzahlung über SumUp, Bestätigung per E-Mail. Rückerstattung bis Sonntag, 1. November 2026 möglich.',
-  partner_h='Instinct Amazonia', partner_p='Nikkei-Küche, Food & Party: Das Restaurant in Granges verbindet japanische und peruanische Aromen, dazu kreative Cocktails und Party-Stimmung. Für Padel+Dine kocht das ganze Team bei uns.', partner_a='Zum Restaurant',
+  partner_h='Instinct Amazonia', partner_p='Nikkei-Küche, Food & Party: Das Restaurant in Granges verbindet japanische und peruanische Aromen, dazu kreative Cocktails und Party-Stimmung. Für Padel +Dine kocht das ganze Team bei uns.', partner_a='Zum Restaurant',
   faq_h='Gut zu wissen',
   faq=[('Wie läuft das Turnier ab?', 'Du meldest dich als 2er-Team an. Am Morgen wird die Qualifikation gespielt, danach geht es ins Haupttableau. Bälle sind inklusive.'),
        ('Ich habe keinen Schläger, ist das ein Problem?', 'Nein, du kannst vor Ort einen Schläger mieten.'),
@@ -90,11 +90,11 @@ T = {
   m_people='Namen der Teilnehmenden', m_notes='Allergien oder Bemerkungen?', m_notes2='(optional)', m_ok='Ich habe die Bedingungen gelesen: Rückerstattung bis Sonntag, 1. November 2026 möglich.', m_go='Weiter zur Zahlung',
   cap1='48 Plätze', cap2='52 Plätze', t1_sub='2er-Team', t2_sub='Einzelticket'),
 'en': dict(
-  title='Padel+Dine feat. Instinct Amazonia · 7 November | Rackets Academy',
+  title='Padel +Dine powered by Instinct Amazonia · 7 November | Rackets Academy',
   desc='Saturday 7 November 2026 in Salgesch: padel tournament in teams of 2, Instinct Amazonia’s nikkei signature buffet and a DJ party until 2am. Tournament + Dinner Party 79 CHF, Dinner Party 59 CHF.',
-  kicker='Rackets Academy × Instinct Amazonia', h1='Padel+Dine', h1b='feat. Instinct Amazonia',
+  kicker='Rackets Academy × Instinct Amazonia', h1='Padel <b>+Dine</b>', h1b='powered by Instinct Amazonia',
   lede='Padel tournament by day, Dinner Party by night. Nikkei signature buffet, DJ and jungle vibes until 2am.',
-  chips=['Saturday 7 November 2026', '10am – 2am', 'Salgesch'], cta='Get your tickets', cta2='See the programme',
+  chips=['Saturday 7 November 2026', '<b>Tournament</b> from 10am', '<b>Dinner Party</b> from 8pm', 'Salgesch'], cta='Get your tickets', cta2='See the programme',
   concept_h='A new concept: play, eat, dance.',
   concept_p='We bring together padel and the cooking of Instinct Amazonia, the nikkei restaurant from Granges, for a day that doesn’t end with the last point. Play the tournament with your partner, then everyone meets for the Dinner Party.',
   pad_h='The tournament', pad_k='By day · from 10am', pad_l=['Teams of 2', 'Qualifying round in the morning, main draw in the afternoon', 'Balls included, rental rackets on site', 'Prize-giving before the Dinner Party'],
@@ -104,7 +104,7 @@ T = {
   t2_name='Dinner Party', t2_price='59 CHF', t2_unit='per person', t2_note='For everyone coming just for the night · 52 places',
   t2_inc=['Instinct Amazonia signature buffet', '1 drink included', 'DJ party until 2am'],
   extra='Rental rackets available on site. Other drinks at the bar.',
-  prog_h='The programme', prog=[('10am', 'Welcome and qualifying round'), ('Afternoon', 'Main draw and prize-giving'), ('Evening', 'Dinner Party: Instinct Amazonia signature buffet'), ('Until 2am', 'DJ party')],
+  prog_h='The programme', prog=[('10am', 'Welcome and qualifying round'), ('Afternoon', 'Main draw and prize-giving'), ('8pm', 'Dinner Party: Instinct Amazonia signature buffet'), ('Until 2am', 'DJ party')],
   food_h='The signature buffet', food_p='A generous spread with nikkei influences: finger food to share and hot dishes served on the plate.',
   food=[('Cold', 'Sushi, salads, nikkei bites and more cold creations'), ('To share', 'Crispy karaage, baos and other house specialities'), ('Hot', 'Slow-cooked pork ribs, chicken curry, chicken satay, grilled meats'), ('Sides', 'Fried rice, sautéed vegetables and more')],
   food_cap='Indicative selection; the final menu depends on seasonal produce. Photos: Instinct Amazonia.',
@@ -113,7 +113,7 @@ T = {
   bar_cap='Beer, wine and soft drinks also available. Prices indicative.',
   book_h='Get your tickets', step1='1. Pick your ticket', qty_l='Number of tickets', go='Book & pay',
   pay_note='Prices in CHF, VAT included. Secure card payment via SumUp, confirmation by email. Refunds possible until Sunday 1 November 2026.',
-  partner_h='Instinct Amazonia', partner_p='Nikkei cooking, food & party: the Granges restaurant blends Japanese and Peruvian flavours with creative cocktails and a party atmosphere. For Padel+Dine, the whole team comes to cook at our place.', partner_a='Visit the restaurant',
+  partner_h='Instinct Amazonia', partner_p='Nikkei cooking, food & party: the Granges restaurant blends Japanese and Peruvian flavours with creative cocktails and a party atmosphere. For Padel +Dine, the whole team comes to cook at our place.', partner_a='Visit the restaurant',
   faq_h='Good to know',
   faq=[('How does the tournament work?', 'You sign up as a team of 2. The qualifying round is played in the morning, then teams move into the main draw. Balls are provided.'),
        ('I don’t have a racket — is that a problem?', 'Not at all, you can rent one on site.'),
@@ -131,7 +131,13 @@ CSS = '''<style id="dine-css">
 :root{--jungle:#0f2e27;--jungle2:#173f35;--gold:#c6a460;--cream:#f7f2e7}
 .dn-hero{position:relative;min-height:86vh;display:flex;align-items:flex-end;padding:120px 0 56px;color:#fff;background:var(--jungle) center/cover no-repeat;overflow:hidden}
 .dn-hero-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 62%;z-index:0}
-.dn-hero:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(15,46,39,.55) 0%,rgba(15,46,39,.92) 75%)}
+.dn-hero:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(0,119,222,.9) 0%,rgba(0,119,222,.6) 22%,rgba(15,46,39,.8) 50%,rgba(15,46,39,.95) 100%)}
+.dn-hero h1 b{color:#6ffd1d;font-weight:inherit}
+.dn-hero .spa-chip b{color:#6ffd1d}
+.dn-lock{display:flex;align-items:center;gap:28px;justify-self:end}
+.dn-lock img{height:190px;width:auto;filter:drop-shadow(0 4px 18px rgba(0,0,0,.3))}
+.dn-lock span{width:1.5px;height:150px;background:rgba(255,255,255,.4)}
+.dn-lock img.dn-r{height:132px}
 .dn-hero-in{position:relative;z-index:2;display:grid;grid-template-columns:1.4fr .8fr;gap:40px;align-items:end}
 .dn-kicker{color:var(--gold);font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:.82rem;margin:0 0 12px}
 .dn-hero h1{color:#fff;font-size:clamp(2.6rem,8vw,5rem);line-height:.95;margin:0}
@@ -205,7 +211,7 @@ CSS = '''<style id="dine-css">
 .dn-final h2{color:#fff;font-size:clamp(1.8rem,5vw,2.6rem);margin:0 0 8px}
 .pp-row.pp-one{grid-template-columns:1fr!important}
 #modal-people{display:grid;gap:8px;margin-top:6px}.pp-row{display:grid;grid-template-columns:1fr 120px;gap:8px}.pp-row input{width:100%}.pp-lbl{font-size:.78rem;font-weight:700;color:#7a8ea3;margin-bottom:-4px}
-@media(max-width:820px){.dn-hero-in,.dn-tks,.dn-food,.dn-bar,.dn-partner{grid-template-columns:1fr}.dn-logo{justify-self:start;max-width:150px;order:-1}.dn-prog li{grid-template-columns:100px 1fr}.dn-partner img{max-width:160px}}
+@media(max-width:820px){.dn-hero-in,.dn-tks,.dn-food,.dn-bar,.dn-partner{grid-template-columns:1fr}.dn-lock{justify-self:start;order:-1;gap:16px}.dn-lock img{height:96px}.dn-lock img.dn-r{height:66px}.dn-lock span{height:76px}.dn-prog li{grid-template-columns:100px 1fr}.dn-partner img{max-width:160px}}
 </style>
 '''
 
@@ -233,7 +239,7 @@ def body(L, t, pre):
         <a class="btn spa-cta-ghost" href="#programme">{t['cta2']}</a>
       </div>
     </div>
-    <img class="dn-logo" src="{pre}images/dine/instinct-amazonia-logo-gold.webp" alt="Instinct Amazonia" width="360" height="466">
+    <div class="dn-lock"><img class="dn-r" src="{pre}images/dine/ra-r-white.png" alt="Rackets Academy" width="640" height="611"><span></span><img src="{pre}images/dine/instinct-amazonia-logo-gold.webp" alt="Instinct Amazonia" width="360" height="466"></div>
   </div>
 </section>
 
@@ -383,7 +389,7 @@ def body(L, t, pre):
 def ld(L, t, url):
     base = 'https://www.racketsacademy.ch/'
     return {'@context': 'https://schema.org', '@graph': [
-        {'@type': 'Event', 'name': 'Padel+Dine feat. Instinct Amazonia', 'description': t['desc'],
+        {'@type': 'Event', 'name': 'Padel +Dine powered by Instinct Amazonia', 'description': t['desc'],
          'startDate': '2026-11-07T10:00:00+01:00', 'endDate': '2026-11-08T02:00:00+01:00',
          'eventStatus': 'https://schema.org/EventScheduled', 'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode',
          'maximumAttendeeCapacity': 100, 'image': FOOD[0], 'inLanguage': L,

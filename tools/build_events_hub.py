@@ -9,7 +9,7 @@ MSG = {'en': 'Hola! I am interested in {e}. Please keep me posted.',
 # (key, title, href or None=WhatsApp, calendar keywords, is_new)
 CARDS = [
  ('nto24', 'NTO24 · 24h', None, '24h', True),
- ('dine', 'Padel+Dine feat. Instinct Amazonia', 'padel-dine.html', 'amazonia,dine', True),
+ ('dine', 'Padel +Dine powered by Instinct Amazonia', 'padel-dine.html', 'amazonia,dine', True),
  ('ski', 'Ski &amp;Padel', 'ski-and-padel.html', 'ski', False),
  ('racketero', 'Racketero', 'racketero.html', 'racketero', False),
  ('rackemix', 'Rackemix', None, 'rackemix', True),
@@ -24,7 +24,7 @@ CARDS = [
 ]
 WA_NUM = {'veyras': 'https://wa.me/41795885483?text='}
 T = {
-'en': dict(desc='Rackets Academy events in Valais: NTO24 24h tournament, Padel+Dine, Ski &Padel weekends, Racketero, Rackemix, Pickleball Mix & Match, Padel+Paella/Wine/Beer/Fitness, Swiss Tennis and Rivella League.',
+'en': dict(desc='Rackets Academy events in Valais: NTO24 24h tournament, Padel +Dine, Ski &Padel weekends, Racketero, Rackemix, Pickleball Mix & Match, Padel+Paella/Wine/Beer/Fitness, Swiss Tennis and Rivella League.',
   lede='Social nights, weekly tournaments, a 24-hour marathon, ski weekends and official Swiss Tennis competitions. Dates update live from our calendar.',
   agenda_h='Coming up', all_h='All our events', new='New', loading='Loading dates…', wait='Next date loading…',
   more='Learn more →', ask='Ask on WhatsApp →', camps='See the camps →', tickets='Get tickets →', standings='See standings →', tourn='See tournaments →',
@@ -43,7 +43,7 @@ T = {
      'swiss': 'The Rackets Hyundai Cup and official Swiss Tennis Padel competitions (P20 to P200).',
      'rivella': '32 teams, 8 groups, April–November. The final decides the Academy champion.',
      'veyras': 'TC Veyras tennis tournaments: a kids’ tournament in December and a doubles tournament in January.'}),
-'fr': dict(desc="Événements Rackets Academy en Valais : tournoi 24 h NTO24, Padel+Dine, week-ends Ski &Padel, Racketero, Rackemix, Pickleball Mix & Match, Padel+Paella/Wine/Beer/Fitness, Swiss Tennis et Rivella League.",
+'fr': dict(desc="Événements Rackets Academy en Valais : tournoi 24 h NTO24, Padel +Dine, week-ends Ski &Padel, Racketero, Rackemix, Pickleball Mix & Match, Padel+Paella/Wine/Beer/Fitness, Swiss Tennis et Rivella League.",
   lede="Soirées conviviales, tournois réguliers, un marathon de 24 heures, des week-ends de ski et des compétitions officielles Swiss Tennis. Les dates se mettent à jour en direct depuis notre calendrier.",
   agenda_h='À venir', all_h='Tous nos événements', new='Nouveau', loading='Chargement des dates…', wait='Prochaine date en chargement…',
   more='En savoir plus →', ask='Demander sur WhatsApp →', camps='Voir les camps →', tickets='Prendre mes billets →', standings='Voir le classement →', tourn='Voir les tournois →',
@@ -62,7 +62,7 @@ T = {
      'swiss': "La Rackets Hyundai Cup et les compétitions officielles Swiss Tennis Padel (P20 à P200).",
      'rivella': "32 équipes, 8 groupes, d'avril à novembre. La finale désigne le champion de l'Academy.",
      'veyras': "Les tournois de tennis du TC Veyras : un tournoi enfants en décembre et un tournoi en double en janvier."}),
-'de': dict(desc='Rackets Academy Events im Wallis: NTO24 24-Std.-Turnier, Padel+Dine, Ski &Padel Wochenenden, Racketero, Rackemix, Pickleball Mix & Match, Padel+Paella/Wine/Beer/Fitness, Swiss Tennis und Rivella League.',
+'de': dict(desc='Rackets Academy Events im Wallis: NTO24 24-Std.-Turnier, Padel +Dine, Ski &Padel Wochenenden, Racketero, Rackemix, Pickleball Mix & Match, Padel+Paella/Wine/Beer/Fitness, Swiss Tennis und Rivella League.',
   lede='Gesellige Abende, regelmässige Turniere, ein 24-Stunden-Marathon, Ski-Wochenenden und offizielle Swiss Tennis Wettkämpfe. Die Daten kommen live aus unserem Kalender.',
   agenda_h='Demnächst', all_h='Alle unsere Events', new='Neu', loading='Daten werden geladen…', wait='Nächstes Datum wird geladen…',
   more='Mehr erfahren →', ask='Per WhatsApp fragen →', camps='Zu den Camps →', tickets='Tickets sichern →', standings='Zur Tabelle →', tourn='Zu den Turnieren →',
