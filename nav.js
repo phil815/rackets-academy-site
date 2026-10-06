@@ -363,20 +363,55 @@ document.addEventListener('DOMContentLoaded', function () {
 })();
 
 // ------------------------------------------------------------------
+// Meta Pixel — measures which Instagram/Facebook ads lead to bookings.
+// Loads ONLY after cookie consent ("In · accept").
+// ------------------------------------------------------------------
+var RA_PIXEL_ID = '1826093361488124';
+function raPixelLoad() {
+  if (!RA_PIXEL_ID || window.fbq) return;
+  try { if (localStorage.getItem('ra_consent') !== 'granted') return; } catch (e) { return; }
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', RA_PIXEL_ID);
+  fbq('track', 'PageView');
+}
+function raPixel(name, params, custom) {
+  if (typeof window.fbq !== 'function') return;
+  fbq(custom ? 'trackCustom' : 'track', name, params || {});
+}
+raPixelLoad();
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a[href]');
+  if (!a) return;
+  var h = a.href;
+  if (/playtomic\.com/.test(h)) raPixel('PlaytomicClick', { link: h }, true);
+  else if (/wa\.me|whatsapp\.com/.test(h)) raPixel('Contact', { method: 'whatsapp' });
+  else if (/tinyurl\.com\/RA-Plus/i.test(h)) raPixel('Lead', { content_name: 'Rackets+' });
+}, true);
+document.addEventListener('submit', function (e) {
+  var f = e.target;
+  if (f && /script\.google/.test(f.action || '')) raPixel('InitiateCheckout', { currency: 'CHF' });
+}, true);
+
+// ------------------------------------------------------------------
 // Cookie consent — "Your serve" (Google Consent Mode v2)
 // ------------------------------------------------------------------
 (function () {
   var L = (document.documentElement.lang || 'en').slice(0, 2);
   var T = {
-    en: { t: 'Your serve', p: 'We use cookies for anonymous visitor stats — no ads, no tracking across sites. The ball is in your court.', yes: 'In · accept', no: 'Out · decline', more: 'Privacy', set: 'Cookie settings' },
-    fr: { t: 'À toi de servir', p: 'On utilise des cookies pour des statistiques anonymes — pas de pub, pas de pistage. La balle est dans ton camp.', yes: 'In · accepter', no: 'Out · refuser', more: 'Confidentialité', set: 'Paramètres cookies' },
-    de: { t: 'Dein Aufschlag', p: 'Wir nutzen Cookies für anonyme Besucherstatistiken — keine Werbung, kein Tracking. Der Ball liegt bei dir.', yes: 'In · annehmen', no: 'Out · ablehnen', more: 'Datenschutz', set: 'Cookie-Einstellungen' }
+    en: { t: 'Your serve', p: 'We use cookies for visitor stats and to measure our Instagram & Facebook ads (Meta). We never sell your data. The ball is in your court.', yes: 'In · accept', no: 'Out · decline', more: 'Privacy', set: 'Cookie settings' },
+    fr: { t: 'À toi de servir', p: 'On utilise des cookies pour nos statistiques et pour mesurer nos pubs Instagram & Facebook (Meta). On ne vend jamais tes données. La balle est dans ton camp.', yes: 'In · accepter', no: 'Out · refuser', more: 'Confidentialité', set: 'Paramètres cookies' },
+    de: { t: 'Dein Aufschlag', p: 'Wir nutzen Cookies für Besucherstatistiken und um unsere Instagram- & Facebook-Werbung (Meta) zu messen. Wir verkaufen deine Daten nie. Der Ball liegt bei dir.', yes: 'In · annehmen', no: 'Out · ablehnen', more: 'Datenschutz', set: 'Cookie-Einstellungen' }
   }[L] || null;
   if (!T) return;
   function get() { try { return localStorage.getItem('ra_consent'); } catch (e) { return null; } }
   function choose(v) {
     try { localStorage.setItem('ra_consent', v); } catch (e) {}
     if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: v });
+    if (v === 'granted') raPixelLoad();
     var el = document.getElementById('serve-banner');
     if (el) { el.classList.add('hit-' + (v === 'granted' ? 'in' : 'out')); setTimeout(function () { el.remove(); }, 650); }
   }
@@ -458,6 +493,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (type === 'success') {
               pane.innerHTML = '<div class="pay-done"><h3>' + M.ok + '</h3><p>' + M.okText + '</p></div>';
               if (typeof gtag === 'function') gtag('event', 'purchase', { value: Number(j.amount) || 0, currency: 'CHF', transaction_id: j.id });
+              raPixel('Purchase', { value: Number(j.amount) || 0, currency: 'CHF' });
             } else if (type === 'fail' || type === 'error') {
               var n = pane.querySelector('.pay-note') || document.createElement('p');
               n.className = 'pay-note'; n.textContent = M.fail;

@@ -98,5 +98,6 @@ var PUSH_JOBS_ = [
 - [ ] Merchant Center: falsche Gratisversand-Richtlinie durch Abholrichtlinie ersetzen
 
 ## Log
+- 06.10.2026 · Meta Pixel 1826093361488124 in nav.js (loads only after cookie consent; events: PageView, PlaytomicClick, Contact, Lead, InitiateCheckout, Purchase). Cookie banner text + privacy policy (EN/FR/DE) updated.
 - 2026-10-04 · Phil · COWORK.md angelegt, Felix als Collaborator, Drive-Ordner pro Seite
 - 2026-10-03 · Phil · Padel+Dine live inkl. Ticketverkauf, Video-Hero
