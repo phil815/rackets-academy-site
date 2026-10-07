@@ -344,9 +344,9 @@ document.addEventListener('DOMContentLoaded', function () {
 (function () {
   var L = (document.documentElement.lang || 'en').slice(0, 2);
   var T = {
-    en: { title: 'Where do you want to play?', court: 'Book a court', course: 'Courses', sub: 'Pick your location', close: 'Close', sa: 'Padel · Pickleball · Tennis · Spa · free parking', si: 'Padel · Route de Préjeux 16', tip: 'Racket rental 3–10 CHF · free cancellation up to 24 h before' },
-    fr: { title: 'Où veux-tu jouer ?', court: 'Réserver', course: 'Cours', sub: 'Choisis ton lieu', close: 'Fermer', sa: 'Padel · Pickleball · Tennis · Spa · parking gratuit', si: 'Padel · Route de Préjeux 16', tip: "Location de raquette 3–10 CHF · annulation gratuite jusqu'à 24 h avant" },
-    de: { title: 'Wo möchtest du spielen?', court: 'Platz buchen', course: 'Kurse', sub: 'Wähle deinen Standort', close: 'Schliessen', sa: 'Padel · Pickleball · Tennis · Spa · Gratis-Parkplätze', si: 'Padel · Route de Préjeux 16', tip: 'Schlägermiete 3–10 CHF · kostenlos stornieren bis 24 h vorher' }
+    en: { title: 'Where do you want to play?', court: 'Book a court', course: 'Courses', sub: 'Pick your location', close: 'Close', sa: 'Padel · Pickleball · Tennis · Spa · free parking', si: 'Padel · parking on site', tip: 'Racket rental 3–10 CHF · free cancellation up to 24 h before' },
+    fr: { title: 'Où veux-tu jouer ?', court: 'Réserver', course: 'Cours', sub: 'Choisis ton lieu', close: 'Fermer', sa: 'Padel · Pickleball · Tennis · Spa · parking gratuit', si: 'Padel · parking sur place', tip: "Location de raquette 3–10 CHF · annulation gratuite jusqu'à 24 h avant" },
+    de: { title: 'Wo möchtest du spielen?', court: 'Platz buchen', course: 'Kurse', sub: 'Wähle deinen Standort', close: 'Schliessen', sa: 'Padel · Pickleball · Tennis · Spa · Gratis-Parkplätze', si: 'Padel · Parkplätze vor Ort', tip: 'Schlägermiete 3–10 CHF · kostenlos stornieren bis 24 h vorher' }
   }[L] || null;
   if (!T) return;
   var URLS = {
