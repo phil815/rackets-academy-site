@@ -352,6 +352,9 @@ document.addEventListener('DOMContentLoaded', function () {
     if (/padel-dine/.test(location.pathname)) {
       var TK = { en: 'Get your tickets', fr: 'Prendre mes billets', de: 'Tickets sichern' }[L] || 'Get your tickets';
       bar.innerHTML = '<a class="sb-court" href="#tk-book">' + TK + '</a>';
+    } else if (/ski-and-padel/.test(location.pathname)) {
+      var SK = { en: 'Choose your weekend', fr: 'Choisir mon week-end', de: 'Wochenende wählen' }[L] || 'Choose your weekend';
+      bar.innerHTML = '<a class="sb-court" href="#camp-book">' + SK + '</a>';
     } else if (/spa-and-sauna/.test(location.pathname)) {
       var SP = { en: 'Book spa', fr: 'Réserver le spa', de: 'Spa buchen' }[L] || 'Book spa';
       bar.innerHTML = '<a class="sb-court" href="https://playtomic.com/clubs/rackets-academy-salgesch" target="_blank" rel="noopener">' + SP + '</a>' +
@@ -359,6 +362,22 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     document.body.appendChild(bar);
     document.body.classList.add('has-sticky-book');
+
+    // event pages: top banner promotes the event instead of court booking
+    var EV = null;
+    if (/padel-dine/.test(location.pathname)) EV = {
+      en: ['🍽️ PADEL +DINE · SAT 7 NOV · SALGESCH', 'Get your tickets →'],
+      fr: ['🍽️ PADEL +DINE · SAMEDI 7 NOV · SALGESCH', 'Prendre mes billets →'],
+      de: ['🍽️ PADEL +DINE · SA 7. NOV · SALGESCH', 'Tickets sichern →'], h: '#tk-book' };
+    else if (/ski-and-padel/.test(location.pathname)) EV = {
+      en: ['⛷️ SKI & PADEL · FEBRUARY 2027 · 12 PLACES PER WEEKEND', 'Choose your weekend →'],
+      fr: ['⛷️ SKI & PADEL · FÉVRIER 2027 · 12 PLACES PAR WEEK-END', 'Choisir mon week-end →'],
+      de: ['⛷️ SKI & PADEL · FEBRUAR 2027 · 12 PLÄTZE PRO WOCHENENDE', 'Wochenende wählen →'], h: '#camp-book' };
+    var track = EV && document.querySelector('.promo-track');
+    if (track) {
+      var tx = EV[L] || EV.en, one = '<span>' + tx[0] + ' — <a href="' + EV.h + '">' + tx[1] + '</a></span>';
+      track.innerHTML = one + one + one;
+    }
   });
 })();
 

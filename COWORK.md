@@ -101,3 +101,4 @@ var PUSH_JOBS_ = [
 - 06.10.2026 · Meta Pixel 1826093361488124 in nav.js (loads only after cookie consent; events: PageView, PlaytomicClick, Contact, Lead, InitiateCheckout, Purchase). Cookie banner text + privacy policy (EN/FR/DE) updated.
 - 2026-10-04 · Phil · COWORK.md angelegt, Felix als Collaborator, Drive-Ordner pro Seite
 - 2026-10-03 · Phil · Padel+Dine live inkl. Ticketverkauf, Video-Hero
+- 07.10.2026 · Ski & Padel: Sticky-Button mobil «Choose your weekend» → #camp-book. Event-Seiten (Padel +Dine, Ski & Padel): Top-Leiste zeigt Event statt «Courts open now». hero-mobile.mp4 komprimiert (2,7 → 1,1 MB). nav.js v26.
