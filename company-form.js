@@ -16,6 +16,9 @@
   try { if (src) sessionStorage.setItem('ra_src', src); else src = sessionStorage.getItem('ra_src') || ''; } catch (e) {}
   f.elements.source.value = src || (document.referrer ? 'web:' + new URL(document.referrer).hostname : 'direct');
   var sel = f.elements.company, others = f.querySelectorAll('.co-other');
+  // Firma vorauswählen (z.B. ?company=Denner vom Firmen-Plakat)
+  var pre = qs.get('company');
+  if (pre) for (var i = 0; i < sel.options.length; i++) if (sel.options[i].text.toLowerCase() === pre.toLowerCase()) { sel.selectedIndex = i; break; }
   sel.addEventListener('change', function () {
     var o = sel.value === '__other';
     others.forEach(function (el) { el.hidden = !o; });
