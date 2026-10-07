@@ -482,11 +482,39 @@ function raPixelLoad() {
   fbq('init', RA_PIXEL_ID);
   fbq('track', 'PageView');
 }
-function raPixel(name, params, custom) {
+function raPixel(name, params, custom, eventId) {
   if (typeof window.fbq !== 'function') return;
-  fbq(custom ? 'trackCustom' : 'track', name, params || {});
+  if (eventId) fbq(custom ? 'trackCustom' : 'track', name, params || {}, { eventID: String(eventId) });
+  else fbq(custom ? 'trackCustom' : 'track', name, params || {});
 }
 raPixelLoad();
+// Value + product of a checkout form (hidden "price" field; camp/shop/ticket forms).
+function raCheckoutParams(f) {
+  var p = { currency: 'CHF' };
+  var price = f && f.querySelector('[name="price"]');
+  var v = price ? parseFloat(String(price.value).replace(/[^0-9.]/g, '')) : NaN;
+  if (v > 0) p.value = v;
+  var id = f && (f.querySelector('[name="campId"]') || f.querySelector('[name="racketModel"]') || f.querySelector('[name="formType"]'));
+  if (id && id.value) p.content_name = id.value;
+  var pkg = f && f.querySelector('[name="campPackage"]');
+  if (pkg && pkg.value) p.content_category = pkg.value;
+  return p;
+}
+// Back from the SumUp hosted payment page: ...?paid=<ref>&amount=<CHF> -> Purchase (once per ref).
+(function () {
+  try {
+    var q = new URLSearchParams(location.search), ref = q.get('paid');
+    if (!ref) return;
+    var key = 'ra_paid_' + ref;
+    if (!localStorage.getItem(key)) {
+      raPixel('Purchase', { value: parseFloat(q.get('amount')) || 0, currency: 'CHF' }, false, ref);
+      if (typeof gtag === 'function') gtag('event', 'purchase', { value: parseFloat(q.get('amount')) || 0, currency: 'CHF', transaction_id: ref });
+      localStorage.setItem(key, '1');
+    }
+    q.delete('paid'); q.delete('amount');
+    history.replaceState(null, '', location.pathname + (q.toString() ? '?' + q : '') + location.hash);
+  } catch (e) {}
+})();
 document.addEventListener('click', function (e) {
   var a = e.target.closest && e.target.closest('a[href]');
   if (!a) return;
@@ -497,7 +525,7 @@ document.addEventListener('click', function (e) {
 }, true);
 document.addEventListener('submit', function (e) {
   var f = e.target;
-  if (f && /script\.google/.test(f.action || '')) raPixel('InitiateCheckout', { currency: 'CHF' });
+  if (f && /script\.google/.test(f.action || '')) raPixel('InitiateCheckout', raCheckoutParams(f));
 }, true);
 
 // ------------------------------------------------------------------
@@ -587,6 +615,11 @@ document.addEventListener('submit', function (e) {
       '<div id="sumup-card"></div>' +
       '<a class="pay-alt" href="' + j.url + '">' + M.alt + '</a>';
     form.parentNode.appendChild(pane);
+    // Leaving for the SumUp page: count it, so these checkouts are not invisible.
+    var alt = pane.querySelector('.pay-alt');
+    if (alt) alt.addEventListener('click', function () {
+      raPixel('AddPaymentInfo', { value: Number(j.amount) || 0, currency: 'CHF', content_name: 'sumup_hosted' });
+    });
     loadSdk(function () {
       try {
         window.SumUpCard.mount({
@@ -599,7 +632,7 @@ document.addEventListener('submit', function (e) {
             if (type === 'success') {
               pane.innerHTML = '<div class="pay-done"><h3>' + M.ok + '</h3><p>' + M.okText + '</p></div>';
               if (typeof gtag === 'function') gtag('event', 'purchase', { value: Number(j.amount) || 0, currency: 'CHF', transaction_id: j.id });
-              raPixel('Purchase', { value: Number(j.amount) || 0, currency: 'CHF' });
+              raPixel('Purchase', { value: Number(j.amount) || 0, currency: 'CHF' }, false, j.id);
             } else if (type === 'fail' || type === 'error') {
               var n = pane.querySelector('.pay-note') || document.createElement('p');
               n.className = 'pay-note'; n.textContent = M.fail;
