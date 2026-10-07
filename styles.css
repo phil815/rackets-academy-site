@@ -1041,3 +1041,4 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 @media (max-width:760px){ .tw-grid{grid-template-columns:1fr;} }
 .loc-tip{margin:14px 0 0; font-size:.82rem; color:#5b6f84; text-align:center;}
 .shop-bubbles.as-chips .shop-bubble .bubble-icon{display:none;}
+.ev-price{display:block; margin:-4px 0 8px; font-size:.9rem; color:#3c5268;} .ev-price b{color:var(--blue); font-weight:900; font-size:1.05rem;}

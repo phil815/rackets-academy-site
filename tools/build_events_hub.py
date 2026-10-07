@@ -22,6 +22,16 @@ CARDS = [
  ('rivella', 'Rivella League', 'rivella-league.html', 'rivella', False),
  ('veyras', None, None, 'veyras', True),
 ]
+# Prices (Phil, 07.10.2026). Per person unless stated otherwise.
+PRICE = {
+ 'en': {'nto24': '249 CHF', 'dine': 'from 59 CHF', 'ski': 'from 999 CHF', 'racketero': '30 CHF', 'rackemix': '30 CHF', 'pickle': '10 CHF',
+        'paella': '35 CHF', 'wine': '35 CHF', 'beer': '50 CHF', 'fitness': '30 CHF', 'swiss': '45 CHF', 'rivella': '30 CHF · sign-up for 2027 opens in January'},
+ 'fr': {'nto24': '249 CHF', 'dine': 'dès 59 CHF', 'ski': 'dès 999 CHF', 'racketero': '30 CHF', 'rackemix': '30 CHF', 'pickle': '10 CHF',
+        'paella': '35 CHF', 'wine': '35 CHF', 'beer': '50 CHF', 'fitness': '30 CHF', 'swiss': '45 CHF', 'rivella': '30 CHF · inscriptions 2027 en janvier'},
+ 'de': {'nto24': '249 CHF', 'dine': 'ab 59 CHF', 'ski': 'ab 999 CHF', 'racketero': '30 CHF', 'rackemix': '30 CHF', 'pickle': '10 CHF',
+        'paella': '35 CHF', 'wine': '35 CHF', 'beer': '50 CHF', 'fitness': '30 CHF', 'swiss': '45 CHF', 'rivella': '30 CHF · Anmeldung 2027 ab Januar'},
+}
+PP = {'en': 'per person', 'fr': 'par personne', 'de': 'pro Person'}
 WA_NUM = {'veyras': 'https://wa.me/41795885483?text='}
 T = {
 'en': dict(desc='Rackets Academy events in Valais: NTO24 24h tournament, Padel +Dine, Ski &Padel weekends, Racketero, Rackemix, Pickleball Mix & Match, Padel+Paella/Wine/Beer/Fitness, Swiss Tennis and Rivella League.',
@@ -108,10 +118,12 @@ def section(lang, t):
             link = 'href="' + WA_NUM.get(key, WA) + urllib.parse.quote(MSG[lang].format(e=plain)) + '" target="_blank" rel="noopener"'
             cta = t['ask']
         tag = f'<span class="ev-new">{t["new"]}</span>' if new else ''
+        pr = PRICE[lang].get(key)
+        price = f'<span class="ev-price"><b>{pr.split(" · ")[0]}</b> {PP[lang]}{(" · " + pr.split(" · ", 1)[1]) if " · " in pr else ""}</span>\n        ' if pr else ''
         cards.append(f'''      <a class="card card-link" {link}>
         {tag}<h3>{title}</h3>
         <p>{t['p'][key]}</p>
-        <span data-next-event="{kw}">{t['wait']}</span>
+        {price}<span data-next-event="{kw}">{t['wait']}</span>
         <span class="card-cta">{cta}</span>
       </a>''')
     return f'''<section class="ev-agenda-sec">
@@ -144,6 +156,5 @@ for lang, t in T.items():
         s = re.sub(r'<meta ' + k + ' content="[^"]*"', '<meta ' + k + ' content="' + esc + '"', s)
     s = re.sub(r'<style id="ev-hub-css">.*?</style>\n', '', s, flags=re.S)
     s = s.replace('</head>', CSS + '</head>', 1)
-    s = re.sub(r'nav\.js\?v=\d+', 'nav.js?v=22', s)
     open(path, 'w').write(s)
     print(path, len(t['desc']))
