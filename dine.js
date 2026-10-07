@@ -7,9 +7,9 @@
   var OPEN = new Date('2026-10-03T00:00:00+02:00').getTime();
   var EVENT_START = new Date('2026-11-07T10:00:00+01:00').getTime();
   var S = {
-    en: { left: function (n, c) { return n === 1 ? 'Last place!' : n + ' of ' + c + ' places left'; }, sold: 'Sold out', total: 'Total', soon: 'Ticket sales open on Monday 5 October', over: 'Ticket sales are closed', team: 'Tournament + Dinner Party · team of 2', dinner: function (q) { return 'Dinner Party · ' + q + (q === 1 ? ' ticket' : ' tickets'); }, p: 'Player', g: 'Guest', you: 'you', name: 'First and last name', lvl: 'Playtomic level' },
-    fr: { left: function (n, c) { return n === 1 ? 'Dernière place !' : n + ' places sur ' + c; }, sold: 'Complet', total: 'Total', soon: 'Billetterie ouverte dès le lundi 5 octobre', over: 'La billetterie est fermée', team: 'Tournoi + Dinner Party · équipe de 2', dinner: function (q) { return 'Dinner Party · ' + q + (q === 1 ? ' billet' : ' billets'); }, p: 'Joueur·se', g: 'Invité·e', you: 'toi', name: 'Prénom et nom', lvl: 'Niveau Playtomic' },
-    de: { left: function (n, c) { return n === 1 ? 'Letzter Platz!' : 'Noch ' + n + ' von ' + c + ' Plätzen'; }, sold: 'Ausverkauft', total: 'Total', soon: 'Ticketverkauf ab Montag, 5. Oktober', over: 'Der Ticketverkauf ist geschlossen', team: 'Turnier + Dinner Party · 2er-Team', dinner: function (q) { return 'Dinner Party · ' + q + (q === 1 ? ' Ticket' : ' Tickets'); }, p: 'Spieler·in', g: 'Gast', you: 'du', name: 'Vor- und Nachname', lvl: 'Playtomic-Level' }
+    en: { left: function (n, c) { return n === 1 ? 'Last place!' : n + ' of ' + c + ' places left'; }, sold: 'Sold out', total: 'Total', soon: 'Ticket sales open on Monday 5 October', over: 'Ticket sales are closed', team: 'Tournament + Dinner Party · team of 2', dinner: function (q) { return 'Dinner Party · ' + q + (q === 1 ? ' ticket' : ' tickets'); }, p: 'Player', g: 'Guest', you: 'you', name: 'First and last name', lvl: 'Playtomic level', live: function (a, b) { return '🔥 ' + a + ' tournament places · ' + b + ' dinner places left'; } },
+    fr: { left: function (n, c) { return n === 1 ? 'Dernière place !' : n + ' places sur ' + c; }, sold: 'Complet', total: 'Total', soon: 'Billetterie ouverte dès le lundi 5 octobre', over: 'La billetterie est fermée', team: 'Tournoi + Dinner Party · équipe de 2', dinner: function (q) { return 'Dinner Party · ' + q + (q === 1 ? ' billet' : ' billets'); }, p: 'Joueur·se', g: 'Invité·e', you: 'toi', name: 'Prénom et nom', lvl: 'Niveau Playtomic', live: function (a, b) { return '🔥 Encore ' + a + ' places tournoi · ' + b + ' places dîner'; } },
+    de: { left: function (n, c) { return n === 1 ? 'Letzter Platz!' : 'Noch ' + n + ' von ' + c + ' Plätzen'; }, sold: 'Ausverkauft', total: 'Total', soon: 'Ticketverkauf ab Montag, 5. Oktober', over: 'Der Ticketverkauf ist geschlossen', team: 'Turnier + Dinner Party · 2er-Team', dinner: function (q) { return 'Dinner Party · ' + q + (q === 1 ? ' Ticket' : ' Tickets'); }, p: 'Spieler·in', g: 'Gast', you: 'du', name: 'Vor- und Nachname', lvl: 'Playtomic-Level', live: function (a, b) { return '🔥 Noch ' + a + ' Turnier- · ' + b + ' Dinner-Plätze frei'; } }
   }[L] || null;
   if (!S) return;
   var TICKETS = { team: { people: 2, pp: 79, cap: 48 }, dinner: { pp: 59, cap: 52 } };
@@ -56,7 +56,12 @@
 
     fetch(form.action + '?action=tickets&event=' + EVENT)
       .then(function (r) { return r.json(); })
-      .then(function (j) { if (j && j.ok && j.tickets) { left = j.tickets; refresh(); } })
+      .then(function (j) {
+        if (!(j && j.ok && j.tickets)) return;
+        left = j.tickets; refresh();
+        var lv = document.getElementById('dn-live');
+        if (lv && left.team !== undefined && left.dinner !== undefined && Date.now() < EVENT_START) { lv.textContent = S.live(left.team, left.dinner); lv.hidden = false; }
+      })
       .catch(function () {});
 
     window.openTicketModal = function () {
