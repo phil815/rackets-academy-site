@@ -45,7 +45,7 @@
 <title>Firmenevent & Teambuilding im Wallis | Rackets Academy</title>
 <meta name="description" content="Firmenanlässe in Salgesch & Sion: Padelturnier mit Coaches, Sitzungsraum, Paella oder Raclette, Apéro. 2 bis 6 Stunden, ab 25 CHF pro Person.">
 <link rel="canonical" href="https://www.racketsacademy.ch/de/company-events.html">
-<link rel="stylesheet" href="../styles.css?v=34">
+<link rel="stylesheet" href="../styles.css?v=35">
 <meta property="og:title" content="Firmenevent & Teambuilding im Wallis | Rackets Academy">
 <meta property="og:description" content="Firmenanlässe in Salgesch & Sion: Padelturnier mit Coaches, Sitzungsraum, Paella oder Raclette, Apéro. 2 bis 6 Stunden, ab 25 CHF pro Person.">
 <meta property="og:type" content="website">
@@ -106,7 +106,7 @@
     <p class="lede">Vom 2-stündigen Padel-Plausch bis zum ganzen Tag mit Sitzungsraum, Mittagessen und Apéro — in Salgesch und Sion, bei jedem Wetter.</p>
     <div class="spa-chips"><span class="spa-chip">Ab 25 CHF pro Person</span><span class="spa-chip">2 bis 6 Stunden</span><span class="spa-chip">Drinnen, das ganze Jahr</span></div>
     <div class="hero-actions">
-      <a class="btn btn-green spa-cta" href="https://wa.me/41772780115?text=Hola%21%20Wir%20planen%20einen%20Firmenanlass.%20Datum%3A%20%E2%80%A6%20%C2%B7%20Personen%3A%20%E2%80%A6%20%C2%B7%20Dauer%3A%20%E2%80%A6" target="_blank" rel="noopener">Event anfragen</a>
+      <a class="btn btn-green spa-cta" href="#inquiry">Event anfragen</a>
       <a class="btn spa-cta-ghost" href="#example">Beispiel-Tag ansehen</a>
     </div>
   </div>
@@ -147,13 +147,27 @@
   </div>
 </section>
 
+<!-- ux:inquiry -->
+<section class="section-tight ux-inquiry" id="inquiry">
+  <div class="wrap">
+    <h2>Offerte anfragen</h2>
+    <p class="section-lede">Gib uns die Eckdaten, wir schicken dir innert 24 Stunden eine Offerte. Ohne Anzahlung.</p>
+    <form class="iq-form wa-inquiry" id="iq-company" data-intro="Hola! Anfrage Firmenevent:" novalidate>
+      <div class="iq-grid"><label for="iq-company-company">Firma *<input id="iq-company-company" name="company" type="text" required data-label="Firma"></label><label for="iq-company-people">Anzahl Personen *<input id="iq-company-people" name="people" type="number" min="1" inputmode="numeric" required data-label="Anzahl Personen"></label><label for="iq-company-date">Wunschdatum<input id="iq-company-date" name="date" type="date" data-label="Wunschdatum"></label><fieldset class="iq-full"><legend>Was darf es sein?</legend><div class="iq-checks"><label class="iq-check"><input type="checkbox" name="mods" value="Padel"> Padel</label><label class="iq-check"><input type="checkbox" name="mods" value="Essen"> Essen</label><label class="iq-check"><input type="checkbox" name="mods" value="Apéro"> Apéro</label><label class="iq-check"><input type="checkbox" name="mods" value="Sitzungsraum"> Sitzungsraum</label></div></fieldset><label for="iq-company-budget">Budget pro Person (optional)<input id="iq-company-budget" name="budget" type="text" data-label="Budget pro Person (optional)"></label><label for="iq-company-name">Dein Name *<input id="iq-company-name" name="name" type="text" required data-label="Dein Name"></label><label for="iq-company-phone">Handy *<input id="iq-company-phone" name="phone" type="tel" required data-label="Handy"></label><label for="iq-company-email">E-Mail<input id="iq-company-email" name="email" type="email" data-label="E-Mail"></label></div>
+      <button type="submit" class="btn btn-green iq-btn">Per WhatsApp senden</button>
+      <p class="iq-note">Öffnet WhatsApp mit deiner fertigen Anfrage.</p>
+    </form>
+  </div>
+</section>
+<!-- /ux:inquiry -->
+
 <section class="spa-final" style="background-image:url('../images/coaching/coaching-6.jpg');">
   <div class="spa-hero-shade"></div>
   <div class="wrap spa-final-inner">
     <h2>Sag uns dein Datum — den Rest planen wir.</h2>
     <p>Salgesch & Sion · 2 bis 6 Stunden · ab 25 CHF pro Person</p>
     <div class="hero-actions" style="justify-content:center;">
-      <a class="btn btn-green spa-cta" href="https://wa.me/41772780115?text=Hola%21%20Wir%20planen%20einen%20Firmenanlass.%20Datum%3A%20%E2%80%A6%20%C2%B7%20Personen%3A%20%E2%80%A6%20%C2%B7%20Dauer%3A%20%E2%80%A6" target="_blank" rel="noopener">Event anfragen</a>
+      <a class="btn btn-green spa-cta" href="#inquiry">Event anfragen</a>
       <a class="btn spa-cta-ghost" href="mailto:phil@racketsacademy.ch?subject=Anfrage%20Firmenevent&body=Hallo%2C%0A%0Awir%20planen%20einen%20Firmenanlass.%0ADatum%3A%0AAnzahl%20Personen%3A%0ADauer%20%282%E2%80%936%20Std.%29%3A%0AW%C3%BCnsche%20%28Padel%2C%20Sitzungsraum%2C%20Paella/Raclette%2C%20Ap%C3%A9ro%2C%20%C3%9Cbernachtung%29%3A%0A%0ADanke%21">Anfrage per E-Mail</a>
     </div>
   </div>
@@ -163,11 +177,7 @@
   <div class="wrap">
     <img src="https://www.racketsacademy.ch/images/wix/fd51e1e7dfdf.png" alt="Rackets Academy" width="200" height="72" style="margin-bottom:8px;">
     <p style="opacity:.85; margin:0 0 14px;">PLAY. COMPETE. ENJOY.</p>
-    <div class="footer-grid">
-      <div><h4>Salgesch</h4><a href="https://www.google.com/maps/search/?api=1&query=Littenstrasse+30+3970+Salgesch" target="_blank" rel="noopener">Littenstrasse 30, 3970 Salgesch</a></div>
-      <div><h4>Sion</h4><a href="https://www.google.com/maps/search/?api=1&query=Route+de+Pr%C3%A9jeux+16+1950+Sion" target="_blank" rel="noopener">Route de Préjeux 16, 1950 Sion</a></div>
-      <div class="footer-contact"><h4>Kontakt</h4><a href="mailto:phil@racketsacademy.ch">phil@racketsacademy.ch</a></div>
-    </div>
+    <div class="footer-grid ux-foot"><div><h4>Salgesch</h4><a href="https://www.google.com/maps/search/?api=1&query=Littenstrasse+30+3970+Salgesch" target="_blank" rel="noopener">Littenstrasse 30, 3970 Salgesch</a><p>Padel · Pickleball · Tennis · Spa</p><p>Täglich 7–23:30 Uhr</p></div><div><h4>Sion</h4><a href="https://www.google.com/maps/search/?api=1&query=Route+de+Pr%C3%A9jeux+16+1950+Sion" target="_blank" rel="noopener">Route de Préjeux 16, 1950 Sion</a><p>Padel</p><p>Täglich 7–23:30 Uhr</p></div><div class="foot-links"><h4>Schnellzugriff</h4><a href="book.html">Platz buchen</a><a href="training.html">Kurse</a><a href="book.html#faq">FAQ</a><a href="shop.html#vouchers">Geschenkgutscheine</a><a href="shop.html">Shop</a><a href="events.html">Events</a></div><div class="footer-contact"><h4>Kontakt</h4><a class="foot-wa" href="https://wa.me/41772780115?text=Hola%21%20Ich%20habe%20eine%20Frage%20zur%20Rackets%20Academy." target="_blank" rel="noopener">Schreib uns auf WhatsApp</a><p>Schnelle Antwort · +41 77 278 01 15</p><a href="mailto:phil@racketsacademy.ch">phil@racketsacademy.ch</a></div></div>
     <div class="sponsor-row">
       <div class="sponsor-track">
       <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/5887f86ed50b.png" alt="Wilson" loading="lazy"></a>
@@ -196,6 +206,6 @@
     </div>
   </div>
 </footer>
-<script src="../nav.js?v=26"></script>
+<script src="../nav.js?v=27"></script>
 </body>
 </html>

@@ -102,3 +102,4 @@ var PUSH_JOBS_ = [
 - 2026-10-04 · Phil · COWORK.md angelegt, Felix als Collaborator, Drive-Ordner pro Seite
 - 2026-10-03 · Phil · Padel+Dine live inkl. Ticketverkauf, Video-Hero
 - 07.10.2026 · Ski & Padel: Sticky-Button mobil «Choose your weekend» → #camp-book. Event-Seiten (Padel +Dine, Ski & Padel): Top-Leiste zeigt Event statt «Courts open now». hero-mobile.mp4 komprimiert (2,7 → 1,1 MB). nav.js v26.
+- 07.10.2026 · UX v1 (Branch ux-v1): Preise + FAQ auf Startseite/Book, Trust-Zeile, Gutschein-Banner, neuer Footer (Zeiten, WhatsApp, Links), Shop als Filter-Shop, Racket-Filter + «Teste-la 10 CHF», Kursseite-Weiche («Cours d'initiation»), Anfrageformulare Kids/Firmen → WhatsApp, Ski-Seite leichter (uploads/ski-padel/sm) + Bewertungen nach oben, Popup/Cookie-Banner übersetzt bzw. kompakt. Scripts: tools/ux_*.py (nach Generator-Läufen erneut ausführen).

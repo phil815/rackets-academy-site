@@ -45,7 +45,7 @@
 <title>Kindergeburtstag im Wallis mit Padel | Rackets Academy</title>
 <meta name="description" content="Padel-Kindergeburtstag in Salgesch (5 Min. von Siders): 1 Std. mit Coach, 1 Std. Mini-Turnier, danach Kuchen und Pizza. Bis 12 Kinder, 20 CHF pro Kind.">
 <link rel="canonical" href="https://www.racketsacademy.ch/de/kids-birthday.html">
-<link rel="stylesheet" href="../styles.css?v=34">
+<link rel="stylesheet" href="../styles.css?v=35">
 <meta property="og:title" content="Kindergeburtstag im Wallis mit Padel | Rackets Academy">
 <meta property="og:description" content="Padel-Kindergeburtstag in Salgesch (5 Min. von Siders): 1 Std. mit Coach, 1 Std. Mini-Turnier, danach Kuchen und Pizza. Bis 12 Kinder, 20 CHF pro Kind.">
 <meta property="og:type" content="website">
@@ -106,7 +106,7 @@
     <p class="lede">Zwei Stunden Padel mit Coach, ein Mini-Turnier und zum Schluss Kuchen und Pizza — drinnen, bei jedem Wetter.</p>
     <div class="spa-chips"><span class="spa-chip">20 CHF pro Kind</span><span class="spa-chip">2 Stunden</span><span class="spa-chip">Bis 12 Kinder</span></div>
     <div class="hero-actions">
-      <a class="btn btn-green spa-cta" href="https://wa.me/41772780115?text=Hola%21%20Ich%20m%C3%B6chte%20einen%20Kindergeburtstag%20buchen.%20Datum%3A%20%E2%80%A6%20%C2%B7%20Anzahl%20Kinder%3A%20%E2%80%A6%20%C2%B7%20Alter%3A%20%E2%80%A6" target="_blank" rel="noopener">Geburtstag buchen</a>
+      <a class="btn btn-green spa-cta" href="#inquiry">Geburtstag buchen</a>
       <a class="btn spa-cta-ghost" href="#flow">So läuft es ab</a>
     </div>
   </div>
@@ -133,12 +133,26 @@
   </div>
 </section>
 
+<!-- ux:inquiry -->
+<section class="section-tight ux-inquiry" id="inquiry">
+  <div class="wrap">
+    <h2>Geburtstag anfragen</h2>
+    <p class="section-lede">Fülle das Wichtigste aus, wir antworten innert 24 Stunden auf WhatsApp. Ohne Anzahlung.</p>
+    <form class="iq-form wa-inquiry" id="iq-kids" data-intro="Hola! Anfrage Kindergeburtstag:" novalidate>
+      <div class="iq-grid"><label for="iq-kids-date">Wunschdatum *<input id="iq-kids-date" name="date" type="date" required data-label="Wunschdatum"></label><label for="iq-kids-time">Wunschzeit<input id="iq-kids-time" name="time" type="text" placeholder="z. B. Samstag 14 Uhr" data-label="Wunschzeit"></label><label for="iq-kids-kids">Anzahl Kinder *<input id="iq-kids-kids" name="kids" type="number" min="1" inputmode="numeric" required data-label="Anzahl Kinder"></label><label for="iq-kids-age">Alter der Kinder *<input id="iq-kids-age" name="age" type="text" placeholder="z. B. 8–10" required data-label="Alter der Kinder"></label><label for="iq-kids-name">Dein Name *<input id="iq-kids-name" name="name" type="text" required data-label="Dein Name"></label><label for="iq-kids-phone">Handy *<input id="iq-kids-phone" name="phone" type="tel" required data-label="Handy"></label><label class="iq-full" for="iq-kids-msg">Sonst noch etwas?<textarea id="iq-kids-msg" name="msg" rows="3" data-label="Sonst noch etwas?"></textarea></label></div>
+      <button type="submit" class="btn btn-green iq-btn">Per WhatsApp senden</button>
+      <p class="iq-note">Öffnet WhatsApp mit deiner fertigen Anfrage.</p>
+    </form>
+  </div>
+</section>
+<!-- /ux:inquiry -->
+
 <section class="spa-final kb-final" style="background-image:url('../images/coaching/coaching-6.jpg');">
   <div class="spa-hero-shade"></div>
   <div class="wrap spa-final-inner">
     <h2>Wähl ein Datum — für den Spass sorgen wir.</h2>
     <p>Salgesch · unter der Woche vor 17 Uhr · Wochenende auf Anfrage</p>
-    <a class="btn btn-green spa-cta" href="https://wa.me/41772780115?text=Hola%21%20Ich%20m%C3%B6chte%20einen%20Kindergeburtstag%20buchen.%20Datum%3A%20%E2%80%A6%20%C2%B7%20Anzahl%20Kinder%3A%20%E2%80%A6%20%C2%B7%20Alter%3A%20%E2%80%A6" target="_blank" rel="noopener">Geburtstag buchen</a>
+    <a class="btn btn-green spa-cta" href="#inquiry">Geburtstag buchen</a>
   </div>
 </section>
 
@@ -146,11 +160,7 @@
   <div class="wrap">
     <img src="https://www.racketsacademy.ch/images/wix/fd51e1e7dfdf.png" alt="Rackets Academy" width="200" height="72" style="margin-bottom:8px;">
     <p style="opacity:.85; margin:0 0 14px;">PLAY. COMPETE. ENJOY.</p>
-    <div class="footer-grid">
-      <div><h4>Salgesch</h4><a href="https://www.google.com/maps/search/?api=1&query=Littenstrasse+30+3970+Salgesch" target="_blank" rel="noopener">Littenstrasse 30, 3970 Salgesch</a></div>
-      <div><h4>Sion</h4><a href="https://www.google.com/maps/search/?api=1&query=Route+de+Pr%C3%A9jeux+16+1950+Sion" target="_blank" rel="noopener">Route de Préjeux 16, 1950 Sion</a></div>
-      <div class="footer-contact"><h4>Kontakt</h4><a href="mailto:phil@racketsacademy.ch">phil@racketsacademy.ch</a></div>
-    </div>
+    <div class="footer-grid ux-foot"><div><h4>Salgesch</h4><a href="https://www.google.com/maps/search/?api=1&query=Littenstrasse+30+3970+Salgesch" target="_blank" rel="noopener">Littenstrasse 30, 3970 Salgesch</a><p>Padel · Pickleball · Tennis · Spa</p><p>Täglich 7–23:30 Uhr</p></div><div><h4>Sion</h4><a href="https://www.google.com/maps/search/?api=1&query=Route+de+Pr%C3%A9jeux+16+1950+Sion" target="_blank" rel="noopener">Route de Préjeux 16, 1950 Sion</a><p>Padel</p><p>Täglich 7–23:30 Uhr</p></div><div class="foot-links"><h4>Schnellzugriff</h4><a href="book.html">Platz buchen</a><a href="training.html">Kurse</a><a href="book.html#faq">FAQ</a><a href="shop.html#vouchers">Geschenkgutscheine</a><a href="shop.html">Shop</a><a href="events.html">Events</a></div><div class="footer-contact"><h4>Kontakt</h4><a class="foot-wa" href="https://wa.me/41772780115?text=Hola%21%20Ich%20habe%20eine%20Frage%20zur%20Rackets%20Academy." target="_blank" rel="noopener">Schreib uns auf WhatsApp</a><p>Schnelle Antwort · +41 77 278 01 15</p><a href="mailto:phil@racketsacademy.ch">phil@racketsacademy.ch</a></div></div>
     <div class="sponsor-row">
       <div class="sponsor-track">
       <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/5887f86ed50b.png" alt="Wilson" loading="lazy"></a>
@@ -179,6 +189,6 @@
     </div>
   </div>
 </footer>
-<script src="../nav.js?v=26"></script>
+<script src="../nav.js?v=27"></script>
 </body>
 </html>
