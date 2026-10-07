@@ -31,19 +31,22 @@ document.addEventListener('DOMContentLoaded', function () {
   var triggers = document.querySelectorAll('[data-book-modal]');
   if (!triggers.length) return;
 
+  var BL = (document.documentElement.lang || 'en').slice(0, 2);
+  var BM = {
+    en: { h: 'Good to know before you book', r: '<strong>No racket?</strong> Rent one at the club for 3, 5 or 10 CHF (beginner / intermediate / pro), pay with Twint.', b: '<strong>Need balls?</strong> Available to buy on-site.', c: '<strong>Plans change?</strong> Free cancellation up to 24 h before, right in the app.', go: 'Continue to Playtomic', x: 'Close' },
+    fr: { h: 'Bon à savoir avant de réserver', r: '<strong>Pas de raquette ?</strong> Loue-la au club pour 3, 5 ou 10 CHF (débutant / intermédiaire / pro), paiement par Twint.', b: '<strong>Besoin de balles ?</strong> En vente sur place.', c: '<strong>Un imprévu ?</strong> Annulation gratuite jusqu\'à 24 h avant, directement dans l\'app.', go: 'Continuer vers Playtomic', x: 'Fermer' },
+    de: { h: 'Gut zu wissen vor dem Buchen', r: '<strong>Kein Schläger?</strong> Miete einen im Club für 3, 5 oder 10 CHF (Einsteiger / Fortgeschritten / Pro), bezahlt wird mit Twint.', b: '<strong>Bälle nötig?</strong> Gibt es vor Ort zu kaufen.', c: '<strong>Etwas dazwischengekommen?</strong> Kostenlos stornieren bis 24 h vorher, direkt in der App.', go: 'Weiter zu Playtomic', x: 'Schliessen' }
+  }[BL] || null;
+  if (!BM) return;
   var modal = document.createElement('div');
   modal.className = 'book-modal-overlay';
-  modal.innerHTML = `
-    <div class="book-modal">
-      <button class="book-modal-close" aria-label="Close">×</button>
-      <h3>Good to know before you book</h3>
-      <ul>
-        <li><strong>Forgot your racket?</strong> Rent one at the club for 3, 5 or 10 CHF (beginner / intermediate / pro) — pay directly with Twint.</li>
-        <li><strong>Need balls?</strong> Available to buy on-site too.</li>
-        <li><strong>Plans change?</strong> No problem — cancel free up to 24h before your booking, right in the app.</li>
-      </ul>
-      <a href="#" class="btn btn-green book-modal-continue" target="_blank" rel="noopener">Continue to Playtomic</a>
-    </div>`;
+  modal.innerHTML =
+    '<div class="book-modal">' +
+      '<button class="book-modal-close" aria-label="' + BM.x + '">×</button>' +
+      '<h3>' + BM.h + '</h3>' +
+      '<ul><li>' + BM.r + '</li><li>' + BM.b + '</li><li>' + BM.c + '</li></ul>' +
+      '<a href="#" class="btn btn-green book-modal-continue" target="_blank" rel="noopener">' + BM.go + '</a>' +
+    '</div>';
   document.body.appendChild(modal);
 
   var continueBtn = modal.querySelector('.book-modal-continue');
@@ -76,15 +79,77 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Shop category bubbles: show only the chosen panel (Vouchers or Rackets).
 function showShopPanel(id) {
+  // Online-shop behaviour (UX F6): every category is visible by default,
+  // the chips just filter. id === 'all' shows everything.
   document.querySelectorAll('.shop-panel').forEach(function (panel) {
-    panel.classList.toggle('active', panel.id === id);
+    panel.classList.toggle('active', id === 'all' || panel.id === id);
   });
   document.querySelectorAll('.shop-bubble').forEach(function (bubble) {
     bubble.classList.toggle('active', bubble.id === 'bubble-' + id);
   });
-  var target = document.getElementById(id);
-  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  var bar = document.querySelector('.shop-bubbles');
+  if (bar) bar.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+  var bar = document.querySelector('.shop-bubbles');
+  if (!bar) return;
+  var L = (document.documentElement.lang || 'en').slice(0, 2);
+  var X = {
+    en: { all: 'All products', allr: 'All', u200: 'Up to 200 CHF', test: 'Test it · 10 CHF' },
+    fr: { all: 'Tout le shop', allr: 'Toutes', u200: "Jusqu'à 200 CHF", test: 'Teste-la · 10 CHF' },
+    de: { all: 'Alle Produkte', allr: 'Alle', u200: 'Bis 200 CHF', test: 'Testen · 10 CHF' }
+  }[L] || { all: 'All', allr: 'All', u200: '≤ 200 CHF', test: 'Test · 10 CHF' };
+  bar.classList.add('as-chips');
+  var all = document.createElement('button');
+  all.type = 'button'; all.className = 'shop-bubble'; all.id = 'bubble-all'; all.textContent = X.all;
+  all.addEventListener('click', function () { showShopPanel('all'); });
+  bar.insertBefore(all, bar.firstChild);
+  document.querySelectorAll('.shop-panel').forEach(function (p) { p.classList.add('active'); });
+  all.classList.add('active');
+
+  // Racket filters (brand / price) + "test it" badge (UX F16)
+  var rk = document.getElementById('rackets');
+  if (!rk) return;
+  var brand = '';
+  rk.querySelectorAll('.racket-brand-heading, .racket-grid').forEach(function (el) {
+    if (el.classList.contains('racket-brand-heading')) { brand = el.textContent.trim(); return; }
+    el.setAttribute('data-brand', brand);
+    el.querySelectorAll('.racket-card').forEach(function (c) {
+      c.setAttribute('data-brand', brand);
+      var pr = parseInt((c.querySelector('.racket-price') || {}).textContent, 10) || 0;
+      c.setAttribute('data-price', pr);
+      var a = c.querySelector('.racket-link');
+      if (a && !c.querySelector('.racket-test')) {
+        var t = document.createElement('a'); t.className = 'racket-test'; t.href = a.getAttribute('href'); t.textContent = X.test;
+        c.insertBefore(t, c.querySelector('.racket-model'));
+      }
+    });
+  });
+  var brands = [];
+  rk.querySelectorAll('.racket-brand-heading').forEach(function (h) { var b = h.textContent.trim(); if (brands.indexOf(b) < 0) brands.push(b); });
+  var f = document.createElement('div'); f.className = 'racket-filter';
+  var opts = [['*', X.allr]].concat(brands.map(function (b) { return [b, b]; })).concat([['u200', X.u200]]);
+  opts.forEach(function (o, i) {
+    var b = document.createElement('button'); b.type = 'button'; b.textContent = o[1]; b.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+    b.addEventListener('click', function () {
+      f.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      rk.querySelectorAll('.racket-card').forEach(function (c) {
+        var ok = o[0] === '*' || (o[0] === 'u200' ? +c.getAttribute('data-price') <= 200 : c.getAttribute('data-brand') === o[0]);
+        c.style.display = ok ? '' : 'none';
+      });
+      rk.querySelectorAll('.racket-grid').forEach(function (g) {
+        var any = [].some.call(g.querySelectorAll('.racket-card'), function (c) { return c.style.display !== 'none'; });
+        g.style.display = any ? '' : 'none';
+        var h = g.previousElementSibling;
+        if (h && h.classList.contains('racket-brand-heading')) h.style.display = any ? '' : 'none';
+      });
+    });
+    f.appendChild(b);
+  });
+  var first = rk.querySelector('.racket-brand-heading');
+  if (first) first.parentNode.insertBefore(f, first);
+});
 
 // Shared "Buy Now" modal for both vouchers and rackets.
 function openBuyModal(type, opts) {
@@ -167,9 +232,9 @@ document.addEventListener('DOMContentLoaded', function () {
   var L = (document.documentElement.lang || 'en').slice(0, 2);
   var LOC = { en: 'en-GB', fr: 'fr-CH', de: 'de-CH' }[L] || 'en-GB';
   var TXT = {
-    en: { next: 'Next: ', none: 'Ask us for the next date', empty: 'New dates coming soon — follow us on Instagram.' },
-    fr: { next: 'Prochaine date : ', none: 'Demande-nous la prochaine date', empty: 'Nouvelles dates bientôt — suis-nous sur Instagram.' },
-    de: { next: 'Nächstes Datum: ', none: 'Frag uns nach dem nächsten Datum', empty: 'Neue Daten folgen bald — folg uns auf Instagram.' }
+    en: { next: 'Next: ', none: 'Next date announced soon', empty: 'New dates coming soon — follow us on Instagram.' },
+    fr: { next: 'Prochaine date : ', none: 'Prochaine date annoncée bientôt', empty: 'Nouvelles dates bientôt — suis-nous sur Instagram.' },
+    de: { next: 'Nächstes Datum: ', none: 'Nächstes Datum folgt bald', empty: 'Neue Daten folgen bald — folg uns auf Instagram.' }
   }[L] || {};
   var WA = 'https://wa.me/41772780115?text=';
   // keyword(s) in calendar title → label + link per language (first match wins)
@@ -279,9 +344,9 @@ document.addEventListener('DOMContentLoaded', function () {
 (function () {
   var L = (document.documentElement.lang || 'en').slice(0, 2);
   var T = {
-    en: { title: 'Where do you want to play?', court: 'Book a court', course: 'Courses', sub: 'Pick your location', close: 'Close', sa: 'Padel · Pickleball · Tennis', si: 'Padel' },
-    fr: { title: 'Où veux-tu jouer ?', court: 'Réserver', course: 'Cours', sub: 'Choisis ton lieu', close: 'Fermer', sa: 'Padel · Pickleball · Tennis', si: 'Padel' },
-    de: { title: 'Wo möchtest du spielen?', court: 'Platz buchen', course: 'Kurse', sub: 'Wähle deinen Standort', close: 'Schliessen', sa: 'Padel · Pickleball · Tennis', si: 'Padel' }
+    en: { title: 'Where do you want to play?', court: 'Book a court', course: 'Courses', sub: 'Pick your location', close: 'Close', sa: 'Padel · Pickleball · Tennis · Spa · free parking', si: 'Padel · parking on site', tip: 'Racket rental 3–10 CHF · free cancellation up to 24 h before' },
+    fr: { title: 'Où veux-tu jouer ?', court: 'Réserver', course: 'Cours', sub: 'Choisis ton lieu', close: 'Fermer', sa: 'Padel · Pickleball · Tennis · Spa · parking gratuit', si: 'Padel · parking sur place', tip: "Location de raquette 3–10 CHF · annulation gratuite jusqu'à 24 h avant" },
+    de: { title: 'Wo möchtest du spielen?', court: 'Platz buchen', course: 'Kurse', sub: 'Wähle deinen Standort', close: 'Schliessen', sa: 'Padel · Pickleball · Tennis · Spa · Gratis-Parkplätze', si: 'Padel · Parkplätze vor Ort', tip: 'Schlägermiete 3–10 CHF · kostenlos stornieren bis 24 h vorher' }
   }[L] || null;
   if (!T) return;
   var URLS = {
@@ -304,6 +369,7 @@ document.addEventListener('DOMContentLoaded', function () {
           '<h3>' + T.title + '</h3>' +
           '<a class="loc-btn" data-loc="sa" target="_blank" rel="noopener"><strong>Salgesch</strong><span>' + T.sa + '</span></a>' +
           '<a class="loc-btn" data-loc="si" target="_blank" rel="noopener"><strong>Sion</strong><span>' + T.si + '</span></a>' +
+          '<p class="loc-tip">' + T.tip + '</p>' +
         '</div>';
       document.body.appendChild(ov);
       ov.addEventListener('click', function (e) {
@@ -355,6 +421,25 @@ document.addEventListener('DOMContentLoaded', function () {
     } else if (/ski-and-padel/.test(location.pathname)) {
       var SK = { en: 'Choose your weekend', fr: 'Choisir mon week-end', de: 'Wochenende wählen' }[L] || 'Choose your weekend';
       bar.innerHTML = '<a class="sb-court" href="#camp-book">' + SK + '</a>';
+    } else if (/\/rackets\//.test(location.pathname)) {
+      var buy = document.querySelector('.buy-btn'), tst = document.querySelector('.product-test-btn');
+      var pr = (buy && (buy.getAttribute('onclick') || '').match(/price:(\d+)/)) || null;
+      var RB = { en: ['Buy', 'Test · 10 CHF'], fr: ['Acheter', 'Tester · 10 CHF'], de: ['Kaufen', 'Testen · 10 CHF'] }[L] || ['Buy', 'Test'];
+      bar.innerHTML = '<button type="button" class="sb-court">' + RB[0] + (pr ? ' · ' + pr[1] + ' CHF' : '') + '</button>' +
+        (tst ? '<a class="sb-course" href="' + tst.getAttribute('href') + '" target="_blank" rel="noopener">' + RB[1] + '</a>' : '');
+      bar.firstChild.addEventListener('click', function () { if (buy) buy.click(); });
+    } else if (/shop\.html/.test(location.pathname)) {
+      var SH = { en: ['🎁 Gift vouchers', 'Rackets'], fr: ['🎁 Bons cadeaux', 'Raquettes'], de: ['🎁 Gutscheine', 'Schläger'] }[L] || ['Vouchers', 'Rackets'];
+      bar.innerHTML = '<button type="button" class="sb-court">' + SH[0] + '</button><button type="button" class="sb-course">' + SH[1] + '</button>';
+      bar.children[0].addEventListener('click', function () { if (window.showShopPanel) showShopPanel('vouchers'); });
+      bar.children[1].addEventListener('click', function () { if (window.showShopPanel) showShopPanel('rackets'); });
+    } else if (/kids-birthday/.test(location.pathname)) {
+      bar.innerHTML = '<a class="sb-court" href="#inquiry">' + ({ en: 'Request a birthday', fr: 'Demander un anniversaire', de: 'Geburtstag anfragen' }[L] || 'Request') + '</a>';
+    } else if (/company-events/.test(location.pathname)) {
+      bar.innerHTML = '<a class="sb-court" href="#inquiry">' + ({ en: 'Request an offer', fr: 'Demander une offre', de: 'Offerte anfragen' }[L] || 'Request') + '</a>';
+    } else if (/training\.html/.test(location.pathname)) {
+      var TR = { en: ['Intro course', 'Memberships'], fr: ["Cours d'initiation", 'Abonnements'], de: ['Einführungskurs', 'Abos'] }[L] || ['Intro', 'Plans'];
+      bar.innerHTML = '<a class="sb-court" href="https://tinyurl.com/Academy-Sion" target="_blank" rel="noopener">' + TR[0] + '</a><a class="sb-course" href="#plans">' + TR[1] + '</a>';
     } else if (/spa-and-sauna/.test(location.pathname)) {
       var SP = { en: 'Book spa', fr: 'Réserver le spa', de: 'Spa buchen' }[L] || 'Book spa';
       bar.innerHTML = '<a class="sb-court" href="https://playtomic.com/clubs/rackets-academy-salgesch" target="_blank" rel="noopener">' + SP + '</a>' +
@@ -421,9 +506,9 @@ document.addEventListener('submit', function (e) {
 (function () {
   var L = (document.documentElement.lang || 'en').slice(0, 2);
   var T = {
-    en: { t: 'Your serve', p: 'We use cookies for visitor stats and to measure our Instagram & Facebook ads (Meta). We never sell your data. The ball is in your court.', yes: 'In · accept', no: 'Out · decline', more: 'Privacy', set: 'Cookie settings' },
-    fr: { t: 'À toi de servir', p: 'On utilise des cookies pour nos statistiques et pour mesurer nos pubs Instagram & Facebook (Meta). On ne vend jamais tes données. La balle est dans ton camp.', yes: 'In · accepter', no: 'Out · refuser', more: 'Confidentialité', set: 'Paramètres cookies' },
-    de: { t: 'Dein Aufschlag', p: 'Wir nutzen Cookies für Besucherstatistiken und um unsere Instagram- & Facebook-Werbung (Meta) zu messen. Wir verkaufen deine Daten nie. Der Ball liegt bei dir.', yes: 'In · annehmen', no: 'Out · ablehnen', more: 'Datenschutz', set: 'Cookie-Einstellungen' }
+    en: { s: 'Cookies for our stats and Meta ads. We never sell your data.', t: 'Your serve', p: 'We use cookies for visitor stats and to measure our Instagram & Facebook ads (Meta). We never sell your data. The ball is in your court.', yes: 'In · accept', no: 'Out · decline', more: 'Privacy', set: 'Cookie settings' },
+    fr: { s: 'Cookies pour nos stats et nos pubs Meta. On ne vend jamais tes données.', t: 'À toi de servir', p: 'On utilise des cookies pour nos statistiques et pour mesurer nos pubs Instagram & Facebook (Meta). On ne vend jamais tes données. La balle est dans ton camp.', yes: 'In · accepter', no: 'Out · refuser', more: 'Confidentialité', set: 'Paramètres cookies' },
+    de: { s: 'Cookies für unsere Statistik und Meta-Werbung. Wir verkaufen deine Daten nie.', t: 'Dein Aufschlag', p: 'Wir nutzen Cookies für Besucherstatistiken und um unsere Instagram- & Facebook-Werbung (Meta) zu messen. Wir verkaufen deine Daten nie. Der Ball liegt bei dir.', yes: 'In · annehmen', no: 'Out · ablehnen', more: 'Datenschutz', set: 'Cookie-Einstellungen' }
   }[L] || null;
   if (!T) return;
   function get() { try { return localStorage.getItem('ra_consent'); } catch (e) { return null; } }
@@ -432,6 +517,7 @@ document.addEventListener('submit', function (e) {
     if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: v });
     if (v === 'granted') raPixelLoad();
     var el = document.getElementById('serve-banner');
+    document.body.classList.remove('consent-open');
     if (el) { el.classList.add('hit-' + (v === 'granted' ? 'in' : 'out')); setTimeout(function () { el.remove(); }, 650); }
   }
   function show() {
@@ -444,13 +530,14 @@ document.addEventListener('submit', function (e) {
       '<div class="sv-court" aria-hidden="true"><span class="sv-net"></span><span class="sv-ball"></span></div>' +
       '<div class="sv-body">' +
         '<p class="sv-title">' + T.t + ' <span aria-hidden="true">🎾</span></p>' +
-        '<p class="sv-text">' + T.p + ' <a href="privacy-policy.html">' + T.more + '</a></p>' +
+        '<p class="sv-text"><span class="sv-long">' + T.p + '</span><span class="sv-short">' + T.s + '</span> <a href="privacy-policy.html">' + T.more + '</a></p>' +
         '<div class="sv-btns">' +
           '<button type="button" class="sv-no">' + T.no + '</button>' +
           '<button type="button" class="sv-yes">' + T.yes + '</button>' +
         '</div>' +
       '</div>';
     document.body.appendChild(el);
+    document.body.classList.add('consent-open');
     el.querySelector('.sv-yes').addEventListener('click', function () { choose('granted'); });
     el.querySelector('.sv-no').addEventListener('click', function () { choose('denied'); });
   }
@@ -756,3 +843,30 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 })();
+
+// ------------------------------------------------------------------
+// Inquiry forms (kids birthday, company events) -> prefilled WhatsApp (UX F11)
+// ------------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('form.wa-inquiry').forEach(function (f) {
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var bad = [].filter.call(f.querySelectorAll('[required]'), function (i) { return !i.value.trim(); });
+      f.querySelectorAll('.iq-bad').forEach(function (x) { x.classList.remove('iq-bad'); });
+      if (bad.length) { bad.forEach(function (i) { i.classList.add('iq-bad'); }); bad[0].focus(); return; }
+      var lines = [f.getAttribute('data-intro')];
+      f.querySelectorAll('input[data-label], textarea[data-label]').forEach(function (i) {
+        if (i.value.trim()) lines.push('• ' + i.getAttribute('data-label') + ': ' + i.value.trim());
+      });
+      f.querySelectorAll('fieldset').forEach(function (fs) {
+        var v = [].filter.call(fs.querySelectorAll('input:checked'), function () { return true; }).map(function (i) { return i.value; });
+        if (v.length) lines.push('• ' + fs.querySelector('legend').textContent + ': ' + v.join(', '));
+      });
+      var url = 'https://wa.me/41772780115?text=' + encodeURIComponent(lines.join('\n'));
+      if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_id: f.id, page_path: location.pathname });
+      if (typeof raPixel === 'function') raPixel('Lead', { content_name: f.id });
+      var w = window.open(url, '_blank', 'noopener');
+      if (!w) location.href = url;
+    });
+  });
+});

@@ -45,7 +45,7 @@ T = {
            ('🎾','Après ton match','Le spa est juste à côté des terrains. Douche, sauna, jacuzzi — la meilleure récupération qui soit.')],
   inside_h="Ce qui t'attend",
   gallery=[('spa-sauna','Sauna finlandais · 80 °C'),('spa-biosauna','Bio-sauna · 48 °C'),('spa-hammam','Hammam'),('spa-area','Jacuzzi'),('spa-footbath','Bains de pieds'),('spa-relax','Salle de repos'),('spa-shower','Douche pluie chaude & froide'),('spa-sauna-area','Espace sauna')],
-  facilities=['Sauna finlandais · 80 °C','Bio-sauna · 48 °C, 65 % humidity','Hammam (bain de vapeur)','Jacuzzi','Deux bains de pieds','Salle de repos','Douche pluie chaude & froide'],
+  facilities=['Sauna finlandais · 80 °C','Bio-sauna · 48 °C, 65 % d'humidité','Hammam (bain de vapeur)','Jacuzzi','Deux bains de pieds','Salle de repos','Douche pluie chaude & froide'],
   ritual_h='Ton rituel spa', ritual_sub='Notre conseil pour une soirée parfaite — à répéter 2–3 fois.',
   ritual=[('Se réchauffer','Commence en douceur au bio-sauna à 48 °C ou au hammam.'),('Transpirer','Passe au sauna finlandais à 80 °C pendant 8–12 minutes.'),('Se rafraîchir','Douche pluie froide et bain de pieds chaud.'),('Se détendre','Jacuzzi, puis repos dans la salle de relaxation.')],
   private_h='Spa privé pour ton groupe', private_p="Réserve tout le spa pendant 2 heures pour 8 personnes max — 120 CHF, soit dès 15 CHF par personne. Idéal pour un anniversaire, une soirée d'équipe ou entre amies après le ski.",
