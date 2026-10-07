@@ -1042,3 +1042,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .loc-tip{margin:14px 0 0; font-size:.82rem; color:#5b6f84; text-align:center;}
 .shop-bubbles.as-chips .shop-bubble .bubble-icon{display:none;}
 .ev-price{display:block; margin:-4px 0 8px; font-size:.9rem; color:#3c5268;} .ev-price b{color:var(--blue); font-weight:900; font-size:1.05rem;}
+/* racket specs + filters */
+.racket-spec{display:block; font-size:.72rem; color:#5b6f84; margin:2px 0 4px; line-height:1.3;}
+.racket-selects{display:flex; flex-wrap:wrap; gap:10px; margin:-6px 0 18px;}
+.racket-selects label{display:flex; flex-direction:column; gap:4px; font-size:.75rem; font-weight:800; text-transform:uppercase; letter-spacing:.06em; color:#5b6f84; flex:1 1 110px;}
+.racket-selects select{font:inherit; font-size:.95rem; font-weight:600; text-transform:none; letter-spacing:0; color:var(--ink); border:1.5px solid #cfdeee; border-radius:12px; padding:9px 10px; background:#fff;}
+.spec-hide{display:none !important;}
+.racket-empty{color:#5b6f84; font-weight:600;}
+.product-specs{margin:18px 0; background:#f5f9fd; border:1px solid #dfeaf5; border-radius:16px; padding:14px 18px;}
+.product-specs h3{margin:0 0 8px; font-size:1rem;}
+.product-specs dl{display:grid; grid-template-columns:auto 1fr; gap:6px 16px; margin:0; font-size:.92rem;}
+.product-specs dt{font-weight:700; color:#5b6f84;}
+.product-specs dd{margin:0;}

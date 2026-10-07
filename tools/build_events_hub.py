@@ -8,7 +8,7 @@ MSG = {'en': 'Hola! I am interested in {e}. Please keep me posted.',
        'de': 'Hola! Ich interessiere mich für {e}. Haltet mich auf dem Laufenden.'}
 # (key, title, href or None=WhatsApp, calendar keywords, is_new)
 CARDS = [
- ('nto24', 'NTO24 · 24h', None, '24h', True),
+ ('nto24', 'NTO24 · 24h', '/padel4ever/', '24h', True),
  ('dine', 'Padel +Dine powered by Instinct Amazonia', 'padel-dine.html', 'amazonia,dine', True),
  ('ski', 'Ski &amp;Padel', 'ski-and-padel.html', 'ski', False),
  ('racketero', 'Racketero', 'racketero.html', 'racketero', False),

@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var WA = 'https://wa.me/41772780115?text=';
   // keyword(s) in calendar title → label + link per language (first match wins)
   var AGENDA = [
-    { k: ['24h'], l: { en: 'NTO24 · 24h padel tournament', fr: 'NTO24 · tournoi de padel 24 h', de: 'NTO24 · 24-Std.-Padelturnier' }, wa: 'NTO24' },
+    { k: ['24h'], l: { en: 'NTO24 · 24h padel tournament', fr: 'NTO24 · tournoi de padel 24 h', de: 'NTO24 · 24-Std.-Padelturnier' }, h: '/padel4ever/' },
     { k: ['amazonia', 'dine'], l: { en: 'Padel +Dine powered by Instinct Amazonia', fr: 'Padel +Dine powered by Instinct Amazonia', de: 'Padel +Dine powered by Instinct Amazonia' }, h: 'padel-dine.html' },
     { k: ['ski'], l: { en: 'Ski &Padel weekend', fr: 'Week-end Ski &Padel', de: 'Ski &Padel Wochenende' }, h: 'ski-and-padel.html' },
     { k: ['rackemix'], l: { en: 'Rackemix', fr: 'Rackemix', de: 'Rackemix' }, wa: 'Rackemix' },
@@ -869,4 +869,84 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!w) location.href = url;
     });
   });
+});
+
+// ------------------------------------------------------------------
+// Racket specs (shape, weight, hardness, level) on shop cards + product
+// pages, with shop filters. Data: /racket-specs.js (from the Shop sheet).
+// ------------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', function () {
+  var shop = document.getElementById('rackets');
+  var prod = document.querySelector('.product-page[data-product]');
+  if (!shop && !prod) return;
+  var L = (document.documentElement.lang || 'en').slice(0, 2);
+  var TR = {
+    en: { Rund: 'Round', 'Träne': 'Teardrop', Diamant: 'Diamond', Weich: 'Soft', Mittel: 'Medium', Hart: 'Hard', Amateur: 'Amateur', Fortgeschritten: 'Advanced', Profi: 'Pro', Kopflastig: 'Head-heavy', Grifflastig: 'Head-light',
+          shape: 'Shape', hard: 'Hardness', level: 'Level', weight: 'Weight', face: 'Face', core: 'Core', balance: 'Balance', any: 'All', specs: 'Specs', none: 'No racket matches these filters.' },
+    fr: { Rund: 'Ronde', 'Träne': 'Larme', Diamant: 'Diamant', Weich: 'Souple', Mittel: 'Medium', Hart: 'Dure', Amateur: 'Amateur', Fortgeschritten: 'Confirmé', Profi: 'Expert', Kopflastig: 'En tête', Grifflastig: 'Au manche',
+          shape: 'Forme', hard: 'Dureté', level: 'Niveau', weight: 'Poids', face: 'Surface', core: 'Mousse', balance: 'Équilibre', any: 'Tous', specs: 'Caractéristiques', none: 'Aucune raquette ne correspond à ces filtres.' },
+    de: { shape: 'Form', hard: 'Härte', level: 'Niveau', weight: 'Gewicht', face: 'Schlagfläche', core: 'Kern', balance: 'Balance', any: 'Alle', specs: 'Technische Daten', none: 'Kein Schläger passt zu diesen Filtern.' }
+  }[L] || {};
+  function tr(v) { return TR[v] || v; }
+  var BAL = { Mittel: { en: 'Even', fr: 'Équilibré', de: 'Ausgewogen' } };
+  function trBal(v) { return (BAL[v] && BAL[v][L]) || tr(v); }
+
+  function run() {
+    var S = window.RA_SPECS || {};
+    if (prod) {
+      var d = S[prod.getAttribute('data-product')], info = prod.querySelector('.product-info');
+      if (d && info && !info.querySelector('.product-specs')) {
+        var rows = [['shape', tr(d.shape)], ['weight', d.weight ? d.weight + ' g' : ''], ['hard', tr(d.hard)], ['level', tr(d.level)], ['balance', trBal(d.balance)], ['face', d.face], ['core', d.core]];
+        var dl = document.createElement('div'); dl.className = 'product-specs';
+        dl.innerHTML = '<h3>' + TR.specs + '</h3><dl>' + rows.filter(function (r) { return r[1]; }).map(function (r) { return '<dt>' + TR[r[0]] + '</dt><dd>' + r[1] + '</dd>'; }).join('') + '</dl>';
+        var facts = info.querySelector('.product-facts');
+        info.insertBefore(dl, facts || null);
+      }
+    }
+    if (!shop) return;
+    var cards = [].slice.call(shop.querySelectorAll('.racket-card'));
+    cards.forEach(function (c) {
+      var a = c.querySelector('.racket-link'), id = a && (a.getAttribute('href').match(/rackets\/([^/.]+)\.html/) || [])[1], d = S[id];
+      if (!d) return;
+      c.setAttribute('data-shape', d.shape); c.setAttribute('data-hard', d.hard); c.setAttribute('data-level', d.level);
+      if (!c.querySelector('.racket-spec')) {
+        var sp = document.createElement('span'); sp.className = 'racket-spec';
+        sp.textContent = [tr(d.shape), d.weight ? d.weight + ' g' : '', tr(d.hard), tr(d.level)].filter(Boolean).join(' · ');
+        var price = c.querySelector('.racket-price'); c.insertBefore(sp, price);
+      }
+    });
+    var bar = shop.querySelector('.racket-filter');
+    if (!bar || shop.querySelector('.racket-selects')) return;
+    var groups = [['shape', ['Rund', 'Träne', 'Diamant']], ['hard', ['Weich', 'Mittel', 'Hart']], ['level', ['Amateur', 'Fortgeschritten', 'Profi']]];
+    var box = document.createElement('div'); box.className = 'racket-selects';
+    groups.forEach(function (g) {
+      var lab = document.createElement('label');
+      lab.innerHTML = '<span>' + TR[g[0]] + '</span><select data-k="' + g[0] + '"><option value="">' + TR.any + '</option>' +
+        g[1].map(function (v) { return '<option value="' + v + '">' + tr(v) + '</option>'; }).join('') + '</select>';
+      box.appendChild(lab);
+    });
+    var empty = document.createElement('p'); empty.className = 'racket-empty'; empty.textContent = TR.none; empty.hidden = true;
+    bar.parentNode.insertBefore(box, bar.nextSibling);
+    box.parentNode.insertBefore(empty, box.nextSibling);
+    function apply() {
+      var sel = {}; box.querySelectorAll('select').forEach(function (s) { if (s.value) sel[s.getAttribute('data-k')] = s.value; });
+      var shown = 0;
+      cards.forEach(function (c) {
+        var ok = Object.keys(sel).every(function (k) { return c.getAttribute('data-' + k) === sel[k]; });
+        c.classList.toggle('spec-hide', !ok);
+        if (ok && c.style.display !== 'none') shown++;
+      });
+      shop.querySelectorAll('.racket-grid').forEach(function (g) {
+        var any = [].some.call(g.querySelectorAll('.racket-card'), function (c) { return c.style.display !== 'none' && !c.classList.contains('spec-hide'); });
+        g.classList.toggle('spec-hide', !any);
+        var h = g.previousElementSibling;
+        if (h && h.classList.contains('racket-brand-heading')) h.classList.toggle('spec-hide', !any);
+      });
+      empty.hidden = shown > 0;
+    }
+    box.addEventListener('change', apply);
+    bar.addEventListener('click', function () { setTimeout(apply, 0); });
+  }
+  if (window.RA_SPECS) return run();
+  var s = document.createElement('script'); s.src = '/racket-specs.js?v=1'; s.onload = run; document.head.appendChild(s);
 });

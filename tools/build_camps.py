@@ -382,7 +382,7 @@ for lang, t in T.items():
     for k in ['name="description"', 'property="og:description"']:
         s = re.sub(r'<meta ' + k + ' content="[^"]*"', '<meta ' + k + ' content="' + t['desc'] + '"', s)
     s = re.sub(r'<meta property="og:title" content="[^"]*"', '<meta property="og:title" content="' + t['title'] + '"', s)
-    s = re.sub(r'styles\.css\?v=\d+', 'styles.css?v=35', s)
+    s = re.sub(r'styles\.css\?v=\d+', 'styles.css?v=36', s)
     s = re.sub(r'<script src="(\.\./)?camps\.js[^"]*"></script>\n', '', s)
     s = re.sub(r'(<script src="(?:\.\./)?nav\.js\?v=)\d+("></script>)', r'\g<1>22\2', s)
     s = s.replace('</body>', f'<script src="{pre}camps.js?v=3"></script>\n</body>', 1)
