@@ -213,6 +213,7 @@ CSS = '''<style id="dine-css">
 #modal-people{display:grid;gap:8px;margin-top:6px}.pp-row{display:grid;grid-template-columns:1fr 120px;gap:8px}.pp-row input{width:100%}.pp-lbl{font-size:.78rem;font-weight:700;color:#7a8ea3;margin-bottom:-4px}
 .dn-hero .spa-chips{margin-top:16px}
 .dn-facts{display:flex;flex-wrap:wrap;gap:8px 18px;margin:14px 0 0;font-size:.95rem;color:#fff}
+.dn-booked{margin:12px 0 0;color:#6ffd1d;font-weight:700;font-size:.95rem}
 .dn-facts b{color:var(--gold);font-weight:800;margin-right:4px}
 @media(max-width:820px){.dn-hero{min-height:0;padding:26px 0 34px}.dn-hero-in{gap:18px}.dn-hero .lede{font-size:1rem;margin:14px 0}.dn-kicker{margin-bottom:6px}}
 @media(max-width:820px){.dn-hero-in,.dn-tks,.dn-food,.dn-bar,.dn-partner{grid-template-columns:1fr}.dn-lock{justify-self:start;order:-1;gap:16px}.dn-lock img{height:64px}.dn-lock img.dn-r{height:44px}.dn-lock span{height:50px}.dn-prog li{grid-template-columns:100px 1fr}.dn-partner img{max-width:160px}}
@@ -238,6 +239,7 @@ def body(L, t, pre):
       <h1>{t['h1']}<span>{t['h1b']}</span></h1>
       <div class="spa-chips">{chips}</div>
       <div class="dn-facts"><span><b>{t['t1_price']}</b> {t['t1_name']}</span><span><b>{t['t2_price']}</b> {t['t2_name']}</span></div>
+      <p class="dn-booked" id="dn-booked" hidden></p>
       <p class="lede">{t['lede']}</p>
       <div class="hero-actions">
         <a class="btn dn-btn-gold" href="#tk-book">{t['cta']}</a>
@@ -424,6 +426,6 @@ for L, t in T.items():
     s = s.replace('class="active"', '')
     s = re.sub(r'<a class="nav-cta-mobile" href="book.html">[^<]*</a>', '<a class="nav-cta-mobile" href="#tk-book">' + t['cta'] + '</a>', s)
     s = re.sub(r'<a class="nav-cta" href="book.html">[^<]*</a>', '<a class="nav-cta" href="#tk-book">' + t['cta'] + '</a>', s)
-    s = re.sub(r'<script src="(?:\.\./)?nav\.js\?v=\d+"></script>', lambda m: m.group(0) + '\n<script src="' + pre + 'dine.js?v=2"></script>', s, count=1)
+    s = re.sub(r'<script src="(?:\.\./)?nav\.js\?v=\d+"></script>', lambda m: m.group(0) + '\n<script src="' + pre + 'dine.js?v=3"></script>', s, count=1)
     open(d + SLUG, 'w').write(s)
     print(d + SLUG, len(t['title']), len(t['desc']))
