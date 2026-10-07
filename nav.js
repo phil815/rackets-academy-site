@@ -631,8 +631,10 @@ document.addEventListener('submit', function (e) {
           onResponse: function (type, body) {
             if (type === 'success') {
               pane.innerHTML = '<div class="pay-done"><h3>' + M.ok + '</h3><p>' + M.okText + '</p></div>';
-              if (typeof gtag === 'function') gtag('event', 'purchase', { value: Number(j.amount) || 0, currency: 'CHF', transaction_id: j.id });
-              raPixel('Purchase', { value: Number(j.amount) || 0, currency: 'CHF' }, false, j.id);
+              var pref = j.ref || j.id; // same id as the ?paid=<ref> return from the SumUp page -> no double count
+              if (typeof gtag === 'function') gtag('event', 'purchase', { value: Number(j.amount) || 0, currency: 'CHF', transaction_id: pref });
+              raPixel('Purchase', { value: Number(j.amount) || 0, currency: 'CHF' }, false, pref);
+              try { localStorage.setItem('ra_paid_' + pref, '1'); } catch (x) {}
             } else if (type === 'fail' || type === 'error') {
               var n = pane.querySelector('.pay-note') || document.createElement('p');
               n.className = 'pay-note'; n.textContent = M.fail;
