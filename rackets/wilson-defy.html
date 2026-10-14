@@ -16,7 +16,9 @@
     ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'
   });
   gtag('js', new Date());
-  gtag('config', 'G-T9T2GZHGS2');
+  // Team-Geraete: einmal racketsacademy.ch/?internal=1 aufrufen → Besuche als intern markiert (GA4-Filter «Internal Traffic»); ?internal=0 hebt es auf
+  (function(){try{var q=location.search;if(/[?&]internal=1/.test(q))localStorage.setItem('ra_internal','1');if(/[?&]internal=0/.test(q))localStorage.removeItem('ra_internal');}catch(e){}})();
+  gtag('config', 'G-T9T2GZHGS2', (function(){try{return localStorage.getItem('ra_internal')==='1'?{traffic_type:'internal'}:{};}catch(e){return {};}})());
   // Rackets Academy conversion events
   (function(){
     var lang = (location.pathname.match(/\/(fr|de)\//)||[,'en'])[1];
