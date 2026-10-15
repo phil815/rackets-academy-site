@@ -4,15 +4,14 @@
  *
  * - doPost: Anmeldung von racketsacademy.ch/anniviers.html → Sheet «RA Anniviers – Carte d'hôte», Mail an Phil,
  *           Bestätigung an die Person (FR/DE/EN).
- * - dailyImport (täglich ~7 Uhr): neue Anmeldungen als Playtomic-Import-CSV per Mail an Phil
- *           (Kategorie «Val d'Anniviers» wird beim Import direkt zugewiesen). Spalte J markiert, was exportiert ist.
+ * - Bei JEDER Anmeldung: Mail an Phil mit Playtomic-Import-CSV im Anhang (Kategorie «Val d'Anniviers», ohne Ablaufdatum).
+ * - exportPending(): manuell alle noch nicht exportierten Zeilen als eine CSV mailen (Spalte J markiert Exportiertes).
  * - Einmalig: setup() ausführen.
  * - Playtomic: Kategorie muss exakt CATEGORY heissen und vorher in Playtomic Manager existieren.
  *   Import: Customers → Imports → Import new customers → CSV hochladen.
  */
 var NOTIFY_ = 'phil@racketsacademy.ch';
 var CATEGORY_ = "Val d'Anniviers";
-var EXPIRES_DEFAULT_ = '2027-04-30'; // Ende Wintersaison – in Skripteigenschaften CATEGORY_EXPIRES änderbar
 var TZ_ = 'Europe/Zurich';
 var HEAD_ = ['Zeitpunkt', 'Vorname', 'Nachname', 'E-Mail', 'Telefon', "Carte d'hôte Nr.", 'Standort', 'Sprache', 'Quelle', 'Playtomic-Import', 'In Playtomic ✔', 'Notiz'];
 
@@ -21,14 +20,12 @@ function setup() {
   var id = props.getProperty('SHEET_ID');
   var ss = id ? SpreadsheetApp.openById(id) : SpreadsheetApp.create("RA Anniviers – Carte d'hôte");
   props.setProperty('SHEET_ID', ss.getId());
-  if (!props.getProperty('CATEGORY_EXPIRES')) props.setProperty('CATEGORY_EXPIRES', EXPIRES_DEFAULT_);
   var sh = ss.getSheets()[0];
   sh.setName('Anmeldungen');
   sh.getRange(1, 1, 1, HEAD_.length).setValues([HEAD_]).setFontWeight('bold').setBackground('#1e3a52').setFontColor('#ffffff');
   sh.setFrozenRows(1);
   sh.setColumnWidths(1, HEAD_.length, 140);
-  ScriptApp.getProjectTriggers().forEach(function (t) { if (t.getHandlerFunction() === 'dailyImport') ScriptApp.deleteTrigger(t); });
-  ScriptApp.newTrigger('dailyImport').timeBased().everyDays(1).atHour(7).inTimezone(TZ_).create();
+  ScriptApp.getProjectTriggers().forEach(function (t) { ScriptApp.deleteTrigger(t); });
   Logger.log('Sheet: ' + ss.getUrl());
 }
 
@@ -48,7 +45,8 @@ function doPost(e) {
     var data = sh.getLastRow() > 1 ? sh.getRange(2, 1, sh.getLastRow() - 1, HEAD_.length).getValues() : [];
     var dupe = data.some(function (r) { return String(r[3]).toLowerCase() === email; });
     var lang = String(p.lang || 'fr').slice(0, 2);
-    sh.appendRow([new Date(), p.first_name, p.last_name || '', email, p.phone || '', card, p.location || 'Salgesch', lang.toUpperCase(), p.source || '', dupe ? 'Duplikat – kein Import' : '', false, '']);
+    var stamp = Utilities.formatDate(new Date(), TZ_, 'yyyy-MM-dd');
+    sh.appendRow([new Date(), p.first_name, p.last_name || '', email, p.phone || '', card, p.location || 'Salgesch', lang.toUpperCase(), p.source || '', dupe ? 'Duplikat – kein Import' : 'CSV ' + stamp, false, '']);
     sh.getRange(sh.getLastRow(), 11).insertCheckboxes();
     notifyPhil_(p, email, card, dupe);
     if (!dupe) confirm_(p, email, lang);
@@ -63,7 +61,8 @@ function notifyPhil_(p, email, card, dupe) {
   MailApp.sendEmail(NOTIFY_, '🏔️ Anniviers: ' + name + (dupe ? ' (Duplikat)' : ''), '',
     { htmlBody: '<p><b>' + name + '</b> hat sich mit der Carte d\'hôte Val d\'Anniviers angemeldet.</p>' +
       '<p>E-Mail: ' + email + '<br>Telefon: ' + (p.phone || '–') + '<br>Carte d\'hôte Nr.: <b>' + card + '</b><br>Sprache: ' + String(p.lang || '').toUpperCase() + '<br>Quelle: ' + (p.source || '–') + '</p>' +
-      (dupe ? '<p style="color:#b00">Diese E-Mail ist schon im Sheet – wird nicht nochmals importiert.</p>' : '<p>Kommt morgen um 7 Uhr in die Playtomic-Import-Datei.</p>'),
+      (dupe ? '<p style="color:#b00">Diese E-Mail ist schon im Sheet – keine Import-Datei.</p>' : IMPORT_HOWTO_),
+      attachments: dupe ? [] : [csvBlob_([[name, email, phone_(p.phone), '', '', CATEGORY_, '', '', '']], name)],
       name: 'Rackets Academy', replyTo: email });
 }
 
@@ -81,28 +80,30 @@ function confirm_(p, email, lang) {
   MailApp.sendEmail(email, T[0], '', { htmlBody: T[1], name: 'Rackets Academy', replyTo: NOTIFY_ });
 }
 
-// Täglich: neue Anmeldungen → Playtomic-CSV per Mail
-function dailyImport() {
+var IMPORT_HOWTO_ = '<p><b>Playtomic:</b> Customers → Imports → Import new customers → bestätigen → angehängte CSV hochladen → Next. ' +
+  'Die Person landet direkt in der Gruppe «Val d\'Anniviers».</p>';
+
+function csvBlob_(people, label) {
+  var head = ['name', 'email', 'phone_number', 'gender', 'birthdate', 'category_name', 'category_expires', 'benefit_price_id', 'next_due_date'];
+  var csv = [head].concat(people).map(function (r) { return r.map(csvCell_).join(','); }).join('\n');
+  var slug = String(label).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  return Utilities.newBlob(csv, 'text/csv', 'playtomic-anniviers-' + slug + '.csv');
+}
+
+// Manuell: alle noch nicht exportierten Zeilen (Spalte J leer) in EINER CSV mailen
+function exportPending() {
   var sh = sheet_();
   if (sh.getLastRow() < 2) return;
-  var rng = sh.getRange(2, 1, sh.getLastRow() - 1, HEAD_.length), data = rng.getValues();
-  var exp = PropertiesService.getScriptProperties().getProperty('CATEGORY_EXPIRES') || EXPIRES_DEFAULT_;
-  var rows = [['name', 'email', 'phone_number', 'gender', 'birthdate', 'category_name', 'category_expires', 'benefit_price_id', 'next_due_date']];
-  var idx = [];
+  var data = sh.getRange(2, 1, sh.getLastRow() - 1, HEAD_.length).getValues(), people = [], idx = [];
   data.forEach(function (r, i) {
-    if (r[9]) return; // schon exportiert oder Duplikat
-    rows.push([(r[1] + ' ' + r[2]).trim(), r[3], phone_(r[4]), '', '', CATEGORY_, exp, '', '']);
+    if (r[9]) return;
+    people.push([(r[1] + ' ' + r[2]).trim(), r[3], phone_(r[4]), '', '', CATEGORY_, '', '', '']);
     idx.push(i + 2);
   });
   if (!idx.length) return;
-  var csv = rows.map(function (r) { return r.map(csvCell_).join(','); }).join('\n');
   var stamp = Utilities.formatDate(new Date(), TZ_, 'yyyy-MM-dd');
-  var blob = Utilities.newBlob(csv, 'text/csv', 'playtomic-import-anniviers-' + stamp + '.csv');
-  MailApp.sendEmail(NOTIFY_, '🏔️ Playtomic-Import Anniviers: ' + idx.length + ' neue Person(en)', '',
-    { htmlBody: '<p>Im Anhang die Import-Datei für Playtomic (' + idx.length + ' Person(en), Kategorie «' + CATEGORY_ + '», gültig bis ' + exp + ').</p>' +
-      '<ol><li>Playtomic Manager → <b>Customers → Imports → Import new customers</b></li><li>Bestätigen → Datei hochladen → Next</li><li>Danach im Sheet Spalte «In Playtomic ✔» abhaken (optional).</li></ol>' +
-      '<p><a href="' + SpreadsheetApp.openById(PropertiesService.getScriptProperties().getProperty('SHEET_ID')).getUrl() + '">Sheet öffnen</a></p>',
-      attachments: [blob], name: 'Rackets Academy' });
+  MailApp.sendEmail(NOTIFY_, '🏔️ Playtomic-Import Anniviers: ' + idx.length + ' Person(en)', '',
+    { htmlBody: IMPORT_HOWTO_, attachments: [csvBlob_(people, 'sammel-' + stamp)], name: 'Rackets Academy' });
   idx.forEach(function (row) { sh.getRange(row, 10).setValue('CSV ' + stamp); });
 }
 

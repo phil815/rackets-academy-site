@@ -1,7 +1,7 @@
 /* Val d'Anniviers guest-card discount sign-up.
    ENDPOINT = eigenes Apps Script (eigenes Sheet «Anniviers»). Solange leer: Absenden öffnet WhatsApp mit allen Angaben. */
 (function () {
-  var ENDPOINT = '';
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbxM5AiA2PHESx3liCIpsYV8AJOriaMsnnE1TFnmCBW7LVgX7hUicCFAh0qZvHoTBn2hNA/exec';
   var WA = '41762914369';
   var f = document.getElementById('anniviers-form');
   if (!f) return;
