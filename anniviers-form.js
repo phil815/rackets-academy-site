@@ -8,7 +8,7 @@
   var lang = (document.documentElement.lang || 'en').slice(0, 2);
   var msg = {
     en: { sending: 'Sending…', fail: 'Something went wrong — please try again or write to us on WhatsApp.', wa: 'Val d’Anniviers guest card – 15% discount' },
-    fr: { sending: 'Envoi…', fail: 'Oups, ça n’a pas marché — réessaie ou écris-nous sur WhatsApp.', wa: 'Carte d’hôtes Val d’Anniviers – réduction 15%' },
+    fr: { sending: 'Envoi…', fail: 'Oups, ça n’a pas marché — réessaie ou écris-nous sur WhatsApp.', wa: 'Carte d’hôte Val d’Anniviers – réduction 15%' },
     de: { sending: 'Wird gesendet…', fail: 'Das hat nicht geklappt — bitte nochmals versuchen oder schreib uns auf WhatsApp.', wa: 'Gästekarte Val d’Anniviers – 15% Rabatt' }
   }[lang] || {};
   var qs = new URLSearchParams(location.search), src = qs.get('src') || qs.get('utm_source') || '';
