@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T9T2GZHGS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    analytics_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'
+  });
+  gtag('js', new Date());
+  // Team-Geraete: einmal racketsacademy.ch/?internal=1 aufrufen → Besuche als intern markiert (GA4-Filter «Internal Traffic»); ?internal=0 hebt es auf
+  (function(){try{var q=location.search;if(/[?&]internal=1/.test(q))localStorage.setItem('ra_internal','1');if(/[?&]internal=0/.test(q))localStorage.removeItem('ra_internal');}catch(e){}})();
+  gtag('config', 'G-T9T2GZHGS2', (function(){try{return localStorage.getItem('ra_internal')==='1'?{traffic_type:'internal'}:{};}catch(e){return {};}})());
+  // Rackets Academy conversion events
+  (function(){
+    var lang = (location.pathname.match(/\/(fr|de)\//)||[,'en'])[1];
+    function send(name, p){ p=p||{}; p.page_lang=lang; p.page_path=location.pathname; p.transport_type='beacon'; gtag('event', name, p); }
+    document.addEventListener('click', function(e){
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (a && a.hasAttribute('data-pick')) return;
+      if (a) {
+        var h = a.href;
+        if (/playtomic\.com/.test(h)) return send('book_court', {link_url:h, link_text:(a.textContent||'').trim().slice(0,60)});
+        if (/wa\.me|whatsapp\.com/.test(h)) return send('whatsapp_click', {link_url:h});
+        if (/tinyurl\.com\/RA-Plus/i.test(h)) return send('rackets_plus_signup', {link_url:h});
+        if (/docs\.google\.com\/forms|forms\.gle/.test(h)) return send('form_click', {link_url:h});
+        return;
+      }
+      var b = e.target.closest && e.target.closest('button[onclick*="openBuyModal"], button[onclick*="openVoucherModal"], button[onclick*="openLessonModal"]');
+      if (b) {
+        var card = b.closest('.card, .racket-card, div');
+        var t = card && card.querySelector('h3');
+        send('shop_buy_click', {item_name: t ? t.textContent.trim().slice(0,80) : (/Voucher/.test(b.getAttribute('onclick')) ? 'Voucher' : 'unknown')});
+      }
+    }, true);
+    document.addEventListener('submit', function(e){
+      var f = e.target;
+      if (f && /script\.google/.test(f.action||'')) send('begin_checkout', {form_type: (f.querySelector('[name="type"]')||{}).value || ''});
+    }, true);
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carte d'hôtes Val d'Anniviers : -15% sur le padel | Rackets Academy</title>
+<meta name="description" content="Avec ta carte d'hôtes du Val d'Anniviers : 15% de réduction sur le padel, le pickleball et le tennis à la Rackets Academy, tous les jours avant 17h30, aussi le week-end.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://www.racketsacademy.ch/fr/anniviers.html">
+<link rel="stylesheet" href="../styles.css?v=36">
+<meta property="og:title" content="Carte d'hôtes Val d'Anniviers : -15% sur le padel | Rackets Academy">
+<meta property="og:description" content="Avec ta carte d'hôtes du Val d'Anniviers : 15% de réduction sur le padel, le pickleball et le tennis à la Rackets Academy, tous les jours avant 17h30, aussi le week-end.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.racketsacademy.ch/fr/anniviers.html">
+<meta property="og:image" content="https://www.racketsacademy.ch/images/wix/66ac72740d6a.jpg">
+<meta property="og:locale" content="fr_CH">
+<meta property="og:site_name" content="Rackets Academy">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://www.racketsacademy.ch/anniviers.html">
+<link rel="alternate" hreflang="fr" href="https://www.racketsacademy.ch/fr/anniviers.html">
+<link rel="alternate" hreflang="de" href="https://www.racketsacademy.ch/de/anniviers.html">
+<link rel="alternate" hreflang="x-default" href="https://www.racketsacademy.ch/anniviers.html">
+<style>
+.cform{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left;margin-top:8px}
+.cform label{display:flex;flex-direction:column;gap:5px;font-size:.85rem;font-weight:700;color:var(--blue-dark)}
+.cform .full{grid-column:1/-1}
+.cform input,.cform select{font:inherit;font-weight:400;font-size:1rem;padding:12px 14px;border:2px solid #d6e6f6;border-radius:14px;background:#fff;color:var(--ink)}
+.cform input:focus,.cform select:focus{outline:none;border-color:var(--blue)}
+.cform button{grid-column:1/-1;justify-self:center;border:0;cursor:pointer;margin-top:6px}
+.cform .hp{position:absolute;left:-5000px}
+.cform-note{font-size:.8rem;color:#7a8ea3;margin-top:12px}
+.cform-ok{background:#eaffd9;border-radius:18px;padding:22px;font-weight:600;color:var(--ink)}
+.va-hero{position:relative;padding-bottom:120px !important;background:linear-gradient(170deg,rgba(4,91,171,.80) 0%,rgba(11,26,43,.86) 100%),url('https://www.racketsacademy.ch/images/wix/66ac72740d6a.jpg') center/cover}
+.va-hero .mtn{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:110px;display:block}
+.va-cobrand{position:relative;z-index:2;margin:-70px auto 0;max-width:640px;background:#fff;border-radius:22px;box-shadow:0 18px 40px rgba(11,26,43,.14);display:flex;align-items:center;justify-content:center;gap:clamp(14px,4vw,36px);padding:22px clamp(16px,4vw,34px);flex-wrap:wrap}
+.va-cobrand img{height:clamp(40px,8vw,58px);width:auto;display:block}
+.va-cobrand .x{font-size:1.6rem;font-weight:300;color:#9aaabb}
+.va-cobrand small{flex-basis:100%;text-align:center;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#7a8ea3;margin-top:-6px}
+.va-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:34px auto 0;max-width:760px}
+.va-facts div{background:var(--paper);border-radius:18px;padding:18px 12px;text-align:center}
+.va-facts b{display:block;font-size:clamp(1.3rem,3.4vw,1.9rem);color:var(--blue-dark);font-weight:800;line-height:1.1}
+.va-facts span{font-size:.85rem;color:#4a5d72}
+.va-steps .card h3{color:var(--blue-dark)}
+.va-places{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.va-places .card p{margin:.3em 0}
+.va-places .tag{font-size:.8rem;font-weight:700;color:var(--blue)}
+@media(max-width:560px){.cform,.va-places{grid-template-columns:1fr}.va-facts{grid-template-columns:1fr 1fr 1fr;gap:8px}.va-facts span{font-size:.75rem}}
+</style>
+</head>
+<body>
+<div class="site-top">
+<div class="promo-banner">
+  <div class="promo-track">
+    <span>🎾 COURTS OUVERTS — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Réserve sur Playtomic →</a></span>
+    <span>🎾 COURTS OUVERTS — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Réserve sur Playtomic →</a></span>
+    <span>🎾 COURTS OUVERTS — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Réserve sur Playtomic →</a></span>
+  </div>
+</div>
+
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo"><img src="https://www.racketsacademy.ch/images/wix/834be8bc03b7.png" alt="Rackets Academy logo" width="180" height="63"></a>
+    <nav class="navlinks">
+      <a href="book.html">Réserver</a>
+      <a href="training.html">Cours</a>
+      <a href="events.html">Événements</a>
+      <a href="rackets-plus.html">Membres</a>
+      <a href="ski-and-padel.html">Camps</a>
+      <a href="spa-and-sauna.html">Spa</a>
+      <a href="shop.html">Shop</a>
+      <a href="about.html">À propos</a>
+      <div class="lang-switch">
+        <button type="button" aria-haspopup="true">FR</button>
+        <div class="lang-menu"><a href="anniviers.html">English</a><a href="../de/anniviers.html">Deutsch</a><a href="#">Français</a></div>
+      </div>
+      <a class="nav-cta-mobile" href="book.html">Réserver</a>
+    </nav>
+    <div class="lang-switch">
+      <button type="button" aria-haspopup="true">FR</button>
+      <div class="lang-menu"><a href="anniviers.html">English</a><a href="../de/anniviers.html">Deutsch</a><a href="#">Français</a></div>
+    </div>
+    <a class="nav-cta" href="book.html">Réserver</a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span></button>
+  </div>
+</header>
+</div>
+
+<section class="hero va-hero">
+  <span class="ball b1"></span><span class="ball b2"></span>
+  <div class="wrap hero-inner">
+    <span class="eyebrow-tag" style="background:rgba(255,255,255,.18);">Partenariat Val d'Anniviers</span>
+    <h1>Ta carte d'hôtes vaut -15% sur le court</h1>
+    <p class="lede">Tu séjournes au Val d'Anniviers ? Avec ta carte d'hôtes, tu joues au padel, au pickleball et au tennis à -15% à la Rackets Academy — tous les jours, aussi le week-end, avant 17h30.</p>
+    <div class="hero-actions" style="display:flex;gap:14px;flex-wrap:wrap;"><a class="btn btn-green" href="#apply">Activer ma réduction</a></div>
+  </div>
+  <svg class="mtn" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true"><path fill="#fff" fill-opacity=".18" d="M0 110 L0 70 L120 40 L230 72 L360 18 L470 64 L590 30 L720 78 L860 8 L990 66 L1110 34 L1240 70 L1360 44 L1440 60 L1440 110Z"/><path fill="#fff" d="M0 110 L0 88 L150 66 L280 92 L420 58 L560 90 L700 62 L840 94 L980 56 L1120 90 L1260 70 L1440 92 L1440 110Z"/></svg>
+</section>
+<div class="wrap">
+  <div class="va-cobrand">
+    <img src="https://www.racketsacademy.ch/images/wix/834be8bc03b7.png" alt="Rackets Academy" width="180" height="63">
+    <span class="x" aria-hidden="true">×</span>
+    <img src="https://static.valdanniviers.ch/anniviers-dark-fr.svg" alt="Val d'Anniviers" height="58">
+  </div>
+  <div class="va-facts"><div><b>-15%</b><span>sur toutes les réservations de court</span></div><div><b>7/7</b><span>du lundi au dimanche</span></div><div><b>avant 17h30</b><span>heure de début du match</span></div></div>
+</div>
+
+<section class="section-tight va-steps">
+  <div class="wrap">
+    <h2 style="text-align:center;">Comment ça marche</h2>
+    <div class="grid-3"><div class="card"><h3>1 · Inscris-toi</h3><p>Remplis le formulaire avec ton numéro de carte d'hôtes. Ça prend 1 minute.</p></div><div class="card"><h3>2 · On t'active</h3><p>On t'ajoute au groupe « Val d'Anniviers » dans Playtomic, en général sous 1 jour ouvrable. Tu reçois une confirmation par e-mail.</p></div><div class="card"><h3>3 · Joue à -15%</h3><p>Réserve ton court sur Playtomic avant 17h30 : la réduction s'applique automatiquement, aussi le samedi et le dimanche.</p></div></div>
+  </div>
+</section>
+
+<section id="apply" class="section-tight" style="background:var(--paper);">
+  <div class="wrap" style="max-width:640px; text-align:center;">
+    <h2>Active ta réduction</h2>
+    <p class="section-lede" style="margin-left:auto; margin-right:auto;">Une inscription par personne. Garde ta carte d'hôtes sur toi : on peut te la demander à l'accueil.</p>
+    <form id="anniviers-form" class="cform" novalidate>
+      <label>Prénom<input name="first_name" required autocomplete="given-name"></label>
+      <label>Nom<input name="last_name" required autocomplete="family-name"></label>
+      <label>E-mail<input name="email" type="email" required autocomplete="email"></label>
+      <label>Téléphone (pour Playtomic)<input name="phone" type="tel" required autocomplete="tel" placeholder="+41 79 …"></label>
+      <label>N° de carte d'hôtes<input name="card_number" required autocomplete="off" placeholder="ex. 123456"></label>
+      <label>Où joues-tu ?<select name="location"><option>Les deux</option><option>Salgesch</option><option>Sion</option></select></label>
+      <input type="hidden" name="source">
+      <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="btn btn-green" type="submit">Activer ma réduction</button>
+    </form>
+    <p id="anniviers-form-ok" class="cform-ok" hidden>Merci ! On a bien reçu ton inscription et on active ta réduction de 15% dans Playtomic sous 1 jour ouvrable. Une confirmation arrive dans ta boîte mail.</p>
+    <p class="cform-note">Tes données servent uniquement à activer la réduction.<br><a href="https://wa.me/41762914369?text=Hola%20%21%20J%27ai%20une%20question%20sur%20la%20r%C3%A9duction%20carte%20d%27h%C3%B4tes%20Val%20d%27Anniviers." target="_blank" rel="noopener" style="text-decoration:underline;">Une question ? Écris-nous sur WhatsApp</a></p>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="wrap">
+    <h2 style="text-align:center;">Où jouer</h2>
+    <div class="va-places"><div class="card"><h3>Salgesch</h3><p class="tag">Padel · Pickleball · Tennis · Spa</p><p>À 5 min de Sierre, en bas du Val d'Anniviers. Littenstrasse 30, 3970 Salgesch.</p></div><div class="card"><h3>Sion</h3><p class="tag">Padel</p><p>Route de Préjeux 16, 1950 Sion.</p></div></div>
+  </div>
+</section>
+<script src="../anniviers-form.js?v=1" defer></script>
+
+<footer>
+  <div class="wrap">
+    <img src="https://www.racketsacademy.ch/images/wix/fd51e1e7dfdf.png" alt="Rackets Academy" width="200" height="72" style="margin-bottom:8px;">
+    <p style="opacity:.85; margin:0 0 14px;">PLAY. COMPETE. ENJOY.</p>
+    <div class="footer-grid ux-foot"><div><h4>Salgesch</h4><a href="https://www.google.com/maps/search/?api=1&query=Littenstrasse+30+3970+Salgesch" target="_blank" rel="noopener">Littenstrasse 30, 3970 Salgesch</a><p>Padel · Pickleball · Tennis · Spa</p><p>Tous les jours 7h–23h30</p></div><div><h4>Sion</h4><a href="https://www.google.com/maps/search/?api=1&query=Route+de+Pr%C3%A9jeux+16+1950+Sion" target="_blank" rel="noopener">Route de Préjeux 16, 1950 Sion</a><p>Padel</p><p>Tous les jours 7h–23h30</p></div><div class="foot-links"><h4>Liens rapides</h4><a href="book.html">Réserver un court</a><a href="training.html">Cours</a><a href="book.html#faq">FAQ</a><a href="shop.html#vouchers">Bons cadeaux</a><a href="shop.html">Shop</a><a href="events.html">Événements</a></div><div class="footer-contact"><h4>Contact</h4><a class="foot-wa" href="https://wa.me/41772780115?text=Hola%20%21%20J%27ai%20une%20question%20sur%20la%20Rackets%20Academy." target="_blank" rel="noopener">Écris-nous sur WhatsApp</a><p>Réponse rapide · +41 77 278 01 15</p><a href="mailto:phil@racketsacademy.ch">phil@racketsacademy.ch</a></div></div>
+    <div class="sponsor-row">
+      <div class="sponsor-track">
+      <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/5887f86ed50b.png" alt="Wilson" loading="lazy"></a>
+      <a href="https://www.estrellagalicia.es" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e0ff8b826424.png" alt="Estrella Galicia" loading="lazy"></a>
+      <a href="https://www.decathlon.ch" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/75ca95274283.png" alt="Decathlon" loading="lazy"></a>
+      <a href="https://www.coca-cola.com/ch/de/brands/powerade" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4662d7547275.png" alt="Powerade" loading="lazy"></a>
+      <a href="https://tanguy.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4c92a56af6fb.png" alt="Garage Tanguy" loading="lazy"></a>
+      <a href="https://tanguy.hyundai.ch/fr" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/f74a1e85ce45.png" alt="Hyundai" loading="lazy"></a>
+      <a href="https://www.scleanup.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d7bc95225fa2.png" alt="S Clean-up" loading="lazy"></a>
+      <a href="https://shop.morand.ch/shop/category/sirops-65" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e03b161cd8bb.png" alt="Distillerie Morand" loading="lazy"></a>
+      <a href="https://rivella.ch/de/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d4f0de57b68e.png" alt="Rivella" loading="lazy"></a>
+      <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/5887f86ed50b.png" alt="Wilson" loading="lazy"></a>
+      <a href="https://www.estrellagalicia.es" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e0ff8b826424.png" alt="Estrella Galicia" loading="lazy"></a>
+      <a href="https://www.decathlon.ch" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/75ca95274283.png" alt="Decathlon" loading="lazy"></a>
+      <a href="https://www.coca-cola.com/ch/de/brands/powerade" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4662d7547275.png" alt="Powerade" loading="lazy"></a>
+      <a href="https://tanguy.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4c92a56af6fb.png" alt="Garage Tanguy" loading="lazy"></a>
+      <a href="https://tanguy.hyundai.ch/fr" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/f74a1e85ce45.png" alt="Hyundai" loading="lazy"></a>
+      <a href="https://www.scleanup.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d7bc95225fa2.png" alt="S Clean-up" loading="lazy"></a>
+      <a href="https://shop.morand.ch/shop/category/sirops-65" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e03b161cd8bb.png" alt="Distillerie Morand" loading="lazy"></a>
+      <a href="https://rivella.ch/de/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d4f0de57b68e.png" alt="Rivella" loading="lazy"></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Rackets Academy</span>
+      <span><a href="terms-and-conditions.html">Conditions générales</a> · <a href="privacy-policy.html">Politique de confidentialité</a> · <a href="impressum.html">Mentions légales</a></span>
+    </div>
+  </div>
+</footer>
+<script src="../nav.js?v=30"></script>
+</body>
+</html>
