@@ -160,36 +160,120 @@ function igFollowers_(ss) {
 }
 
 // ---- Wochenbericht (Montag 7 Uhr) ----
+var SHOP_SHEET_ = '1meJ2CES_u2nFlpBLHcV0RKROFMkShiQHHVqIhA9kaoI';
+var COMPANY_SHEET_ = '1-QqAHXZ9V4hoWr3UIm5W3D5YBA2z0Z4soyyRVrk00S8';
+var ANNIV_SHEET_ = '1BdUSojPlZofdEi9PDIapuNF_DnxaPLui8_qp4JeKxYI';
+var INTERNAL_ = /@racketsacademy\.ch$|^p\.junggutierrez@|storebotmail|@example\./i;
+
+// Datum aus Sheet-Zelle (Date oder Text dd/MM/yyyy bzw. M/d/yyyy) → 'yyyy-MM-dd'
+function day_(v, us) {
+  if (v instanceof Date) return Utilities.formatDate(v, TZ_, 'yyyy-MM-dd');
+  var m = String(v).match(/^(\d{1,2})[\/.](\d{1,2})[\/.](\d{4})/);
+  if (!m) return '';
+  var dd = us ? m[2] : m[1], mm = us ? m[1] : m[2];
+  return m[3] + '-' + ('0' + mm).slice(-2) + '-' + ('0' + dd).slice(-2);
+}
+function countSignups_(id, tab, from, to, us) {
+  var sh = SpreadsheetApp.openById(id).getSheetByName(tab);
+  if (!sh || sh.getLastRow() < 2) return 0;
+  return sh.getRange(2, 1, sh.getLastRow() - 1, 4).getValues().filter(function (r) {
+    var d = day_(r[0], us); return r[3] && d >= from && d <= to;
+  }).length;
+}
+// Kanal aus Quelle/Medium + Kampagne
+function chan_(sm, camp) {
+  sm = String(sm).toLowerCase(); camp = String(camp || '').toLowerCase();
+  if (sm === 'google / maps') return 'Google Maps (Unternehmensprofil)';
+  if (sm === 'google / organic' || /bing|duckduckgo|yahoo|ecosia/.test(sm)) return 'Google-Suche (gratis)';
+  if (sm === 'google / cpc') return 'Google Ads';
+  if (sm === 'instagram / paid' || /facebook.*paid|meta/.test(sm)) return 'Instagram/Meta Ads';
+  if (/instagram|^ig \/|facebook|l\.instagram/.test(sm)) return 'Instagram/Facebook (gratis)';
+  if (/_clubs/.test(camp)) return 'Mails an Clubs (Ski & Padel)';
+  if (/company|partner|acor|foire|flyer/.test(sm + ' ' + camp)) return 'Firmenpartner & Flyer';
+  if (/chatgpt|perplexity|claude|gemini|copilot/.test(sm)) return 'KI-Assistenten (ChatGPT & Co.)';
+  if (/oppwa|sumup/.test(sm)) return 'Rückkehr von der Zahlungsseite';
+  if (/l\.wl\.co|whatsapp/.test(sm)) return 'WhatsApp';
+  if (sm === '(direct) / (none)') return 'Direkt (Link getippt, Lesezeichen, Apps)';
+  return 'Andere';
+}
+function mmss_(sec) { sec = Math.round(sec || 0); return Math.floor(sec / 60) + ':' + ('0' + (sec % 60)).slice(-2); }
+
 function weeklyReport() {
   var tz = TZ_, d = function (n) { var x = new Date(); x.setDate(x.getDate() - n); return Utilities.formatDate(x, tz, 'yyyy-MM-dd'); };
   var cur = [d(7), d(1)], prev = [d(14), d(8)];
   var sum = function (rows, from, to, col) { return rows.filter(function (r) { return r[0] >= from && r[0] <= to; }).reduce(function (a, r) { return a + (Number(r[col]) || 0); }, 0); };
-  var pct = function (a, b) { return b ? (a >= b ? '+' : '') + Math.round((a - b) / b * 100) + '%' : '–'; };
+  var pct = function (a, b) { return b ? (a >= b ? '+' : '') + Math.round((a - b) / b * 100) + '%' : (a ? 'neu' : '–'); };
   var fmt = function (n, dec) { return Number(n).toFixed(dec || 0).replace(/\B(?=(\d{3})+(?!\d))/g, "'"); };
+  var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
+  var tbl = function (head, rows) {
+    return '<table cellpadding="4" style="border-collapse:collapse;font-size:13px;margin:6px 0 14px"><tr style="background:#eef3f8">' + head.map(function (h, i) { return '<th align="' + (i ? 'right' : 'left') + '">' + h + '</th>'; }).join('') + '</tr>' +
+      rows.map(function (r) { return '<tr>' + r.map(function (c, i) { return '<td' + (i ? ' align="right"' : '') + ' style="border-bottom:1px solid #eee">' + c + '</td>'; }).join('') + '</tr>'; }).join('') + '</table>';
+  };
   var lines = [];
-  // Website (GA4)
+
+  // ---- Website (GA4) ----
   try {
-    var ga = ga_(['date'], ['sessions', 'engagedSessions', 'totalUsers'], d(1));
-    ga.shift();
-    var s1 = sum(ga, cur[0], cur[1], 1), s0 = sum(ga, prev[0], prev[1], 1), e1 = sum(ga, cur[0], cur[1], 2), u1 = sum(ga, cur[0], cur[1], 3);
-    var tbl = function (head, rows) {
-      return '<table cellpadding="4" style="border-collapse:collapse;font-size:13px;margin:6px 0 12px"><tr style="background:#eef3f8">' + head.map(function (h, i) { return '<th align="' + (i ? 'right' : 'left') + '">' + h + '</th>'; }).join('') + '</tr>' +
-        rows.map(function (r) { return '<tr>' + r.map(function (c, i) { return '<td' + (i ? ' align="right"' : '') + '>' + c + '</td>'; }).join('') + '</tr>'; }).join('') + '</table>';
-    };
-    var src = gaR_(['sessionSourceMedium'], ['sessions', 'engagedSessions'], cur[0], cur[1]).slice(0, 6)
-      .map(function (r) { return [r[0], fmt(r[1]), r[1] ? Math.round(r[2] / r[1] * 100) + '%' : '–']; });
-    var pages = gaR_(['pagePath'], ['screenPageViews', 'totalUsers'], cur[0], cur[1]).slice(0, 8)
-      .map(function (r) { return [r[0], fmt(r[1]), fmt(r[2])]; });
-    var evNames = { book_court: 'Klick «Court buchen» (Playtomic)', whatsapp_click: 'WhatsApp-Klicks', begin_checkout: 'Bezahlvorgang gestartet', purchase: 'Käufe', generate_lead: 'Anmeldungen (Firmen/Anniviers)' };
-    var ev = gaR_(['eventName'], ['eventCount'], cur[0], cur[1], { filter: { fieldName: 'eventName', inListFilter: { values: Object.keys(evNames) } } });
-    var evPrev = {}; gaR_(['eventName'], ['eventCount'], prev[0], prev[1], { filter: { fieldName: 'eventName', inListFilter: { values: Object.keys(evNames) } } }).forEach(function (r) { evPrev[r[0]] = r[1]; });
-    var evRows = Object.keys(evNames).map(function (k) { var v = 0; ev.forEach(function (r) { if (r[0] === k) v = r[1]; }); return [evNames[k], v, pct(v, evPrev[k] || 0)]; });
-    lines.push('<h3>Website</h3><p>Besuche: <b>' + fmt(s1) + '</b> (' + pct(s1, s0) + ' vs. Vorwoche) · Personen: ' + fmt(u1) + ' · engagiert: ' + (s1 ? Math.round(e1 / s1 * 100) : 0) + '%</p>' +
+    var tot = function (a, b) { var r = gaR_([], ['sessions', 'engagedSessions', 'totalUsers', 'userEngagementDuration'], a, b)[0] || [0, 0, 0, 0]; return r; };
+    var t1 = tot(cur[0], cur[1]), t0 = tot(prev[0], prev[1]);
+    var bounce = function (t) { return t[0] ? Math.round((1 - t[1] / t[0]) * 100) : 0; };
+    var evNames = { book_court: 'Klick «Court buchen» (Playtomic)', whatsapp_click: 'WhatsApp-Klicks', begin_checkout: 'Bezahlvorgang gestartet' };
+    var evMap = function (a, b) { var o = {}; gaR_(['eventName'], ['eventCount'], a, b, { filter: { fieldName: 'eventName', inListFilter: { values: Object.keys(evNames) } } }).forEach(function (r) { o[r[0]] = r[1]; }); return o; };
+    var e1 = evMap(cur[0], cur[1]), e0 = evMap(prev[0], prev[1]);
+    var evRows = Object.keys(evNames).map(function (k) { return [evNames[k], e1[k] || 0, pct(e1[k] || 0, e0[k] || 0)]; });
+    var c1 = countSignups_(COMPANY_SHEET_, 'Anmeldungen', cur[0], cur[1], true), c0 = countSignups_(COMPANY_SHEET_, 'Anmeldungen', prev[0], prev[1], true);
+    var a1 = countSignups_(ANNIV_SHEET_, 'Anmeldungen', cur[0], cur[1]), a0 = countSignups_(ANNIV_SHEET_, 'Anmeldungen', prev[0], prev[1]);
+    evRows.push(['Anmeldungen Firmenrabatt', c1, pct(c1, c0)], ['Anmeldungen Carte d\'hôte Anniviers', a1, pct(a1, a0)]);
+    // Kanäle
+    var ch = {};
+    gaR_(['sessionSourceMedium', 'sessionCampaignName'], ['sessions', 'engagedSessions', 'userEngagementDuration'], cur[0], cur[1]).forEach(function (r) {
+      var k = chan_(r[0], r[1]); ch[k] = ch[k] || [0, 0, 0]; ch[k][0] += r[2]; ch[k][1] += r[3]; ch[k][2] += r[4];
+    });
+    var chRows = Object.keys(ch).sort(function (a, b) { return ch[b][0] - ch[a][0]; }).map(function (k) {
+      var v = ch[k]; return [k, fmt(v[0]), v[0] ? Math.round((1 - v[1] / v[0]) * 100) + '%' : '–', mmss_(v[0] ? v[2] / v[0] : 0)];
+    });
+    var pages = gaR_(['pagePath'], ['screenPageViews', 'totalUsers', 'userEngagementDuration'], cur[0], cur[1]).slice(0, 8)
+      .map(function (r) { return [esc(r[0]), fmt(r[1]), fmt(r[2]), mmss_(r[2] ? r[3] / r[2] : 0)]; });
+    lines.push('<h3>Website</h3><p>Besuche: <b>' + fmt(t1[0]) + '</b> (' + pct(t1[0], t0[0]) + ' vs. Vorwoche) · Personen: ' + fmt(t1[2]) +
+      ' · Absprungrate: <b>' + bounce(t1) + '%</b> (Vorwoche ' + bounce(t0) + '%) · Ø Zeit pro Besuch: <b>' + mmss_(t1[0] ? t1[3] / t1[0] : 0) + '</b> (Vorwoche ' + mmss_(t0[0] ? t0[3] / t0[0] : 0) + ')</p>' +
+      '<p style="font-size:12px;color:#777;margin-top:-6px">Absprungrate = Besuche unter 10 Sek. mit nur 1 Seite und ohne Aktion (tiefer = besser). Ø Zeit = aktive Zeit auf der Seite.</p>' +
       '<p style="margin:10px 0 0"><b>Was die Leute gemacht haben</b></p>' + tbl(['Aktion', 'Anzahl', 'vs. Vorwoche'], evRows) +
-      '<p style="margin:10px 0 0"><b>Woher sie kamen</b></p>' + tbl(['Quelle', 'Besuche', 'engagiert'], src) +
-      '<p style="margin:10px 0 0"><b>Meistbesuchte Seiten</b></p>' + tbl(['Seite', 'Aufrufe', 'Personen'], pages));
-  } catch (e) { lines.push('<p>Website: Fehler ' + e.message + '</p>'); }
-  // Meta Ads
+      '<p style="margin:10px 0 0"><b>Woher sie kamen</b></p>' + tbl(['Kanal', 'Besuche', 'Absprungrate', 'Ø Zeit'], chRows) +
+      '<p style="margin:10px 0 0"><b>Meistbesuchte Seiten</b></p>' + tbl(['Seite', 'Aufrufe', 'Personen', 'Ø Zeit/Person'], pages));
+  } catch (e) { lines.push('<h3>Website</h3><p>Fehler: ' + esc(e.message) + '</p>'); }
+
+  // ---- Shop & Bezahlungen (aus dem Shop-Sheet, zählt jeden Kauf – auch ohne Cookie-Zustimmung) ----
+  try {
+    var o = SpreadsheetApp.openById(SHOP_SHEET_).getSheetByName('Orders').getDataRange().getValues(); o.shift();
+    var label = function (r) {
+      var j = {}; try { j = JSON.parse(r[6]); } catch (x) {}
+      if (r[3] === 'racket') return j.racketLabel || 'Schläger';
+      if (r[3] === 'ticket') return /padel-dine/.test(j.eventId || '') ? 'Padel +Dine' : (j.eventId || 'Event-Ticket');
+      if (r[3] === 'camp') return 'Ski & Padel ' + String(j.campId || '').replace('ski-padel-', '');
+      if (r[3] === 'voucher') return 'Gutschein'; if (r[3] === 'lesson') return 'Trainerstunden-Gutschein';
+      return r[3];
+    };
+    var rows = o.map(function (r) { return { day: day_(r[0]), name: String(r[4] || ''), email: String(r[5] || '').toLowerCase().trim(), what: label(r), amt: Number(r[7]) || 0, st: r[8], fu: r[12] || '' }; })
+      .filter(function (r) { return r.email && !INTERNAL_.test(r.email); });
+    var inW = function (r, w) { return r.day >= w[0] && r.day <= w[1]; };
+    var paid = rows.filter(function (r) { return r.st === 'PAID' && inW(r, cur); });
+    var paidPrev = rows.filter(function (r) { return r.st === 'PAID' && inW(r, prev); });
+    var paidEver = {}; rows.forEach(function (r) { if (r.st === 'PAID') paidEver[r.email] = (paidEver[r.email] || '') < r.day ? r.day : paidEver[r.email]; });
+    var failed = {}; rows.filter(function (r) { return (r.st === 'FAILED' || r.st === 'EXPIRED') && inW(r, cur); }).forEach(function (r) {
+      if (paidEver[r.email] && paidEver[r.email] >= r.day) return; // hat danach doch bezahlt
+      var f = failed[r.email] = failed[r.email] || { name: r.name, email: r.email, what: r.what, amt: r.amt, n: 0, fu: '' };
+      f.n++; if (r.fu) f.fu = r.fu;
+    });
+    var revenue = paid.reduce(function (a, r) { return a + r.amt; }, 0), revPrev = paidPrev.reduce(function (a, r) { return a + r.amt; }, 0);
+    var fl = Object.keys(failed).map(function (k) { return failed[k]; });
+    lines.push('<h3>Shop & Bezahlungen</h3><p>Bezahlt: <b>' + paid.length + '</b> Kauf/Käufe · <b>CHF ' + fmt(revenue) + '</b> (Vorwoche ' + paidPrev.length + ' · CHF ' + fmt(revPrev) + ')</p>' +
+      (paid.length ? tbl(['Bezahlt', 'Wer', 'CHF'], paid.map(function (r) { return [r.day.slice(8) + '.' + r.day.slice(5, 7) + '. · ' + esc(r.what), esc(r.name), fmt(r.amt)]; })) : '') +
+      '<p style="margin:10px 0 0"><b>Nicht bezahlt – zum Nachfassen (' + fl.length + ')</b></p>' +
+      (fl.length ? tbl(['Wer · was', 'CHF', 'Versuche', 'Follow-up'], fl.map(function (f) {
+        return [esc(f.name) + ' · <a href="mailto:' + esc(f.email) + '">' + esc(f.email) + '</a><br><span style="color:#777">' + esc(f.what) + '</span>', fmt(f.amt), f.n, f.fu ? esc(String(f.fu)) : '<span style="color:#b00">offen</span>'];
+      })) : '<p style="color:#777">Keine – alle Bezahlversuche gingen durch. 🎉</p>'));
+  } catch (e) { lines.push('<h3>Shop & Bezahlungen</h3><p>Fehler: ' + esc(e.message) + '</p>'); }
+
+  // ---- Meta Ads ----
   try {
     var m = metaAds_(d(1)); m.shift();
     var sp1 = sum(m, cur[0], cur[1], 4), sp0 = sum(m, prev[0], prev[1], 4), lc1 = sum(m, cur[0], cur[1], 7), lc0 = sum(m, prev[0], prev[1], 7), lp1 = sum(m, cur[0], cur[1], 8), im1 = sum(m, cur[0], cur[1], 5);
@@ -198,22 +282,26 @@ function weeklyReport() {
       var k = r[1] + ' › ' + r[3]; byAd[k] = byAd[k] || [0, 0, 0]; byAd[k][0] += r[4]; byAd[k][1] += r[7]; byAd[k][2] += r[8];
     });
     var top = Object.keys(byAd).sort(function (a, b) { return byAd[b][0] - byAd[a][0]; }).slice(0, 6).map(function (k) {
-      var v = byAd[k]; return '<tr><td>' + k + '</td><td align="right">' + fmt(v[0], 2) + '</td><td align="right">' + v[1] + '</td><td align="right">' + v[2] + '</td><td align="right">' + (v[1] ? fmt(v[0] / v[1], 2) : '–') + '</td></tr>';
-    }).join('');
-    lines.push('<h3>Meta Ads</h3><p>Ausgaben: <b>CHF ' + fmt(sp1, 2) + '</b> (' + pct(sp1, sp0) + ') · Impressionen: ' + fmt(im1) + ' · Link-Klicks: <b>' + lc1 + '</b> (' + pct(lc1, lc0) + ') · Landingpage-Aufrufe: <b>' + lp1 + '</b> · CHF/Klick: ' + (lc1 ? fmt(sp1 / lc1, 2) : '–') + '</p>' +
-      (top ? '<table cellpadding="4" style="border-collapse:collapse;font-size:13px"><tr style="background:#eef3f8"><th align="left">Kampagne › Anzeige</th><th>CHF</th><th>Klicks</th><th>LP-Aufrufe</th><th>CHF/Klick</th></tr>' + top + '</table>' : '<p>Keine aktiven Anzeigen.</p>'));
-  } catch (e) { lines.push('<h3>Meta Ads</h3><p>Fehler: ' + e.message + '</p>'); }
-  // Instagram
+      var v = byAd[k]; return [esc(k), fmt(v[0], 2), v[1], v[2], v[1] ? fmt(v[0] / v[1], 2) : '–'];
+    });
+    lines.push('<h3>Meta Ads</h3><p>Ausgaben: <b>CHF ' + fmt(sp1, 2) + '</b> (' + pct(sp1, sp0) + ') · Impressionen: ' + fmt(im1) + ' · Link-Klicks: <b>' + lc1 + '</b> (' + pct(lc1, lc0) + ') · Seite geladen: <b>' + lp1 + '</b>' + (lc1 ? ' (' + Math.round(lp1 / lc1 * 100) + '% der Klicks)' : '') + ' · CHF/Klick: ' + (lc1 ? fmt(sp1 / lc1, 2) : '–') + '</p>' +
+      (top.length ? tbl(['Kampagne › Anzeige', 'CHF', 'Klicks', 'Seite geladen', 'CHF/Klick'], top) : '<p>Keine aktiven Anzeigen.</p>'));
+  } catch (e) { lines.push('<h3>Meta Ads</h3><p>Fehler: ' + esc(e.message) + '</p>'); }
+
+  // ---- Instagram ----
   try {
     var ss = SpreadsheetApp.openById(PropertiesService.getScriptProperties().getProperty('SHEET_ID'));
     var f = ss.getSheetByName('Instagram Follower').getDataRange().getDisplayValues(); f.shift();
     var now = f.length ? Number(f[f.length - 1][1]) : 0;
     var ago = f.filter(function (r) { return r[0] <= cur[0]; }).pop();
-    lines.push('<h3>Instagram</h3><p>Follower: <b>' + fmt(now) + '</b>' + (ago ? ' (' + ((now - Number(ago[1])) >= 0 ? '+' : '') + (now - Number(ago[1])) + ' in 7 Tagen)' : '') + '</p>');
-  } catch (e) { lines.push('<h3>Instagram</h3><p>Fehler: ' + e.message + '</p>'); }
+    var posts = (ss.getSheetByName('Instagram Posts').getDataRange().getValues()).slice(1).filter(function (r) { var dd = r[0] instanceof Date ? Utilities.formatDate(r[0], TZ_, 'yyyy-MM-dd') : String(r[0]); return dd >= cur[0] && dd <= cur[1]; });
+    lines.push('<h3>Instagram</h3><p>Follower: <b>' + fmt(now) + '</b>' + (ago ? ' (' + ((now - Number(ago[1])) >= 0 ? '+' : '') + (now - Number(ago[1])) + ' in 7 Tagen)' : ' (Verlauf startet 16.10.)') + ' · Posts diese Woche: ' + posts.length + '</p>' +
+      (posts.length ? tbl(['Post', 'Reichweite', 'Likes', 'Views'], posts.map(function (r) { return ['<a href="' + r[9] + '">' + esc(String(r[2]).slice(0, 50)) + '…</a>', fmt(r[5] || 0), r[3], fmt(r[8] || 0)]; })) : ''));
+  } catch (e) { lines.push('<h3>Instagram</h3><p>Fehler: ' + esc(e.message) + '</p>'); }
+
   var url = SpreadsheetApp.openById(PropertiesService.getScriptProperties().getProperty('SHEET_ID')).getUrl();
   MailApp.sendEmail(REPORT_TO_, '📊 Wochenbericht ' + cur[0].slice(8) + '.' + cur[0].slice(5, 7) + '.–' + cur[1].slice(8) + '.' + cur[1].slice(5, 7) + '.', '',
-    { htmlBody: '<div style="font-family:Arial,sans-serif;max-width:640px">' + lines.join('') + '<p style="color:#888;font-size:12px">Alle Details im Sheet <a href="' + url + '">RA Website-Daten</a>.</p></div>', name: 'Rackets Academy Daten' });
+    { htmlBody: '<div style="font-family:Arial,sans-serif;max-width:680px">' + lines.join('') + '<p style="color:#888;font-size:12px">Alle Details im Sheet <a href="' + url + '">RA Website-Daten</a>.</p></div>', name: 'Rackets Academy Daten' });
 }
 
 function write_(ss, name, rows) {
@@ -233,6 +321,6 @@ function gaR_(dims, mets, from, to, dimFilter) {
   if (dimFilter) req.dimensionFilter = dimFilter;
   var res = AnalyticsData.Properties.runReport(req, GA_PROPERTY_);
   return (res.rows || []).map(function (r) {
-    return r.dimensionValues.map(function (v) { return v.value; }).concat(r.metricValues.map(function (v) { return Number(v.value); }));
+    return (r.dimensionValues || []).map(function (v) { return v.value; }).concat(r.metricValues.map(function (v) { return Number(v.value); }));
   }).sort(function (a, b) { return b[dims.length] - a[dims.length]; });
 }
