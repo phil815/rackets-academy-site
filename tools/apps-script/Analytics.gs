@@ -171,8 +171,23 @@ function weeklyReport() {
   try {
     var ga = ga_(['date'], ['sessions', 'engagedSessions', 'totalUsers'], d(1));
     ga.shift();
-    var s1 = sum(ga, cur[0], cur[1], 1), s0 = sum(ga, prev[0], prev[1], 1), e1 = sum(ga, cur[0], cur[1], 2);
-    lines.push('<h3>Website</h3><p>Besuche: <b>' + fmt(s1) + '</b> (' + pct(s1, s0) + ' vs. Vorwoche) · engagiert: ' + (s1 ? Math.round(e1 / s1 * 100) : 0) + '%</p>');
+    var s1 = sum(ga, cur[0], cur[1], 1), s0 = sum(ga, prev[0], prev[1], 1), e1 = sum(ga, cur[0], cur[1], 2), u1 = sum(ga, cur[0], cur[1], 3);
+    var tbl = function (head, rows) {
+      return '<table cellpadding="4" style="border-collapse:collapse;font-size:13px;margin:6px 0 12px"><tr style="background:#eef3f8">' + head.map(function (h, i) { return '<th align="' + (i ? 'right' : 'left') + '">' + h + '</th>'; }).join('') + '</tr>' +
+        rows.map(function (r) { return '<tr>' + r.map(function (c, i) { return '<td' + (i ? ' align="right"' : '') + '>' + c + '</td>'; }).join('') + '</tr>'; }).join('') + '</table>';
+    };
+    var src = gaR_(['sessionSourceMedium'], ['sessions', 'engagedSessions'], cur[0], cur[1]).slice(0, 6)
+      .map(function (r) { return [r[0], fmt(r[1]), r[1] ? Math.round(r[2] / r[1] * 100) + '%' : '–']; });
+    var pages = gaR_(['pagePath'], ['screenPageViews', 'totalUsers'], cur[0], cur[1]).slice(0, 8)
+      .map(function (r) { return [r[0], fmt(r[1]), fmt(r[2])]; });
+    var evNames = { book_court: 'Klick «Court buchen» (Playtomic)', whatsapp_click: 'WhatsApp-Klicks', begin_checkout: 'Bezahlvorgang gestartet', purchase: 'Käufe', generate_lead: 'Anmeldungen (Firmen/Anniviers)' };
+    var ev = gaR_(['eventName'], ['eventCount'], cur[0], cur[1], { filter: { fieldName: 'eventName', inListFilter: { values: Object.keys(evNames) } } });
+    var evPrev = {}; gaR_(['eventName'], ['eventCount'], prev[0], prev[1], { filter: { fieldName: 'eventName', inListFilter: { values: Object.keys(evNames) } } }).forEach(function (r) { evPrev[r[0]] = r[1]; });
+    var evRows = Object.keys(evNames).map(function (k) { var v = 0; ev.forEach(function (r) { if (r[0] === k) v = r[1]; }); return [evNames[k], v, pct(v, evPrev[k] || 0)]; });
+    lines.push('<h3>Website</h3><p>Besuche: <b>' + fmt(s1) + '</b> (' + pct(s1, s0) + ' vs. Vorwoche) · Personen: ' + fmt(u1) + ' · engagiert: ' + (s1 ? Math.round(e1 / s1 * 100) : 0) + '%</p>' +
+      '<p style="margin:10px 0 0"><b>Was die Leute gemacht haben</b></p>' + tbl(['Aktion', 'Anzahl', 'vs. Vorwoche'], evRows) +
+      '<p style="margin:10px 0 0"><b>Woher sie kamen</b></p>' + tbl(['Quelle', 'Besuche', 'engagiert'], src) +
+      '<p style="margin:10px 0 0"><b>Meistbesuchte Seiten</b></p>' + tbl(['Seite', 'Aufrufe', 'Personen'], pages));
   } catch (e) { lines.push('<p>Website: Fehler ' + e.message + '</p>'); }
   // Meta Ads
   try {
@@ -210,4 +225,14 @@ function write_(ss, name, rows) {
   sh.getRange(1, 1, rows.length, width).setValues(rows);
   sh.getRange(1, 1, 1, width).setFontWeight('bold');
   sh.setFrozenRows(1);
+}
+
+// GA4 für einen beliebigen Zeitraum, sortiert nach erster Kennzahl (absteigend)
+function gaR_(dims, mets, from, to, dimFilter) {
+  var req = { dateRanges: [{ startDate: from, endDate: to }], dimensions: dims.map(function (d) { return { name: d }; }), metrics: mets.map(function (m) { return { name: m }; }), limit: 1000 };
+  if (dimFilter) req.dimensionFilter = dimFilter;
+  var res = AnalyticsData.Properties.runReport(req, GA_PROPERTY_);
+  return (res.rows || []).map(function (r) {
+    return r.dimensionValues.map(function (v) { return v.value; }).concat(r.metricValues.map(function (v) { return Number(v.value); }));
+  }).sort(function (a, b) { return b[dims.length] - a[dims.length]; });
 }
