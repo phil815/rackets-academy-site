@@ -2,7 +2,7 @@
  * RA Website-Daten — gratis Ersatz für Supermetrics.
  * Holt täglich Google Analytics 4 (Property 556163205), Meta Ads (act_870675094567241) und Instagram
  * (@racketsacademy.ch) und schreibt alles in das Sheet «RA Website-Daten».
- * Search Console läuft über Windsor.ai (gratis), nicht über dieses Script.
+ * Search Console über die API (GCP-Projekt «RA Analytics», ra-analytics-511909), Tab «GSC Tage».
  * Meta/Instagram: Skripteigenschaft META_TOKEN = System-User-Token (ads_read, instagram_basic, instagram_manage_insights).
  * Montags 7 Uhr: Wochenbericht per Mail (Website + Meta Ads + Instagram).
  * Claude liest dieses Sheet für Auswertungen.
@@ -48,7 +48,8 @@ function refreshAll() {
     ['GA Ereignisse', function () { return ga_(['date', 'eventName', 'pagePath'], ['eventCount', 'totalUsers'], end, { filter: { fieldName: 'eventName', inListFilter: { values: KEY_EVENTS_ } } }); }],
     ['GA Länder & Geräte', function () { return ga_(['date', 'country', 'city', 'deviceCategory'], ['sessions', 'engagedSessions'], end); }],
     ['Meta Ads', function () { return metaAds_(end); }],
-    ['Instagram Posts', function () { return igPosts_(); }]
+    ['Instagram Posts', function () { return igPosts_(); }],
+    ['GSC Tage', function () { return gscDays_(end); }]
   ];
   jobs.forEach(function (j) {
     try {
@@ -60,6 +61,7 @@ function refreshAll() {
     }
   });
   try { igFollowers_(ss); log.push(['Instagram Follower', '', 'OK']); } catch (err) { log.push(['Instagram Follower', '', 'FEHLER: ' + err.message]); }
+  try { igDays_(ss); log.push(['Instagram Tage', '', 'OK']); } catch (err) { log.push(['Instagram Tage', '', 'FEHLER: ' + err.message]); }
   var info = [['Stand', Utilities.formatDate(new Date(), TZ_, 'dd.MM.yyyy HH:mm')], ['Zeitraum', START_ + ' bis ' + end], [], ['Tab', 'Zeilen', 'Status']].concat(log);
   write_(ss, 'Info', info);
   var first = ss.getSheetByName('Sheet1') || ss.getSheetByName('Tabelle1') || ss.getSheetByName('Feuille 1');
@@ -345,4 +347,100 @@ function gaR_(dims, mets, from, to, dimFilter) {
   return (res.rows || []).map(function (r) {
     return (r.dimensionValues || []).map(function (v) { return v.value; }).concat(r.metricValues.map(function (v) { return Number(v.value); }));
   }).sort(function (a, b) { return b[dims.length] - a[dims.length]; });
+}
+
+// ===================== Neu: Search Console, Instagram-Tageswerte, Wix-Basis =====================
+
+var WIX_PROPERTY_ = 'properties/465019666';   // alte Wix-Website (Betrachter-Zugriff phil@)
+var WIX_END_ = '2026-09-26';                   // letzter Tag mit Wix
+
+// Search Console pro Tag (in refreshAll als Job «GSC Tage»)
+function gsc_(from, to, dims) {
+  var r = UrlFetchApp.fetch('https://searchconsole.googleapis.com/webmasters/v3/sites/' + encodeURIComponent(GSC_SITE_) + '/searchAnalytics/query', {
+    method: 'post', contentType: 'application/json', muteHttpExceptions: true,
+    headers: { Authorization: 'Bearer ' + ScriptApp.getOAuthToken() },
+    payload: JSON.stringify({ startDate: from, endDate: to, dimensions: dims || ['date'], rowLimit: 25000 })
+  });
+  var body = JSON.parse(r.getContentText());
+  if (body.error) throw new Error('Search Console: ' + body.error.message);
+  return body.rows || [];
+}
+function gscDays_(end) {
+  var rows = [['date', 'clicks', 'impressions', 'ctr_%', 'position']];
+  gsc_(START_, end).forEach(function (r) {
+    rows.push([r.keys[0], r.clicks, r.impressions, Math.round(r.ctr * 1000) / 10, Math.round(r.position * 10) / 10]);
+  });
+  var head = rows.shift(); rows.sort(function (a, b) { return a[0] < b[0] ? 1 : -1; }); rows.unshift(head);
+  return rows;
+}
+
+// Instagram pro Tag: letzte 30 Tage neu holen, ältere Tage bleiben im Tab stehen
+function igDays_(ss) {
+  var sh = ss.getSheetByName('Instagram Tage') || ss.insertSheet('Instagram Tage');
+  var head = ['date', 'reach', 'new_followers', 'profile_views', 'website_clicks', 'accounts_engaged', 'total_interactions', 'views'];
+  var keep = {};
+  if (sh.getLastRow() > 1) sh.getRange(2, 1, sh.getLastRow() - 1, head.length).getDisplayValues().forEach(function (r) { keep[r[0]] = r; });
+  var now = Math.floor(Date.now() / 1000), day = 86400;
+  var series = {};
+  ['reach', 'follower_count'].forEach(function (m) {
+    try {
+      graph_(IG_ID_ + '/insights', { metric: m, period: 'day', since: now - 30 * day, until: now }).data[0].values.forEach(function (v) {
+        var d = Utilities.formatDate(new Date(new Date(v.end_time).getTime() - day * 1000), TZ_, 'yyyy-MM-dd');
+        (series[d] = series[d] || {})[m] = v.value;
+      });
+    } catch (e) {}
+  });
+  for (var i = 1; i <= 30; i++) {
+    var since = now - (i + 1) * day, d = Utilities.formatDate(new Date(since * 1000 + day * 500), TZ_, 'yyyy-MM-dd');
+    try {
+      graph_(IG_ID_ + '/insights', { metric: 'profile_views,website_clicks,accounts_engaged,total_interactions,views', period: 'day', metric_type: 'total_value', since: since, until: since + day })
+        .data.forEach(function (x) { (series[d] = series[d] || {})[x.name] = x.total_value ? x.total_value.value : ''; });
+    } catch (e) {}
+  }
+  Object.keys(series).forEach(function (d) {
+    var s = series[d];
+    keep[d] = [d, s.reach || '', s.follower_count || 0, s.profile_views || '', s.website_clicks || '', s.accounts_engaged || '', s.total_interactions || '', s.views || ''];
+  });
+  var rows = Object.keys(keep).sort().reverse().map(function (k) { return keep[k]; });
+  write_(ss, 'Instagram Tage', [head].concat(rows));
+}
+
+// Einmalig von Hand: Wochendurchschnitt der alten Wix-Website → Tab «Wix Basis»
+function wixBaseline() {
+  var ss = SpreadsheetApp.openById(PropertiesService.getScriptProperties().getProperty('SHEET_ID'));
+  function rep(dims, mets, filter) {
+    var req = { dateRanges: [{ startDate: '2023-01-01', endDate: WIX_END_ }], dimensions: dims.map(function (d) { return { name: d }; }), metrics: mets.map(function (m) { return { name: m }; }), limit: 100000 };
+    if (filter) req.dimensionFilter = filter;
+    return (AnalyticsData.Properties.runReport(req, WIX_PROPERTY_).rows || []).map(function (r) {
+      return (r.dimensionValues || []).map(function (d) { return d.value; }).concat(r.metricValues.map(function (m) { return Number(m.value); }));
+    });
+  }
+  var days = rep(['date'], ['sessions', 'engagedSessions']).sort(function (a, b) { return a[0] < b[0] ? -1 : 1; });
+  var first = days[0][0], start = first.slice(0, 4) + '-' + first.slice(4, 6) + '-' + first.slice(6, 8);
+  var weeks = days.length / 7;
+  var ses = 0, eng = 0; days.forEach(function (r) { ses += r[1]; eng += r[2]; });
+  var ch = { Google: 0, 'Instagram / Meta': 0, Direkt: 0, Andere: 0 };
+  rep(['sessionSourceMedium'], ['sessions']).forEach(function (r) {
+    var sm = String(r[0]).toLowerCase();
+    var k = /^google|^bing/.test(sm) ? 'Google' : /instagram|^ig |^fb |facebook|^meta/.test(sm) ? 'Instagram / Meta' : /^\(direct\)/.test(sm) ? 'Direkt' : 'Andere';
+    ch[k] += r[1];
+  });
+  var clicks = rep(['linkDomain'], ['eventCount'], { filter: { fieldName: 'eventName', stringFilter: { value: 'click' } } });
+  var sumDom = function (re) { var n = 0; clicks.forEach(function (r) { if (re.test(r[0])) n += r[1]; }); return n; };
+  var w = function (n) { return Math.round(n / weeks * 10) / 10; };
+  var rows = [['Kennzahl', 'Ø pro Woche'],
+    ['Besuche', w(ses)], ['Absprungrate %', Math.round((1 - eng / ses) * 100)],
+    ['Kanal Google', w(ch.Google)], ['Kanal Instagram / Meta', w(ch['Instagram / Meta'])], ['Kanal Direkt', w(ch.Direkt)], ['Kanal Andere', w(ch.Andere)],
+    ['Court buchen (Klicks auf Playtomic)', w(sumDom(/playtomic/))], ['WhatsApp (Klicks auf wa.me)', w(sumDom(/^wa\.me$/))]];
+  try {
+    var g = gsc_(start, WIX_END_), gc = 0, gi = 0;            // Search Console hat max. 16 Monate Verlauf
+    g.forEach(function (r) { gc += r.clicks; gi += r.impressions; });
+    if (g.length) {
+      rows.push(['Google-Suche Klicks', Math.round(gc / g.length * 7 * 10) / 10]);
+      rows.push(['Google-Suche Impressionen', Math.round(gi / g.length * 7)]);
+      rows.push(['Google-Suche Zeitraum', g.map(function (r) { return r.keys[0]; }).sort()[0] + ' bis ' + WIX_END_]);
+    }
+  } catch (e) { rows.push(['Google-Suche', 'noch nicht verfügbar: ' + e.message.slice(0, 80)]); }
+  rows.push([], ['Zeitraum', start + ' bis ' + WIX_END_ + ' (' + days.length + ' Tage)']);
+  write_(ss, 'Wix Basis', rows);
 }
