@@ -198,7 +198,7 @@ function chan_(sm, camp) {
 }
 function mmss_(sec) { sec = Math.round(sec || 0); return Math.floor(sec / 60) + ':' + ('0' + (sec % 60)).slice(-2); }
 
-function weeklyReport() {
+function weeklyReport(opts) {
   var tz = TZ_, d = function (n) { var x = new Date(); x.setDate(x.getDate() - n); return Utilities.formatDate(x, tz, 'yyyy-MM-dd'); };
   var cur = [d(7), d(1)], prev = [d(14), d(8)];
   var sum = function (rows, from, to, col) { return rows.filter(function (r) { return r[0] >= from && r[0] <= to; }).reduce(function (a, r) { return a + (Number(r[col]) || 0); }, 0); };
@@ -300,9 +300,31 @@ function weeklyReport() {
   } catch (e) { lines.push('<h3>Instagram</h3><p>Fehler: ' + esc(e.message) + '</p>'); }
 
   var url = SpreadsheetApp.openById(PropertiesService.getScriptProperties().getProperty('SHEET_ID')).getUrl();
-  MailApp.sendEmail(REPORT_TO_, '📊 Wochenbericht ' + cur[0].slice(8) + '.' + cur[0].slice(5, 7) + '.–' + cur[1].slice(8) + '.' + cur[1].slice(5, 7) + '.', '',
-    { htmlBody: '<div style="font-family:Arial,sans-serif;max-width:680px">' + lines.join('') + '<p style="color:#888;font-size:12px">Alle Details im Sheet <a href="' + url + '">RA Website-Daten</a>.</p></div>', name: 'Rackets Academy Daten' });
+  var body = '<div style="font-family:Arial,sans-serif;max-width:680px">' + lines.join('') +
+    '<p style="color:#888;font-size:12px">Alle Details im Sheet <a href="' + url + '">RA Website-Daten</a>.</p></div>';
+  saveReport_(cur, body);
+  if (!(opts && opts.noMail)) MailApp.sendEmail(REPORT_TO_, '📊 Wochenbericht ' + cur[0].slice(8) + '.' + cur[0].slice(5, 7) + '.–' + cur[1].slice(8) + '.' + cur[1].slice(5, 7) + '.', '',
+    { htmlBody: body, name: 'Rackets Academy Daten' });
 }
+
+// Bericht im Tab «Reports» ablegen (eine Zeile pro Woche, gleiche Woche wird überschrieben).
+// Die interne Web App «RA P&L» zeigt diese Berichte im Reiter Marketing.
+function saveReport_(cur, html) {
+  var ss = SpreadsheetApp.openById(PropertiesService.getScriptProperties().getProperty('SHEET_ID'));
+  var sh = ss.getSheetByName('Reports');
+  if (!sh) {
+    sh = ss.insertSheet('Reports');
+    sh.getRange('A:B').setNumberFormat('@');
+    sh.appendRow(['Woche von', 'Woche bis', 'Erstellt', 'HTML']);
+  }
+  if (html.length > 49000) html = html.slice(0, 49000) + '<p>… gekürzt</p>';  // Zellenlimit 50'000 Zeichen
+  var weeks = sh.getLastRow() > 1 ? sh.getRange(2, 1, sh.getLastRow() - 1, 1).getDisplayValues().map(function (r) { return r[0]; }) : [];
+  var i = weeks.indexOf(cur[0]), row = [cur[0], cur[1], new Date(), html];
+  if (i >= 0) sh.getRange(i + 2, 1, 1, 4).setValues([row]); else sh.appendRow(row);
+}
+
+// Einmalig von Hand: Bericht ablegen, ohne Mail
+function saveReportOnly() { weeklyReport({ noMail: true }); }
 
 function write_(ss, name, rows) {
   var sh = ss.getSheetByName(name) || ss.insertSheet(name);
