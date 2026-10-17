@@ -71,6 +71,8 @@ header{
 }
 .nav-cta:hover{background:#5ee00a;}
 .navlinks .nav-cta-mobile{display:none;}
+.navlinks a.nav-login{font-weight:500; font-size:0.78rem; opacity:.6;}
+.navlinks a.nav-login:hover{opacity:1;}
 .navlinks .lang-switch{display:none;}
 
 /* mobile menu toggle button */
