@@ -126,3 +126,7 @@ var PUSH_JOBS_ = [
 - Web App «RA P&L» Version 4 deployt (gleiche URL): Reiter Marketing zeigt oben «Verlauf» (Kacheln + Graphen, Ø Wix gestrichelt), darunter die Wochenberichte. Backup: rackets-pl-data/apps-script/Code.gs.
 - OAuth-Zustimmungsbildschirm im GCP-Projekt ra-analytics-511909 (Nr. 152803810942) angelegt (Intern); Analytics-Skript auf dieses Projekt umgestellt.
 - Offen: Phil autorisiert das Skript neu → dann refreshAll + wixBaseline für Search Console.
+
+### 2026-10-17 12:15 – Besuchsdauer + Instagram-Verlauf
+- Analytics.gs: wixBaseline mit «Besuchsdauer Sek.» (Wix Ø 184 s), Search-Console-Basis auf 16 Monate begrenzt; neue Funktion igBackfill (Instagram-Tageswerte rückwärts, max. 2 Jahre, mehrmals ausführbar).
+- Web App «RA P&L» Version 5: Kachel + Graph «Ø Besuchsdauer» mit Ø Wix; Instagram-Graphen mit eigener Zeitachse über den ganzen Verlauf.

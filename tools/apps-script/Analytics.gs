@@ -415,10 +415,10 @@ function wixBaseline() {
       return (r.dimensionValues || []).map(function (d) { return d.value; }).concat(r.metricValues.map(function (m) { return Number(m.value); }));
     });
   }
-  var days = rep(['date'], ['sessions', 'engagedSessions']).sort(function (a, b) { return a[0] < b[0] ? -1 : 1; });
+  var days = rep(['date'], ['sessions', 'engagedSessions', 'averageSessionDuration']).sort(function (a, b) { return a[0] < b[0] ? -1 : 1; });
   var first = days[0][0], start = first.slice(0, 4) + '-' + first.slice(4, 6) + '-' + first.slice(6, 8);
   var weeks = days.length / 7;
-  var ses = 0, eng = 0; days.forEach(function (r) { ses += r[1]; eng += r[2]; });
+  var ses = 0, eng = 0, dur = 0; days.forEach(function (r) { ses += r[1]; eng += r[2]; dur += r[3] * r[1]; });
   var ch = { Google: 0, 'Instagram / Meta': 0, Direkt: 0, Andere: 0 };
   rep(['sessionSourceMedium'], ['sessions']).forEach(function (r) {
     var sm = String(r[0]).toLowerCase();
@@ -429,11 +429,12 @@ function wixBaseline() {
   var sumDom = function (re) { var n = 0; clicks.forEach(function (r) { if (re.test(r[0])) n += r[1]; }); return n; };
   var w = function (n) { return Math.round(n / weeks * 10) / 10; };
   var rows = [['Kennzahl', 'Ø pro Woche'],
-    ['Besuche', w(ses)], ['Absprungrate %', Math.round((1 - eng / ses) * 100)],
+    ['Besuche', w(ses)], ['Absprungrate %', Math.round((1 - eng / ses) * 100)], ['Besuchsdauer Sek.', Math.round(dur / ses)],
     ['Kanal Google', w(ch.Google)], ['Kanal Instagram / Meta', w(ch['Instagram / Meta'])], ['Kanal Direkt', w(ch.Direkt)], ['Kanal Andere', w(ch.Andere)],
     ['Court buchen (Klicks auf Playtomic)', w(sumDom(/playtomic/))], ['WhatsApp (Klicks auf wa.me)', w(sumDom(/^wa\.me$/))]];
   try {
-    var g = gsc_(start, WIX_END_), gc = 0, gi = 0;            // Search Console hat max. 16 Monate Verlauf
+    var g16 = Utilities.formatDate(new Date(Date.now() - 480 * 864e5), TZ_, 'yyyy-MM-dd');
+    var g = gsc_(start > g16 ? start : g16, WIX_END_), gc = 0, gi = 0;            // Search Console hat max. 16 Monate Verlauf
     g.forEach(function (r) { gc += r.clicks; gi += r.impressions; });
     if (g.length) {
       rows.push(['Google-Suche Klicks', Math.round(gc / g.length * 7 * 10) / 10]);
@@ -443,4 +444,35 @@ function wixBaseline() {
   } catch (e) { rows.push(['Google-Suche', 'noch nicht verfügbar: ' + e.message.slice(0, 80)]); }
   rows.push([], ['Zeitraum', start + ' bis ' + WIX_END_ + ' (' + days.length + ' Tage)']);
   write_(ss, 'Wix Basis', rows);
+}
+
+// Einmalig von Hand (bei Bedarf mehrmals): Instagram-Tageswerte rückwärts auffüllen, max. 2 Jahre (Instagram-Limit).
+// Holt pro Tag Reichweite, Profilaufrufe, Link-Klicks, Interaktionen, Views. Neue Follower liefert Instagram nur 30 Tage zurück.
+// Stoppt nach ca. 4.5 Minuten; nochmals ausführen, bis im Protokoll «fertig» steht.
+function igBackfill() {
+  var ss = SpreadsheetApp.openById(PropertiesService.getScriptProperties().getProperty('SHEET_ID'));
+  var sh = ss.getSheetByName('Instagram Tage');
+  var head = ['date', 'reach', 'new_followers', 'profile_views', 'website_clicks', 'accounts_engaged', 'total_interactions', 'views'];
+  var keep = {};
+  if (sh && sh.getLastRow() > 1) sh.getRange(2, 1, sh.getLastRow() - 1, head.length).getDisplayValues().forEach(function (r) { keep[r[0]] = r; });
+  var dates = Object.keys(keep).sort();
+  var d = dates.length ? dates[0] : Utilities.formatDate(new Date(), TZ_, 'yyyy-MM-dd');
+  var limit = Utilities.formatDate(new Date(Date.now() - 729 * 864e5), TZ_, 'yyyy-MM-dd');
+  var t0 = Date.now(), added = 0, empty = 0, done = '';
+  while (Date.now() - t0 < 270000) {
+    var prev = new Date(Utilities.parseDate(d, TZ_, 'yyyy-MM-dd').getTime() - 864e5 / 2);
+    d = Utilities.formatDate(prev, TZ_, 'yyyy-MM-dd');
+    if (d < limit) { done = 'fertig (2-Jahres-Limit)'; break; }
+    var since = Math.floor(Utilities.parseDate(d, TZ_, 'yyyy-MM-dd').getTime() / 1000), v = {};
+    try {
+      graph_(IG_ID_ + '/insights', { metric: 'reach,profile_views,website_clicks,accounts_engaged,total_interactions,views', period: 'day', metric_type: 'total_value', since: since, until: since + 86400 })
+        .data.forEach(function (x) { v[x.name] = x.total_value ? x.total_value.value : ''; });
+    } catch (e) { done = 'fertig (Instagram: ' + e.message.slice(0, 80) + ')'; break; }
+    if (!v.reach && !v.total_interactions) { if (++empty >= 21) { done = 'fertig (keine älteren Daten)'; break; } } else empty = 0;
+    keep[d] = [d, v.reach || '', '', v.profile_views || '', v.website_clicks || '', v.accounts_engaged || '', v.total_interactions || '', v.views || ''];
+    added++;
+  }
+  var rows = Object.keys(keep).sort().reverse().map(function (k) { return keep[k]; });
+  write_(ss, 'Instagram Tage', [head].concat(rows));
+  Logger.log(added + ' Tage ergänzt, ältester Tag ' + rows[rows.length - 1][0] + '. ' + (done || 'Noch nicht fertig: igBackfill nochmals ausführen.'));
 }
