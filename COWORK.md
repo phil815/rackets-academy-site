@@ -140,3 +140,11 @@ var PUSH_JOBS_ = [
 - Outreach: liest «Outreach Occupancy – Tracker» (8 Tabs), Übersicht/Filter/fällige Follow-ups (≥ 7 Tage); Erfassen/Ändern nur Phil + Bettina, schreibt direkt ins Sheet.
 - Kalender: Workplan Salgesch/Sion, Events Salgesch/Sion, phil@ (private Termine nur «Belegt»), Feiertage CH, «Team – Ferien» (sobald angelegt); Ferien aus Workplan per Stichwort.
 - Planung: Simeon nur Ansicht. Offen: Auslastung (wartet auf DB-Zugang von Simeon).
+
+### 2026-10-18 20:15 – Intern: team space redesign live (Web App Version 10)
+- One page (`app.html`) with Finance (Results/Budget), Marketing, Outreach, Calendar; English; same brand as the website (Galano Grotesque, #0077de, #6ffd1d).
+- Data cached server-side (CacheService, gzip): Finance/Marketing 1 h, Outreach/Calendar 5 min; cleared on save/approve. Editor function `clearCache` empties it (e.g. after a new data.json).
+- `index.html` in rackets-pl-data is no longer used by the web app (P&L now part of app.html).
+- Outreach statuses reduced to 5 (To contact, Contacted, In talks, Won, Lost); tracker sheet migrated (92 cells) incl. dropdowns.
+- Weekly report (Analytics) now in English, also the Monday email.
+- Lesson: HtmlService strips JS comments from HTML files – never use a comment as a placeholder.
