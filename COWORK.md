@@ -134,3 +134,9 @@ var PUSH_JOBS_ = [
 ### 2026-10-17 13:25 – Intern: Reiter «Planung» live (Web App v6)
 - Planung FY 26/27 pro Standort (Salgesch, Sion, freier 3. Standort) + Gesamt; Vier-Augen-Freigabe Phil/Bettina; Versionen im Sheet «RA Planung» (Drive phil@). Gültige Version = BP FY 26/27 im P&L-Reiter (nur Salgesch/Sion). P&L: Auswahl FY 26/27 neu.
 - Neue To-dos Team-Bereich: Outreach-Tool, Auslastung, Google-Kalender (Schichten, Ferien, Events).
+
+### 2026-10-18 10:55 – Intern: Outreach + Kalender live (Web App v8)
+- Rollen (ROLES/PAGES): admin = Phil, Bettina, Simeon (datadude@) alles; Rolle «team» (nur Outreach + Kalender) vorbereitet, aktuell leer.
+- Outreach: liest «Outreach Occupancy – Tracker» (8 Tabs), Übersicht/Filter/fällige Follow-ups (≥ 7 Tage); Erfassen/Ändern nur Phil + Bettina, schreibt direkt ins Sheet.
+- Kalender: Workplan Salgesch/Sion, Events Salgesch/Sion, phil@ (private Termine nur «Belegt»), Feiertage CH, «Team – Ferien» (sobald angelegt); Ferien aus Workplan per Stichwort.
+- Planung: Simeon nur Ansicht. Offen: Auslastung (wartet auf DB-Zugang von Simeon).
