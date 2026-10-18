@@ -185,18 +185,18 @@ function countSignups_(id, tab, from, to, us) {
 // Kanal aus Quelle/Medium + Kampagne
 function chan_(sm, camp) {
   sm = String(sm).toLowerCase(); camp = String(camp || '').toLowerCase();
-  if (sm === 'google / maps') return 'Google Maps (Unternehmensprofil)';
-  if (sm === 'google / organic' || /bing|duckduckgo|yahoo|ecosia/.test(sm)) return 'Google-Suche (gratis)';
+  if (sm === 'google / maps') return 'Google Maps (business profile)';
+  if (sm === 'google / organic' || /bing|duckduckgo|yahoo|ecosia/.test(sm)) return 'Google search (free)';
   if (sm === 'google / cpc') return 'Google Ads';
   if (sm === 'instagram / paid' || /facebook.*paid|meta/.test(sm)) return 'Instagram/Meta Ads';
-  if (/instagram|^ig \/|facebook|l\.instagram/.test(sm)) return 'Instagram/Facebook (gratis)';
-  if (/_clubs/.test(camp)) return 'Mails an Clubs (Ski & Padel)';
-  if (/company|partner|acor|foire|flyer/.test(sm + ' ' + camp)) return 'Firmenpartner & Flyer';
-  if (/chatgpt|perplexity|claude|gemini|copilot/.test(sm)) return 'KI-Assistenten (ChatGPT & Co.)';
-  if (/oppwa|sumup/.test(sm)) return 'Rückkehr von der Zahlungsseite';
+  if (/instagram|^ig \/|facebook|l\.instagram/.test(sm)) return 'Instagram/Facebook (free)';
+  if (/_clubs/.test(camp)) return 'Emails to clubs (Ski & Padel)';
+  if (/company|partner|acor|foire|flyer/.test(sm + ' ' + camp)) return 'Company partners & flyers';
+  if (/chatgpt|perplexity|claude|gemini|copilot/.test(sm)) return 'AI assistants (ChatGPT etc.)';
+  if (/oppwa|sumup/.test(sm)) return 'Back from payment page';
   if (/l\.wl\.co|whatsapp/.test(sm)) return 'WhatsApp';
-  if (sm === '(direct) / (none)') return 'Direkt (Link getippt, Lesezeichen, Apps)';
-  return 'Andere';
+  if (sm === '(direct) / (none)') return 'Direct (typed link, bookmarks, apps)';
+  return 'Other';
 }
 function mmss_(sec) { sec = Math.round(sec || 0); return Math.floor(sec / 60) + ':' + ('0' + (sec % 60)).slice(-2); }
 
@@ -204,7 +204,7 @@ function weeklyReport(opts) {
   var tz = TZ_, d = function (n) { var x = new Date(); x.setDate(x.getDate() - n); return Utilities.formatDate(x, tz, 'yyyy-MM-dd'); };
   var cur = [d(7), d(1)], prev = [d(14), d(8)];
   var sum = function (rows, from, to, col) { return rows.filter(function (r) { return r[0] >= from && r[0] <= to; }).reduce(function (a, r) { return a + (Number(r[col]) || 0); }, 0); };
-  var pct = function (a, b) { return b ? (a >= b ? '+' : '') + Math.round((a - b) / b * 100) + '%' : (a ? 'neu' : '–'); };
+  var pct = function (a, b) { return b ? (a >= b ? '+' : '') + Math.round((a - b) / b * 100) + '%' : (a ? 'new' : '–'); };
   var fmt = function (n, dec) { return Number(n).toFixed(dec || 0).replace(/\B(?=(\d{3})+(?!\d))/g, "'"); };
   var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
   var tbl = function (head, rows) {
@@ -218,13 +218,13 @@ function weeklyReport(opts) {
     var tot = function (a, b) { var r = gaR_([], ['sessions', 'engagedSessions', 'totalUsers', 'userEngagementDuration'], a, b)[0] || [0, 0, 0, 0]; return r; };
     var t1 = tot(cur[0], cur[1]), t0 = tot(prev[0], prev[1]);
     var bounce = function (t) { return t[0] ? Math.round((1 - t[1] / t[0]) * 100) : 0; };
-    var evNames = { book_court: 'Klick «Court buchen» (Playtomic)', whatsapp_click: 'WhatsApp-Klicks', begin_checkout: 'Bezahlvorgang gestartet' };
+    var evNames = { book_court: '“Book court” clicks (Playtomic)', whatsapp_click: 'WhatsApp clicks', begin_checkout: 'Checkout started' };
     var evMap = function (a, b) { var o = {}; gaR_(['eventName'], ['eventCount'], a, b, { filter: { fieldName: 'eventName', inListFilter: { values: Object.keys(evNames) } } }).forEach(function (r) { o[r[0]] = r[1]; }); return o; };
     var e1 = evMap(cur[0], cur[1]), e0 = evMap(prev[0], prev[1]);
     var evRows = Object.keys(evNames).map(function (k) { return [evNames[k], e1[k] || 0, pct(e1[k] || 0, e0[k] || 0)]; });
     var c1 = countSignups_(COMPANY_SHEET_, 'Anmeldungen', cur[0], cur[1], true), c0 = countSignups_(COMPANY_SHEET_, 'Anmeldungen', prev[0], prev[1], true);
     var a1 = countSignups_(ANNIV_SHEET_, 'Anmeldungen', cur[0], cur[1]), a0 = countSignups_(ANNIV_SHEET_, 'Anmeldungen', prev[0], prev[1]);
-    evRows.push(['Anmeldungen Firmenrabatt', c1, pct(c1, c0)], ['Anmeldungen Carte d\'hôte Anniviers', a1, pct(a1, a0)]);
+    evRows.push(['Sign-ups company discount', c1, pct(c1, c0)], ['Sign-ups carte d\'hôte Anniviers', a1, pct(a1, a0)]);
     // Kanäle
     var ch = {};
     gaR_(['sessionSourceMedium', 'sessionCampaignName'], ['sessions', 'engagedSessions', 'userEngagementDuration'], cur[0], cur[1]).forEach(function (r) {
@@ -235,23 +235,23 @@ function weeklyReport(opts) {
     });
     var pages = gaR_(['pagePath'], ['screenPageViews', 'totalUsers', 'userEngagementDuration'], cur[0], cur[1]).slice(0, 8)
       .map(function (r) { return [esc(r[0]), fmt(r[1]), fmt(r[2]), mmss_(r[2] ? r[3] / r[2] : 0)]; });
-    lines.push('<h3>Website</h3><p>Besuche: <b>' + fmt(t1[0]) + '</b> (' + pct(t1[0], t0[0]) + ' vs. Vorwoche) · Personen: ' + fmt(t1[2]) +
-      ' · Absprungrate: <b>' + bounce(t1) + '%</b> (Vorwoche ' + bounce(t0) + '%) · Ø Zeit pro Besuch: <b>' + mmss_(t1[0] ? t1[3] / t1[0] : 0) + '</b> (Vorwoche ' + mmss_(t0[0] ? t0[3] / t0[0] : 0) + ')</p>' +
-      '<p style="font-size:12px;color:#777;margin-top:-6px">Absprungrate = Besuche unter 10 Sek. mit nur 1 Seite und ohne Aktion (tiefer = besser). Ø Zeit = aktive Zeit auf der Seite.</p>' +
-      '<p style="margin:10px 0 0"><b>Was die Leute gemacht haben</b></p>' + tbl(['Aktion', 'Anzahl', 'vs. Vorwoche'], evRows) +
-      '<p style="margin:10px 0 0"><b>Woher sie kamen</b></p>' + tbl(['Kanal', 'Besuche', 'Absprungrate', 'Ø Zeit'], chRows) +
-      '<p style="margin:10px 0 0"><b>Meistbesuchte Seiten</b></p>' + tbl(['Seite', 'Aufrufe', 'Personen', 'Ø Zeit/Person'], pages));
-  } catch (e) { lines.push('<h3>Website</h3><p>Fehler: ' + esc(e.message) + '</p>'); }
+    lines.push('<h3>Website</h3><p>Visits: <b>' + fmt(t1[0]) + '</b> (' + pct(t1[0], t0[0]) + ' vs last week) · People: ' + fmt(t1[2]) +
+      ' · Bounce rate: <b>' + bounce(t1) + '%</b> (last week ' + bounce(t0) + '%) · Avg. time per visit: <b>' + mmss_(t1[0] ? t1[3] / t1[0] : 0) + '</b> (last week ' + mmss_(t0[0] ? t0[3] / t0[0] : 0) + ')</p>' +
+      '<p style="font-size:12px;color:#777;margin-top:-6px">Bounce rate = visits under 10 sec. with only 1 page and no action (lower is better). Avg. time = active time on the site.</p>' +
+      '<p style="margin:10px 0 0"><b>What people did</b></p>' + tbl(['Action', 'Count', 'vs last week'], evRows) +
+      '<p style="margin:10px 0 0"><b>Where they came from</b></p>' + tbl(['Channel', 'Visits', 'Bounce rate', 'Avg. time'], chRows) +
+      '<p style="margin:10px 0 0"><b>Most visited pages</b></p>' + tbl(['Page', 'Views', 'People', 'Avg. time/person'], pages));
+  } catch (e) { lines.push('<h3>Website</h3><p>Error: ' + esc(e.message) + '</p>'); }
 
   // ---- Shop & Bezahlungen (aus dem Shop-Sheet, zählt jeden Kauf – auch ohne Cookie-Zustimmung) ----
   try {
     var o = SpreadsheetApp.openById(SHOP_SHEET_).getSheetByName('Orders').getDataRange().getValues(); o.shift();
     var label = function (r) {
       var j = {}; try { j = JSON.parse(r[6]); } catch (x) {}
-      if (r[3] === 'racket') return j.racketLabel || 'Schläger';
+      if (r[3] === 'racket') return j.racketLabel || 'Racket';
       if (r[3] === 'ticket') return /padel-dine/.test(j.eventId || '') ? 'Padel +Dine' : (j.eventId || 'Event-Ticket');
       if (r[3] === 'camp') return 'Ski & Padel ' + String(j.campId || '').replace('ski-padel-', '');
-      if (r[3] === 'voucher') return 'Gutschein'; if (r[3] === 'lesson') return 'Trainerstunden-Gutschein';
+      if (r[3] === 'voucher') return 'Voucher'; if (r[3] === 'lesson') return 'Coaching voucher';
       return r[3];
     };
     var rows = o.map(function (r) { return { day: day_(r[0]), name: String(r[4] || ''), email: String(r[5] || '').toLowerCase().trim(), what: label(r), amt: Number(r[7]) || 0, st: r[8], fu: r[12] || '' }; })
@@ -267,13 +267,13 @@ function weeklyReport(opts) {
     });
     var revenue = paid.reduce(function (a, r) { return a + r.amt; }, 0), revPrev = paidPrev.reduce(function (a, r) { return a + r.amt; }, 0);
     var fl = Object.keys(failed).map(function (k) { return failed[k]; });
-    lines.push('<h3>Shop & Bezahlungen</h3><p>Bezahlt: <b>' + paid.length + '</b> Kauf/Käufe · <b>CHF ' + fmt(revenue) + '</b> (Vorwoche ' + paidPrev.length + ' · CHF ' + fmt(revPrev) + ')</p>' +
-      (paid.length ? tbl(['Bezahlt', 'Wer', 'CHF'], paid.map(function (r) { return [r.day.slice(8) + '.' + r.day.slice(5, 7) + '. · ' + esc(r.what), esc(r.name), fmt(r.amt)]; })) : '') +
-      '<p style="margin:10px 0 0"><b>Nicht bezahlt – zum Nachfassen (' + fl.length + ')</b></p>' +
-      (fl.length ? tbl(['Wer · was', 'CHF', 'Versuche', 'Follow-up'], fl.map(function (f) {
-        return [esc(f.name) + ' · <a href="mailto:' + esc(f.email) + '">' + esc(f.email) + '</a><br><span style="color:#777">' + esc(f.what) + '</span>', fmt(f.amt), f.n, f.fu ? esc(String(f.fu)) : '<span style="color:#b00">offen</span>'];
-      })) : '<p style="color:#777">Keine – alle Bezahlversuche gingen durch. 🎉</p>'));
-  } catch (e) { lines.push('<h3>Shop & Bezahlungen</h3><p>Fehler: ' + esc(e.message) + '</p>'); }
+    lines.push('<h3>Shop & payments</h3><p>Paid: <b>' + paid.length + '</b> purchase(s) · <b>CHF ' + fmt(revenue) + '</b> (last week ' + paidPrev.length + ' · CHF ' + fmt(revPrev) + ')</p>' +
+      (paid.length ? tbl(['Paid', 'Who', 'CHF'], paid.map(function (r) { return [r.day.slice(8) + '.' + r.day.slice(5, 7) + '. · ' + esc(r.what), esc(r.name), fmt(r.amt)]; })) : '') +
+      '<p style="margin:10px 0 0"><b>Not paid – follow up (' + fl.length + ')</b></p>' +
+      (fl.length ? tbl(['Who · what', 'CHF', 'Attempts', 'Follow-up'], fl.map(function (f) {
+        return [esc(f.name) + ' · <a href="mailto:' + esc(f.email) + '">' + esc(f.email) + '</a><br><span style="color:#777">' + esc(f.what) + '</span>', fmt(f.amt), f.n, f.fu ? esc(String(f.fu)) : '<span style="color:#b00">open</span>'];
+      })) : '<p style="color:#777">None – all payment attempts went through. 🎉</p>'));
+  } catch (e) { lines.push('<h3>Shop & payments</h3><p>Error: ' + esc(e.message) + '</p>'); }
 
   // ---- Meta Ads ----
   try {
@@ -286,9 +286,9 @@ function weeklyReport(opts) {
     var top = Object.keys(byAd).sort(function (a, b) { return byAd[b][0] - byAd[a][0]; }).slice(0, 6).map(function (k) {
       var v = byAd[k]; return [esc(k), fmt(v[0], 2), v[1], v[2], v[1] ? fmt(v[0] / v[1], 2) : '–'];
     });
-    lines.push('<h3>Meta Ads</h3><p>Ausgaben: <b>CHF ' + fmt(sp1, 2) + '</b> (' + pct(sp1, sp0) + ') · Impressionen: ' + fmt(im1) + ' · Link-Klicks: <b>' + lc1 + '</b> (' + pct(lc1, lc0) + ') · Seite geladen: <b>' + lp1 + '</b>' + (lc1 ? ' (' + Math.round(lp1 / lc1 * 100) + '% der Klicks)' : '') + ' · CHF/Klick: ' + (lc1 ? fmt(sp1 / lc1, 2) : '–') + '</p>' +
-      (top.length ? tbl(['Kampagne › Anzeige', 'CHF', 'Klicks', 'Seite geladen', 'CHF/Klick'], top) : '<p>Keine aktiven Anzeigen.</p>'));
-  } catch (e) { lines.push('<h3>Meta Ads</h3><p>Fehler: ' + esc(e.message) + '</p>'); }
+    lines.push('<h3>Meta Ads</h3><p>Spend: <b>CHF ' + fmt(sp1, 2) + '</b> (' + pct(sp1, sp0) + ') · Impressions: ' + fmt(im1) + ' · Link clicks: <b>' + lc1 + '</b> (' + pct(lc1, lc0) + ') · Page loaded: <b>' + lp1 + '</b>' + (lc1 ? ' (' + Math.round(lp1 / lc1 * 100) + '% of clicks)' : '') + ' · CHF/click: ' + (lc1 ? fmt(sp1 / lc1, 2) : '–') + '</p>' +
+      (top.length ? tbl(['Campaign › ad', 'CHF', 'Clicks', 'Page loaded', 'CHF/click'], top) : '<p>No active ads.</p>'));
+  } catch (e) { lines.push('<h3>Meta Ads</h3><p>Error: ' + esc(e.message) + '</p>'); }
 
   // ---- Instagram ----
   try {
@@ -297,15 +297,15 @@ function weeklyReport(opts) {
     var now = f.length ? Number(f[f.length - 1][1]) : 0;
     var ago = f.filter(function (r) { return r[0] <= cur[0]; }).pop();
     var posts = (ss.getSheetByName('Instagram Posts').getDataRange().getValues()).slice(1).filter(function (r) { var dd = r[0] instanceof Date ? Utilities.formatDate(r[0], TZ_, 'yyyy-MM-dd') : String(r[0]); return dd >= cur[0] && dd <= cur[1]; });
-    lines.push('<h3>Instagram</h3><p>Follower: <b>' + fmt(now) + '</b>' + (ago ? ' (' + ((now - Number(ago[1])) >= 0 ? '+' : '') + (now - Number(ago[1])) + ' in 7 Tagen)' : ' (Verlauf startet 16.10.)') + ' · Posts diese Woche: ' + posts.length + '</p>' +
-      (posts.length ? tbl(['Post', 'Reichweite', 'Likes', 'Views'], posts.map(function (r) { return ['<a href="' + r[9] + '">' + esc(String(r[2]).slice(0, 50)) + '…</a>', fmt(r[5] || 0), r[3], fmt(r[8] || 0)]; })) : ''));
-  } catch (e) { lines.push('<h3>Instagram</h3><p>Fehler: ' + esc(e.message) + '</p>'); }
+    lines.push('<h3>Instagram</h3><p>Followers: <b>' + fmt(now) + '</b>' + (ago ? ' (' + ((now - Number(ago[1])) >= 0 ? '+' : '') + (now - Number(ago[1])) + ' in 7 days)' : ' (history starts 16.10.)') + ' · Posts this week: ' + posts.length + '</p>' +
+      (posts.length ? tbl(['Post', 'Reach', 'Likes', 'Views'], posts.map(function (r) { return ['<a href="' + r[9] + '">' + esc(String(r[2]).slice(0, 50)) + '…</a>', fmt(r[5] || 0), r[3], fmt(r[8] || 0)]; })) : ''));
+  } catch (e) { lines.push('<h3>Instagram</h3><p>Error: ' + esc(e.message) + '</p>'); }
 
   var url = SpreadsheetApp.openById(PropertiesService.getScriptProperties().getProperty('SHEET_ID')).getUrl();
   var body = '<div style="font-family:Arial,sans-serif;max-width:680px">' + lines.join('') +
-    '<p style="color:#888;font-size:12px">Alle Details im Sheet <a href="' + url + '">RA Website-Daten</a>.</p></div>';
+    '<p style="color:#888;font-size:12px">All details in the sheet <a href="' + url + '">RA Website-Daten</a>.</p></div>';
   saveReport_(cur, body);
-  if (!(opts && opts.noMail)) MailApp.sendEmail(REPORT_TO_, '📊 Wochenbericht ' + cur[0].slice(8) + '.' + cur[0].slice(5, 7) + '.–' + cur[1].slice(8) + '.' + cur[1].slice(5, 7) + '.', '',
+  if (!(opts && opts.noMail)) MailApp.sendEmail(REPORT_TO_, '📊 Weekly report ' + cur[0].slice(8) + '.' + cur[0].slice(5, 7) + '.–' + cur[1].slice(8) + '.' + cur[1].slice(5, 7) + '.', '',
     { htmlBody: body, name: 'Rackets Academy Daten' });
 }
 
@@ -319,7 +319,7 @@ function saveReport_(cur, html) {
     sh.getRange('A:B').setNumberFormat('@');
     sh.appendRow(['Woche von', 'Woche bis', 'Erstellt', 'HTML']);
   }
-  if (html.length > 49000) html = html.slice(0, 49000) + '<p>… gekürzt</p>';  // Zellenlimit 50'000 Zeichen
+  if (html.length > 49000) html = html.slice(0, 49000) + '<p>… shortened</p>';  // Zellenlimit 50'000 Zeichen
   var weeks = sh.getLastRow() > 1 ? sh.getRange(2, 1, sh.getLastRow() - 1, 1).getDisplayValues().map(function (r) { return r[0]; }) : [];
   var i = weeks.indexOf(cur[0]), row = [cur[0], cur[1], new Date(), html];
   if (i >= 0) sh.getRange(i + 2, 1, 1, 4).setValues([row]); else sh.appendRow(row);
