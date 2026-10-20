@@ -298,8 +298,12 @@ footer{background:var(--ink); color:var(--white); padding:40px 0 22px; margin-to
   .lang-switch > button{width:100%; text-align:left;}
   .lang-switch .lang-menu{position:static; box-shadow:none; border:0; display:none; margin-top:4px;}
   .lang-switch.open .lang-menu{display:block;}
-  /* the standalone header-level lang-switch (outside .navlinks) is mobile-only duplicated inside the menu — hide the outer one */
-  .nav > .lang-switch{display:none;}
+  /* header-level language switch stays visible on mobile (next to the menu button), so it is always reachable */
+  .nav > .lang-switch{display:block; margin:0 6px 0 auto; width:auto;}
+  .nav > .lang-switch > button{width:auto; text-align:center; background:var(--white);}
+  .nav > .lang-switch .lang-menu{position:absolute; top:calc(100% + 8px); right:12px; display:none; box-shadow:0 10px 24px rgba(11,26,43,.12); border:1px solid #e7edf5; border-radius:12px; min-width:120px;}
+  .nav > .lang-switch.open .lang-menu{display:block;}
+  .navlinks .lang-switch{display:none;}
 }
 
 /* clickable offer cards */
