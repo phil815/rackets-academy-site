@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T9T2GZHGS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    analytics_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'
+  });
+  gtag('js', new Date());
+  // Team-Geraete: einmal racketsacademy.ch/?internal=1 aufrufen → Besuche als intern markiert (GA4-Filter «Internal Traffic»); ?internal=0 hebt es auf
+  (function(){try{var q=location.search;if(/[?&]internal=1/.test(q))localStorage.setItem('ra_internal','1');if(/[?&]internal=0/.test(q))localStorage.removeItem('ra_internal');}catch(e){}})();
+  gtag('config', 'G-T9T2GZHGS2', (function(){try{return localStorage.getItem('ra_internal')==='1'?{traffic_type:'internal'}:{};}catch(e){return {};}})());
+  // Rackets Academy conversion events
+  (function(){
+    var lang = (location.pathname.match(/\/(fr|de)\//)||[,'en'])[1];
+    function send(name, p){ p=p||{}; p.page_lang=lang; p.page_path=location.pathname; p.transport_type='beacon'; gtag('event', name, p); }
+    document.addEventListener('click', function(e){
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (a && a.hasAttribute('data-pick')) return;
+      if (a) {
+        var h = a.href;
+        if (/playtomic\.com/.test(h)) return send('book_court', {link_url:h, link_text:(a.textContent||'').trim().slice(0,60)});
+        if (/wa\.me|whatsapp\.com/.test(h)) return send('whatsapp_click', {link_url:h});
+        if (/tinyurl\.com\/RA-Plus/i.test(h)) return send('rackets_plus_signup', {link_url:h});
+        if (/docs\.google\.com\/forms|forms\.gle/.test(h)) return send('form_click', {link_url:h});
+        return;
+      }
+      var b = e.target.closest && e.target.closest('button[onclick*="openBuyModal"], button[onclick*="openVoucherModal"], button[onclick*="openLessonModal"]');
+      if (b) {
+        var card = b.closest('.card, .racket-card, div');
+        var t = card && card.querySelector('h3');
+        send('shop_buy_click', {item_name: t ? t.textContent.trim().slice(0,80) : (/Voucher/.test(b.getAttribute('onclick')) ? 'Voucher' : 'unknown')});
+      }
+    }, true);
+    document.addEventListener('submit', function(e){
+      var f = e.target;
+      if (f && /script\.google/.test(f.action||'')) send('begin_checkout', {form_type: (f.querySelector('[name="type"]')||{}).value || ''});
+    }, true);
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — Rackets Academy</title>
+<meta name="description" content="Réponses sur la réservation, les prix, l&#x27;annulation, la location de raquettes, les cours, les bons, RACKETS+ et les événements à la Rackets Academy de Salgesch et Sion.">
+<link rel="canonical" href="https://www.racketsacademy.ch/fr/faq.html">
+<link rel="stylesheet" href="../styles.css?v=37">
+<meta property="og:title" content="FAQ — Rackets Academy">
+<meta property="og:description" content="Réponses sur la réservation, les prix, l&#x27;annulation, la location de raquettes, les cours, les bons, RACKETS+ et les événements à la Rackets Academy de Salgesch et Sion.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.racketsacademy.ch/fr/faq.html">
+<meta property="og:image" content="https://www.racketsacademy.ch/images/wix/66ac72740d6a.jpg">
+<meta property="og:locale" content="fr_CH">
+<meta property="og:site_name" content="Rackets Academy">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://www.racketsacademy.ch/faq.html">
+<link rel="alternate" hreflang="fr" href="https://www.racketsacademy.ch/fr/faq.html">
+<link rel="alternate" hreflang="de" href="https://www.racketsacademy.ch/de/faq.html">
+<link rel="alternate" hreflang="x-default" href="https://www.racketsacademy.ch/faq.html">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Comment réserver un terrain ?", "acceptedAnswer": {"@type": "Answer", "text": "En ligne dans l'app Playtomic ou sur notre page de réservation, pour Salgesch et Sion. Le prix est partagé automatiquement entre les joueurs."}}, {"@type": "Question", "name": "Combien coûte un terrain ?", "acceptedAnswer": {"@type": "Answer", "text": "Padel indoor (90 min) : 17 CHF par personne du lundi au vendredi avant 17 h, 20 CHF par personne dès 17 h et le week-end. Tennis dès 15 CHF par personne. Pickleball (1 h) dès 5 CHF par personne. Mêmes prix dans les deux clubs."}}, {"@type": "Question", "name": "Comment annuler ?", "acceptedAnswer": {"@type": "Answer", "text": "Annulation gratuite jusqu'à 24 heures avant la réservation, directement dans l'app Playtomic. Les annulations tardives et les absences sont facturées en entier — sans exception."}}, {"@type": "Question", "name": "Quels sont les horaires ?", "acceptedAnswer": {"@type": "Answer", "text": "Tous les jours de 7 h à 23 h 30 dans les deux clubs."}}, {"@type": "Question", "name": "Y a-t-il un rabais pour les entreprises ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. Les employés des entreprises partenaires ont 15 % de rabais sur les réservations avant 17 h 30 en semaine. Plus pour les entreprises."}}, {"@type": "Question", "name": "Je n'ai pas de raquette.", "acceptedAnswer": {"@type": "Answer", "text": "Loue-en une au club pour 3, 5 ou 10 CHF (débutant / intermédiaire / pro), paiement par Twint. Balles en vente sur place."}}, {"@type": "Question", "name": "Quelles chaussures faut-il ?", "acceptedAnswer": {"@type": "Answer", "text": "Des chaussures de sport d'intérieur propres (padel ou tennis). Pas de chaussures d'extérieur ni de semelles noires sur les terrains."}}, {"@type": "Question", "name": "Quand la lumière s'allume-t-elle ?", "acceptedAnswer": {"@type": "Answer", "text": "Automatiquement 5 minutes avant ta réservation, et elle s'éteint 10 minutes après la fin."}}, {"@type": "Question", "name": "Vestiaires et douches ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui, dans les deux clubs."}}, {"@type": "Question", "name": "Où se garer ?", "acceptedAnswer": {"@type": "Answer", "text": "Salgesch : parking gratuit sur place, la gare est à 15 minutes à pied. Sion : parking sur place, Route de Préjeux 16."}}, {"@type": "Question", "name": "Puis-je venir avec mon chien ?", "acceptedAnswer": {"@type": "Answer", "text": "Pas sur les terrains de padel. Voir tout le règlement intérieur."}}, {"@type": "Question", "name": "Je n'ai jamais joué. Par où commencer ?", "acceptedAnswer": {"@type": "Answer", "text": "Viens au cours d'initiation chaque samedi à 10 h à Sion. Aucune expérience nécessaire, raquettes à louer sur place. Inscription sur Playtomic."}}, {"@type": "Question", "name": "Proposez-vous des cours privés ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui, de 1 à 4 joueurs, coach, terrain, raquette et balles compris. Prix et réservation sur la page des cours."}}, {"@type": "Question", "name": "Y a-t-il des cours pendant les vacances scolaires ?", "acceptedAnswer": {"@type": "Answer", "text": "Non. Les cours en groupe font une pause pendant les vacances scolaires valaisannes ; les dates sont sur la page des cours."}}, {"@type": "Question", "name": "J'ai manqué une séance de groupe.", "acceptedAnswer": {"@type": "Answer", "text": "Si possible, on te propose un rattrapage dans un autre groupe, sans garantie. Remboursement sur certificat médical."}}, {"@type": "Question", "name": "Comment fonctionnent les bons cadeaux ?", "acceptedAnswer": {"@type": "Answer", "text": "Chaque bon est un code Playtomic valant une partie en soirée (20 CHF) pour une personne, envoyé par e-mail juste après le paiement. À acheter dans le shop."}}, {"@type": "Question", "name": "Combien de temps les bons sont-ils valables ?", "acceptedAnswer": {"@type": "Answer", "text": "Ils n'expirent pas."}}, {"@type": "Question", "name": "Quand puis-je retirer une raquette commandée ?", "acceptedAnswer": {"@type": "Answer", "text": "Dès le lendemain au club choisi. Besoin plus tôt ? Écris-nous sur WhatsApp."}}, {"@type": "Question", "name": "Qu'est-ce que RACKETS+ ?", "acceptedAnswer": {"@type": "Answer", "text": "Notre programme de fidélité : cumule des points à chaque visite et reçois des récompenses, le tout via WhatsApp avec une carte numérique dans ton wallet. Rejoindre RACKETS+."}}, {"@type": "Question", "name": "Peut-on réserver un événement d'entreprise ou un anniversaire d'enfant ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui — voir événements d'entreprise et anniversaires d'enfants. On t'envoie une offre."}}, {"@type": "Question", "name": "Peut-on privatiser le spa ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. Le spa entier à Salgesch pour 2 heures jusqu'à 8 personnes coûte 120 CHF. Spa et sauna."}}]}</script>
+</head>
+<body>
+<div class="site-top">
+<div class="promo-banner">
+  <div class="promo-track">
+    <span>🎾 COURTS OUVERTS — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Réserve sur Playtomic →</a></span>
+    <span>🎾 COURTS OUVERTS — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Réserve sur Playtomic →</a></span>
+    <span>🎾 COURTS OUVERTS — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Réserve sur Playtomic →</a></span>
+  </div>
+</div>
+
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo"><img src="https://www.racketsacademy.ch/images/wix/834be8bc03b7.png" alt="Rackets Academy logo" width="180" height="63"></a>
+    <nav class="navlinks">
+      <a href="book.html">Réserver</a>
+      <a href="training.html">Cours</a>
+      <a href="events.html">Événements</a>
+      <a href="rackets-plus.html">Membres</a>
+      <a href="ski-and-padel.html">Camps</a>
+      <a href="spa-and-sauna.html">Spa</a>
+      <a href="shop.html">Shop</a>
+      <a href="about.html">À propos</a>
+      <a class="nav-login" href="../intern.html" rel="nofollow">Login équipe</a>
+      <div class="lang-switch">
+        <button type="button" aria-haspopup="true">FR</button>
+        <div class="lang-menu"><a href="../faq.html">English</a><a href="../de/faq.html">Deutsch</a><a href="#">Français</a></div>
+      </div>
+      <a class="nav-cta-mobile" href="book.html">Réserver</a>
+    </nav>
+    <div class="lang-switch">
+      <button type="button" aria-haspopup="true">FR</button>
+      <div class="lang-menu"><a href="../faq.html">English</a><a href="../de/faq.html">Deutsch</a><a href="#">Français</a></div>
+    </div>
+    <a class="nav-cta" href="book.html">Réserver</a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span></button>
+  </div>
+</header>
+</div>
+
+<section class="section-tight ux-faq" id="faq">
+  <div class="wrap" style="max-width:820px;">
+    <h1 style="font-size:2.2rem; font-weight:800; margin-bottom:10px;">Questions fréquentes</h1>
+    <p style="margin:0 0 24px">Pas de réponse ici ? <a href="https://wa.me/41772780115" target="_blank" rel="noopener">Écris-nous sur WhatsApp</a> — on répond vite.</p>
+    <h2 style="margin:28px 0 10px;font-size:1.3rem">Réservation et prix</h2>
+    <div class="faq-list"><details><summary>Comment réserver un terrain ?</summary><p>En ligne dans l'app Playtomic ou sur <a href="book.html">notre page de réservation</a>, pour Salgesch et Sion. Le prix est partagé automatiquement entre les joueurs.</p></details><details><summary>Combien coûte un terrain ?</summary><p>Padel indoor (90 min) : 17 CHF par personne du lundi au vendredi avant 17 h, 20 CHF par personne dès 17 h et le week-end. Tennis dès 15 CHF par personne. Pickleball (1 h) dès 5 CHF par personne. Mêmes prix dans les deux clubs.</p></details><details><summary>Comment annuler ?</summary><p>Annulation gratuite jusqu'à <b>24 heures</b> avant la réservation, directement dans l'app Playtomic. Les annulations tardives et les absences sont facturées en entier — sans exception.</p></details><details><summary>Quels sont les horaires ?</summary><p>Tous les jours de 7 h à 23 h 30 dans les deux clubs.</p></details><details><summary>Y a-t-il un rabais pour les entreprises ?</summary><p>Oui. Les employés des entreprises partenaires ont 15 % de rabais sur les réservations avant 17 h 30 en semaine. <a href="company.html">Plus pour les entreprises</a>.</p></details></div>
+    <h2 style="margin:28px 0 10px;font-size:1.3rem">Au club</h2>
+    <div class="faq-list"><details><summary>Je n'ai pas de raquette.</summary><p>Loue-en une au club pour 3, 5 ou 10 CHF (débutant / intermédiaire / pro), paiement par Twint. Balles en vente sur place.</p></details><details><summary>Quelles chaussures faut-il ?</summary><p>Des chaussures de sport d'intérieur propres (padel ou tennis). Pas de chaussures d'extérieur ni de semelles noires sur les terrains.</p></details><details><summary>Quand la lumière s'allume-t-elle ?</summary><p>Automatiquement 5 minutes avant ta réservation, et elle s'éteint 10 minutes après la fin.</p></details><details><summary>Vestiaires et douches ?</summary><p>Oui, dans les deux clubs.</p></details><details><summary>Où se garer ?</summary><p>Salgesch : parking gratuit sur place, la gare est à 15 minutes à pied. Sion : parking sur place, Route de Préjeux 16.</p></details><details><summary>Puis-je venir avec mon chien ?</summary><p>Pas sur les terrains de padel. Voir tout le <a href="house-rules.html">règlement intérieur</a>.</p></details></div>
+    <h2 style="margin:28px 0 10px;font-size:1.3rem">Cours et coaching</h2>
+    <div class="faq-list"><details><summary>Je n'ai jamais joué. Par où commencer ?</summary><p>Viens au cours d'initiation chaque samedi à 10 h à Sion. Aucune expérience nécessaire, raquettes à louer sur place. <a href="https://tinyurl.com/Academy-Sion" target="_blank" rel="noopener">Inscription sur Playtomic</a>.</p></details><details><summary>Proposez-vous des cours privés ?</summary><p>Oui, de 1 à 4 joueurs, coach, terrain, raquette et balles compris. Prix et réservation sur la <a href="training.html">page des cours</a>.</p></details><details><summary>Y a-t-il des cours pendant les vacances scolaires ?</summary><p>Non. Les cours en groupe font une pause pendant les vacances scolaires valaisannes ; les dates sont sur la <a href="training.html">page des cours</a>.</p></details><details><summary>J'ai manqué une séance de groupe.</summary><p>Si possible, on te propose un rattrapage dans un autre groupe, sans garantie. Remboursement sur certificat médical.</p></details></div>
+    <h2 style="margin:28px 0 10px;font-size:1.3rem">Bons et shop</h2>
+    <div class="faq-list"><details><summary>Comment fonctionnent les bons cadeaux ?</summary><p>Chaque bon est un code Playtomic valant une partie en soirée (20 CHF) pour une personne, envoyé par e-mail juste après le paiement. À acheter dans le <a href="shop.html#vouchers">shop</a>.</p></details><details><summary>Combien de temps les bons sont-ils valables ?</summary><p>Ils n'expirent pas.</p></details><details><summary>Quand puis-je retirer une raquette commandée ?</summary><p>Dès le lendemain au club choisi. Besoin plus tôt ? Écris-nous sur WhatsApp.</p></details></div>
+    <h2 style="margin:28px 0 10px;font-size:1.3rem">RACKETS+ et événements</h2>
+    <div class="faq-list"><details><summary>Qu'est-ce que RACKETS+ ?</summary><p>Notre programme de fidélité : cumule des points à chaque visite et reçois des récompenses, le tout via WhatsApp avec une carte numérique dans ton wallet. <a href="rackets-plus.html">Rejoindre RACKETS+</a>.</p></details><details><summary>Peut-on réserver un événement d'entreprise ou un anniversaire d'enfant ?</summary><p>Oui — voir <a href="company-events.html">événements d'entreprise</a> et <a href="kids-birthday.html">anniversaires d'enfants</a>. On t'envoie une offre.</p></details><details><summary>Peut-on privatiser le spa ?</summary><p>Oui. Le spa entier à Salgesch pour 2 heures jusqu'à 8 personnes coûte 120 CHF. <a href="spa-and-sauna.html">Spa et sauna</a>.</p></details></div>
+    <h2 style="margin:28px 0 10px;font-size:1.3rem">Règlement intérieur</h2>
+    <p>Annulation 24 h, chaussures, lumière, verre, chiens, fumée : <a href="house-rules.html">lire tout le règlement</a>.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="https://www.racketsacademy.ch/images/wix/fd51e1e7dfdf.png" alt="Rackets Academy" width="200" height="72" style="margin-bottom:8px;">
+    <p style="opacity:.85; margin:0 0 14px;">PLAY. COMPETE. ENJOY.</p>
+    <div class="footer-grid ux-foot"><div><h4>Salgesch</h4><a href="https://www.google.com/maps/search/?api=1&query=Littenstrasse+30+3970+Salgesch" target="_blank" rel="noopener">Littenstrasse 30, 3970 Salgesch</a><p>Padel · Pickleball · Tennis · Spa</p><p>Tous les jours 7h–23h30</p></div><div><h4>Sion</h4><a href="https://www.google.com/maps/search/?api=1&query=Route+de+Pr%C3%A9jeux+16+1950+Sion" target="_blank" rel="noopener">Route de Préjeux 16, 1950 Sion</a><p>Padel</p><p>Tous les jours 7h–23h30</p></div><div class="foot-links"><h4>Liens rapides</h4><a href="book.html">Réserver un court</a><a href="training.html">Cours</a><a href="faq.html">FAQ</a><a href="shop.html#vouchers">Bons cadeaux</a><a href="shop.html">Shop</a><a href="events.html">Événements</a></div><div class="footer-contact"><h4>Contact</h4><a class="foot-wa" href="https://wa.me/41772780115?text=Hola%20%21%20J%27ai%20une%20question%20sur%20la%20Rackets%20Academy." target="_blank" rel="noopener">Écris-nous sur WhatsApp</a><p>Réponse rapide · +41 77 278 01 15</p><a href="mailto:phil@racketsacademy.ch">phil@racketsacademy.ch</a></div></div>
+    <div class="sponsor-row">
+      <div class="sponsor-track">
+      <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/5887f86ed50b.png" alt="Wilson" loading="lazy"></a>
+      <a href="https://www.estrellagalicia.es" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e0ff8b826424.png" alt="Estrella Galicia" loading="lazy"></a>
+      <a href="https://www.decathlon.ch" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/75ca95274283.png" alt="Decathlon" loading="lazy"></a>
+      <a href="https://www.coca-cola.com/ch/de/brands/powerade" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4662d7547275.png" alt="Powerade" loading="lazy"></a>
+      <a href="https://tanguy.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4c92a56af6fb.png" alt="Garage Tanguy" loading="lazy"></a>
+      <a href="https://tanguy.hyundai.ch/fr" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/f74a1e85ce45.png" alt="Hyundai" loading="lazy"></a>
+      <a href="https://www.scleanup.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d7bc95225fa2.png" alt="S Clean-up" loading="lazy"></a>
+      <a href="https://shop.morand.ch/shop/category/sirops-65" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e03b161cd8bb.png" alt="Distillerie Morand" loading="lazy"></a>
+      <a href="https://rivella.ch/de/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d4f0de57b68e.png" alt="Rivella" loading="lazy"></a>
+      <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/5887f86ed50b.png" alt="Wilson" loading="lazy"></a>
+      <a href="https://www.estrellagalicia.es" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e0ff8b826424.png" alt="Estrella Galicia" loading="lazy"></a>
+      <a href="https://www.decathlon.ch" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/75ca95274283.png" alt="Decathlon" loading="lazy"></a>
+      <a href="https://www.coca-cola.com/ch/de/brands/powerade" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4662d7547275.png" alt="Powerade" loading="lazy"></a>
+      <a href="https://tanguy.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4c92a56af6fb.png" alt="Garage Tanguy" loading="lazy"></a>
+      <a href="https://tanguy.hyundai.ch/fr" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/f74a1e85ce45.png" alt="Hyundai" loading="lazy"></a>
+      <a href="https://www.scleanup.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d7bc95225fa2.png" alt="S Clean-up" loading="lazy"></a>
+      <a href="https://shop.morand.ch/shop/category/sirops-65" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e03b161cd8bb.png" alt="Distillerie Morand" loading="lazy"></a>
+      <a href="https://rivella.ch/de/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d4f0de57b68e.png" alt="Rivella" loading="lazy"></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Rackets Academy</span>
+      <span><a href="faq.html">Conditions générales</a> · <a href="privacy-policy.html">Politique de confidentialité</a> · <a href="impressum.html">Mentions légales</a></span>
+    </div>
+  </div>
+</footer>
+<script src="../nav.js?v=30"></script>
+</body>
+</html>
