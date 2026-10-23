@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  // first visit: follow the browser language (fr/de); explicit choice is remembered
+  (function(){try{var k='ra_lang';if(!localStorage.getItem(k)){var n=(navigator.language||'').slice(0,2).toLowerCase();if(n==='fr'||n==='de'){localStorage.setItem(k,n);var p=location.pathname.split('/').pop()||'index.html';location.replace(n+'/'+p+location.search+location.hash);}else{localStorage.setItem(k,'en');}}}catch(e){}})();
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T9T2GZHGS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    analytics_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'
+  });
+  gtag('js', new Date());
+  // Team-Geraete: einmal racketsacademy.ch/?internal=1 aufrufen → Besuche als intern markiert (GA4-Filter «Internal Traffic»); ?internal=0 hebt es auf
+  (function(){try{var q=location.search;if(/[?&]internal=1/.test(q))localStorage.setItem('ra_internal','1');if(/[?&]internal=0/.test(q))localStorage.removeItem('ra_internal');}catch(e){}})();
+  gtag('config', 'G-T9T2GZHGS2', (function(){try{return localStorage.getItem('ra_internal')==='1'?{traffic_type:'internal'}:{};}catch(e){return {};}})());
+  // Rackets Academy conversion events
+  (function(){
+    var lang = (location.pathname.match(/\/(fr|de)\//)||[,'en'])[1];
+    function send(name, p){ p=p||{}; p.page_lang=lang; p.page_path=location.pathname; p.transport_type='beacon'; gtag('event', name, p); }
+    document.addEventListener('click', function(e){
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (a && a.hasAttribute('data-pick')) return;
+      if (a) {
+        var h = a.href;
+        if (/playtomic\.com/.test(h)) return send('book_court', {link_url:h, link_text:(a.textContent||'').trim().slice(0,60)});
+        if (/wa\.me|whatsapp\.com/.test(h)) return send('whatsapp_click', {link_url:h});
+        if (/tinyurl\.com\/RA-Plus/i.test(h)) return send('rackets_plus_signup', {link_url:h});
+        if (/docs\.google\.com\/forms|forms\.gle/.test(h)) return send('form_click', {link_url:h});
+        return;
+      }
+      var b = e.target.closest && e.target.closest('button[onclick*="openBuyModal"], button[onclick*="openVoucherModal"], button[onclick*="openLessonModal"]');
+      if (b) {
+        var card = b.closest('.card, .racket-card, div');
+        var t = card && card.querySelector('h3');
+        send('shop_buy_click', {item_name: t ? t.textContent.trim().slice(0,80) : (/Voucher/.test(b.getAttribute('onclick')) ? 'Voucher' : 'unknown')});
+      }
+    }, true);
+    document.addEventListener('submit', function(e){
+      var f = e.target;
+      if (f && /script\.google/.test(f.action||'')) send('begin_checkout', {form_type: (f.querySelector('[name="type"]')||{}).value || ''});
+    }, true);
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>House Rules — Rackets Academy</title>
+<meta name="description" content="House rules and etiquette at Rackets Academy in Salgesch and Sion: 24-hour cancellation, lights, shoes, conduct.">
+<link rel="canonical" href="https://www.racketsacademy.ch/house-rules.html">
+<link rel="stylesheet" href="styles.css?v=37">
+<meta property="og:title" content="House Rules — Rackets Academy">
+<meta property="og:description" content="House rules and etiquette at Rackets Academy in Salgesch and Sion: 24-hour cancellation, lights, shoes, conduct.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.racketsacademy.ch/house-rules.html">
+<meta property="og:image" content="https://www.racketsacademy.ch/images/wix/66ac72740d6a.jpg">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="Rackets Academy">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://www.racketsacademy.ch/house-rules.html">
+<link rel="alternate" hreflang="fr" href="https://www.racketsacademy.ch/fr/house-rules.html">
+<link rel="alternate" hreflang="de" href="https://www.racketsacademy.ch/de/house-rules.html">
+<link rel="alternate" hreflang="x-default" href="https://www.racketsacademy.ch/house-rules.html">
+</head>
+<body>
+<div class="site-top">
+<div class="promo-banner">
+  <div class="promo-track">
+    <span>🎾 COURTS OPEN NOW — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Book Now on Playtomic →</a></span>
+    <span>🎾 COURTS OPEN NOW — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Book Now on Playtomic →</a></span>
+    <span>🎾 COURTS OPEN NOW — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Book Now on Playtomic →</a></span>
+  </div>
+</div>
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo"><img src="https://www.racketsacademy.ch/images/wix/834be8bc03b7.png" alt="Rackets Academy logo" width="180" height="63"></a>
+    <nav class="navlinks">
+      <a href="book.html">Book</a>
+      <a href="training.html">Coaching</a>
+      <a href="events.html">Events</a>
+      <a href="rackets-plus.html">Membership</a>
+      <a href="ski-and-padel.html">Camps</a>
+      <a href="spa-and-sauna.html">Spa</a>
+      <a href="shop.html">Shop</a>
+      <a href="about.html">About</a>
+      <a class="nav-login" href="intern.html" rel="nofollow">Team login</a>
+      <div class="lang-switch">
+        <button type="button" aria-haspopup="true">EN</button>
+        <div class="lang-menu"><a href="#">English</a><a href="de/house-rules.html">Deutsch</a><a href="fr/house-rules.html">Français</a></div>
+      </div>
+      <a class="nav-cta-mobile" href="book.html">Book Now</a>
+    </nav>
+    <div class="lang-switch">
+      <button type="button" aria-haspopup="true">EN</button>
+      <div class="lang-menu"><a href="#">English</a><a href="de/house-rules.html">Deutsch</a><a href="fr/house-rules.html">Français</a></div>
+    </div>
+    <a class="nav-cta" href="book.html">Book Now</a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span></button>
+  </div>
+</header>
+</div>
+<section class="section-tight">
+  <div class="wrap" style="max-width:760px;">
+    <h1 style="font-size:2.2rem; font-weight:800; margin-bottom:16px;">House Rules</h1>
+    <div style="background:#fff4e5;border-left:6px solid #ff8a3d;border-radius:12px;padding:18px 20px;margin:0 0 28px"><h2 style="margin:0 0 8px;font-size:1.35rem">⚠️ Cancellation: at least 24 hours before</h2><p style="margin:0">Cancel your booking in the Playtomic app at least <b>24 hours</b> before it starts. Later cancellations and no-shows are charged in full — no exceptions, so every player gets the same fair chance at a court.</p></div>
+    <p>Padel is not only about winning or losing, but also about mutual respect. Please follow these rules:</p>
+    <h3>Etiquette</h3>
+    <ol style="padding-left:22px"><li style="margin:0 0 10px">No glass bottles or glasses in the hall or near the courts.</li><li style="margin:0 0 10px">When switching sides, do not climb or jump over the net.</li><li style="margin:0 0 10px">Respect your booked time, or extend it in time.</li><li style="margin:0 0 10px">Pay for the court and rental rackets before you start playing.</li><li style="margin:0 0 10px">Wear proper sports clothing — no playing with a bare upper body.</li></ol>
+    <h3>Good to know</h3>
+    <ul style="padding-left:22px"><li style="margin:0 0 10px"><b>Lights switch on automatically 5 minutes before your booking and off 10 minutes after it ends.</b> Please leave the court on time for the next players.</li><li style="margin:0 0 10px">Clean indoor sports shoes only (padel or tennis shoes) — no outdoor or black-soled shoes.</li><li style="margin:0 0 10px">Do not hit the glass or the fence with your racket. Please report any damage straight away.</li><li style="margin:0 0 10px">No food on the courts. Water in plastic or metal bottles is fine.</li><li style="margin:0 0 10px">No smoking or vaping indoors.</li><li style="margin:0 0 10px">No dogs or other pets on the padel courts.</li><li style="margin:0 0 10px">Take your bottles and rubbish with you.</li><li style="margin:0 0 10px">Children under 14 only with an adult.</li><li style="margin:0 0 10px">Play fair and stay friendly: call your own balls and greet the next players.</li></ul>
+    <p style="margin-top:24px"><b>Rackets Academy reserves the right to exclude anyone who does not respect these rules from the Academy, temporarily or permanently.</b></p>
+  </div>
+</section>
+<footer>
+  <div class="wrap">
+    <img src="https://www.racketsacademy.ch/images/wix/fd51e1e7dfdf.png" alt="Rackets Academy" width="200" height="72" style="margin-bottom:8px;">
+    <p style="opacity:.85; margin:0 0 14px;">PLAY. COMPETE. ENJOY.</p>
+    <div class="footer-grid ux-foot"><div><h4>Salgesch</h4><a href="https://www.google.com/maps/search/?api=1&query=Littenstrasse+30+3970+Salgesch" target="_blank" rel="noopener">Littenstrasse 30, 3970 Salgesch</a><p>Padel · Pickleball · Tennis · Spa</p><p>Daily 7am–11:30pm</p></div><div><h4>Sion</h4><a href="https://www.google.com/maps/search/?api=1&query=Route+de+Pr%C3%A9jeux+16+1950+Sion" target="_blank" rel="noopener">Route de Préjeux 16, 1950 Sion</a><p>Padel</p><p>Daily 7am–11:30pm</p></div><div class="foot-links"><h4>Quick links</h4><a href="book.html">Book a court</a><a href="training.html">Courses</a><a href="book.html#faq">FAQ</a><a href="shop.html#vouchers">Gift vouchers</a><a href="shop.html">Shop</a><a href="events.html">Events</a></div><div class="footer-contact"><h4>Contact</h4><a class="foot-wa" href="https://wa.me/41772780115?text=Hola%21%20I%20have%20a%20question%20about%20Rackets%20Academy." target="_blank" rel="noopener">Message us on WhatsApp</a><p>Quick reply · +41 77 278 01 15</p><a href="mailto:phil@racketsacademy.ch">phil@racketsacademy.ch</a></div></div>
+    <div class="sponsor-row">
+      <div class="sponsor-track">
+      <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/5887f86ed50b.png" alt="Wilson" loading="lazy"></a>
+      <a href="https://www.estrellagalicia.es" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e0ff8b826424.png" alt="Estrella Galicia" loading="lazy"></a>
+      <a href="https://www.decathlon.ch" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/75ca95274283.png" alt="Decathlon" loading="lazy"></a>
+      <a href="https://www.coca-cola.com/ch/de/brands/powerade" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4662d7547275.png" alt="Powerade" loading="lazy"></a>
+      <a href="https://tanguy.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4c92a56af6fb.png" alt="Garage Tanguy" loading="lazy"></a>
+      <a href="https://tanguy.hyundai.ch/fr" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/f74a1e85ce45.png" alt="Hyundai" loading="lazy"></a>
+      <a href="https://www.scleanup.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d7bc95225fa2.png" alt="S Clean-up" loading="lazy"></a>
+      <a href="https://shop.morand.ch/shop/category/sirops-65" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e03b161cd8bb.png" alt="Distillerie Morand" loading="lazy"></a>
+      <a href="https://rivella.ch/de/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d4f0de57b68e.png" alt="Rivella" loading="lazy"></a>
+      <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/5887f86ed50b.png" alt="Wilson" loading="lazy"></a>
+      <a href="https://www.estrellagalicia.es" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e0ff8b826424.png" alt="Estrella Galicia" loading="lazy"></a>
+      <a href="https://www.decathlon.ch" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/75ca95274283.png" alt="Decathlon" loading="lazy"></a>
+      <a href="https://www.coca-cola.com/ch/de/brands/powerade" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4662d7547275.png" alt="Powerade" loading="lazy"></a>
+      <a href="https://tanguy.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4c92a56af6fb.png" alt="Garage Tanguy" loading="lazy"></a>
+      <a href="https://tanguy.hyundai.ch/fr" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/f74a1e85ce45.png" alt="Hyundai" loading="lazy"></a>
+      <a href="https://www.scleanup.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d7bc95225fa2.png" alt="S Clean-up" loading="lazy"></a>
+      <a href="https://shop.morand.ch/shop/category/sirops-65" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e03b161cd8bb.png" alt="Distillerie Morand" loading="lazy"></a>
+      <a href="https://rivella.ch/de/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d4f0de57b68e.png" alt="Rivella" loading="lazy"></a>
+      </div>
+    <div class="footer-bottom">
+      <span>© 2026 Rackets Academy</span>
+      <span><a href="house-rules.html">Terms &amp; Conditions</a> · <a href="privacy-policy.html">Privacy Policy</a> · <a href="impressum.html">Imprint</a></span>
+    </div>
+    </div>
+</footer>
+<script src="nav.js?v=30"></script>
+</body>
+</html>
