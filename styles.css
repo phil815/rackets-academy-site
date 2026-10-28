@@ -1084,3 +1084,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 @media (max-width:600px){ .hero h1.hero-lede{font-size:1.05rem;} }
 .hero-video .hero-h{text-shadow:0 2px 12px rgba(0,0,0,.35);}
 .offer-text h3 a{color:inherit; text-decoration:none;}
+/* pickleball page */
+.pb-intro{max-width:760px; font-size:1.12rem; line-height:1.6; margin:0 0 22px;}
+.pb-rules{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));}
+.pb-chips .pb-chip{background:#fff; color:var(--blue-dark); border:2px solid #e3e9f0;}
+.pb-spa{display:flex; gap:28px; align-items:center;}
+.pb-spa-logo{flex:0 0 auto; background:var(--blue-dark); border-radius:22px; padding:22px 26px; line-height:0;}
+.pb-spa-logo img{width:200px; height:auto;}
+.pb-spa-link{font-weight:800; color:var(--blue);}
+@media (max-width:700px){ .pb-spa{flex-direction:column; align-items:flex-start;} }
