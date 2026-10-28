@@ -1072,3 +1072,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .kc-book{white-space:nowrap; padding:10px 18px;}
 .kc-mores{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
 @media (max-width:600px){ .kc-week{flex-direction:column; align-items:flex-start;} .kc-book{width:100%; text-align:center;} }
+.kc-week .kc-left{display:block; font-weight:800; color:var(--blue); font-size:.92rem !important; margin-top:2px;} .kc-week .kc-left.low{color:#d4380d;}
+.kc-book:disabled{opacity:.45; cursor:not-allowed;}
+.kc-wa{margin:14px 0 0;} .kc-wa a{font-weight:800; color:var(--blue);}
+.kc-sub{margin:-6px 0 16px; font-size:1.08rem; color:#445;}
+#kc-kids{display:grid;gap:8px;margin-top:6px}.pp-row{display:grid;grid-template-columns:1fr 84px;gap:8px}.pp-row input{width:100%}
+#kc-n{display:block; margin-top:6px; width:100%; padding:10px; border-radius:10px; border:1px solid #d5dde6; font:inherit;}
