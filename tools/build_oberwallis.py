@@ -14,7 +14,7 @@ FAC = [('🎾', 'Padel', '4 Plätze indoor, 2 outdoor', 'Täglich 07:00–23:30'
 MORE = [('🏆', 'Racketero-Turniere', 'Jede Woche — spiel gegen neue Leute aus dem ganzen Wallis.', 'racketero.html'),
         ('🎓', 'Training auf Deutsch', 'Einzel- oder Gruppentrainings, mit deutschsprachigen Coaches in Salgesch.', 'training.html'),
         ('🎂', 'Kindergeburtstag', '2 Stunden Padel mit Coach und Mini-Turnier, bis 12 Kinder.', 'kids-birthday.html'),
-        ('💼', 'Firmenevent', 'Teamevent mit Padel, Essen und Apéro — ab 25 CHF pro Person.', 'company-events.html')]
+        ('📍', 'Padel für Visp & Brig', 'Anfahrt, Preise und Kurse für Spieler aus Visp und Brig.', 'padel-visp.html')]
 FAQ = [('Wo kann man im Oberwallis Padel spielen?', 'In der Rackets Academy in Salgesch — dem grössten Padelzentrum im Wallis, 20 Minuten von Visp und 30 Minuten von Brig. 4 Indoor- und 2 Outdoor-Plätze, täglich 07:00–23:30.'),
        ('Brauche ich einen eigenen Schläger?', 'Nein. Für dein erstes Spiel bekommst du einen Leihschläger gratis.'),
        ('Gibt es Training auf Deutsch?', 'Ja, in Salgesch trainieren dich auch deutschsprachige Coaches — einzeln oder in der Gruppe.'),

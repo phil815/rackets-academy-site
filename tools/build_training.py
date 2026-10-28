@@ -3,7 +3,7 @@ import re, os, urllib.parse
 WA_SA, WA_SI = '41772780115', '41762914369'
 T = {
 'en': dict(
-  title='Padel courses Salgesch & Sion | Rackets Academy',
+  title='Padel coaching & courses in Valais – Sion & Salgesch | Rackets Academy',
   desc='Padel courses for adults and kids in Salgesch and Sion. Subscriptions include a 12-week training plan and coach feedback after every session.',
   kicker='Coaching · Salgesch & Sion', h1='Train with a plan. See your progress.',
   lede='Group courses for adults and kids — with a subscription you get a 12-week training plan and a personal rating from your coach after every session.',
@@ -32,7 +32,7 @@ T = {
   sub_old='Month / Quarter / Year subscriptions — sign up with our coach:',
   sub_new='Month / Quarter / Year — incl. training plan &amp; feedback after every session. Sign up with our coach:'),
 'fr': dict(
-  title='Cours de padel Salgesch & Sion | Rackets Academy',
+  title='Cours de padel & coaching Valais – Sion & Salgesch | Rackets Academy',
   desc="Cours de padel adultes et enfants à Salgesch et Sion. L'abonnement inclut un plan de 12 semaines et un retour du coach après chaque séance.",
   kicker='Coaching · Salgesch & Sion', h1='Entraîne-toi avec un plan. Vois tes progrès.',
   lede="Cours en groupe pour adultes et enfants — avec un abonnement, tu reçois un plan d'entraînement de 12 semaines et une évaluation personnelle de ton coach après chaque séance.",
@@ -61,7 +61,7 @@ T = {
   sub_old='Abonnements mois / trimestre / année — inscris-toi avec notre coach :',
   sub_new="Mois / trimestre / année — plan d'entraînement &amp; retour après chaque séance inclus. Inscris-toi avec notre coach :"),
 'de': dict(
-  title='Padelkurse Salgesch & Sion | Rackets Academy',
+  title='Padelkurse & Coaching im Wallis – Salgesch & Sion | Rackets Academy',
   desc='Padelkurse für Erwachsene und Kinder in Salgesch und Sion. Mit Abo: 12-Wochen-Trainingsplan und Feedback vom Coach nach jedem Training.',
   kicker='Coaching · Salgesch & Sion', h1='Trainiere mit Plan. Sieh deinen Fortschritt.',
   lede='Gruppenkurse für Erwachsene und Kinder — mit einem Abo bekommst du einen 12-Wochen-Trainingsplan und nach jedem Training ein persönliches Rating von deinem Coach.',
