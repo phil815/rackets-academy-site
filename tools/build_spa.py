@@ -4,7 +4,7 @@ PT = 'https://playtomic.com/clubs/rackets-academy-salgesch'
 WA = 'https://wa.me/41772780115?text='
 T = {
 'en': dict(
-  title='Spa & Sauna Salgesch · near Sierre, Sion, Crans-Montana',
+  title='Sauna & Spa near Sierre, Valais · Salgesch | Rackets Academy',
   desc='Sauna, hammam & jacuzzi in Salgesch – 5 min from Sierre, 20 min from Crans-Montana, 18 min from Sion. From 25 CHF, Mon–Fri 14–22h, weekends 10–22h.',
   kicker='Spa & Sauna · Salgesch', h1='Grey outside? Warm inside.',
   lede='Finnish sauna, bio-sauna, hammam and jacuzzi right next to our courts — your escape after the slopes, on foggy autumn days or after your match.',
@@ -33,7 +33,7 @@ T = {
        ('Can I book the spa privately?','Yes. You can privatise the whole spa for 2 hours for up to 8 people for 120 CHF — perfect for birthdays or team evenings.')],
   final_h='Your warm-up is waiting.', final_p='Mon–Fri 14:00–22:00 · Sat–Sun 10:00–22:00 · Littenstrasse 30, 3970 Salgesch'),
 'fr': dict(
-  title='Spa & sauna Salgesch · près de Sierre, Sion, Crans-Montana',
+  title='Sauna & spa Sierre · Salgesch, Valais – hammam & jacuzzi',
   desc='Sauna, hammam et jacuzzi à Salgesch – à 5 min de Sierre, 20 min de Crans-Montana, 18 min de Sion. Dès 25 CHF, en semaine 14h–22h, week-end 10h–22h.',
   kicker='Spa & Sauna · Salgesch', h1='Gris dehors ? Chaud dedans.',
   lede='Sauna finlandais, bio-sauna, hammam et jacuzzi juste à côté de nos terrains — ton refuge après les pistes, les jours de brouillard ou après ton match.',
@@ -62,7 +62,7 @@ T = {
        ('Peut-on privatiser le spa ?',"Oui. Tu peux privatiser tout le spa pendant 2 heures pour 8 personnes max pour 120 CHF — idéal pour un anniversaire ou une soirée d'équipe.")],
   final_h="Ta pause chaleur t'attend.", final_p='Lun–ven 14h–22h · sam–dim 10h–22h · Littenstrasse 30, 3970 Salgesch'),
 'de': dict(
-  title='Spa & Sauna Salgesch · bei Siders, Sitten, Crans-Montana',
+  title='Sauna & Spa bei Siders · Salgesch, Wallis – Hammam & Jacuzzi',
   desc='Sauna, Hammam & Jacuzzi in Salgesch – 5 Min. von Siders, 20 Min. von Crans-Montana, 18 Min. von Sitten. Ab 25 CHF, Mo–Fr 14–22, Sa–So 10–22 Uhr.',
   kicker='Spa & Sauna · Salgesch', h1='Grau draussen? Warm drinnen.',
   lede='Finnische Sauna, Bio-Sauna, Hammam und Jacuzzi direkt neben unseren Plätzen — dein Rückzugsort nach der Piste, an nebligen Herbsttagen oder nach dem Match.',

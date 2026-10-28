@@ -490,6 +490,8 @@ document.addEventListener('DOMContentLoaded', function () {
       bar.innerHTML = '<button type="button" class="sb-court">' + SH[0] + '</button><button type="button" class="sb-course">' + SH[1] + '</button>';
       bar.children[0].addEventListener('click', function () { if (window.showShopPanel) showShopPanel('vouchers'); });
       bar.children[1].addEventListener('click', function () { if (window.showShopPanel) showShopPanel('rackets'); });
+    } else if (/kids-camp/.test(location.pathname)) {
+      bar.innerHTML = '<a class="sb-court" href="#dates">' + ({ en: 'Reserve a spot', fr: 'Réserver une place', de: 'Platz reservieren' }[L] || 'Reserve') + '</a>';
     } else if (/kids-birthday/.test(location.pathname)) {
       bar.innerHTML = '<a class="sb-court" href="#inquiry">' + ({ en: 'Request a birthday', fr: 'Demander un anniversaire', de: 'Geburtstag anfragen' }[L] || 'Request') + '</a>';
     } else if (/company-events/.test(location.pathname)) {

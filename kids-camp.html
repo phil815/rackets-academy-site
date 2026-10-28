@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  // first visit: follow the browser language (fr/de); explicit choice is remembered
+  (function(){try{var k='ra_lang';if(!localStorage.getItem(k)){var n=(navigator.language||'').slice(0,2).toLowerCase();if(n==='fr'||n==='de'){localStorage.setItem(k,n);var p=location.pathname.split('/').pop()||'index.html';location.replace(n+'/'+p+location.search+location.hash);}else{localStorage.setItem(k,'en');}}}catch(e){}})();
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T9T2GZHGS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    analytics_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'
+  });
+  gtag('js', new Date());
+  // Team-Geraete: einmal racketsacademy.ch/?internal=1 aufrufen → Besuche als intern markiert (GA4-Filter «Internal Traffic»); ?internal=0 hebt es auf
+  (function(){try{var q=location.search;if(/[?&]internal=1/.test(q))localStorage.setItem('ra_internal','1');if(/[?&]internal=0/.test(q))localStorage.removeItem('ra_internal');}catch(e){}})();
+  gtag('config', 'G-T9T2GZHGS2', (function(){try{return localStorage.getItem('ra_internal')==='1'?{traffic_type:'internal'}:{};}catch(e){return {};}})());
+  // Rackets Academy conversion events
+  (function(){
+    var lang = (location.pathname.match(/\/(fr|de)\//)||[,'en'])[1];
+    function send(name, p){ p=p||{}; p.page_lang=lang; p.page_path=location.pathname; p.transport_type='beacon'; gtag('event', name, p); }
+    document.addEventListener('click', function(e){
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (a && a.hasAttribute('data-pick')) return;
+      if (a) {
+        var h = a.href;
+        if (/playtomic\.com/.test(h)) return send('book_court', {link_url:h, link_text:(a.textContent||'').trim().slice(0,60)});
+        if (/wa\.me|whatsapp\.com/.test(h)) return send('whatsapp_click', {link_url:h});
+        if (/tinyurl\.com\/RA-Plus/i.test(h)) return send('rackets_plus_signup', {link_url:h});
+        if (/docs\.google\.com\/forms|forms\.gle/.test(h)) return send('form_click', {link_url:h});
+        return;
+      }
+      var b = e.target.closest && e.target.closest('button[onclick*="openBuyModal"], button[onclick*="openVoucherModal"], button[onclick*="openLessonModal"]');
+      if (b) {
+        var card = b.closest('.card, .racket-card, div');
+        var t = card && card.querySelector('h3');
+        send('shop_buy_click', {item_name: t ? t.textContent.trim().slice(0,80) : (/Voucher/.test(b.getAttribute('onclick')) ? 'Voucher' : 'unknown')});
+      }
+    }, true);
+    document.addEventListener('submit', function(e){
+      var f = e.target;
+      if (f && /script\.google/.test(f.action||'')) send('begin_checkout', {form_type: (f.querySelector('[name="type"]')||{}).value || ''});
+    }, true);
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kids padel day camps, holidays 2027 – Sierre, Valais | Rackets Academy</title>
+<meta name="description" content="Padel camps for kids aged 6–14 in the Valais school holidays 2027: winter, Easter and summer in Salgesch, 5 min from Sierre. 20 spots per week, CHF 250, book online.">
+<link rel="canonical" href="https://www.racketsacademy.ch/kids-camp.html">
+<link rel="stylesheet" href="styles.css?v=40">
+<meta property="og:title" content="Kids padel day camps, holidays 2027 – Sierre, Valais | Rackets Academy">
+<meta property="og:description" content="Padel camps for kids aged 6–14 in the Valais school holidays 2027: winter, Easter and summer in Salgesch, 5 min from Sierre. 20 spots per week, CHF 250, book online.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.racketsacademy.ch/kids-camp.html">
+<meta property="og:image" content="https://www.racketsacademy.ch/images/coaching/coaching-2.jpg">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="Rackets Academy">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://www.racketsacademy.ch/kids-camp.html">
+<link rel="alternate" hreflang="fr" href="https://www.racketsacademy.ch/fr/kids-camp.html">
+<link rel="alternate" hreflang="de" href="https://www.racketsacademy.ch/de/kids-camp.html">
+<link rel="alternate" hreflang="x-default" href="https://www.racketsacademy.ch/kids-camp.html">
+<script type="application/ld+json" id="ld-kc">{"@context": "https://schema.org", "@graph": [{"@type": "Event", "name": "Winter camp · 4 – 8 January 2027 · 14:00–17:00 · Rackets Academy", "description": "Afternoon padel camp after skiing for kids aged 6–14: January and carnival holidays 2027 in Salgesch, 5 min from Sierre. 14:00–17:00, CHF 250 per week.", "startDate": "2027-01-04T14:00:00+01:00", "endDate": "2027-01-08T17:00:00+01:00", "eventStatus": "https://schema.org/EventScheduled", "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode", "location": {"@type": "Place", "name": "Rackets Academy Salgesch", "address": {"@type": "PostalAddress", "streetAddress": "Littenstrasse 30", "postalCode": "3970", "addressLocality": "Salgesch", "addressRegion": "VS", "addressCountry": "CH"}}, "organizer": {"@type": "Organization", "name": "Rackets Academy", "url": "https://www.racketsacademy.ch/"}, "image": "https://www.racketsacademy.ch/images/coaching/coaching-3.jpg", "url": "https://www.racketsacademy.ch/kids-camp.html", "typicalAgeRange": "6-14", "maximumAttendeeCapacity": 20, "offers": {"@type": "Offer", "price": "250", "priceCurrency": "CHF", "availability": "https://schema.org/InStock", "url": "https://www.racketsacademy.ch/kids-camp.html"}}, {"@type": "Event", "name": "Winter camp · 8 – 12 February 2027 · 14:00–17:00 · Rackets Academy", "description": "Afternoon padel camp after skiing for kids aged 6–14: January and carnival holidays 2027 in Salgesch, 5 min from Sierre. 14:00–17:00, CHF 250 per week.", "startDate": "2027-02-08T14:00:00+01:00", "endDate": "2027-02-12T17:00:00+01:00", "eventStatus": "https://schema.org/EventScheduled", "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode", "location": {"@type": "Place", "name": "Rackets Academy Salgesch", "address": {"@type": "PostalAddress", "streetAddress": "Littenstrasse 30", "postalCode": "3970", "addressLocality": "Salgesch", "addressRegion": "VS", "addressCountry": "CH"}}, "organizer": {"@type": "Organization", "name": "Rackets Academy", "url": "https://www.racketsacademy.ch/"}, "image": "https://www.racketsacademy.ch/images/coaching/coaching-3.jpg", "url": "https://www.racketsacademy.ch/kids-camp.html", "typicalAgeRange": "6-14", "maximumAttendeeCapacity": 20, "offers": {"@type": "Offer", "price": "250", "priceCurrency": "CHF", "availability": "https://schema.org/InStock", "url": "https://www.racketsacademy.ch/kids-camp.html"}}, {"@type": "Event", "name": "Easter camp · 30 March – 2 April 2027 · 9:00–12:00 · Rackets Academy", "description": "Padel camp for kids aged 6–14 in the Easter holidays 2027 in Salgesch, 5 min from Sierre. 4 mornings 9:00–12:00, indoors, rackets included, CHF 200.", "startDate": "2027-03-30T09:00:00+02:00", "endDate": "2027-04-02T12:00:00+02:00", "eventStatus": "https://schema.org/EventScheduled", "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode", "location": {"@type": "Place", "name": "Rackets Academy Salgesch", "address": {"@type": "PostalAddress", "streetAddress": "Littenstrasse 30", "postalCode": "3970", "addressLocality": "Salgesch", "addressRegion": "VS", "addressCountry": "CH"}}, "organizer": {"@type": "Organization", "name": "Rackets Academy", "url": "https://www.racketsacademy.ch/"}, "image": "https://www.racketsacademy.ch/images/coaching/coaching-4.jpg", "url": "https://www.racketsacademy.ch/kids-camp.html", "typicalAgeRange": "6-14", "maximumAttendeeCapacity": 20, "offers": {"@type": "Offer", "price": "200", "priceCurrency": "CHF", "availability": "https://schema.org/InStock", "url": "https://www.racketsacademy.ch/kids-camp.html"}}, {"@type": "Event", "name": "Summer camp · 12 – 16 July 2027 · 9:00–12:00 · Rackets Academy", "description": "Padel summer camp 2027 for kids aged 6–14 in Salgesch, 5 min from Sierre: 12–16 July and 9–13 August, mornings 9–12, indoors, CHF 250 per week.", "startDate": "2027-07-12T09:00:00+02:00", "endDate": "2027-07-16T12:00:00+02:00", "eventStatus": "https://schema.org/EventScheduled", "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode", "location": {"@type": "Place", "name": "Rackets Academy Salgesch", "address": {"@type": "PostalAddress", "streetAddress": "Littenstrasse 30", "postalCode": "3970", "addressLocality": "Salgesch", "addressRegion": "VS", "addressCountry": "CH"}}, "organizer": {"@type": "Organization", "name": "Rackets Academy", "url": "https://www.racketsacademy.ch/"}, "image": "https://www.racketsacademy.ch/images/coaching/coaching-5.jpg", "url": "https://www.racketsacademy.ch/kids-camp.html", "typicalAgeRange": "6-14", "maximumAttendeeCapacity": 20, "offers": {"@type": "Offer", "price": "250", "priceCurrency": "CHF", "availability": "https://schema.org/InStock", "url": "https://www.racketsacademy.ch/kids-camp.html"}}, {"@type": "Event", "name": "Summer camp · 9 – 13 August 2027 · 9:00–12:00 · Rackets Academy", "description": "Padel summer camp 2027 for kids aged 6–14 in Salgesch, 5 min from Sierre: 12–16 July and 9–13 August, mornings 9–12, indoors, CHF 250 per week.", "startDate": "2027-08-09T09:00:00+02:00", "endDate": "2027-08-13T12:00:00+02:00", "eventStatus": "https://schema.org/EventScheduled", "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode", "location": {"@type": "Place", "name": "Rackets Academy Salgesch", "address": {"@type": "PostalAddress", "streetAddress": "Littenstrasse 30", "postalCode": "3970", "addressLocality": "Salgesch", "addressRegion": "VS", "addressCountry": "CH"}}, "organizer": {"@type": "Organization", "name": "Rackets Academy", "url": "https://www.racketsacademy.ch/"}, "image": "https://www.racketsacademy.ch/images/coaching/coaching-5.jpg", "url": "https://www.racketsacademy.ch/kids-camp.html", "typicalAgeRange": "6-14", "maximumAttendeeCapacity": 20, "offers": {"@type": "Offer", "price": "250", "priceCurrency": "CHF", "availability": "https://schema.org/InStock", "url": "https://www.racketsacademy.ch/kids-camp.html"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much does the kids padel camp cost?", "acceptedAnswer": {"@type": "Answer", "text": "CHF 250 per week (5 days, 3 hours a day). The Easter camp has 4 days and costs CHF 200. Rackets and balls are included."}}, {"@type": "Question", "name": "Is it a day camp?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — a sports day camp without overnight stay: 3 hours a day in Salgesch, 5 min from Sierre, 15 min from Crans-Montana, 20 min from Sion and Visp. Ideal alongside ski school or other holiday activities."}}, {"@type": "Question", "name": "When does the camp take place?", "acceptedAnswer": {"@type": "Answer", "text": "January and February: afternoons 14:00–17:00, so kids can ski in the morning. Easter and summer: mornings 9:00–12:00."}}, {"@type": "Question", "name": "Does my child need to know how to play padel?", "acceptedAnswer": {"@type": "Answer", "text": "No. Kids are grouped by age and level, so beginners and players both get the right coaching."}}, {"@type": "Question", "name": "How many kids are in a camp?", "acceptedAnswer": {"@type": "Answer", "text": "Maximum 20 kids per week, split into small groups by age and level."}}, {"@type": "Question", "name": "How do I book?", "acceptedAnswer": {"@type": "Answer", "text": "Online on this page: choose the week, enter your children’s names and ages and pay by card or TWINT. You get the confirmation by email right away."}}]}]}</script>
+</head>
+<body>
+<div class="site-top">
+<div class="promo-banner">
+  <div class="promo-track">
+    <span>🎾 COURTS OPEN NOW — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Book Now on Playtomic →</a></span>
+    <span>🎾 COURTS OPEN NOW — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Book Now on Playtomic →</a></span>
+    <span>🎾 COURTS OPEN NOW — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Book Now on Playtomic →</a></span>
+  </div>
+</div>
+
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo"><img src="https://www.racketsacademy.ch/images/wix/834be8bc03b7.png" alt="Rackets Academy logo" width="180" height="63"></a>
+    <nav class="navlinks">
+      <a href="book.html">Book</a>
+      <a href="training.html">Coaching</a>
+      <a href="events.html">Events</a>
+      <a href="rackets-plus.html">Membership</a>
+      <a href="camps.html">Camps</a>
+      <a href="kids-camp.html" >Spa</a>
+      <a href="shop.html">Shop</a>
+      <a href="about.html">About</a>
+      <a class="nav-login" href="intern.html" rel="nofollow">Team login</a>
+      <div class="lang-switch">
+        <button type="button" aria-haspopup="true">EN</button>
+        <div class="lang-menu"><a href="#">English</a><a href="de/kids-camp.html">Deutsch</a><a href="fr/kids-camp.html">Français</a></div>
+      </div>
+      <a class="nav-cta-mobile" href="book.html">Book Now</a>
+    </nav>
+    <div class="lang-switch">
+      <button type="button" aria-haspopup="true">EN</button>
+      <div class="lang-menu"><a href="#">English</a><a href="de/kids-camp.html">Deutsch</a><a href="fr/kids-camp.html">Français</a></div>
+    </div>
+    <a class="nav-cta" href="book.html">Book Now</a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span></button>
+  </div>
+</header>
+</div>
+
+<section class="spa-hero co-hero kb-hero" style="background-image:url('images/coaching/coaching-2.jpg');">
+  <div class="spa-hero-shade"></div>
+  <div class="wrap spa-hero-inner">
+    <p class="spa-kicker">Kids camps 2027 · Salgesch</p>
+    <h1>Holidays? Padel camp!</h1>
+    <p class="lede">Three hours a day of padel, games and new friends for kids aged 6–14 — in the winter, Easter and summer holidays, indoors in Salgesch.</p>
+    <div class="spa-chips"><span class="spa-chip">Age 6–14</span><span class="spa-chip">20 spots per week</span><span class="spa-chip">CHF 250 per week</span><span class="spa-chip">Rackets included</span></div>
+    <div class="hero-actions">
+      <a class="btn btn-green spa-cta" href="#dates">See the dates</a>
+      <a class="btn spa-cta-ghost" href="https://wa.me/41772780115?text=Hola%21%20I%20have%20a%20question%20about%20the%20kids%20padel%20camp%3A%20Kids%20padel%20holiday%20camps." target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section class="co2-sec" id="dates">
+  <div class="wrap" id="kc-book" data-left="{n} of 20 spots left" data-last="Last spot!" data-sold="Fully booked" data-total="Total">
+    <h2 class="co2-h">Dates & booking</h2>
+    <h3 class="kc-season">❄️ Winter 2027 <span>· January & February · afternoons</span></h3><div class="kc-weeks"><div class="kc-week" data-camp="kids-2027-01-04"><div><strong>4 – 8 January 2027</strong><span>Mon–Fri 14:00–17:00 · CHF 250</span><span class="kc-left"></span></div><button type="button" class="btn btn-green kc-book" data-camp="kids-2027-01-04" data-pp="250" data-label="Winter 2027 · 4 – 8 January 2027 · 14:00–17:00">Book online</button></div><div class="kc-week" data-camp="kids-2027-02-08"><div><strong>8 – 12 February 2027</strong><span>Mon–Fri 14:00–17:00 · CHF 250</span><span class="kc-left"></span></div><button type="button" class="btn btn-green kc-book" data-camp="kids-2027-02-08" data-pp="250" data-label="Winter 2027 · 8 – 12 February 2027 · 14:00–17:00">Book online</button></div></div><h3 class="kc-season">🐣 Easter 2027 <span>· Easter holidays · mornings</span></h3><div class="kc-weeks"><div class="kc-week" data-camp="kids-2027-03-30"><div><strong>30 March – 2 April 2027</strong><span>Tue–Fri 9:00–12:00 · CHF 200</span><span class="kc-left"></span></div><button type="button" class="btn btn-green kc-book" data-camp="kids-2027-03-30" data-pp="200" data-label="Easter 2027 · 30 March – 2 April 2027 · 9:00–12:00">Book online</button></div></div><h3 class="kc-season">☀️ Summer 2027 <span>· July & August · mornings</span></h3><div class="kc-weeks"><div class="kc-week" data-camp="kids-2027-07-12"><div><strong>12 – 16 July 2027</strong><span>Mon–Fri 9:00–12:00 · CHF 250</span><span class="kc-left"></span></div><button type="button" class="btn btn-green kc-book" data-camp="kids-2027-07-12" data-pp="250" data-label="Summer 2027 · 12 – 16 July 2027 · 9:00–12:00">Book online</button></div><div class="kc-week" data-camp="kids-2027-08-09"><div><strong>9 – 13 August 2027</strong><span>Mon–Fri 9:00–12:00 · CHF 250</span><span class="kc-left"></span></div><button type="button" class="btn btn-green kc-book" data-camp="kids-2027-08-09" data-pp="250" data-label="Summer 2027 · 9 – 13 August 2027 · 9:00–12:00">Book online</button></div></div>
+    <p class="kc-wa"><a href="https://wa.me/41772780115?text=Hola%21%20I%20have%20a%20question%20about%20the%20kids%20padel%20camp%3A%20Kids%20padel%20holiday%20camps." target="_blank" rel="noopener">Questions? WhatsApp →</a></p>
+  </div>
+</section>
+
+<section class="co2-sec kb-flow-sec">
+  <div class="wrap">
+    <h2 class="co2-h">A camp day</h2>
+    <div class="kb-flow"><div class="kb-step"><span class="kb-badge">1 h</span><h3>Warm-up & technique</h3><p>Coordination games, then the basics: forehand, backhand, volley, the walls.</p></div><div class="kb-step"><span class="kb-badge">2 h</span><h3>Break & games</h3><p>Short snack break, then team games on court.</p></div><div class="kb-step"><span class="kb-badge">3 h</span><h3>Matches</h3><p>Real points and a mini tournament on the last day.</p></div></div>
+  </div>
+</section>
+
+<section class="co2-sec">
+  <div class="wrap">
+    <h2 class="co2-h">Good to know</h2>
+    <div class="co2-bens ev-mods"><div class="co2-b"><span class="co2-ic">📍</span><h3>Where</h3><p>Rackets Academy Salgesch, Littenstrasse 30 — 5 min from Sierre, 15 min from Crans-Montana, 20 min from Sion and Visp.</p></div><div class="co2-b"><span class="co2-ic">👧</span><h3>Who</h3><p>Kids aged 6–14, beginners and players. Groups by age and level, max. 20 kids per week.</p></div><div class="co2-b"><span class="co2-ic">🎒</span><h3>What to bring</h3><p>Indoor sports shoes, sportswear, a water bottle and a snack. Rackets and balls are provided.</p></div></div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="wrap">
+    <h2>Questions from parents</h2>
+    <div class="spa-faq"><details><summary>How much does the kids padel camp cost?</summary><p>CHF 250 per week (5 days, 3 hours a day). The Easter camp has 4 days and costs CHF 200. Rackets and balls are included.</p></details><details><summary>Is it a day camp?</summary><p>Yes — a sports day camp without overnight stay: 3 hours a day in Salgesch, 5 min from Sierre, 15 min from Crans-Montana, 20 min from Sion and Visp. Ideal alongside ski school or other holiday activities.</p></details><details><summary>When does the camp take place?</summary><p>January and February: afternoons 14:00–17:00, so kids can ski in the morning. Easter and summer: mornings 9:00–12:00.</p></details><details><summary>Does my child need to know how to play padel?</summary><p>No. Kids are grouped by age and level, so beginners and players both get the right coaching.</p></details><details><summary>How many kids are in a camp?</summary><p>Maximum 20 kids per week, split into small groups by age and level.</p></details><details><summary>How do I book?</summary><p>Online on this page: choose the week, enter your children’s names and ages and pay by card or TWINT. You get the confirmation by email right away.</p></details></div>
+  </div>
+</section>
+
+<section class="co2-sec">
+  <div class="wrap">
+    <h2 class="co2-h">All kids camps</h2>
+    <div class="co2-bens ow-mores kc-mores"><a class="co2-b ow-more" href="kids-camp-winter.html"><span class="co2-ic">❄️</span><h3>Winter 2027 →</h3><p>January & February · afternoons</p></a><a class="co2-b ow-more" href="kids-camp-easter.html"><span class="co2-ic">🐣</span><h3>Easter 2027 →</h3><p>Easter holidays · mornings</p></a><a class="co2-b ow-more" href="kids-camp-summer.html"><span class="co2-ic">☀️</span><h3>Summer 2027 →</h3><p>July & August · mornings</p></a><a class="co2-b ow-more" href="ski-and-padel.html"><span class="co2-ic">⛷️</span><h3>Ski &Padel weekends →</h3><p>For adults · February 2027 · ski in the morning, padel in the afternoon, 3 nights in Salgesch.</p></a></div>
+  </div>
+</section>
+
+<section class="spa-final kb-final" style="background-image:url('images/coaching/coaching-6.jpg');">
+  <div class="spa-hero-shade"></div>
+  <div class="wrap spa-final-inner">
+    <h2>20 spots per week — book early.</h2>
+    <p>Salgesch · age 6–14 · CHF 250 per week</p>
+    <a class="btn btn-green spa-cta" href="#dates">See the dates</a>
+  </div>
+</section>
+
+<div class="buy-modal-overlay" id="buy-modal-overlay">
+  <div class="buy-modal">
+    <button type="button" class="buy-modal-close" id="buy-modal-close" aria-label="Close">&times;</button>
+    <h3 id="buy-modal-title"></h3>
+    <div class="buy-modal-price" id="buy-modal-price"></div>
+    <form id="buy-modal-form" class="shop-form" method="POST" action="https://script.google.com/macros/s/AKfycbwLWTwsILcSkAHe9FSKjicU1pUk5s3nxSnS4PQ2Tws2RVejiHjBltJJ8gKpmIe3JLRe/exec" target="_blank">
+      <input type="hidden" name="formType" value="camp">
+      <input type="hidden" name="campId" id="modal-campId">
+      <input type="hidden" name="campPackage" id="modal-campPackage" value="kid1">
+      <input type="hidden" name="price" id="modal-price">
+      <label class="shop-field">Number of children<select id="kc-n"><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label>
+      <div class="shop-field" id="kc-kids-wrap" data-kid="Child" data-age="Age">Name and age of each child<div id="kc-kids"></div><input type="hidden" name="participants"></div>
+      <label class="shop-field">Parent’s name<input type="text" name="buyerName" required autocomplete="name"></label>
+      <label class="shop-field">Email <span style="font-weight:400; opacity:.7;">(confirmation is sent here)</span><input type="email" name="buyerEmail" required autocomplete="email"></label>
+      <label class="shop-field">Mobile number <span style="font-weight:400; opacity:.7;">(for updates on the camp)</span><input type="tel" name="phone" required autocomplete="tel"></label>
+      <label class="shop-field">Anything we should know? <span style="font-weight:400; opacity:.7;">(optional — allergies, health)</span><textarea name="notes" rows="2" maxlength="300"></textarea></label>
+      <button type="submit" class="btn btn-green" style="width:100%; text-align:center;">Continue to payment</button>
+    </form>
+  </div>
+</div>
+<footer>
+  <div class="wrap">
+    <img src="https://www.racketsacademy.ch/images/wix/fd51e1e7dfdf.png" alt="Rackets Academy" width="200" height="72" style="margin-bottom:8px;">
+    <p style="opacity:.85; margin:0 0 14px;">PLAY. COMPETE. ENJOY.</p>
+    <div class="footer-grid ux-foot"><div><h4>Salgesch</h4><a href="https://www.google.com/maps/search/?api=1&query=Littenstrasse+30+3970+Salgesch" target="_blank" rel="noopener">Littenstrasse 30, 3970 Salgesch</a><p>Padel · Pickleball · Tennis · Spa</p><p>Daily 7am–11:30pm</p></div><div><h4>Sion</h4><a href="https://www.google.com/maps/search/?api=1&query=Route+de+Pr%C3%A9jeux+16+1950+Sion" target="_blank" rel="noopener">Route de Préjeux 16, 1950 Sion</a><p>Padel</p><p>Daily 7am–11:30pm</p></div><div class="foot-links"><h4>Quick links</h4><a href="book.html">Book a court</a><a href="training.html">Courses</a><a href="faq.html">FAQ</a><a href="shop.html#vouchers">Gift vouchers</a><a href="shop.html">Shop</a><a href="events.html">Events</a></div><div class="footer-contact"><h4>Contact</h4><a class="foot-wa" href="https://wa.me/41772780115?text=Hola%21%20I%20have%20a%20question%20about%20Rackets%20Academy." target="_blank" rel="noopener">Message us on WhatsApp</a><p>Quick reply · +41 77 278 01 15</p><a href="mailto:phil@racketsacademy.ch">phil@racketsacademy.ch</a></div></div>
+    <div class="sponsor-row">
+      <div class="sponsor-track">
+      <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/5887f86ed50b.png" alt="Wilson" loading="lazy"></a>
+      <a href="https://www.estrellagalicia.es" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e0ff8b826424.png" alt="Estrella Galicia" loading="lazy"></a>
+      <a href="https://www.decathlon.ch" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/75ca95274283.png" alt="Decathlon" loading="lazy"></a>
+      <a href="https://www.coca-cola.com/ch/de/brands/powerade" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4662d7547275.png" alt="Powerade" loading="lazy"></a>
+      <a href="https://tanguy.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4c92a56af6fb.png" alt="Garage Tanguy" loading="lazy"></a>
+      <a href="https://tanguy.hyundai.ch/fr" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/f74a1e85ce45.png" alt="Hyundai" loading="lazy"></a>
+      <a href="https://www.scleanup.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d7bc95225fa2.png" alt="S Clean-up" loading="lazy"></a>
+      <a href="https://shop.morand.ch/shop/category/sirops-65" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e03b161cd8bb.png" alt="Distillerie Morand" loading="lazy"></a>
+      <a href="https://rivella.ch/de/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d4f0de57b68e.png" alt="Rivella" loading="lazy"></a>
+      <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/5887f86ed50b.png" alt="Wilson" loading="lazy"></a>
+      <a href="https://www.estrellagalicia.es" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e0ff8b826424.png" alt="Estrella Galicia" loading="lazy"></a>
+      <a href="https://www.decathlon.ch" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/75ca95274283.png" alt="Decathlon" loading="lazy"></a>
+      <a href="https://www.coca-cola.com/ch/de/brands/powerade" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4662d7547275.png" alt="Powerade" loading="lazy"></a>
+      <a href="https://tanguy.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4c92a56af6fb.png" alt="Garage Tanguy" loading="lazy"></a>
+      <a href="https://tanguy.hyundai.ch/fr" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/f74a1e85ce45.png" alt="Hyundai" loading="lazy"></a>
+      <a href="https://www.scleanup.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d7bc95225fa2.png" alt="S Clean-up" loading="lazy"></a>
+      <a href="https://shop.morand.ch/shop/category/sirops-65" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e03b161cd8bb.png" alt="Distillerie Morand" loading="lazy"></a>
+      <a href="https://rivella.ch/de/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d4f0de57b68e.png" alt="Rivella" loading="lazy"></a>
+      </div>
+    <div class="footer-bottom">
+      <span>© 2026 Rackets Academy</span>
+      <span><a href="terms-and-conditions.html">Terms &amp; Conditions</a> · <a href="privacy-policy.html">Privacy Policy</a> · <a href="impressum.html">Imprint</a></span>
+    </div>
+    </div>
+</footer>
+
+<script src="nav.js?v=32"></script>
+<script src="kidscamp.js?v=1"></script>
+</body>
+</html>
