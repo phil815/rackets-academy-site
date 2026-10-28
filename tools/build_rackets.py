@@ -7,20 +7,20 @@ BASE = 'https://www.racketsacademy.ch/'
 WA = '41772780115'
 T = {
  'en': dict(test_h='Test it first', test_p='Rent this racket for 10 CHF and play a real match with it. If you buy it, we credit the 10 CHF to the price — completely risk-free.',
-            facts=['Official {brand} reseller', 'Pick up at the academy in Salgesch or Sion', 'Test for 10 CHF — credited when you buy', 'No returns — that is why you test first'],
+            facts=['Official {brand} reseller', 'Pick up in Salgesch or Sion, or shipping by post for 9 CHF', 'Test for 10 CHF — credited when you buy', 'Returns within 30 days if new and in original packaging'],
             test_btn='Book a test on WhatsApp', back='← Back to shop', wa="Hola! I'd like to test the {label}.",
-            suffix=' – test & buy', similar='You might also like', brand_suffix=' | Rackets Academy', pickup='Pick up in Salgesch or Sion · ready the next day',
-            meta='{label} for {price} CHF at Rackets Academy in Valais. Test it for 10 CHF first — credited when you buy. Pick up in Salgesch or Sion.'),
+            suffix=' – test & buy', similar='You might also like', brand_suffix=' | Rackets Academy', pickup='Pick up in Salgesch or Sion (next day) · or shipping for 9 CHF in 1–2 working days',
+            meta='{label} for {price} CHF at Rackets Academy in Valais. Test it for 10 CHF first — credited when you buy. Pick up in Salgesch or Sion or shipping by post.'),
  'fr': dict(test_h="Teste-la d'abord", test_p="Loue cette raquette pour 10 CHF et joue un vrai match avec. Si tu l'achètes, on déduit les 10 CHF du prix — sans aucun risque.",
-            facts=['Revendeur officiel {brand}', "Retrait à l'academy à Salgesch ou Sion", 'Test à 10 CHF — déduit si tu achètes', 'Pas de retour — c’est pour ça qu’on teste avant'],
+            facts=['Revendeur officiel {brand}', "Retrait à Salgesch ou Sion, ou envoi par la Poste pour 9 CHF", 'Test à 10 CHF — déduit si tu achètes', "Retour sous 30 jours si neuve et dans l'emballage d'origine"],
             test_btn='Réserver un test sur WhatsApp', back='← Retour à la boutique', wa="Hola ! J'aimerais tester la {label}.",
-            suffix=' – tester & acheter', similar='Tu aimeras aussi', brand_suffix=' | Rackets Academy', pickup='Retrait à Salgesch ou Sion · prête dès le lendemain',
-            meta="{label} à {price} CHF à la Rackets Academy en Valais. Teste-la d'abord pour 10 CHF, déduits si tu achètes. Retrait à Salgesch ou Sion."),
+            suffix=' – tester & acheter', similar='Tu aimeras aussi', brand_suffix=' | Rackets Academy', pickup='Retrait à Salgesch ou Sion (dès le lendemain) · ou envoi pour 9 CHF en 1–2 jours ouvrables',
+            meta="{label} à {price} CHF à la Rackets Academy en Valais. Teste-la d'abord pour 10 CHF, déduits si tu achètes. Retrait à Salgesch ou Sion ou envoi par la Poste."),
  'de': dict(test_h='Erst testen', test_p='Miete dieses Racket für 10 CHF und spiel damit ein echtes Match. Kaufst du es, schreiben wir dir die 10 CHF gut — ganz ohne Risiko.',
-            facts=['Offizieller {brand}-Händler', 'Abholung in der Academy in Salgesch oder Sion', 'Test für 10 CHF — beim Kauf angerechnet', 'Keine Rückgabe — genau deshalb testest du vorher'],
+            facts=['Offizieller {brand}-Händler', 'Abholung in Salgesch oder Sion, oder Versand per Post für 9 CHF', 'Test für 10 CHF — beim Kauf angerechnet', 'Rückgabe innert 30 Tagen, wenn neu und originalverpackt'],
             test_btn='Test per WhatsApp buchen', back='← Zurück zum Shop', wa='Hola! Ich möchte das {label} testen.',
-            suffix=' – testen & kaufen', similar='Das könnte dir auch gefallen', brand_suffix=' | Rackets Academy', pickup='Abholung in Salgesch oder Sion · abholbereit ab dem nächsten Tag',
-            meta='{label} für {price} CHF bei der Rackets Academy im Wallis. Erst für 10 CHF testen, beim Kauf angerechnet. Abholung in Salgesch oder Sion.'),
+            suffix=' – testen & kaufen', similar='Das könnte dir auch gefallen', brand_suffix=' | Rackets Academy', pickup='Abholung in Salgesch oder Sion (ab dem nächsten Tag) · oder Versand für 9 CHF in 1–2 Werktagen',
+            meta='{label} für {price} CHF bei der Rackets Academy im Wallis. Erst für 10 CHF testen, beim Kauf angerechnet. Abholung in Salgesch oder Sion oder Versand per Post.'),
 }
 CARD_RE = re.compile(r'<div class="racket-card[^"]*">\n.*?\n      </div>\n', re.S)
 
@@ -93,10 +93,19 @@ def build(lang):
               'offers': {'@type': 'Offer', 'price': price, 'priceCurrency': 'CHF', 'url': url,
                          'availability': 'https://schema.org/' + ('OutOfStock' if it['sold'] else 'InStock'),
                          'itemCondition': 'https://schema.org/NewCondition',
+                         # Guti 28.10.2026: Versand 9 CHF (CH), Rückgabe 30 Tage, neu und originalverpackt
                          'hasMerchantReturnPolicy': {'@type': 'MerchantReturnPolicy', 'applicableCountry': 'CH',
-                                                     'returnPolicyCategory': 'https://schema.org/MerchantReturnNotPermitted'},
-                         'shippingDetails': {'@type': 'OfferShippingDetails', 'doesNotShip': True,
-                                             'shippingDestination': {'@type': 'DefinedRegion', 'addressCountry': 'CH'}},
+                                                     'returnPolicyCategory': 'https://schema.org/MerchantReturnFiniteReturnWindow',
+                                                     'merchantReturnDays': 30,
+                                                     'returnMethod': ['https://schema.org/ReturnInStore', 'https://schema.org/ReturnByMail'],
+                                                     'returnFees': 'https://schema.org/ReturnFeesCustomerResponsibility',
+                                                     'itemCondition': 'https://schema.org/NewCondition'},
+                         'shippingDetails': {'@type': 'OfferShippingDetails',
+                                             'shippingRate': {'@type': 'MonetaryAmount', 'value': 9, 'currency': 'CHF'},
+                                             'shippingDestination': {'@type': 'DefinedRegion', 'addressCountry': 'CH'},
+                                             'deliveryTime': {'@type': 'ShippingDeliveryTime',
+                                                              'handlingTime': {'@type': 'QuantitativeValue', 'minValue': 1, 'maxValue': 2, 'unitCode': 'DAY'},
+                                                              'transitTime': {'@type': 'QuantitativeValue', 'minValue': 1, 'maxValue': 2, 'unitCode': 'DAY'}}},
                          'seller': {'@type': 'Organization', 'name': 'Rackets Academy'}}}
         page_top = page_top.replace('</head>', '<script type="application/ld+json" id="ld-product">' + json.dumps(ld, ensure_ascii=False) + '</script>\n</head>', 1)
         wa = 'https://wa.me/' + WA + '?text=' + urllib.parse.quote(t['wa'].format(label=label))

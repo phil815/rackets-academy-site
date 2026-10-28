@@ -172,6 +172,7 @@ function openBuyModal(type, opts) {
 
   var giftWrap = document.getElementById('modal-gift-wrap');
   if (giftWrap) giftWrap.style.display = type === 'racket' ? 'none' : '';
+  raShipSetup(type === 'racket', Number(opts.price) || 0);
 
   var emailNote = document.getElementById('modal-email-note');
   if (emailNote) {
@@ -181,6 +182,62 @@ function openBuyModal(type, opts) {
   }
 
   document.getElementById('buy-modal-overlay').classList.add('open');
+}
+
+// Rackets: Abholung oder Versand per Post (+9 CHF). Die Felder werden in den Kauf-Dialog eingefügt,
+// damit nicht jede Seite einzeln angepasst werden muss; der Server rechnet den Preis selbst.
+var RA_SHIP_CHF = 9;
+function raShipSetup(isRacket, base) {
+  var form = document.getElementById('buy-modal-form');
+  var loc = document.getElementById('modal-location');
+  if (!form || !loc) return;
+  var L = (document.documentElement.lang || 'en').slice(0, 2);
+  var T = {
+    de: { how: 'Wie willst du dein Racket?', pick: 'Abholung in der Academy (gratis)', ship: 'Versand per Post (+' + RA_SHIP_CHF + ' CHF)', street: 'Strasse und Nr.', zip: 'PLZ', city: 'Ort', note: 'Versand in der Schweiz, innert 1–2 Werktagen mit A-Post. Rückgabe innert 30 Tagen, wenn neu und originalverpackt.' },
+    fr: { how: 'Comment veux-tu ta raquette ?', pick: 'Retrait à l\'Academy (gratuit)', ship: 'Envoi par la Poste (+' + RA_SHIP_CHF + ' CHF)', street: 'Rue et n°', zip: 'NPA', city: 'Localité', note: 'Envoi en Suisse, sous 1–2 jours ouvrables en Courrier A. Retour sous 30 jours si neuve et dans l\'emballage d\'origine.' },
+    en: { how: 'How do you want your racket?', pick: 'Pick up at the academy (free)', ship: 'Shipping by post (+' + RA_SHIP_CHF + ' CHF)', street: 'Street and no.', zip: 'Postcode', city: 'Town', note: 'Shipping within Switzerland, within 1–2 working days by A-Post. Returns within 30 days if new and in original packaging.' }
+  }[L] || null;
+  if (!T) return;
+  var box = document.getElementById('modal-ship');
+  if (!box) {
+    box = document.createElement('div');
+    box.id = 'modal-ship';
+    box.innerHTML =
+      '<div class="shop-field"><span>' + T.how + '</span>' +
+      '<label style="display:flex;gap:10px;align-items:center;justify-content:flex-start;text-align:left;font-weight:400;margin:6px 0;"><input type="radio" style="width:auto;flex:0 0 auto;margin:0;" name="delivery" value="pickup" checked> ' + T.pick + '</label>' +
+      '<label style="display:flex;gap:10px;align-items:center;justify-content:flex-start;text-align:left;font-weight:400;margin:6px 0;"><input type="radio" style="width:auto;flex:0 0 auto;margin:0;" name="delivery" value="shipping"> ' + T.ship + '</label></div>' +
+      '<div id="modal-ship-addr" style="display:none;">' +
+      '<label class="shop-field">' + T.street + '<input type="text" name="shipStreet" autocomplete="address-line1"></label>' +
+      '<div style="display:grid;grid-template-columns:1fr 2fr;gap:10px;">' +
+      '<label class="shop-field">' + T.zip + '<input type="text" name="shipZip" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" autocomplete="postal-code"></label>' +
+      '<label class="shop-field">' + T.city + '<input type="text" name="shipCity" autocomplete="address-level2"></label></div></div>' +
+      '<p style="font-size:13px;opacity:.75;margin:0 0 12px;">' + T.note + '</p>';
+    var locLabel = loc.closest('label') || loc.parentNode;
+    locLabel.parentNode.insertBefore(box, locLabel);
+    box.addEventListener('change', function () { raShipToggle(); });
+  }
+  box.dataset.base = base;
+  box.style.display = isRacket ? '' : 'none';
+  var pick = box.querySelector('input[value="pickup"]');
+  if (pick) pick.checked = true;
+  box.querySelectorAll('input').forEach(function (i) { i.disabled = !isRacket; });
+  raShipToggle();
+}
+function raShipToggle() {
+  var box = document.getElementById('modal-ship');
+  if (!box) return;
+  var on = box.style.display !== 'none';
+  var ship = on && !!box.querySelector('input[value="shipping"]:checked');
+  var addr = document.getElementById('modal-ship-addr');
+  if (addr) addr.style.display = ship ? '' : 'none';
+  box.querySelectorAll('#modal-ship-addr input').forEach(function (i) { i.required = ship; i.disabled = !ship; });
+  var loc = document.getElementById('modal-location');
+  var locLabel = loc && (loc.closest('label') || loc.parentNode);
+  if (locLabel) locLabel.style.display = ship ? 'none' : '';
+  if (loc) loc.required = !ship;
+  var base = Number(box.dataset.base) || 0;
+  var priceEl = document.getElementById('buy-modal-price');
+  if (on && priceEl && base) priceEl.textContent = (base + (ship ? RA_SHIP_CHF : 0)) + ' CHF';
 }
 
 function openVoucherModal() {
