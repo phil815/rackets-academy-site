@@ -651,6 +651,10 @@ a.card-link.offer::after{
 @media (max-width:760px){ .product-grid{grid-template-columns:1fr; gap:18px;} }
 .racket-card.product-card{border:0; padding:0; background:var(--white); border-radius:18px;}
 .product-card .racket-photo{aspect-ratio:1/1; border-radius:18px;}
+.product-thumbs{display:flex; gap:10px; margin-top:12px;}
+.product-thumb{flex:0 0 72px; height:72px; padding:0; border:2px solid #e1ecf7; border-radius:12px; background:var(--white); cursor:pointer; overflow:hidden;}
+.product-thumb img{width:100%; height:100%; object-fit:contain; display:block;}
+.product-thumb.active{border-color:var(--blue);}
 .product-brand{margin:0; font-size:.8rem; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:var(--blue); }
 .product-info h1{font-size:clamp(1.6rem,4vw,2.4rem); margin:4px 0 14px; color:var(--blue-dark);}
 .racket-card.product-buy{border:0; padding:0; background:none; align-items:flex-start; text-align:left;}

@@ -68,6 +68,11 @@ def build(lang):
         meta = t['meta'].format(label=label, price=price)
         img_rel = it['img']                                   # relative to the shop page dir (base href)
         img_abs = BASE + ('' if lang == 'en' else '') + re.sub(r'^(\.\./)+', '', img_rel).split('?')[0]
+        # HD-Bilder (Guti 28.10.2026): bis zu 3 Ansichten, 1000 px für die Seite, 2000 px für Google
+        gal = [n for n in (1, 2, 3) if os.path.exists('images/rackets/' + slug + '-' + str(n) + '.jpg')]
+        img_dir = re.sub(r'[^/]*$', '', img_rel.split('?')[0])
+        gal_rel = [img_dir + slug + '-' + str(n) + '.jpg?v=3' for n in gal]
+        hd_abs = [BASE + 'images/rackets/hd/' + slug + '-' + str(n) + '.jpg' for n in gal if os.path.exists('images/rackets/hd/' + slug + '-' + str(n) + '.jpg')]
         page_top = top
         page_top = re.sub(r'<title>.*?</title>', '<title>' + html.escape(title, quote=False) + '</title>', page_top, flags=re.S)
         page_top = re.sub(r'<meta name="description" content="[^"]*"', '<meta name="description" content="' + html.escape(meta) + '"', page_top)
@@ -89,7 +94,7 @@ def build(lang):
                           page_top, flags=re.S)
         ld = {'@context': 'https://schema.org', '@type': 'Product', 'name': label, 'sku': slug,
               **({'mpn': MPN[slug]} if slug in MPN else {}),
-              'brand': {'@type': 'Brand', 'name': brand}, 'image': img_abs, 'description': meta,
+              'brand': {'@type': 'Brand', 'name': brand}, 'image': hd_abs or img_abs, 'description': meta,
               'offers': {'@type': 'Offer', 'price': price, 'priceCurrency': 'CHF', 'url': url,
                          'availability': 'https://schema.org/' + ('OutOfStock' if it['sold'] else 'InStock'),
                          'itemCondition': 'https://schema.org/NewCondition',
@@ -120,7 +125,8 @@ def build(lang):
     <a class="product-back" href="shop.html#rackets">{t['back']}</a>
     <div class="product-grid">
       <div class="racket-card product-card{' sold-out' if it['sold'] else ''}">
-        <img class="racket-photo" src="{img_rel}" alt="{html.escape(label)}">
+        <img class="racket-photo" id="product-main" src="{gal_rel[0] if gal_rel else img_rel}" alt="{html.escape(label)}">
+        {('<div class="product-thumbs">' + ''.join('<button type="button" class="product-thumb' + (' active' if i == 0 else '') + '" onclick="var m=document.getElementById(\'product-main\');m.src=this.dataset.src;[].forEach.call(this.parentNode.children,function(b){b.classList.remove(\'active\')});this.classList.add(\'active\')" data-src="' + g + '"><img src="' + g + '" alt="' + html.escape(label) + ' ' + str(i + 1) + '" loading="lazy"></button>' for i, g in enumerate(gal_rel)) + '</div>') if len(gal_rel) > 1 else ''}
       </div>
       <div class="product-info">
         <p class="product-brand">{html.escape(brand)}</p>
