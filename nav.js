@@ -304,6 +304,7 @@ document.addEventListener('DOMContentLoaded', function () {
     { k: ['racketero - intermediate'], l: { en: 'Racketero · Intermediate', fr: 'Racketero · Intermédiaires', de: 'Racketero · Fortgeschrittene' }, h: 'racketero.html' },
     { k: ['racketero'], l: { en: 'Racketero', fr: 'Racketero', de: 'Racketero' }, h: 'racketero.html' },
     { k: ['pickleball'], l: { en: 'Pickleball Mix & Match', fr: 'Pickleball Mix & Match', de: 'Pickleball Mix & Match' }, h: 'pickleball.html' },
+    { k: ['padel initiation', 'initiation'], l: { en: 'Padel initiation · beginners (Sion)', fr: 'Initiation au padel · débutants (Sion)', de: 'Padel-Einführung · Einsteiger (Sion)' }, h: 'training.html' },
     { k: ['level-session', 'level session'], l: { en: 'Coaching · Playtomic level session (Sion)', fr: 'Coaching · séance de niveau Playtomic (Sion)', de: 'Coaching · Playtomic Level-Session (Sion)' }, h: 'training.html' },
     { k: ['paella'], l: { en: 'Padel+Paella', fr: 'Padel+Paella', de: 'Padel+Paella' }, h: 'padel-paella.html' },
     { k: ['wine'], l: { en: 'Padel+Wine', fr: 'Padel+Wine', de: 'Padel+Wine' }, h: 'padel-wine.html' },
