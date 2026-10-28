@@ -1078,3 +1078,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .kc-sub{margin:-6px 0 16px; font-size:1.08rem; color:#445;}
 #kc-kids{display:grid;gap:8px;margin-top:6px}.pp-row{display:grid;grid-template-columns:1fr 84px;gap:8px}.pp-row input{width:100%}
 #kc-n{display:block; margin-top:6px; width:100%; padding:10px; border-radius:10px; border:1px solid #d5dde6; font:inherit;}
+/* home hero: slogan as p, keyword sentence as h1 (SEO), same look as before */
+.hero p.hero-h{margin:0 0 20px;}
+.hero h1.hero-lede{font-size:1.15rem; font-weight:400; line-height:1.5; letter-spacing:0; opacity:.92; max-width:480px; margin:0 0 32px;}
+@media (max-width:600px){ .hero h1.hero-lede{font-size:1.05rem;} }
+.hero-video .hero-h{text-shadow:0 2px 12px rgba(0,0,0,.35);}
