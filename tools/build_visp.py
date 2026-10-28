@@ -7,7 +7,7 @@ URL = 'https://www.racketsacademy.ch/de/padel-visp.html'
 TITLE = 'Padel Visp & Brig – 6 Plätze in Salgesch | Rackets Academy'
 DESC = 'Padel für Visp und Brig: 6 Plätze (4 indoor), Kurse auf Deutsch, Leihschläger gratis und Spa – 20 Min. ab Visp in Salgesch, täglich 07:00–23:30.'
 FAC = [('🎾', 'Padel', '4 Plätze indoor, 2 outdoor', 'Täglich 07:00–23:30'),
-       ('🏓', 'Pickleball', '4 Plätze indoor', 'Täglich 07:00–23:30'),
+       ('🏓', 'Pickleball', '3 Plätze indoor, Schlägermiete 2 CHF', 'Täglich 07:00–23:30'),
        ('🎾', 'Tennis', '2 Plätze indoor', 'Täglich 07:00–23:30'),
        ('🧖', 'Spa', '2 Saunen, Hammam, Whirlpool', 'Mo–Fr 14:00–22:00 · Sa–So 10:00–22:00'),
        ('🍕', 'Bar', 'Pizzas, Empanadas, Snacks und mehr', 'Mo–Fr 10:00–22:00 · Sa–So 10:00–20:00')]
