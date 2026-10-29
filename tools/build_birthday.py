@@ -76,7 +76,7 @@ def body(t, pre):
     facts = ''.join(f'<div class="co2-b"><span class="co2-ic">{e}</span><h3>{h}</h3><p>{p}</p></div>' for e, h, p in t['facts'])
     faq = ''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in t['faq'])
     return f'''
-<section class="spa-hero co-hero kb-hero" style="background-image:url('{img("images/coaching/coaching-2.jpg")}');">
+<section class="spa-hero co-hero kb-hero" style="background-image:url('{img("images/photos/kids-group.jpg")}');">
   <div class="spa-hero-shade"></div>
   <div class="wrap spa-hero-inner">
     <p class="spa-kicker">{t['kicker']}</p>
@@ -111,7 +111,7 @@ def body(t, pre):
   </div>
 </section>
 
-<section class="spa-final kb-final" style="background-image:url('{img("images/coaching/coaching-6.jpg")}');">
+<section class="spa-final kb-final" style="background-image:url('{img("images/photos/kid-birthday.jpg")}'); background-position:center 30%;">
   <div class="spa-hero-shade"></div>
   <div class="wrap spa-final-inner">
     <h2>{t['final_h']}</h2>
@@ -136,7 +136,7 @@ for lang, t in T.items():
     for k in ['name="description"', 'property="og:description"']:
         s = re.sub(r'<meta ' + k + ' content="[^"]*"', '<meta ' + k + ' content="' + esc(t['desc']) + '"', s)
     s = re.sub(r'<meta property="og:title" content="[^"]*"', '<meta property="og:title" content="' + esc(t['title']) + '"', s)
-    s = re.sub(r'<meta property="og:image" content="[^"]*"', '<meta property="og:image" content="https://www.racketsacademy.ch/images/coaching/coaching-2.jpg"', s)
+    s = re.sub(r'<meta property="og:image" content="[^"]*"', '<meta property="og:image" content="https://www.racketsacademy.ch/images/photos/kids-group.jpg"', s)
     ld = {'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in t['faq']]}
     s = s.replace('</head>', '<script type="application/ld+json" id="ld-kb">' + json.dumps(ld, ensure_ascii=False) + '</script>\n</head>', 1)
     s = s.replace('class="active"', '')

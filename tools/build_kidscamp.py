@@ -17,7 +17,8 @@ WEEKS = {   # (start, end, slot)  am = 9-12, pm = 14-17 (after skiing)
 }
 SEASONS = ['winter', 'easter', 'summer']
 SLUG = {'hub': 'kids-camp.html', 'winter': 'kids-camp-winter.html', 'easter': 'kids-camp-easter.html', 'summer': 'kids-camp-summer.html'}
-IMG = {'hub': 'images/coaching/coaching-2.jpg', 'winter': 'images/coaching/coaching-3.jpg', 'easter': 'images/coaching/coaching-4.jpg', 'summer': 'images/coaching/coaching-5.jpg'}
+IMG = {'hub': 'images/photos/kids-group.jpg', 'winter': 'images/photos/kids-drill.jpg', 'easter': 'images/photos/kids-group.jpg', 'summer': 'images/photos/kids-drill.jpg'}
+FINAL = {'hub': 'images/photos/kids-drill.jpg', 'winter': 'images/photos/kids-group.jpg', 'easter': 'images/photos/kids-drill.jpg', 'summer': 'images/photos/kids-group.jpg'}
 ICON = {'winter': '❄️', 'easter': '🐣', 'summer': '☀️'}
 SLOT = {'am': ('09:00', '12:00'), 'pm': ('14:00', '17:00')}
 MON = {'en': 'January February March April May June July August September October November December'.split(),
@@ -310,7 +311,7 @@ def body(t, L, page, pre):
   </div>
 </section>
 
-<section class="spa-final kb-final" style="background-image:url('{pre}images/coaching/coaching-6.jpg');">
+<section class="spa-final kb-final" style="background-image:url('{pre}{FINAL[page]}');">
   <div class="spa-hero-shade"></div>
   <div class="wrap spa-final-inner">
     <h2>{t['final_h']}</h2>

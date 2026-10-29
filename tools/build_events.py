@@ -142,7 +142,7 @@ def body(t, pre):
   </div>
 </section>
 
-<section class="spa-final" style="background-image:url('{img("images/coaching/coaching-6.jpg")}');">
+<section class="spa-final" style="background-image:url('{img("images/photos/events-friends.jpg")}'); background-position:center 30%;">
   <div class="spa-hero-shade"></div>
   <div class="wrap spa-final-inner">
     <h2>{t['final_h']}</h2>
