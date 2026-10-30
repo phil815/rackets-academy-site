@@ -6,7 +6,7 @@ SLUG = 'pickleball.html'
 BASE = 'https://www.racketsacademy.ch/'
 PT = 'https://playtomic.com/clubs/rackets-academy-salgesch'
 WA_SA = '41772780115'
-IMG = 'images/wix/6363169da8a0.jpg'
+IMG = 'images/photos/pickleball-play.jpg'
 T = {
 'en': dict(title='Pickleball Valais – 3 indoor courts near Sierre | Rackets Academy',
   desc='Pickleball in Valais: 3 indoor courts in Salgesch, 5 min from Sierre, 18 min from Sion. From 5 CHF per person per hour, paddle 2 CHF, Sunday Mix & Match.',
@@ -87,7 +87,7 @@ def body(t, pre):
     rules = ''.join(f'<div class="co2-b"><span class="co2-ic">{e}</span><h3>{h}</h3><p>{p}</p></div>' for e, h, p in t['rules'])
     mm = ''.join(f'<span class="spa-chip pb-chip">{c}</span>' for c in t['mm_facts'])
     return f'''
-<section class="spa-hero co-hero kb-hero" style="background-image:url('{BASE + IMG}');">
+<section class="spa-hero co-hero kb-hero" style="background-image:url('{BASE + IMG}'); background-position:center 20%;">
   <div class="spa-hero-shade"></div>
   <div class="wrap spa-hero-inner">
     <p class="spa-kicker">{t['kicker']}</p>

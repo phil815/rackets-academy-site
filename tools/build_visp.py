@@ -26,7 +26,7 @@ def body():
     more = ''.join(f'<a class="co2-b ow-more" href="{l}"><span class="co2-ic">{e}</span><h3>{h} →</h3><p>{p}</p></a>' for e, h, p, l in MORE)
     faq = ''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in FAQ)
     return f'''
-<section class="spa-hero co-hero" style="background-image:url('../images/hero-poster.jpg');">
+<section class="spa-hero co-hero" style="background-image:url('../images/photos/outdoor-visp.jpg'); background-position:center 60%;">
   <div class="spa-hero-shade"></div>
   <div class="wrap spa-hero-inner">
     <p class="spa-kicker">Padel für Visp &amp; Brig · Salgesch</p>
@@ -78,7 +78,7 @@ def body():
   </div>
 </section>
 
-<section class="spa-final" style="background-image:url('../images/coaching/coaching-6.jpg');">
+<section class="spa-final" style="background-image:url('../images/photos/visp-player.jpg'); background-position:center 30%;">
   <div class="spa-hero-shade"></div>
   <div class="wrap spa-final-inner">
     <h2>Dein erstes Spiel? Der Schläger geht auf uns.</h2>
@@ -107,10 +107,10 @@ s = re.sub(r'<title>.*?</title>', '<title>' + TITLE + '</title>', s, count=1, fl
 for k in ['name="description"', 'property="og:description"']:
     s = re.sub(r'<meta ' + k + ' content="[^"]*"', '<meta ' + k + ' content="' + DESC + '"', s)
 s = re.sub(r'<meta property="og:title" content="[^"]*"', '<meta property="og:title" content="' + TITLE + '"', s)
-s = re.sub(r'<meta property="og:image" content="[^"]*"', '<meta property="og:image" content="https://www.racketsacademy.ch/images/hero-poster.jpg"', s)
+s = re.sub(r'<meta property="og:image" content="[^"]*"', '<meta property="og:image" content="https://www.racketsacademy.ch/images/photos/outdoor-visp.jpg"', s)
 ld = {'@context': 'https://schema.org', '@graph': [
   {'@type': 'SportsActivityLocation', 'name': 'Rackets Academy Salgesch', 'url': URL, 'telephone': '+41762914369',
-   'image': 'https://www.racketsacademy.ch/images/hero-poster.jpg',
+   'image': 'https://www.racketsacademy.ch/images/photos/outdoor-visp.jpg',
    'address': {'@type': 'PostalAddress', 'streetAddress': 'Littenstrasse 30', 'postalCode': '3970', 'addressLocality': 'Salgesch', 'addressRegion': 'VS', 'addressCountry': 'CH'},
    'openingHoursSpecification': [{'@type': 'OpeningHoursSpecification', 'dayOfWeek': ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'], 'opens': '07:00', 'closes': '23:30'}],
    'areaServed': ['Oberwallis', 'Salgesch', 'Leuk', 'Susten', 'Turtmann', 'Gampel-Bratsch', 'Steg-Hohtenn', 'Raron', 'Visp', 'Brig-Glis', 'Naters', 'Leukerbad', 'Siders']},
