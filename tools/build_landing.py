@@ -302,7 +302,7 @@ def beer(L):
     w = wa({'en': 'Hola! I want to join Padel+Beer on 8 November.', 'fr': 'Hola ! Je veux m’inscrire au Padel+Beer du 8 novembre.', 'de': 'Hola! Ich möchte beim Padel+Beer am 8. November mitmachen.'}[L])
     T = {
      'en': dict(title='Padel+Beer – padel and a cold beer in Salgesch | Rackets Academy',
-        desc='Padel+Beer in Salgesch near Sierre: play padel, then a cold Estrella Galicia at the bar with everyone from the courts. Next date Sunday 8 November 2026, 50 CHF per person.',
+        desc='Padel+Beer in Salgesch near Sierre: play padel, then a cold beer at the bar with everyone from the courts. Next date Sunday 8 November 2026, 50 CHF per person.',
         kicker='Sunday · Salgesch', h1='Padel+Beer — play, then cheers.',
         lede='The relaxed Sunday in Salgesch: padel with players at your level, then a cold beer at the bar with everyone from the courts.',
         chips=['Sun 8 November 2026', '50 CHF per person', 'Salgesch'], b1='Sign up on WhatsApp', b2='See all events',
@@ -315,7 +315,7 @@ def beer(L):
              ('Where is it?', 'At Rackets Academy Salgesch, Littenstrasse 30, 3970 Salgesch, 5 minutes from Sierre.')],
         fin_h='Cheers on Sunday.', fin_p='50 CHF · Sun 8 November 2026 · Salgesch'),
      'fr': dict(title='Padel+Beer – padel et bière fraîche à Salgesch | Rackets Academy',
-        desc='Padel+Beer à Salgesch près de Sierre : joue au padel, puis une Estrella Galicia bien fraîche au bar avec tout le monde. Prochaine date dimanche 8 novembre 2026, 50 CHF par personne.',
+        desc='Padel+Beer à Salgesch près de Sierre : joue au padel, puis une bière bien fraîche au bar avec tout le monde. Prochaine date dimanche 8 novembre 2026, 50 CHF par personne.',
         kicker='Dimanche · Salgesch', h1='Padel+Beer — on joue, puis santé !',
         lede='Le dimanche détente à Salgesch : du padel avec des joueurs de ton niveau, puis une bière fraîche au bar avec tout le monde.',
         chips=['Dim. 8 novembre 2026', '50 CHF par personne', 'Salgesch'], b1='S’inscrire sur WhatsApp', b2='Tous les événements',
@@ -328,7 +328,7 @@ def beer(L):
              ('Où ça se passe ?', 'À la Rackets Academy Salgesch, Littenstrasse 30, 3970 Salgesch, à 5 minutes de Sierre.')],
         fin_h='Santé dimanche !', fin_p='50 CHF · dim. 8 novembre 2026 · Salgesch'),
      'de': dict(title='Padel+Beer – Padel und ein kühles Bier in Salgesch | Rackets Academy',
-        desc='Padel+Beer in Salgesch bei Siders: Padel spielen, danach ein kühles Estrella Galicia an der Bar mit allen vom Platz. Nächstes Datum Sonntag, 8. November 2026, 50 CHF pro Person.',
+        desc='Padel+Beer in Salgesch bei Siders: Padel spielen, danach ein kühles Bier an der Bar mit allen vom Platz. Nächstes Datum Sonntag, 8. November 2026, 50 CHF pro Person.',
         kicker='Sonntag · Salgesch', h1='Padel+Beer — erst spielen, dann Prost.',
         lede='Der entspannte Sonntag in Salgesch: Padel mit Leuten auf deinem Niveau, danach ein kühles Bier an der Bar mit allen vom Platz.',
         chips=['So. 8. November 2026', '50 CHF pro Person', 'Salgesch'], b1='Per WhatsApp anmelden', b2='Alle Events',
