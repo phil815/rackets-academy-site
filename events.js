@@ -25,20 +25,20 @@
     { k: ['24h'], label: 'NTO24 · 24h padel tournament', h: '/padel4ever/' },
     { k: ['amazonia', 'dine'], label: 'Padel +Dine powered by Instinct Amazonia', h: 'padel-dine.html' },
     { k: ['ski'], label: 'Ski &Padel weekend', h: 'ski-and-padel.html' },
-    { k: ['rackemix'], label: 'Rackemix' },
+    { k: ['rackemix'], label: 'Rackemix', h: 'rackemix.html' },
     { k: ['racketero - beginner'], label: 'Racketero · Beginner', h: 'racketero.html' },
     { k: ['racketero - intermediate'], label: 'Racketero · Intermediate', h: 'racketero.html' },
     { k: ['racketero'], label: 'Racketero', h: 'racketero.html' },
-    { k: ['pickleball'], label: 'Pickleball Mix & Match' },
+    { k: ['pickleball'], label: 'Pickleball Mix & Match', h: 'pickleball.html' },
     { k: ['paella'], label: 'Padel+Paella', h: 'padel-paella.html' },
     { k: ['wine'], label: 'Padel+Wine', h: 'padel-wine.html' },
-    { k: ['beer'], label: 'Padel+Beer' },
+    { k: ['beer'], label: 'Padel+Beer', h: 'padel-beer.html' },
     { k: ['fitness'], label: 'Padel+Fitness', h: 'padel-fitness.html' },
     { k: ['rivella'], label: 'Rivella League Final', h: 'rivella-league.html' },
     { k: ['swisstennis', 'hyundai'], label: null, h: 'swiss-tennis.html' },
     { k: ['veyras'], label: 'TC Veyras · Tennis tournament', n: '41795885483' },
-    { k: ['initiation'], label: 'Initiation · Saturday morning, Sion' },
-    { k: ['leveling', 'levelling', 'playtomic'], label: 'Playtomic leveling · Saturday morning, Sion' }
+    { k: ['initiation'], label: 'Initiation · Saturday 10–11, Sion', h: 'training.html' },
+    { k: ['leveling', 'levelling', 'level-session', 'level session', 'playtomic'], label: 'Playtomic leveling · Saturday 11–12, Sion', h: 'training.html' }
   ];
   var FALLBACK_HREF = { camps: 'ski-and-padel.html', tournaments: 'swiss-tennis.html', racketeros: 'racketero.html', 'padel-plus': 'events.html' };
 

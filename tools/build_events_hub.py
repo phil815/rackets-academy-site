@@ -12,11 +12,11 @@ CARDS = [
  ('dine', 'Padel +Dine powered by Instinct Amazonia', 'padel-dine.html', 'amazonia,dine', True),
  ('ski', 'Ski &amp;Padel', 'ski-and-padel.html', 'ski', False),
  ('racketero', 'Racketero', 'racketero.html', 'racketero', False),
- ('rackemix', 'Rackemix', None, 'rackemix', True),
- ('pickle', 'Pickleball Mix &amp; Match', None, 'pickleball', True),
+ ('rackemix', 'Rackemix', 'rackemix.html', 'rackemix', True),
+ ('pickle', 'Pickleball Mix &amp; Match', 'pickleball.html', 'pickleball', True),
  ('paella', 'Padel+Paella', 'padel-paella.html', 'paella', False),
  ('wine', 'Padel+Wine', 'padel-wine.html', 'wine', False),
- ('beer', 'Padel+Beer', None, 'beer', True),
+ ('beer', 'Padel+Beer', 'padel-beer.html', 'beer', True),
  ('fitness', 'Padel+Fitness', 'padel-fitness.html', 'fitness', False),
  ('swiss', None, 'swiss-tennis.html', 'swisstennis,p20,p50,p100,p200,hyundai', False),
  ('rivella', 'Rivella League', 'rivella-league.html', 'rivella', False),
@@ -145,6 +145,8 @@ def section(lang, t):
 
 '''
 for lang, t in T.items():
+    if lang == 'en':
+        continue   # EN events.html has its own calendar layout (events.js), do not overwrite
     path = 'events.html' if lang == 'en' else lang + '/events.html'
     s = open(path).read()
     a = s.index('</section>', s.index('<section class="hero"')) + len('</section>\n\n')

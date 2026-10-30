@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T9T2GZHGS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    analytics_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'
+  });
+  gtag('js', new Date());
+  // Team-Geraete: einmal racketsacademy.ch/?internal=1 aufrufen → Besuche als intern markiert (GA4-Filter «Internal Traffic»); ?internal=0 hebt es auf
+  (function(){try{var q=location.search;if(/[?&]internal=1/.test(q))localStorage.setItem('ra_internal','1');if(/[?&]internal=0/.test(q))localStorage.removeItem('ra_internal');}catch(e){}})();
+  gtag('config', 'G-T9T2GZHGS2', (function(){try{return localStorage.getItem('ra_internal')==='1'?{traffic_type:'internal'}:{};}catch(e){return {};}})());
+  // Rackets Academy conversion events
+  (function(){
+    var lang = (location.pathname.match(/\/(fr|de)\//)||[,'en'])[1];
+    function send(name, p){ p=p||{}; p.page_lang=lang; p.page_path=location.pathname; p.transport_type='beacon'; gtag('event', name, p); }
+    document.addEventListener('click', function(e){
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (a && a.hasAttribute('data-pick')) return;
+      if (a) {
+        var h = a.href;
+        if (/playtomic\.com/.test(h)) return send('book_court', {link_url:h, link_text:(a.textContent||'').trim().slice(0,60)});
+        if (/wa\.me|whatsapp\.com/.test(h)) return send('whatsapp_click', {link_url:h});
+        if (/tinyurl\.com\/RA-Plus/i.test(h)) return send('rackets_plus_signup', {link_url:h});
+        if (/docs\.google\.com\/forms|forms\.gle/.test(h)) return send('form_click', {link_url:h});
+        return;
+      }
+      var b = e.target.closest && e.target.closest('button[onclick*="openBuyModal"], button[onclick*="openVoucherModal"], button[onclick*="openLessonModal"]');
+      if (b) {
+        var card = b.closest('.card, .racket-card, div');
+        var t = card && card.querySelector('h3');
+        send('shop_buy_click', {item_name: t ? t.textContent.trim().slice(0,80) : (/Voucher/.test(b.getAttribute('onclick')) ? 'Voucher' : 'unknown')});
+      }
+    }, true);
+    document.addEventListener('submit', function(e){
+      var f = e.target;
+      if (f && /script\.google/.test(f.action||'')) send('begin_checkout', {form_type: (f.querySelector('[name="type"]')||{}).value || ''});
+    }, true);
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Padel+Beer – padel et bière fraîche à Salgesch | Rackets Academy</title>
+<meta name="description" content="Padel+Beer à Salgesch près de Sierre : joue au padel, puis une Estrella Galicia bien fraîche au bar avec tout le monde. Prochaine date dimanche 8 novembre 2026, 50 CHF par personne.">
+<link rel="canonical" href="https://www.racketsacademy.ch/fr/padel-beer.html">
+<link rel="stylesheet" href="../styles.css?v=42">
+<meta property="og:title" content="Padel+Beer – padel et bière fraîche à Salgesch | Rackets Academy">
+<meta property="og:description" content="Padel+Beer à Salgesch près de Sierre : joue au padel, puis une Estrella Galicia bien fraîche au bar avec tout le monde. Prochaine date dimanche 8 novembre 2026, 50 CHF par personne.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.racketsacademy.ch/fr/padel-beer.html">
+<meta property="og:image" content="https://www.racketsacademy.ch/images/photos/events-friends.jpg">
+<meta property="og:locale" content="fr_CH">
+<meta property="og:site_name" content="Rackets Academy">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://www.racketsacademy.ch/padel-beer.html">
+<link rel="alternate" hreflang="fr" href="https://www.racketsacademy.ch/fr/padel-beer.html">
+<link rel="alternate" hreflang="de" href="https://www.racketsacademy.ch/de/padel-beer.html">
+<link rel="alternate" hreflang="x-default" href="https://www.racketsacademy.ch/padel-beer.html">
+<script type="application/ld+json" id="ld-landing">{"@context": "https://schema.org", "@graph": [{"@type": "Event", "name": "Padel+Beer", "startDate": "2026-11-08", "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode", "eventStatus": "https://schema.org/EventScheduled", "location": {"@type": "Place", "name": "Rackets Academy Salgesch", "address": {"@type": "PostalAddress", "streetAddress": "Littenstrasse 30", "postalCode": "3970", "addressLocality": "Salgesch", "addressCountry": "CH"}}, "offers": {"@type": "Offer", "price": "50", "priceCurrency": "CHF"}, "organizer": {"@type": "Organization", "name": "Rackets Academy", "url": "https://www.racketsacademy.ch/"}, "image": "https://www.racketsacademy.ch/images/photos/events-friends.jpg"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Je peux venir seul ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. Inscris-toi seul ou entre amis, on organise les matchs."}}, {"@type": "Question", "name": "Combien ça coûte ?", "acceptedAnswer": {"@type": "Answer", "text": "50 CHF par personne."}}, {"@type": "Question", "name": "Faut-il ma propre raquette ?", "acceptedAnswer": {"@type": "Answer", "text": "Non, tu peux en louer une sur place."}}, {"@type": "Question", "name": "Où ça se passe ?", "acceptedAnswer": {"@type": "Answer", "text": "À la Rackets Academy Salgesch, Littenstrasse 30, 3970 Salgesch, à 5 minutes de Sierre."}}]}]}</script>
+</head>
+<body>
+<div class="site-top">
+<div class="promo-banner">
+  <div class="promo-track">
+    <span>🎾 COURTS OUVERTS — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Réserve sur Playtomic →</a></span>
+    <span>🎾 COURTS OUVERTS — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Réserve sur Playtomic →</a></span>
+    <span>🎾 COURTS OUVERTS — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Réserve sur Playtomic →</a></span>
+  </div>
+</div>
+
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo"><img src="https://www.racketsacademy.ch/images/wix/834be8bc03b7.png" alt="Rackets Academy logo" width="180" height="63"></a>
+    <nav class="navlinks">
+      <a href="book.html">Réserver</a>
+      <a href="training.html">Cours</a>
+      <a href="events.html">Événements</a>
+      <a href="rackets-plus.html">Membres</a>
+      <a href="camps.html">Camps</a>
+      <a href="spa-and-sauna.html" >Spa</a>
+      <a href="shop.html">Shop</a>
+      <a href="about.html">À propos</a>
+      <a class="nav-login" href="../intern.html" rel="nofollow">Login équipe</a>
+      <div class="lang-switch">
+        <button type="button" aria-haspopup="true">FR</button>
+        <div class="lang-menu"><a href="../padel-beer.html">English</a><a href="../de/padel-beer.html">Deutsch</a><a href="#">Français</a></div>
+      </div>
+      <a class="nav-cta-mobile" href="book.html">Réserver</a>
+    </nav>
+    <div class="lang-switch">
+      <button type="button" aria-haspopup="true">FR</button>
+      <div class="lang-menu"><a href="../spa-and-sauna.html">English</a><a href="../de/spa-and-sauna.html">Deutsch</a><a href="#">Français</a></div>
+    </div>
+    <a class="nav-cta" href="book.html">Réserver</a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span></button>
+  </div>
+</header>
+</div>
+
+<section class="spa-hero co-hero" style="background-image:url('../images/photos/events-friends.jpg'); background-position:center 30%;">
+  <div class="spa-hero-shade"></div>
+  <div class="wrap spa-hero-inner">
+    <p class="spa-kicker">Dimanche · Salgesch</p>
+    <h1>Padel+Beer — on joue, puis santé !</h1>
+    <p class="lede">Le dimanche détente à Salgesch : du padel avec des joueurs de ton niveau, puis une bière fraîche au bar avec tout le monde.</p>
+    <div class="spa-chips"><span class="spa-chip">Dim. 8 novembre 2026</span><span class="spa-chip">50 CHF par personne</span><span class="spa-chip">Salgesch</span></div>
+    <div class="hero-actions"><a class="btn btn-green spa-cta" href="https://wa.me/41772780115?text=Hola%20%21%20Je%20veux%20m%E2%80%99inscrire%20au%20Padel%2BBeer%20du%208%20novembre." target="_blank" rel="noopener">S’inscrire sur WhatsApp</a><a class="btn spa-cta-ghost" href="events.html">Tous les événements</a></div>
+  </div>
+</section>
+
+<section class="co2-sec">
+  <div class="wrap">
+    <h2 class="co2-h">Au programme</h2>
+    <div class="ow-facs"><div class="ow-fac"><span class="co2-ic">🎾</span><div><h3>Padel</h3><p>Des matchs avec des joueurs de ton niveau, terrain compris.</p><p class="ow-time">Salgesch</p></div></div><div class="ow-fac"><span class="co2-ic">🍺</span><div><h3>Bière</h3><p>Une bière fraîche au bar après le jeu.</p><p class="ow-time">Après les matchs</p></div></div><div class="ow-fac"><span class="co2-ic">🤝</span><div><h3>Rencontres</h3><p>La communauté Rackets dans une ambiance détendue.</p><p class="ow-time">Tous niveaux</p></div></div></div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="wrap">
+    <h2>Bon à savoir</h2>
+    <div class="spa-faq"><details><summary>Je peux venir seul ?</summary><p>Oui. Inscris-toi seul ou entre amis, on organise les matchs.</p></details><details><summary>Combien ça coûte ?</summary><p>50 CHF par personne.</p></details><details><summary>Faut-il ma propre raquette ?</summary><p>Non, tu peux en louer une sur place.</p></details><details><summary>Où ça se passe ?</summary><p>À la Rackets Academy Salgesch, Littenstrasse 30, 3970 Salgesch, à 5 minutes de Sierre.</p></details></div>
+  </div>
+</section>
+
+<section class="spa-final" style="background-image:url('../images/photos/events-group.jpg'); background-position:center 45%;">
+  <div class="spa-hero-shade"></div>
+  <div class="wrap spa-final-inner">
+    <h2>Santé dimanche !</h2>
+    <p>50 CHF · dim. 8 novembre 2026 · Salgesch</p>
+    <div class="hero-actions" style="justify-content:center;"><a class="btn btn-green spa-cta" href="https://wa.me/41772780115?text=Hola%20%21%20Je%20veux%20m%E2%80%99inscrire%20au%20Padel%2BBeer%20du%208%20novembre." target="_blank" rel="noopener">S’inscrire sur WhatsApp</a><a class="btn spa-cta-ghost" href="events.html">Tous les événements</a></div>
+  </div>
+</section>
+<footer>
+  <div class="wrap">
+    <img src="https://www.racketsacademy.ch/images/wix/fd51e1e7dfdf.png" alt="Rackets Academy" width="200" height="72" style="margin-bottom:8px;">
+    <p style="opacity:.85; margin:0 0 14px;">PLAY. COMPETE. ENJOY.</p>
+    <div class="footer-grid ux-foot"><div><h4>Salgesch</h4><a href="https://www.google.com/maps/search/?api=1&query=Littenstrasse+30+3970+Salgesch" target="_blank" rel="noopener">Littenstrasse 30, 3970 Salgesch</a><p>Padel · Pickleball · Tennis · Spa</p><p>Tous les jours 7h–23h30</p></div><div><h4>Sion</h4><a href="https://www.google.com/maps/search/?api=1&query=Route+de+Pr%C3%A9jeux+16+1950+Sion" target="_blank" rel="noopener">Route de Préjeux 16, 1950 Sion</a><p>Padel</p><p>Tous les jours 7h–23h30</p></div><div class="foot-links"><h4>Liens rapides</h4><a href="book.html">Réserver un court</a><a href="training.html">Cours</a><a href="faq.html">FAQ</a><a href="shop.html#vouchers">Bons cadeaux</a><a href="shop.html">Shop</a><a href="events.html">Événements</a></div><div class="footer-contact"><h4>Contact</h4><a class="foot-wa" href="https://wa.me/41772780115?text=Hola%20%21%20J%27ai%20une%20question%20sur%20la%20Rackets%20Academy." target="_blank" rel="noopener">Écris-nous sur WhatsApp</a><p>Réponse rapide · +41 77 278 01 15</p><a href="mailto:phil@racketsacademy.ch">phil@racketsacademy.ch</a></div></div>
+    <div class="sponsor-row">
+      <div class="sponsor-track">
+      <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/5887f86ed50b.png" alt="Wilson" loading="lazy"></a>
+      <a href="https://www.estrellagalicia.es" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e0ff8b826424.png" alt="Estrella Galicia" loading="lazy"></a>
+      <a href="https://www.decathlon.ch" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/75ca95274283.png" alt="Decathlon" loading="lazy"></a>
+      <a href="https://www.coca-cola.com/ch/de/brands/powerade" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4662d7547275.png" alt="Powerade" loading="lazy"></a>
+      <a href="https://tanguy.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4c92a56af6fb.png" alt="Garage Tanguy" loading="lazy"></a>
+      <a href="https://tanguy.hyundai.ch/fr" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/f74a1e85ce45.png" alt="Hyundai" loading="lazy"></a>
+      <a href="https://www.scleanup.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d7bc95225fa2.png" alt="S Clean-up" loading="lazy"></a>
+      <a href="https://shop.morand.ch/shop/category/sirops-65" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e03b161cd8bb.png" alt="Distillerie Morand" loading="lazy"></a>
+      <a href="https://rivella.ch/de/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d4f0de57b68e.png" alt="Rivella" loading="lazy"></a>
+      <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/5887f86ed50b.png" alt="Wilson" loading="lazy"></a>
+      <a href="https://www.estrellagalicia.es" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e0ff8b826424.png" alt="Estrella Galicia" loading="lazy"></a>
+      <a href="https://www.decathlon.ch" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/75ca95274283.png" alt="Decathlon" loading="lazy"></a>
+      <a href="https://www.coca-cola.com/ch/de/brands/powerade" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4662d7547275.png" alt="Powerade" loading="lazy"></a>
+      <a href="https://tanguy.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4c92a56af6fb.png" alt="Garage Tanguy" loading="lazy"></a>
+      <a href="https://tanguy.hyundai.ch/fr" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/f74a1e85ce45.png" alt="Hyundai" loading="lazy"></a>
+      <a href="https://www.scleanup.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d7bc95225fa2.png" alt="S Clean-up" loading="lazy"></a>
+      <a href="https://shop.morand.ch/shop/category/sirops-65" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e03b161cd8bb.png" alt="Distillerie Morand" loading="lazy"></a>
+      <a href="https://rivella.ch/de/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d4f0de57b68e.png" alt="Rivella" loading="lazy"></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Rackets Academy</span>
+      <span><a href="terms-and-conditions.html">Conditions générales</a> · <a href="privacy-policy.html">Politique de confidentialité</a> · <a href="impressum.html">Mentions légales</a></span>
+    </div>
+  </div>
+</footer>
+<script src="../nav.js?v=35"></script>
+</body>
+</html>
