@@ -11,7 +11,7 @@ PRICE_DAY = 50
 CAP = 20
 D = dt.date
 WEEKS = {   # (start, end, slot)  am = 9-12, pm = 14-17 (after skiing)
-  'winter': [(D(2027, 1, 4), D(2027, 1, 8), 'pm'), (D(2027, 2, 8), D(2027, 2, 12), 'pm')],
+  'winter': [(D(2027, 1, 4), D(2027, 1, 8), 'pm'), (D(2027, 2, 8), D(2027, 2, 12), 'pm'), (D(2027, 2, 22), D(2027, 2, 26), 'pm')],   # 22.–26.2. = Sportferien Oberwallis (Guti 1.11.2026)
   'easter': [(D(2027, 3, 30), D(2027, 4, 2), 'am')],
   'summer': [(D(2027, 7, 12), D(2027, 7, 16), 'am'), (D(2027, 8, 9), D(2027, 8, 13), 'am')],
 }
@@ -140,13 +140,13 @@ T = {
          'easter': 'Kinder-Padelcamp Osterferien 2027, Oberwallis | Rackets Academy',
          'summer': 'Padel-Sommercamp für Kinder 2027, Wallis | Rackets Academy'},
   desc={'hub': 'Padel-Camps für Kinder von 6 bis 14 Jahren in den Schulferien 2027: Winter, Ostern und Sommer in Salgesch, 20 Min. ab Visp. 20 Plätze pro Woche, CHF 250, online buchen.',
-        'winter': 'Padel-Camp am Nachmittag nach dem Skifahren für Kinder von 6 bis 14: Januar- und Fasnachtsferien 2027 in Salgesch, 20 Min. ab Visp. 14–17 Uhr, CHF 250 pro Woche.',
+        'winter': 'Padel-Camp am Nachmittag nach dem Skifahren für Kinder von 6 bis 14: Januar-, Fasnachts- und Sportferien Oberwallis 2027 in Salgesch, 20 Min. ab Visp. 14–17 Uhr, CHF 250 pro Woche.',
         'easter': 'Padel-Camp für Kinder von 6 bis 14 Jahren in den Osterferien 2027 in Salgesch, 20 Min. ab Visp. 4 Vormittage 9–12 Uhr, drinnen, Schläger inklusive, CHF 200.',
         'summer': 'Padel-Sommercamp 2027 für Kinder von 6 bis 14 in Salgesch, 20 Min. ab Visp: 12.–16. Juli und 9.–13. August, vormittags 9–12 Uhr, CHF 250 pro Woche.'},
   kicker={'hub': 'Kindercamps 2027 · Salgesch', 'winter': 'Januar & Februar 2027 · Salgesch', 'easter': 'Osterferien 2027 · Salgesch', 'summer': 'Sommerferien 2027 · Salgesch'},
   h1={'hub': 'Ferien? Padel-Camp!', 'winter': 'Morgens Ski, nachmittags Padel.', 'easter': 'Osterferien auf dem Padelplatz.', 'summer': 'Das Sommercamp, das Kinder nochmals wollen.'},
   lede={'hub': 'Drei Stunden pro Tag Padel, Spiele und neue Freunde für Kinder von 6 bis 14 — in den Winter-, Oster- und Sommerferien, drinnen in Salgesch.',
-        'winter': 'Nachmittagscamp in den Januar- und Fasnachtsferien: nach der Piste fünf Nachmittage Padel, Spiele und Matches. Warm und drinnen.',
+        'winter': 'Nachmittagscamp in den Januar-, Fasnachts- und Oberwalliser Sportferien (22.–26. Februar): nach der Piste fünf Nachmittage Padel, Spiele und Matches. Warm und drinnen.',
         'easter': 'Vier Vormittage Padel, Spiele und ein Mini-Turnier in den Osterferien — drinnen in Salgesch.',
         'summer': 'Zwei Sommerwochen, wenn die meisten Familien wieder zu Hause sind: jeden Vormittag Padel, Spiele und Matches, drinnen und ohne Hitze.'},
   chips=['6–14 Jahre', '20 Plätze pro Woche', 'CHF 250 pro Woche', 'Schläger inklusive'],
