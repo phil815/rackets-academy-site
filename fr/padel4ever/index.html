@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>P424 · 24 h de padel non-stop · Salgesch, 13–14 mars 2027</title>
+<meta name="description" content="P424 : 24 heures de padel non-stop. 6 équipes de 8, 3 terrains, un classement en direct. Rackets Academy Salgesch, 13–14 mars 2027.">
+<!-- p424-i18n -->
+<link rel="alternate" hreflang="en" href="https://www.racketsacademy.ch/padel4ever/">
+<link rel="alternate" hreflang="de" href="https://www.racketsacademy.ch/de/padel4ever/">
+<link rel="alternate" hreflang="fr" href="https://www.racketsacademy.ch/fr/padel4ever/">
+<link rel="alternate" hreflang="x-default" href="https://www.racketsacademy.ch/padel4ever/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎾</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+:root{
+  --ink:#0B1A2B; --ink2:#12263d; --ink3:#1b3452; --bone:#F4F6F8; --line:#dfe4ea;
+  --green:#6FFD1D; --green-dim:#4fbf12; --steel:#8A93A0; --text:#22303f;
+  --night:#060f1a; --radius:14px; --max:980px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:calc(64px + env(safe-area-inset-top,0px))}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0; font-family:'Work Sans',system-ui,-apple-system,Segoe UI,Arial,sans-serif; color:var(--text); background:var(--bone); line-height:1.55;
+  padding-bottom:env(safe-area-inset-bottom,0px)}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
+section{padding:56px 0}
+a{color:inherit}
+h1,h2,h3,.d{font-family:'Bebas Neue',Impact,'Arial Narrow',sans-serif; font-weight:400; letter-spacing:.01em}
+h2{font-size:clamp(2rem,5vw,2.8rem); line-height:1; margin:0 0 12px; color:var(--ink)}
+h3{font-size:1.45rem; margin:0 0 6px; color:var(--ink)}
+p{margin:0 0 10px}
+.lede{max-width:620px; color:#4a5868; font-size:1.05rem; margin-bottom:26px}
+button{font-family:inherit}
+:focus-visible{outline:3px solid var(--green); outline-offset:2px}
+
+/* header */
+header{position:sticky; top:0; z-index:20; background:var(--ink); padding:calc(12px + env(safe-area-inset-top,0px)) 0 12px}
+.hrow{display:flex; align-items:center; justify-content:space-between; gap:12px}
+.wm{display:flex; align-items:center; gap:8px; color:#fff; text-decoration:none}
+.wm .v{writing-mode:vertical-rl; transform:rotate(180deg); font-family:'Bebas Neue',sans-serif; color:var(--green); font-size:13px; letter-spacing:2px; line-height:1}
+.wm .n{font-family:'Bebas Neue',sans-serif; font-size:28px; line-height:1}
+.wm .n b{font-weight:400; color:var(--green)}
+.hnav{display:flex; gap:18px; align-items:center}
+.hnav a.l{color:#c9d2dc; text-decoration:none; font-size:14px; font-weight:600}
+.hnav a.l:hover{color:#fff}
+@media (max-width:640px){.hnav a.l{display:none}}
+.pill{display:inline-block; background:var(--green); color:var(--ink); font-weight:800; font-size:14px; padding:10px 18px; border-radius:999px; text-decoration:none; border:0; cursor:pointer}
+.pill.ghost{background:transparent; color:#fff; border:2px solid rgba(255,255,255,.35)}
+.pill.dark{background:var(--ink); color:#fff}
+
+/* hero */
+.hero{background:var(--ink); color:#fff; padding:40px 0 0; overflow:hidden}
+.hero .meta{color:var(--green); font-weight:700; font-size:15px}
+.lock{display:flex; align-items:flex-end; gap:10px; margin:14px 0 6px}
+.lock .v{writing-mode:vertical-rl; transform:rotate(180deg); font-family:'Bebas Neue',sans-serif; color:var(--green); font-size:clamp(28px,7vw,52px); line-height:.85; letter-spacing:4px}
+.lock h1{font-size:clamp(110px,30vw,230px); line-height:.78; margin:0; color:#fff}
+.lock h1 b{font-weight:400; color:var(--green)}
+.claim{font-size:clamp(1.25rem,3.4vw,1.7rem); font-weight:700; max-width:640px; margin:18px 0 8px}
+.hero .sub{color:#b8c3cf; max-width:560px}
+.cta{display:flex; gap:12px; flex-wrap:wrap; margin:24px 0 36px}
+.clockbar{display:grid; grid-template-columns:repeat(29,1fr); gap:2px; height:16px}
+.clockbar span{background:var(--ink3); border-radius:2px}
+.clockbar span.g{background:#3b2a6b}
+.clockbar span.f{background:var(--green)}
+.clocklab{display:flex; justify-content:space-between; color:#7f8ea0; font-size:12px; margin:8px 0 0; padding-bottom:22px}
+.facts{background:var(--green); color:var(--ink)}
+.facts .wrap{display:grid; grid-template-columns:repeat(5,1fr); gap:8px; padding-top:16px; padding-bottom:16px; text-align:center}
+.facts .n{font-family:'Bebas Neue',sans-serif; font-size:clamp(1.8rem,5vw,2.6rem); line-height:1}
+.facts .l{font-size:12px; font-weight:700}
+@media (max-width:520px){.facts .wrap{grid-template-columns:repeat(3,1fr)} .facts .x{display:none}}
+
+/* steps */
+.steps{display:grid; gap:14px; grid-template-columns:1fr; counter-reset:s}
+@media (min-width:760px){.steps{grid-template-columns:1fr 1fr}}
+.step{background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:22px 22px 20px 70px; position:relative}
+.step:before{counter-increment:s; content:counter(s); position:absolute; left:20px; top:18px; width:34px; height:34px; border-radius:50%; background:var(--ink); color:var(--green); font-family:'Bebas Neue',sans-serif; font-size:22px; display:flex; align-items:center; justify-content:center}
+.step p{color:#4a5868; margin:0}
+
+/* special rules */
+.specials{display:grid; gap:14px; grid-template-columns:1fr; margin-top:26px}
+@media (min-width:760px){.specials{grid-template-columns:repeat(3,1fr)}}
+.sp{border-radius:var(--radius); padding:22px; color:#fff}
+.sp.gy{background:#21184a}
+.sp.jk{background:var(--ink2)}
+.sp.fn{background:var(--ink)}
+.sp h3{color:#fff; font-size:1.7rem}
+.sp .x2{font-family:'Bebas Neue',sans-serif; color:var(--green); font-size:2.6rem; line-height:1}
+.sp p{color:#c7cfd9; margin:0; font-size:.95rem}
+
+/* simulator */
+.simsec{background:var(--ink); color:#fff}
+.simsec h2{color:#fff}
+.simsec .lede{color:#b8c3cf}
+.panel{background:var(--ink2); border-radius:var(--radius); padding:20px}
+.setup label{display:block; font-size:13px; font-weight:700; color:#b8c3cf; margin:0 0 6px}
+.setup input{width:100%; padding:11px 12px; border-radius:10px; border:1px solid #2a4562; background:var(--ink); color:#fff; font-family:inherit; font-size:15px}
+.pgrid{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px}
+@media (min-width:640px){.pgrid{grid-template-columns:repeat(4,1fr)}}
+.setup .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
+#game{display:none; margin-top:18px}
+.glayout{display:grid; gap:16px; grid-template-columns:1fr}
+@media (min-width:900px){.glayout{grid-template-columns:1.25fr 1fr}}
+.rhead{display:flex; justify-content:space-between; align-items:flex-start; gap:10px; flex-wrap:wrap}
+.rnum{font-family:'Bebas Neue',sans-serif; font-size:2.2rem; line-height:1}
+.rtime{color:#b8c3cf; font-size:14px}
+.tag{display:inline-block; font-size:12px; font-weight:800; padding:4px 10px; border-radius:999px; background:var(--ink3); color:#c7cfd9}
+.tag.gy{background:#3b2a6b; color:#d9ccff}
+.tag.fn{background:var(--green); color:var(--ink)}
+.tag.jk{background:#fff; color:var(--ink)}
+.hint{color:#b8c3cf; font-size:14px; margin:12px 0 10px}
+.players{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+.pl{display:flex; flex-direction:column; gap:6px; text-align:left; background:var(--ink); border:2px solid #24405e; color:#fff; border-radius:12px; padding:10px 12px; cursor:pointer; min-height:64px}
+.pl:hover:not(:disabled){border-color:#4a6d92}
+.pl.sel{border-color:var(--green); background:#10301a}
+.pl:disabled{opacity:.38; cursor:not-allowed}
+.pl .nm{font-weight:700; font-size:15px; display:flex; justify-content:space-between; gap:6px}
+.pl .st{font-size:12px; color:#9fb0c2}
+.bar{height:5px; background:#24405e; border-radius:3px; overflow:hidden}
+.bar i{display:block; height:100%; background:var(--green)}
+.bar i.lo{background:#ffb020}
+.bar i.vlo{background:#ff5a5a}
+.actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; align-items:center}
+.jok{display:flex; align-items:center; gap:8px; font-size:14px; color:#c7cfd9; cursor:pointer}
+.jok input{width:18px; height:18px; accent-color:var(--green)}
+.msg{min-height:22px; font-size:14px; color:#ffcf5a; margin-top:10px}
+.results{margin-top:14px; display:grid; gap:8px}
+.res{background:var(--ink); border-radius:10px; padding:10px 12px; font-size:14px; display:grid; grid-template-columns:52px 1fr auto; gap:10px; align-items:center}
+.res .c{color:#7f8ea0; font-size:12px; font-weight:700}
+.res .s{font-family:'Bebas Neue',sans-serif; font-size:1.4rem; color:var(--green); white-space:nowrap}
+.res.me{outline:2px solid var(--green)}
+table.tbl{width:100%; border-collapse:collapse; font-size:14px}
+.tbl th{text-align:left; color:#7f8ea0; font-weight:700; font-size:12px; padding:6px 6px; border-bottom:1px solid #24405e}
+.tbl td{padding:9px 6px; border-bottom:1px solid #1d3550}
+.tbl td.num{text-align:right; font-variant-numeric:tabular-nums}
+.tbl tr.me td{color:var(--green); font-weight:700}
+.tbl .pos{width:28px; color:#7f8ea0}
+.mv{font-size:11px; margin-left:4px}
+.mv.up{color:var(--green)} .mv.dn{color:#ff7a7a}
+.prog{display:grid; grid-template-columns:repeat(29,1fr); gap:2px; height:8px; margin:14px 0 4px}
+.prog span{background:#24405e; border-radius:2px}
+.prog span.g{background:#3b2a6b}
+.prog span.done{background:#7f8ea0}
+.prog span.now{background:var(--green)}
+.endbox{display:none; margin-top:16px; background:var(--green); color:var(--ink); border-radius:var(--radius); padding:20px}
+.endbox h3{font-size:2rem; color:var(--ink)}
+.endbox ul{margin:8px 0 0; padding-left:18px}
+.fine{font-size:13px; color:#7f8ea0; margin-top:12px}
+
+/* included */
+.inc{display:grid; gap:20px; grid-template-columns:1fr; align-items:start}
+@media (min-width:800px){.inc{grid-template-columns:220px 1fr}}
+.price{background:var(--ink); color:#fff; border-radius:var(--radius); padding:24px; text-align:center}
+.price .d{font-size:3.4rem; line-height:1; color:var(--green)}
+.price small{display:block; color:#b8c3cf; margin-top:6px}
+.blist{display:grid; gap:8px; grid-template-columns:1fr; margin:0; padding:0; list-style:none}
+@media (min-width:560px){.blist{grid-template-columns:1fr 1fr}}
+.blist li{background:#fff; border:1px solid var(--line); border-radius:10px; padding:11px 14px; font-weight:600; font-size:.95rem}
+.blist li span{display:block; font-weight:400; color:#5b6878; font-size:.85rem}
+.zone{margin-top:30px; background:#fff; border:1px solid var(--line); border-left:6px solid var(--green); border-radius:var(--radius); padding:22px}
+.math{margin-top:30px; display:grid; gap:10px; grid-template-columns:repeat(2,1fr)}
+@media (min-width:700px){.math{grid-template-columns:repeat(4,1fr)}}
+.math div{background:var(--ink); color:#fff; border-radius:12px; padding:16px}
+.math .d{font-size:2.2rem; line-height:1; color:var(--green)}
+.math small{color:#b8c3cf}
+
+/* schedule */
+.tl{list-style:none; margin:0; padding:0}
+.tl li{display:grid; grid-template-columns:130px 1fr; gap:14px; padding:13px 0; border-bottom:1px solid var(--line)}
+.tl li:last-child{border-bottom:0}
+.tl .t{font-weight:800; color:var(--ink)}
+.tl li.gy .t{color:#5a3fc0}
+.tl li.fn .t{color:var(--green-dim)}
+@media (max-width:480px){.tl li{grid-template-columns:96px 1fr}}
+
+/* faq */
+details{background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:8px}
+summary{font-weight:700; cursor:pointer; color:var(--ink)}
+details p{margin:10px 0 0; color:#4a5868}
+
+.reg{background:var(--ink); color:#fff; border-radius:var(--radius); padding:40px 24px; text-align:center}
+.reg h2{color:#fff}
+.reg p{color:#b8c3cf; max-width:480px; margin:8px auto 22px}
+footer{background:var(--night); color:#7f8ea0; padding:26px 0; text-align:center; font-size:13px}
+.lsw{display:flex; gap:8px}.lsw a{color:#7f8ea0; text-decoration:none; font-size:13px; font-weight:800}.lsw a.on,.lsw a:hover{color:var(--green)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hrow">
+    <a class="wm" href="#top" aria-label="P424 accueil"><span class="v">24H</span><span class="n">P<b>4</b>24</span></a>
+    <nav class="hnav">
+      <span class="lsw"><a href="/padel4ever/" lang="en">EN</a><a href="/de/padel4ever/" lang="de">DE</a><a href="/fr/padel4ever/" lang="fr" class="on" aria-current="page">FR</a></span>
+      <a class="l" href="#how">Le principe</a>
+      <a class="l" href="#play">À toi de jouer</a>
+      <a class="l" href="#included">Inclus</a>
+      <a class="pill" href="#register">Inscrire une équipe</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="meta">Salgesch · sam 13 mars 13:00 au dim 14 mars 13:00</div>
+    <div class="lock"><span class="v">24H</span><h1>P<b>4</b>24</h1></div>
+    <p class="claim">24 heures de padel. Ton équipe tient le terrain toute la journée et toute la nuit.</p>
+    <p class="sub">Six équipes de huit. Trois terrains. Deux d’entre vous jouent toujours. Chaque jeu gagné compte au classement en direct. Le meilleur score dimanche à 13:00 l’emporte.</p>
+    <div class="cta">
+      <a class="pill" href="#play">Joue une partie</a>
+      <a class="pill ghost" href="#how">Le principe</a>
+    </div>
+    <div class="clockbar" id="heroBar" aria-hidden="true"></div>
+    <div class="clocklab"><span>sam 13:00</span><span>Service de nuit 01:30–04:50</span><span>Finale · dim 13:00</span></div>
+  </div>
+</section>
+
+<div class="facts">
+  <div class="wrap">
+    <div><div class="n">6</div><div class="l">équipes</div></div>
+    <div><div class="n">8</div><div class="l">joueurs chacune</div></div>
+    <div><div class="n">3</div><div class="l">terrains</div></div>
+    <div class="x"><div class="n">29</div><div class="l">tours</div></div>
+    <div class="x"><div class="n">~6h</div><div class="l">de padel par joueur</div></div>
+  </div>
+</div>
+
+<section id="how">
+  <div class="wrap">
+    <h2>Le principe</h2>
+    <p class="lede">Lis ceci une fois. Puis joue en dessous, et tout devient clair.</p>
+    <div class="steps">
+      <div class="step"><h3>Forme une équipe de huit</h3><p>Un capitaine, sept coéquipiers. Les niveaux mixtes sont les bienvenus. La profondeur compte plus qu’une star.</p></div>
+      <div class="step"><h3>Deux d’entre vous sont toujours sur le terrain</h3><p>Les six équipes jouent en même temps sur trois terrains. Chaque tour dure 45 minutes, plus 5 minutes de changement. À chaque tour, une autre équipe en face.</p></div>
+      <div class="step"><h3>Le capitaine choisit le duo</h3><p>Avant chaque tour, le capitaine envoie deux joueurs. Règle un : chaque duo possible parmi vos huit joue exactement une fois (soit 28 tours). Règle deux : personne ne joue deux tours de suite.</p></div>
+      <div class="step"><h3>Chaque jeu compte</h3><p>Pas de sets à défendre, pas d’élimination. Chaque jeu gagné par ton duo vaut un point au classement en direct. Perdu 4–6 ? Tu encaisses quand même 4.</p></div>
+    </div>
+
+    <div class="specials">
+      <div class="sp gy"><div class="x2">×2</div><h3>Service de nuit</h3><p>Tours 16 à 19, de 01:30 à 04:50. Chaque jeu compte double pour tout le monde. Qui garde de l’énergie pour la nuit gagne le tournoi.</p></div>
+      <div class="sp jk"><div class="x2">×2</div><h3>Joker</h3><p>Une fois par tournoi, le capitaine peut doubler un tour pour son équipe seulement. Pas pendant le service de nuit. Tout est dans le timing.</p></div>
+      <div class="sp fn"><div class="x2">×2</div><h3>Tour final</h3><p>Dimanche de 12:20 à 13:00. Le capitaine choisit n’importe quel duo, points doublés. Le classement peut encore basculer dans les 40 dernières minutes.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="simsec" id="play">
+  <div class="wrap">
+    <h2>Tu es le capitaine. À toi de jouer.</h2>
+    <p class="lede">Entre ton équipe, puis choisis le duo de chaque tour. Surveille l’énergie, garde des joueurs pour le service de nuit et place ton joker. Les cinq autres équipes sont jouées par l’ordinateur.</p>
+
+    <div class="panel setup" id="setup">
+      <label for="crew">Nom de l’équipe</label>
+      <input id="crew" type="text" value="Les Increvables" maxlength="24" autocomplete="off">
+      <div class="pgrid" id="pgrid"></div>
+      <div class="row">
+        <button class="pill" id="startBtn" type="button">Départ sam à 13:00</button>
+      </div>
+    </div>
+
+    <div id="game">
+      <div class="prog" id="prog" aria-hidden="true"></div>
+      <div class="glayout">
+        <div class="panel">
+          <div class="rhead">
+            <div>
+              <div class="rnum" id="rnum">Tour 1</div>
+              <div class="rtime" id="rtime"></div>
+            </div>
+            <div id="rtags"></div>
+          </div>
+          <p class="hint" id="hint">Touche deux joueurs pour les envoyer sur le terrain.</p>
+          <div class="players" id="players"></div>
+          <div class="actions" id="gameActions">
+            <button class="pill" id="playBtn" type="button" disabled>Jouer le tour</button>
+            <label class="jok" id="jokWrap"><input type="checkbox" id="joker"> Utiliser le joker (×2)</label>
+            <button class="pill ghost" id="autoBtn" type="button">Jouer automatiquement jusqu’au bout</button>
+          </div>
+          <div class="msg" id="msg" role="status" aria-live="polite"></div>
+          <div class="results" id="results"></div>
+        </div>
+        <div class="panel">
+          <h3 style="color:#fff">Classement en direct</h3>
+          <table class="tbl" aria-label="Classement en direct">
+            <thead><tr><th class="pos">#</th><th>Équipe</th><th style="text-align:right">Jeux</th><th style="text-align:right">Points</th></tr></thead>
+            <tbody id="tbody"></tbody>
+          </table>
+          <p class="fine">Points = jeux gagnés × multiplicateur. Le jour J, ce classement s’affiche sur les écrans de la halle et sur Instagram.</p>
+        </div>
+      </div>
+      <div class="endbox" id="endbox"></div>
+      <p class="fine">Simple simulation. Les résultats dépendent de l’énergie des joueurs et d’un peu de chance. Le jour J, les capitaines prennent les mêmes décisions que toi.</p>
+    </div>
+  </div>
+</section>
+
+<section id="included">
+  <div class="wrap">
+    <h2>Ce qui est inclus</h2>
+    <p class="lede">Un seul prix. Tout pour 24 heures sous un même toit.</p>
+    <div class="inc">
+      <div class="price"><div class="d">CHF 249</div><small>par joueur<br>CHF 1'992 par équipe de 8</small></div>
+      <ul class="blist">
+        <li>~6 heures de padel en match<span>7 matchs avec 7 partenaires différents, plus la finale</span></li>
+        <li>Deux chambres par équipe<span>Dormir à tour de rôle pendant que ton duo joue</span></li>
+        <li>Sam midi : lasagnes</li>
+        <li>Sam soir : rôti et purée</li>
+        <li>Carburant de nuit<span>Bananes et snacks, toute la nuit</span></li>
+        <li>Dim buffet petit-déjeuner</li>
+        <li>Dim midi : pizza</li>
+        <li>Spa, sauna et salle de fitness</li>
+        <li>Physio sur appel</li>
+        <li>DJ toute la nuit</li>
+        <li>T-shirt finisher et goodie bag</li>
+        <li>Eau gratuite et à volonté<span>Autres boissons au bar</span></li>
+      </ul>
+    </div>
+
+    <div class="zone">
+      <h3>La zone de repos, c’est sur place</h3>
+      <p style="margin:0">Entre tes matchs, tu as environ deux heures et demie. Sauna, spa, fitness, physio, bar et lits sont dans le même bâtiment, à quelques pas du terrain. Pas de voiture, pas de transfert à l’hôtel. Récupère, dors, reviens affûté.</p>
+    </div>
+
+    <div class="math">
+      <div><div class="d">7+1</div><small>matchs par joueur</small></div>
+      <div><div class="d">7</div><small>partenaires différents</small></div>
+      <div><div class="d">~6h</div><small>sur le terrain</small></div>
+      <div><div class="d">1</div><small>nuit dont tu parleras longtemps</small></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>Programme</h2>
+    <ul class="tl">
+      <li><span class="t">sam 12:00</span><span>Check-in, t-shirts, repas de midi</span></li>
+      <li><span class="t">sam 13:00</span><span>Le chrono démarre. Tour 1 sur les trois terrains</span></li>
+      <li><span class="t">sam 19:00–21:00</span><span>Souper à tour de rôle. Les terrains continuent</span></li>
+      <li><span class="t">sam 22:00</span><span>DJ aux platines. Lumières tamisées</span></li>
+      <li class="gy"><span class="t">dim 01:30–04:50</span><span>Service de nuit. Les tours 16 à 19 comptent double</span></li>
+      <li><span class="t">dim 07:00–09:00</span><span>Buffet petit-déjeuner à tour de rôle</span></li>
+      <li class="fn"><span class="t">dim 12:20–13:00</span><span>Tour final. Choix du capitaine, points doublés</span></li>
+      <li><span class="t">dim 13:00</span><span>Fin du chrono. Podium, pizza</span></li>
+    </ul>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>Questions</h2>
+    <details><summary>Dois-je rester éveillé 24 heures ?</summary><p>Non. Tu joues environ un tour sur quatre. La plupart dorment 3 à 4 heures à tour de rôle. Ton capitaine planifie qui se repose quand.</p></details>
+    <details><summary>Quel niveau faut-il ?</summary><p>Tu dois être à l’aise en match. Les équipes de niveaux mixtes fonctionnent bien, car chaque duo joue une fois et le capitaine décide quand.</p></details>
+    <details><summary>Et si un joueur se blesse ou abandonne ?</summary><p>Une équipe a besoin d’au moins cinq joueurs en forme pour continuer. En dessous, elle s’arrête et garde ses points.</p></details>
+    <details><summary>Comment sont comptés les points ?</summary><p>Chaque tour dure 45 minutes de jeu. Chaque jeu gagné par ton duo vaut un point, deux pendant le service de nuit, le tour final ou ton tour joker. En cas d’égalité, le total de jeux gagnés départage.</p></details>
+    <details><summary>Puis-je m’inscrire seul ?</summary><p>Oui. Écris-nous et on te place dans une équipe.</p></details>
+  </div>
+</section>
+
+<section id="register" style="padding-top:0">
+  <div class="wrap">
+    <div class="reg">
+      <h2>Six équipes. Pas une de plus.</h2>
+      <p>Réunis tes huit. Les places vont aux premières équipes qui s’engagent.</p>
+      <a class="pill" href="https://wa.me/41762914369?text=Salut%2C%20nous%20voulons%20inscrire%20une%20%C3%A9quipe%20pour%20P424" target="_blank" rel="noopener">S’inscrire sur WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">P424 · titre provisoire, vérification de marque en cours · Une production Rackets Academy, Salgesch</div>
+</footer>
+
+<script>
+(function(){
+  var ROUNDS = 28, FINAL = 29, ROUND_MIN = 50, START = 13*60;
+  var GY = [16,17,18,19];
+  var AI_NAMES = ['Smash Bros','Net Ninjas','Bandeja Boys','Night Owls','Wall Street'];
+
+  function isGY(r){ return GY.indexOf(r) >= 0; }
+  function pad(n){ return (n<10?'0':'')+n; }
+  function clock(r){
+    var s = START + (r-1)*ROUND_MIN, e = r===FINAL ? s+40 : s+ROUND_MIN;
+    function f(m){ var d=Math.floor(m/1440), x=m%1440; return (d?'dim ':'sam ')+pad(Math.floor(x/60))+':'+pad(x%60); }
+    var a=f(s), b=f(e); if(a.split(' ')[0]===b.split(' ')[0]) b=b.split(' ')[1]; return a+'–'+b;
+  }
+
+  // hero bar
+  var hb = document.getElementById('heroBar');
+  for (var i=1;i<=FINAL;i++){ var sp=document.createElement('span'); if(isGY(i)) sp.className='g'; if(i===FINAL) sp.className='f'; hb.appendChild(sp); }
+
+  // setup inputs
+  var defaults = ['Marco','Luca','Nico','Sam','Jonas','Dario','Théo','Alex'];
+  var pg = document.getElementById('pgrid');
+  defaults.forEach(function(n,i){
+    var w=document.createElement('div');
+    w.innerHTML='<label for="p'+i+'">Joueur '+(i+1)+'</label><input id="p'+i+'" type="text" maxlength="14" autocomplete="off" value="'+n+'">';
+    pg.appendChild(w);
+  });
+
+  // all 28 duos of 8
+  var DUOS = [];
+  for (var a=0;a<8;a++) for (var b=a+1;b<8;b++) DUOS.push([a,b]);
+  function duoIdx(x,y){ if(x>y){var t=x;x=y;y=t;} for(var k=0;k<DUOS.length;k++) if(DUOS[k][0]===x&&DUOS[k][1]===y) return k; return -1; }
+  function overlaps(d,last){ return last && (d[0]===last[0]||d[0]===last[1]||d[1]===last[0]||d[1]===last[1]); }
+
+  // can the remaining duos still be ordered so that no player plays twice in a row?
+  function feasible(used, last){
+    var budget = {n:4000};
+    function rec(used,last,left){
+      if(left===0) return true;
+      if(--budget.n<0) return true; // optimistic when search is large
+      var deg=[0,0,0,0,0,0,0,0], cand=[];
+      for(var k=0;k<28;k++) if(!used[k]){ deg[DUOS[k][0]]++; deg[DUOS[k][1]]++; }
+      // a player with d remaining matches needs about 2d-1 rounds
+      for(var p=0;p<8;p++) if(deg[p]>0 && 2*deg[p]-1>left) return false;
+      for(k=0;k<28;k++) if(!used[k] && !overlaps(DUOS[k],last)) cand.push(k);
+      cand.sort(function(x,y){ return (deg[DUOS[y][0]]+deg[DUOS[y][1]])-(deg[DUOS[x][0]]+deg[DUOS[x][1]]); });
+      for(var c=0;c<cand.length;c++){
+        used[cand[c]]=true;
+        var ok=rec(used,DUOS[cand[c]],left-1);
+        used[cand[c]]=false;
+        if(ok) return true;
+      }
+      return false;
+    }
+    var left=0; for(var k=0;k<28;k++) if(!used[k]) left++;
+    return rec(used.slice(),last,left);
+  }
+
+  function rnd(a,b){ return a+Math.random()*(b-a); }
+  function makeTeam(name, names, human){
+    return { name:name, human:human, pts:0, games:0, prevRank:0, joker:false,
+      used:new Array(28).fill(false), last:null,
+      players:names.map(function(n){ return {name:n, skill:rnd(70,90), energy:100, played:0, status:'En forme'}; }) };
+  }
+
+  var S = null;
+  var $ = function(id){ return document.getElementById(id); };
+
+  function eligible(t, r){
+    var list=[];
+    if(r===FINAL){ for(var k=0;k<28;k++) if(!overlaps(DUOS[k],t.last)) list.push(k); return list; }
+    for(var k=0;k<28;k++){
+      if(t.used[k] || overlaps(DUOS[k],t.last)) continue;
+      t.used[k]=true; var ok=feasible(t.used, DUOS[k]); t.used[k]=false;
+      if(ok) list.push(k);
+    }
+    return list;
+  }
+  function aiPick(t, r){
+    var el=eligible(t,r), best=el[0], bv=-1;
+    el.forEach(function(k){ var v=t.players[DUOS[k][0]].energy+t.players[DUOS[k][1]].energy+Math.random()*20; if(v>bv){bv=v;best=k;} });
+    if(!t.joker && r>=6 && r<=26 && !isGY(r) && Math.random()<0.06) t.jokerNow=true;
+    return best;
+  }
+  function strength(t,k){
+    var p1=t.players[DUOS[k][0]], p2=t.players[DUOS[k][1]];
+    function s(p){ return p.skill*(0.55+0.45*p.energy/100); }
+    return (s(p1)+s(p2))/2;
+  }
+  function pairings(r){
+    // circle method for 6 crews, 5 different weekly patterns
+    var ids=[0,1,2,3,4,5], rot=ids.slice(1), shift=(r-1)%5;
+    for(var i=0;i<shift;i++) rot.unshift(rot.pop());
+    var arr=[0].concat(rot);
+    return [[arr[0],arr[5]],[arr[1],arr[4]],[arr[2],arr[3]]];
+  }
+
+  function start(){
+    var names=[]; for(var i=0;i<8;i++){ var v=$('p'+i).value.trim(); names.push(v||('Joueur '+(i+1))); }
+    var crew=$('crew').value.trim()||'Ton équipe';
+    var teams=[makeTeam(crew,names,true)];
+    AI_NAMES.forEach(function(n){ teams.push(makeTeam(n,['A','B','C','D','E','F','G','H'],false)); });
+    S={ r:1, teams:teams, sel:[], done:false };
+    $('setup').style.display='none'; $('game').style.display='block'; $('endbox').style.display='none';
+    renderAll(); $('game').scrollIntoView({block:'start'});
+  }
+
+  function renderProg(){
+    var p=$('prog'); p.innerHTML='';
+    for(var i=1;i<=FINAL;i++){ var s=document.createElement('span'); s.className = i<S.r?'done':(i===S.r?'now':(isGY(i)?'g':'')); p.appendChild(s); }
+  }
+  function renderHead(){
+    var r=S.r, me=S.teams[0];
+    $('rnum').textContent = r===FINAL ? 'Tour final' : 'Tour '+r+' sur 28';
+    $('rtime').textContent = clock(r);
+    var tags='';
+    if(isGY(r)) tags+='<span class="tag gy">Service de nuit ×2</span> ';
+    if(r===FINAL) tags+='<span class="tag fn">Finale ×2 · duo libre</span> ';
+    if(!me.joker && r!==FINAL && !isGY(r)) tags+='<span class="tag jk">Joker disponible</span>';
+    $('rtags').innerHTML=tags;
+    var canJ = !me.joker && r!==FINAL && !isGY(r);
+    $('jokWrap').style.display = canJ ? 'flex' : 'none';
+    if(!canJ) $('joker').checked=false;
+  }
+  function renderPlayers(){
+    var me=S.teams[0], el=eligible(me,S.r), box=$('players'); box.innerHTML='';
+    var allowed={}; // player -> partners allowed
+    el.forEach(function(k){ var d=DUOS[k]; (allowed[d[0]]=allowed[d[0]]||[]).push(d[1]); (allowed[d[1]]=allowed[d[1]]||[]).push(d[0]); });
+    me.players.forEach(function(p,i){
+      var b=document.createElement('button'); b.type='button'; b.className='pl'+(S.sel.indexOf(i)>=0?' sel':'');
+      var ok = !!allowed[i];
+      if(S.sel.length===1 && S.sel[0]!==i) ok = allowed[S.sel[0]] && allowed[S.sel[0]].indexOf(i)>=0;
+      if(S.sel.length===2 && S.sel.indexOf(i)<0) ok=false;
+      if(S.sel.indexOf(i)>=0) ok=true;
+      b.disabled=!ok;
+      var e=Math.round(p.energy), cls=e<35?'vlo':(e<60?'lo':'');
+      var why = (me.last && (me.last[0]===i||me.last[1]===i)) ? 'Vient de jouer' : p.status;
+      b.innerHTML='<span class="nm"><span>'+esc(p.name)+'</span><span>'+p.played+'/7</span></span><span class="bar"><i class="'+cls+'" style="width:'+e+'%"></i></span><span class="st">'+why+' · énergie '+e+'%</span>';
+      b.setAttribute('aria-pressed', S.sel.indexOf(i)>=0);
+      b.onclick=function(){ toggle(i); };
+      box.appendChild(b);
+    });
+    $('playBtn').disabled = S.sel.length!==2;
+    var h;
+    if(S.r===FINAL) h='Finale : envoie deux joueurs au choix, s’ils n’ont pas joué le tour 28.';
+    else if(S.sel.length===0) h='Touche deux joueurs. Grisé = pas autorisé ce tour.';
+    else if(S.sel.length===1) h='Choisis maintenant un partenaire pour '+esc(me.players[S.sel[0]].name)+'.';
+    else h=esc(me.players[S.sel[0]].name)+' & '+esc(me.players[S.sel[1]].name)+' sont prêts.';
+    $('hint').innerHTML=h;
+  }
+  function toggle(i){
+    var k=S.sel.indexOf(i);
+    if(k>=0) S.sel.splice(k,1); else if(S.sel.length<2) S.sel.push(i);
+    $('msg').textContent=''; renderPlayers();
+  }
+  function ranked(){
+    return S.teams.map(function(t,i){return {t:t,i:i};}).sort(function(a,b){ return b.t.pts-a.t.pts || b.t.games-a.t.games; });
+  }
+  function renderTable(){
+    var rows=ranked(), tb=$('tbody'); tb.innerHTML='';
+    rows.forEach(function(o,pos){
+      var t=o.t, mv='';
+      if(t.prevRank){ var d=t.prevRank-(pos+1); if(d>0) mv='<span class="mv up">▲'+d+'</span>'; else if(d<0) mv='<span class="mv dn">▼'+(-d)+'</span>'; }
+      var tr=document.createElement('tr'); if(t.human) tr.className='me';
+      tr.innerHTML='<td class="pos">'+(pos+1)+'</td><td>'+esc(t.name)+mv+'</td><td class="num">'+t.games+'</td><td class="num">'+t.pts+'</td>';
+      tb.appendChild(tr);
+    });
+  }
+  function renderAll(){ renderProg(); renderHead(); renderPlayers(); renderTable(); }
+
+  function playRound(humanDuo){
+    var r=S.r, picks=[];
+    S.teams.forEach(function(t,i){
+      t.jokerNow=false;
+      if(t.human){ picks[i]=humanDuo; if($('joker').checked && !t.joker){ t.jokerNow=true; } }
+      else picks[i]=aiPick(t,r);
+    });
+    var before=ranked(); before.forEach(function(o,pos){ o.t.prevRank=pos+1; });
+    var res=[], pr=pairings(r);
+    pr.forEach(function(m,c){
+      var A=S.teams[m[0]], B=S.teams[m[1]], ka=picks[m[0]], kb=picks[m[1]];
+      var sa=strength(A,ka), sb=strength(B,kb), p=Math.pow(sa,3)/(Math.pow(sa,3)+Math.pow(sb,3));
+      var total = r===FINAL ? 9+Math.floor(Math.random()*3) : 11+Math.floor(Math.random()*4), ga=0;
+      for(var g=0;g<total;g++) if(Math.random()<p) ga++;
+      var gb=total-ga;
+      [[A,ga,ka],[B,gb,kb]].forEach(function(x){
+        var mult=(isGY(r)||r===FINAL||x[0].jokerNow)?2:1;
+        x[0].games+=x[1]; x[0].pts+=x[1]*mult;
+      });
+      res.push({c:c+1, A:A, B:B, ka:ka, kb:kb, ga:ga, gb:gb});
+    });
+    // energy & bookkeeping
+    S.teams.forEach(function(t,i){
+      var k=picks[i];
+      if(t.jokerNow) t.joker=true;
+      if(r!==FINAL) t.used[k]=true;
+      t.last=DUOS[k];
+      t.players.forEach(function(p,j){
+        if(j===DUOS[k][0]||j===DUOS[k][1]){ p.energy=Math.max(5,p.energy-(isGY(r)?30:24)); p.played+= (r===FINAL?0:1); p.status='Récupère'; }
+        else { p.energy=Math.min(100,p.energy+ (isGY(r)?5:8)); p.status = p.energy>85?'En forme':(Math.random()<.5?'Sauna':(Math.random()<.5?'Dort':'Physio')); }
+      });
+    });
+    showResults(res, r);
+    S.r++; S.sel=[];
+    if(S.r>FINAL){ finish(); return; }
+    renderAll();
+  }
+  function showResults(res, r){
+    var me=S.teams[0], box=$('results'); box.innerHTML='<div class="c" style="color:#7f8ea0;font-size:13px;font-weight:700">'+(r===FINAL?'Finale':'Tour '+r)+' : résultats</div>';
+    res.forEach(function(x){
+      var d=document.createElement('div'); d.className='res'+((x.A.human||x.B.human)?' me':'');
+      var na=x.A.human? esc(x.A.players[DUOS[x.ka][0]].name+' & '+x.A.players[DUOS[x.ka][1]].name) : esc(x.A.name);
+      var nb=x.B.human? esc(x.B.players[DUOS[x.kb][0]].name+' & '+x.B.players[DUOS[x.kb][1]].name) : esc(x.B.name);
+      if(x.A.human) na+=' <small>('+esc(x.A.name)+')</small>'; if(x.B.human) nb+=' <small>('+esc(x.B.name)+')</small>';
+      d.innerHTML='<span class="c">Terrain '+x.c+'</span><span>'+na+' vs '+nb+'</span><span class="s">'+x.ga+'–'+x.gb+'</span>';
+      box.appendChild(d);
+    });
+    var mult=(isGY(r)||r===FINAL||me.jokerNow)?' Points doublés ce tour.':'';
+    $('msg').textContent=(r===FINAL?'Finale jouée.':'Tour '+r+' terminé.')+mult;
+  }
+  function finish(){
+    S.done=true; renderTable(); $('prog').querySelectorAll('span').forEach(function(s){s.className='done';});
+    var rows=ranked(), pos=0; rows.forEach(function(o,i){ if(o.t.human) pos=i+1; });
+    var me=S.teams[0], best=me.players.slice().sort(function(a,b){return a.energy-b.energy;});
+    var place = pos===1?'Tu as gagné P424.':(pos<=3?'Podium. '+pos+'e place.':pos+'e place sur 6.');
+    $('endbox').innerHTML='<h3>'+place+'</h3><p style="margin:0">'+esc(me.name)+' termine avec '+me.pts+' points pour '+me.games+' jeux.</p><ul><li>Chacun de tes 8 joueurs a disputé 7 matchs avec 7 partenaires différents.</li><li>Soit environ 5 heures 15 de jeu chacun, plus la finale.</li><li>Le plus fatigué à la fin : '+esc(best[0].name)+' ('+Math.round(best[0].energy)+'% d’énergie).</li></ul><div class="actions"><a class="pill dark" href="#register">Inscrire une vraie équipe</a><button class="pill ghost" style="color:var(--ink);border-color:var(--ink)" type="button" id="againBtn">Rejouer</button></div>';
+    $('endbox').style.display='block';
+    $('players').innerHTML=''; $('gameActions').style.display='none'; $('hint').textContent='Résultats finaux ci-dessous.'; $('playBtn').disabled=true; $('autoBtn').disabled=true; $('jokWrap').style.display='none';
+    $('rnum').textContent='Chrono arrêté'; $('rtime').textContent='dim 13:00'; $('rtags').innerHTML='';
+    $('againBtn').onclick=function(){ $('setup').style.display='block'; $('game').style.display='none'; $('autoBtn').disabled=false; $('gameActions').style.display='flex'; $('results').innerHTML=''; $('msg').textContent=''; $('setup').scrollIntoView({block:'start'}); };
+    $('endbox').scrollIntoView({block:'nearest'});
+  }
+  function esc(s){ return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+
+  $('startBtn').onclick=start;
+  $('playBtn').onclick=function(){
+    if(S.sel.length!==2) return;
+    var k=duoIdx(S.sel[0],S.sel[1]);
+    if(eligible(S.teams[0],S.r).indexOf(k)<0){ $('msg').textContent='Ce duo n’est pas autorisé ce tour.'; return; }
+    playRound(k);
+  };
+  $('autoBtn').onclick=function(){
+    while(S && !S.done){ var t=S.teams[0]; var k=aiPick(t,S.r); if(t.jokerNow){ $('joker').checked=true; t.jokerNow=false; } else $('joker').checked=false; playRound(k); }
+  };
+})();
+</script>
+</body>
+</html>

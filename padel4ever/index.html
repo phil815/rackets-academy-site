@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>P424 · 24h non-stop padel · Salgesch, 13–14 Mar 2027</title>
 <meta name="description" content="P424: 24 hours of non-stop padel. 6 crews of 8, 3 courts, one live table. Rackets Academy Salgesch, 13–14 Mar 2027.">
+<!-- p424-i18n -->
+<link rel="alternate" hreflang="en" href="https://www.racketsacademy.ch/padel4ever/">
+<link rel="alternate" hreflang="de" href="https://www.racketsacademy.ch/de/padel4ever/">
+<link rel="alternate" hreflang="fr" href="https://www.racketsacademy.ch/fr/padel4ever/">
+<link rel="alternate" hreflang="x-default" href="https://www.racketsacademy.ch/padel4ever/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎾</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@400;500;600;700;800&display=swap">
@@ -178,6 +183,7 @@ details p{margin:10px 0 0; color:#4a5868}
 .reg h2{color:#fff}
 .reg p{color:#b8c3cf; max-width:480px; margin:8px auto 22px}
 footer{background:var(--night); color:#7f8ea0; padding:26px 0; text-align:center; font-size:13px}
+.lsw{display:flex; gap:8px}.lsw a{color:#7f8ea0; text-decoration:none; font-size:13px; font-weight:800}.lsw a.on,.lsw a:hover{color:var(--green)}
 </style>
 </head>
 <body>
@@ -186,6 +192,7 @@ footer{background:var(--night); color:#7f8ea0; padding:26px 0; text-align:center
   <div class="wrap hrow">
     <a class="wm" href="#top" aria-label="P424 home"><span class="v">24H</span><span class="n">P<b>4</b>24</span></a>
     <nav class="hnav">
+      <span class="lsw"><a href="/padel4ever/" lang="en" class="on" aria-current="page">EN</a><a href="/de/padel4ever/" lang="de">DE</a><a href="/fr/padel4ever/" lang="fr">FR</a></span>
       <a class="l" href="#how">How it works</a>
       <a class="l" href="#play">Play it</a>
       <a class="l" href="#included">What's in</a>
@@ -376,7 +383,7 @@ footer{background:var(--night); color:#7f8ea0; padding:26px 0; text-align:center
   function clock(r){
     var s = START + (r-1)*ROUND_MIN, e = r===FINAL ? s+40 : s+ROUND_MIN;
     function f(m){ var d=Math.floor(m/1440), x=m%1440; return (d?'Sun ':'Sat ')+pad(Math.floor(x/60))+':'+pad(x%60); }
-    var a=f(s), b=f(e); if(a.slice(0,3)===b.slice(0,3)) b=b.slice(4); return a+'–'+b;
+    var a=f(s), b=f(e); if(a.split(' ')[0]===b.split(' ')[0]) b=b.split(' ')[1]; return a+'–'+b;
   }
 
   // hero bar

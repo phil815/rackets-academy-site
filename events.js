@@ -22,7 +22,7 @@
   ];
   // Label and target page per event (first match wins). Anything without h gets a WhatsApp "notify me" link.
   var LINKS = [
-    { k: ['24h'], label: 'NTO24 · 24h padel tournament', h: '/padel4ever/' },
+    { k: ['24h'], label: 'NTO24 · 24h padel tournament', h: 'padel4ever/' },
     { k: ['amazonia', 'dine'], label: 'Padel +Dine powered by Instinct Amazonia', h: 'padel-dine.html' },
     { k: ['ski'], label: 'Ski &Padel weekend', h: 'ski-and-padel.html' },
     { k: ['rackemix'], label: 'Rackemix', h: 'rackemix.html' },
