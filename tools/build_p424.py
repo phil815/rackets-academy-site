@@ -1,4 +1,4 @@
-"""24h tournament page (P424 / NTO24): EN source = padel4ever/index.html.
+"""24h tournament page (P424): EN source = padel4ever/index.html.
 Builds de/padel4ever/index.html and fr/padel4ever/index.html by replacing every
 English text (static + simulator JS). Also adds hreflang + EN/DE/FR switch to all three.
 Edit the EN page, then run: python3 tools/build_p424.py  (fails loudly if a string is missing)."""

@@ -296,7 +296,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var WA = 'https://wa.me/41772780115?text=';
   // keyword(s) in calendar title → label + link per language (first match wins)
   var AGENDA = [
-    { k: ['24h'], l: { en: 'NTO24 · 24h padel tournament', fr: 'NTO24 · tournoi de padel 24 h', de: 'NTO24 · 24-Std.-Padelturnier' }, h: 'padel4ever/' },
+    { k: ['24h'], l: { en: 'P424 · 24h padel tournament', fr: 'P424 · tournoi de padel 24 h', de: 'P424 · 24-Std.-Padelturnier' }, h: 'padel4ever/' },
     { k: ['amazonia', 'dine'], l: { en: 'Padel +Dine powered by Instinct Amazonia', fr: 'Padel +Dine powered by Instinct Amazonia', de: 'Padel +Dine powered by Instinct Amazonia' }, h: 'padel-dine.html' },
     { k: ['ski'], l: { en: 'Ski &Padel weekend', fr: 'Week-end Ski &Padel', de: 'Ski &Padel Wochenende' }, h: 'ski-and-padel.html' },
     { k: ['rackemix'], l: { en: 'Rackemix', fr: 'Rackemix', de: 'Rackemix' }, h: 'rackemix.html' },
