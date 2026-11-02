@@ -1,12 +1,12 @@
 """Rebuilds the main content of spa-and-sauna.html (EN/FR/DE)."""
-import re, urllib.parse
+import re, urllib.parse, html
 PT = 'https://playtomic.com/clubs/rackets-academy-salgesch'
 WA = 'https://wa.me/41772780115?text='
 T = {
 'en': dict(
-  title='Sauna & Spa near Sierre, Valais · Salgesch | Rackets Academy',
-  desc='Sauna, hammam & jacuzzi in Salgesch – 5 min from Sierre, 20 min from Crans-Montana, 18 min from Sion. From 25 CHF, Mon–Fri 14–22h, weekends 10–22h.',
-  kicker='Spa & Sauna · Salgesch', h1='Grey outside? Warm inside.',
+  title='Sauna & Spa near Sierre and Sion, Valais · Salgesch',
+  desc='Spa between Sierre and Sion: sauna, hammam & jacuzzi in Salgesch – 5 min from Sierre, 18 min from Sion. From 25 CHF, private spa 120 CHF. Open daily.',
+  kicker='Grey outside? Warm inside.', h1='Sauna & spa near Sierre and Sion',
   lede='Finnish sauna, bio-sauna, hammam and jacuzzi right next to our courts — your escape after the slopes, on foggy autumn days or after your match.',
   chips=['From 25 CHF', 'Mon–Fri 14–22 · Sat–Sun 10–22', 'Book in 1 minute'],
   cta='Book your spa time', cta2='Private spa for your group',
@@ -30,12 +30,13 @@ T = {
   faq_h='Good to know',
   faq=[('Is there a sauna near Crans-Montana?','Yes — our spa in Salgesch is about 20 minutes by car from Crans-Montana. Ideal after a day on the slopes: Finnish sauna, bio-sauna, hammam and jacuzzi from 25 CHF.'),
        ('Where can I go to the sauna near Sierre or Sion?','Rackets Academy Spa is in Salgesch, about 5 minutes from Sierre and 18 minutes from Sion. Open Mon–Fri 14:00–22:00 and weekends 10:00–22:00, book your entry on Playtomic.'),
+       ('Is there a spa in Sion?','Our spa is in Salgesch, about 18 minutes by car from Sion — sauna, bio-sauna, hammam and jacuzzi from 25 CHF. Our padel centre in Sion has no spa.'),
        ('Can I book the spa privately?','Yes. You can privatise the whole spa for 2 hours for up to 8 people for 120 CHF — perfect for birthdays or team evenings.')],
   final_h='Your warm-up is waiting.', final_p='Mon–Fri 14:00–22:00 · Sat–Sun 10:00–22:00 · Littenstrasse 30, 3970 Salgesch'),
 'fr': dict(
-  title='Sauna & spa Sierre · Salgesch, Valais – hammam & jacuzzi',
-  desc='Sauna, hammam et jacuzzi à Salgesch – à 5 min de Sierre, 20 min de Crans-Montana, 18 min de Sion. Dès 25 CHF, en semaine 14h–22h, week-end 10h–22h.',
-  kicker='Spa & Sauna · Salgesch', h1='Gris dehors ? Chaud dedans.',
+  title='Sauna & spa Sierre – près de Sion, Valais · hammam & jacuzzi',
+  desc='Spa entre Sierre et Sion : sauna, hammam et jacuzzi à Salgesch – 5 min de Sierre, 18 min de Sion. Dès 25 CHF, spa privé 120 CHF. Ouvert 7j/7.',
+  kicker='Gris dehors ? Chaud dedans.', h1='Sauna & spa près de Sierre et Sion',
   lede='Sauna finlandais, bio-sauna, hammam et jacuzzi juste à côté de nos terrains — ton refuge après les pistes, les jours de brouillard ou après ton match.',
   chips=['Dès 25 CHF', 'Lun–ven 14–22h · sam–dim 10–22h', 'Réservé en 1 minute'],
   cta='Réserver mon spa', cta2='Spa privé pour ton groupe',
@@ -45,7 +46,7 @@ T = {
            ('🎾','Après ton match','Le spa est juste à côté des terrains. Douche, sauna, jacuzzi — la meilleure récupération qui soit.')],
   inside_h="Ce qui t'attend",
   gallery=[('spa-sauna','Sauna finlandais · 80 °C'),('spa-biosauna','Bio-sauna · 48 °C'),('spa-hammam','Hammam'),('spa-area','Jacuzzi'),('spa-footbath','Bains de pieds'),('spa-relax','Salle de repos'),('spa-shower','Douche pluie chaude & froide'),('spa-sauna-area','Espace sauna')],
-  facilities=['Sauna finlandais · 80 °C','Bio-sauna · 48 °C, 65 % d'humidité','Hammam (bain de vapeur)','Jacuzzi','Deux bains de pieds','Salle de repos','Douche pluie chaude & froide'],
+  facilities=['Sauna finlandais · 80 °C','Bio-sauna · 48 °C, 65 % d’humidité','Hammam (bain de vapeur)','Jacuzzi','Deux bains de pieds','Salle de repos','Douche pluie chaude & froide'],
   ritual_h='Ton rituel spa', ritual_sub='Notre conseil pour une soirée parfaite — à répéter 2–3 fois.',
   ritual=[('Se réchauffer','Commence en douceur au bio-sauna à 48 °C ou au hammam.'),('Transpirer','Passe au sauna finlandais à 80 °C pendant 8–12 minutes.'),('Se rafraîchir','Douche pluie froide et bain de pieds chaud.'),('Se détendre','Jacuzzi, puis repos dans la salle de relaxation.')],
   private_h='Spa privé pour ton groupe', private_p="Réserve tout le spa pendant 2 heures pour 8 personnes max — 120 CHF, soit dès 15 CHF par personne. Idéal pour un anniversaire, une soirée d'équipe ou entre amies après le ski.",
@@ -59,12 +60,13 @@ T = {
   faq_h='Bon à savoir',
   faq=[('Y a-t-il un sauna près de Crans-Montana ?',"Oui — notre spa à Salgesch est à environ 20 minutes en voiture de Crans-Montana. Idéal après les pistes : sauna finlandais, bio-sauna, hammam et jacuzzi dès 25 CHF."),
        ('Où aller au sauna près de Sierre ou de Sion ?',"Le spa de la Rackets Academy est à Salgesch, à environ 5 minutes de Sierre et 18 minutes de Sion. Ouvert en semaine de 14h à 22h et le week-end de 10h à 22h, réservation sur Playtomic."),
+       ('Y a-t-il un spa à Sion ?',"Notre spa se trouve à Salgesch, à environ 18 minutes de Sion en voiture — sauna, bio-sauna, hammam et jacuzzi dès 25 CHF. Notre centre de padel à Sion n’a pas de spa."),
        ('Peut-on privatiser le spa ?',"Oui. Tu peux privatiser tout le spa pendant 2 heures pour 8 personnes max pour 120 CHF — idéal pour un anniversaire ou une soirée d'équipe.")],
   final_h="Ta pause chaleur t'attend.", final_p='Lun–ven 14h–22h · sam–dim 10h–22h · Littenstrasse 30, 3970 Salgesch'),
 'de': dict(
-  title='Sauna & Spa bei Siders · Salgesch, Wallis – Hammam & Jacuzzi',
-  desc='Sauna, Hammam & Jacuzzi in Salgesch – 5 Min. von Siders, 20 Min. von Crans-Montana, 18 Min. von Sitten. Ab 25 CHF, Mo–Fr 14–22, Sa–So 10–22 Uhr.',
-  kicker='Spa & Sauna · Salgesch', h1='Grau draussen? Warm drinnen.',
+  title='Sauna & Spa Siders · Wallis – Salgesch, nahe Sitten & Visp',
+  desc='Spa im Wallis: Sauna, Hammam & Jacuzzi in Salgesch – 5 Min. von Siders, 20 Min. von Visp und Sitten. Ab 25 CHF, Privat-Spa 120 CHF. Täglich offen.',
+  kicker='Grau draussen? Warm drinnen.', h1='Sauna & Spa bei Siders im Wallis',
   lede='Finnische Sauna, Bio-Sauna, Hammam und Jacuzzi direkt neben unseren Plätzen — dein Rückzugsort nach der Piste, an nebligen Herbsttagen oder nach dem Match.',
   chips=['Ab 25 CHF', 'Mo–Fr 14–22 · Sa–So 10–22 Uhr', 'In 1 Minute gebucht'],
   cta='Spa-Zeit buchen', cta2='Privat-Spa für deine Gruppe',
@@ -88,6 +90,7 @@ T = {
   faq_h='Gut zu wissen',
   faq=[('Gibt es eine Sauna in der Nähe von Crans-Montana?','Ja — unser Spa in Salgesch liegt rund 20 Autominuten von Crans-Montana entfernt. Ideal nach dem Skitag: finnische Sauna, Bio-Sauna, Hammam und Jacuzzi ab 25 CHF.'),
        ('Wo gibt es eine Sauna bei Siders oder Sitten?','Das Spa der Rackets Academy liegt in Salgesch, rund 5 Minuten von Siders und 18 Minuten von Sitten. Mo–Fr 14–22 Uhr und am Wochenende 10–22 Uhr geöffnet, Eintritt auf Playtomic buchen.'),
+       ('Gibt es ein Spa in Sitten (Sion)?','Unser Spa liegt in Salgesch, rund 18 Autominuten von Sitten — Sauna, Bio-Sauna, Hammam und Jacuzzi ab 25 CHF. Unser Padelcenter in Sitten hat kein Spa.'),
        ('Kann man das Spa privat mieten?','Ja. Du kannst das ganze Spa für 2 Stunden für bis zu 8 Personen für 120 CHF mieten — perfekt für Geburtstage oder Team-Abende.')],
   final_h='Deine Aufwärmrunde wartet.', final_p='Mo–Fr 14–22 · Sa–So 10–22 Uhr · Littenstrasse 30, 3970 Salgesch'),
 }
@@ -202,10 +205,10 @@ for lang, t in T.items():
     a = s.index('</header>'); a = s.index('\n', s.index('</div>', a)) + 1
     b = s.index('<footer')
     s = s[:a] + body(t, pre) + s[b:]
-    s = re.sub(r'<title>.*?</title>', '<title>' + t['title'] + '</title>', s, count=1, flags=re.S)
+    s = re.sub(r'<title>.*?</title>', '<title>' + html.escape(t['title'], quote=False) + '</title>', s, count=1, flags=re.S)
     for k in ['name="description"', 'property="og:description"']:
-        s = re.sub(r'<meta ' + k + ' content="[^"]*"', '<meta ' + k + ' content="' + t['desc'] + '"', s)
-    s = re.sub(r'<meta property="og:title" content="[^"]*"', '<meta property="og:title" content="' + t['title'] + '"', s)
+        s = re.sub(r'<meta ' + k + ' content="[^"]*"', '<meta ' + k + ' content="' + html.escape(t['desc']) + '"', s)
+    s = re.sub(r'<meta property="og:title" content="[^"]*"', '<meta property="og:title" content="' + html.escape(t['title']) + '"', s)
     s = re.sub(r'<meta property="og:image" content="[^"]*"', '<meta property="og:image" content="https://www.racketsacademy.ch/images/spa/spa-jacuzzi.jpg"', s)
     import json
     ld = {'@context': 'https://schema.org', '@graph': [
