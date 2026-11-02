@@ -595,15 +595,15 @@ document.addEventListener('submit', function (e) {
 (function () {
   var L = (document.documentElement.lang || 'en').slice(0, 2);
   var T = {
-    en: { s: 'Cookies for our stats and Meta ads. We never sell your data.', t: 'Your serve', p: 'We use cookies for visitor stats and to measure our Instagram & Facebook ads (Meta). We never sell your data. The ball is in your court.', yes: 'In · accept', no: 'Out · decline', more: 'Privacy', set: 'Cookie settings' },
-    fr: { s: 'Cookies pour nos stats et nos pubs Meta. On ne vend jamais tes données.', t: 'À toi de servir', p: 'On utilise des cookies pour nos statistiques et pour mesurer nos pubs Instagram & Facebook (Meta). On ne vend jamais tes données. La balle est dans ton camp.', yes: 'In · accepter', no: 'Out · refuser', more: 'Confidentialité', set: 'Paramètres cookies' },
-    de: { s: 'Cookies für unsere Statistik und Meta-Werbung. Wir verkaufen deine Daten nie.', t: 'Dein Aufschlag', p: 'Wir nutzen Cookies für Besucherstatistiken und um unsere Instagram- & Facebook-Werbung (Meta) zu messen. Wir verkaufen deine Daten nie. Der Ball liegt bei dir.', yes: 'In · annehmen', no: 'Out · ablehnen', more: 'Datenschutz', set: 'Cookie-Einstellungen' }
+    en: { s: 'Cookies for our stats and to measure our ads on Meta and Google. We never sell your data.', t: 'Your serve', p: 'We use cookies for visitor stats and to measure our ads on Instagram & Facebook (Meta) and Google. We never sell your data. The ball is in your court.', yes: 'In · accept', no: 'Out · decline', more: 'Privacy', set: 'Cookie settings' },
+    fr: { s: 'Cookies pour nos stats et pour mesurer nos pubs Meta et Google. On ne vend jamais tes données.', t: 'À toi de servir', p: 'On utilise des cookies pour nos statistiques et pour mesurer nos pubs sur Instagram & Facebook (Meta) et Google. On ne vend jamais tes données. La balle est dans ton camp.', yes: 'In · accepter', no: 'Out · refuser', more: 'Confidentialité', set: 'Paramètres cookies' },
+    de: { s: 'Cookies für unsere Statistik und um unsere Werbung auf Meta und Google zu messen. Wir verkaufen deine Daten nie.', t: 'Dein Aufschlag', p: 'Wir nutzen Cookies für Besucherstatistiken und um unsere Werbung auf Instagram & Facebook (Meta) und Google zu messen. Wir verkaufen deine Daten nie. Der Ball liegt bei dir.', yes: 'In · annehmen', no: 'Out · ablehnen', more: 'Datenschutz', set: 'Cookie-Einstellungen' }
   }[L] || null;
   if (!T) return;
   function get() { try { return localStorage.getItem('ra_consent'); } catch (e) { return null; } }
   function choose(v) {
     try { localStorage.setItem('ra_consent', v); } catch (e) {}
-    if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: v });
+    if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: v, ad_storage: v, ad_user_data: v });
     if (v === 'granted') raPixelLoad();
     var el = document.getElementById('serve-banner');
     document.body.classList.remove('consent-open');

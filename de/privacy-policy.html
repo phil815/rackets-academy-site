@@ -8,7 +8,9 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('consent', 'default', {
     analytics_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
-    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'
+    ad_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_user_data: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_personalization: 'denied'
   });
   gtag('js', new Date());
   // Team-Geraete: einmal racketsacademy.ch/?internal=1 aufrufen → Besuche als intern markiert (GA4-Filter «Internal Traffic»); ?internal=0 hebt es auf
@@ -125,6 +127,8 @@ b) Automatisch erfasste Daten: Bei der Nutzung unserer Website erfassen wir auto
 
 <h3>Google Analytics</h3>
 <p>Diese Website nutzt Google Analytics 4, einen Webanalysedienst von Google Ireland Ltd. / Google LLC. Dabei werden Cookies verwendet, um zu analysieren, wie Besucher die Website nutzen (z.B. besuchte Seiten, Klicks auf Buchungs-Buttons, Gerät und ungefährer Standort). Analyse-Cookies werden erst nach deiner Zustimmung im Cookie-Banner gesetzt; du kannst deine Wahl jederzeit über «Cookie-Einstellungen» im Footer ändern. Google Analytics 4 speichert keine IP-Adressen. Daten können auf Server in den USA übertragen werden. Du kannst das Tracking mit dem <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google-Analytics-Deaktivierungs-Add-on</a> oder durch Blockieren von Cookies in deinem Browser verhindern.</p>
+<h3>Google Ads</h3>
+<p>Um zu messen, ob unsere Google-Werbung zu Buchungen führt, nutzt diese Website die Conversion-Messung von Google Ads (Google Ireland Ltd. / Google LLC) zusammen mit Google Analytics. Wenn du über eine Google-Anzeige zu uns kommst, wird eine Klick-Kennung gespeichert, und Klicks auf Buchungs- oder WhatsApp-Buttons werden dieser Anzeige zugeordnet. Diese Cookies werden erst nach deiner Zustimmung im Cookie-Banner gesetzt; du kannst deine Wahl jederzeit über «Cookie-Einstellungen» in der Fusszeile ändern. Wir nutzen diese Daten nicht für personalisierte Werbung. Daten können auf Server in den USA übertragen werden. Mehr Informationen: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung von Google</a>.</p>
 <h3>Meta Pixel</h3>
 <p>Um zu messen, ob unsere Instagram- und Facebook-Werbung zu Buchungen führt, nutzt diese Website das Meta Pixel von Meta Platforms Ireland Ltd. / Meta Platforms, Inc. Es erfasst Besuche, Klicks auf Buchungs-Buttons und abgeschlossene Ticketkäufe und verknüpft sie mit Werbeanzeigen auf Instagram und Facebook. Das Meta Pixel wird erst nach deiner Zustimmung im Cookie-Banner geladen; du kannst deine Wahl jederzeit über «Cookie-Einstellungen» im Footer ändern. Daten können auf Server in den USA übertragen werden. Mehr Informationen: <a href="https://www.facebook.com/privacy/policy" target="_blank" rel="noopener">Datenschutzrichtlinie von Meta</a>.</p>
 
@@ -170,6 +174,6 @@ b) Automatisch erfasste Daten: Bei der Nutzung unserer Website erfassen wir auto
     </div>
   </div>
 </footer>
-<script src="../nav.js?v=35"></script>
+<script src="../nav.js?v=36"></script>
 </body>
 </html>

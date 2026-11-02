@@ -8,7 +8,9 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('consent', 'default', {
     analytics_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
-    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'
+    ad_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_user_data: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_personalization: 'denied'
   });
   gtag('js', new Date());
   // Team-Geraete: einmal racketsacademy.ch/?internal=1 aufrufen → Besuche als intern markiert (GA4-Filter «Internal Traffic»); ?internal=0 hebt es auf
@@ -209,6 +211,6 @@
     </div>
   </div>
 </footer>
-<script src="../nav.js?v=35"></script>
+<script src="../nav.js?v=36"></script>
 </body>
 </html>
