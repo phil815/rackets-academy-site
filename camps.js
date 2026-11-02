@@ -4,9 +4,9 @@
 (function () {
   var L = (document.documentElement.lang || 'en').slice(0, 2);
   var S = {
-    en: { now: 'Pay now', dep: 'deposit', rest: 'rest by 15 Jan 2027', left: function (n) { return n === 1 ? 'Last spot!' : n + ' of 12 spots left'; }, sold: 'Sold out', total: 'Total', pp: 'per person', people: function (n) { return n === 1 ? '1 person' : n + ' people'; }, solo: 'Individual', duo: 'Duo', group: 'Crew of 4' },
-    fr: { now: 'À payer maintenant', dep: 'acompte', rest: 'solde au 15.01.2027', left: function (n) { return n === 1 ? 'Dernière place !' : n + ' places sur 12'; }, sold: 'Complet', total: 'Total', pp: 'par personne', people: function (n) { return n === 1 ? '1 personne' : n + ' personnes'; }, solo: 'Individuel', duo: 'Duo', group: 'Bande de 4' },
-    de: { now: 'Jetzt zahlen', dep: 'Anzahlung', rest: 'Rest bis 15.01.2027', left: function (n) { return n === 1 ? 'Letzter Platz!' : 'Noch ' + n + ' von 12 Plätzen'; }, sold: 'Ausgebucht', total: 'Total', pp: 'pro Person', people: function (n) { return n === 1 ? '1 Person' : n + ' Personen'; }, solo: 'Einzelplatz', duo: 'Duo', group: '4er-Crew' }
+    en: { now: 'Pay now', dep: 'deposit', rest: 'rest by 31 Dec 2026', left: function (n) { return n === 1 ? 'Last spot!' : n + ' of 12 spots left'; }, sold: 'Sold out', total: 'Total', pp: 'per person', people: function (n) { return n === 1 ? '1 person' : n + ' people'; }, solo: 'Individual', duo: 'Duo', group: 'Crew of 4' },
+    fr: { now: 'À payer maintenant', dep: 'acompte', rest: 'solde au 31.12.2026', left: function (n) { return n === 1 ? 'Dernière place !' : n + ' places sur 12'; }, sold: 'Complet', total: 'Total', pp: 'par personne', people: function (n) { return n === 1 ? '1 personne' : n + ' personnes'; }, solo: 'Individuel', duo: 'Duo', group: 'Bande de 4' },
+    de: { now: 'Jetzt zahlen', dep: 'Anzahlung', rest: 'Rest bis 31.12.2026', left: function (n) { return n === 1 ? 'Letzter Platz!' : 'Noch ' + n + ' von 12 Plätzen'; }, sold: 'Ausgebucht', total: 'Total', pp: 'pro Person', people: function (n) { return n === 1 ? '1 Person' : n + ' Personen'; }, solo: 'Einzelplatz', duo: 'Duo', group: '4er-Crew' }
   }[L] || null;
   if (!S) return;
   // Early-bird until 30.11.2026, then +75 CHF p.p. (same rule as Camps.gs, which decides the real amount)
