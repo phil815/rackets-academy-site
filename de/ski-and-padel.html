@@ -197,14 +197,27 @@
         <span class="camp-tile">
           <span class="camp-pack-name">4er-Crew</span>
           <span class="camp-pack-price">999 CHF <small>pro Person</small></span>
-          <span class="camp-pack-note">Vier Plätze, zwei Zimmer für eure Gruppe. In einem Mal bezahlt. 3'996 CHF total.</span>
+          <span class="camp-pack-note">Vier Plätze, zwei Zimmer für eure Gruppe. 3'996 CHF total.</span>
           <span class="camp-save">800 CHF gespart</span>
         </span>
       </label>
     </div>
+    <p class="camp-step">3. Ganz bezahlen oder mit Anzahlung reservieren?</p>
+    <div class="camp-packs camp-pay">
+      <label class="camp-opt">
+        <input type="radio" name="paymode" value="full" checked>
+        <span class="camp-tile"><span class="camp-pack-name">Ganz bezahlen</span><span class="camp-pack-note">Alles erledigt.</span></span>
+      </label>
+      <label class="camp-opt">
+        <input type="radio" name="paymode" value="deposit">
+        <span class="camp-tile"><span class="camp-pack-name">Anzahlung CHF 200 pro Person</span><span class="camp-pack-note">Platz jetzt sichern, Rest fällig bis 15. Januar 2027.</span></span>
+      </label>
+    </div>
+    <p class="camp-early" id="camp-early" style="margin:14px 0 16px;padding:10px 14px;border-radius:10px;background:#eefbe3;color:#045bab;font-size:.92rem"><b>Frühbucherpreis bis 30. November 2026.</b> Ab 1. Dezember steigt der Preis um 75 CHF pro Person.</p>
     <div class="camp-summary">
       <div><p id="camp-sum-what"></p><p class="camp-total" id="camp-sum-total"></p></div>
       <button type="button" class="btn btn-green" id="camp-go" onclick="openCampModal()">Buchen &amp; bezahlen</button>
+      <a class="btn camp-ask" style="background:#fff;color:var(--blue)" href="https://wa.me/41772780115?text=Hola%21%20Ich%20habe%20eine%20Frage%20zu%20den%20Ski%20%26Padel%20Wochenenden." target="_blank" rel="noopener" onclick="if(window.gtag)gtag('event','whatsapp_click',{link_text:'camp_question'})">Fragen? Schreib uns auf WhatsApp</a>
     </div>
     <p style="margin:12px 0 0; font-size:.88rem; color:#045bab;">Preise in CHF inkl. MWST. Sichere Kartenzahlung über SumUp — Bestätigung per E-Mail.</p>
   </div>
@@ -372,11 +385,12 @@ b.addEventListener('touchend',function(e){if(x0===null)return;var d=e.changedTou
       <input type="hidden" name="campId" id="modal-campId">
       <input type="hidden" name="campPackage" id="modal-campPackage">
       <input type="hidden" name="price" id="modal-price">
+      <input type="hidden" name="payMode" id="modal-payMode" value="full">
       <label class="shop-field">Dein Name<input type="text" name="buyerName" required autocomplete="name"></label>
       <label class="shop-field">Deine E-Mail <span style="font-weight:400; opacity:.7;">(Bestätigung geht hierhin)</span><input type="email" name="buyerEmail" required autocomplete="email"></label>
       <label class="shop-field">Handynummer <span style="font-weight:400; opacity:.7;">(für kurzfristige Infos)</span><input type="tel" name="phone" required autocomplete="tel"></label>
       <div class="shop-field" id="modal-group-wrap" data-pers="Person" data-you="du" data-name="Name" data-age="Alter">Name und Alter aller Teilnehmenden<div id="modal-people"></div><input type="hidden" name="participants"></div>
-      <style>#modal-people{display:grid;gap:8px;margin-top:6px}.pp-row{display:grid;grid-template-columns:1fr 84px;gap:8px}.pp-row input{width:100%}.pp-lbl{font-size:.78rem;font-weight:700;color:#7a8ea3;margin-bottom:-4px}.camp-packs{grid-template-columns:repeat(3,1fr)!important}@media(max-width:720px){.camp-packs{grid-template-columns:1fr!important}}</style>
+      <style>#modal-people{display:grid;gap:8px;margin-top:6px}.pp-row{display:grid;grid-template-columns:1fr 84px;gap:8px}.pp-row input{width:100%}.pp-lbl{font-size:.78rem;font-weight:700;color:#7a8ea3;margin-bottom:-4px}.camp-packs{grid-template-columns:repeat(3,1fr)!important}.camp-pay{grid-template-columns:repeat(2,1fr)!important}.camp-summary{flex-wrap:wrap;gap:10px}@media(max-width:720px){.camp-packs{grid-template-columns:1fr!important}}</style>
       <label class="shop-field">Sollen wir etwas wissen? <span style="font-weight:400; opacity:.7;">(optional — Ernährung, Ankunftszeit)</span><textarea name="notes" rows="2" maxlength="300"></textarea></label>
       <label class="camp-check"><input type="checkbox" name="levelOk" value="yes" required><span>Alle Personen meiner Buchung erfüllen das Mindestniveau in Ski und Padel.</span></label>
       <label class="camp-check"><input type="checkbox" name="lodgingOk" value="yes" required><span>Mir ist klar, dass die Zimmer eine einfache, geteilte Sport-Unterkunft sind und kein Hotel.</span></label>
@@ -420,6 +434,6 @@ b.addEventListener('touchend',function(e){if(x0===null)return;var d=e.changedTou
   </div>
 </footer>
 <script src="../nav.js?v=35"></script>
-<script src="../camps.js?v=3"></script>
+<script src="../camps.js?v=4"></script>
 </body>
 </html>
