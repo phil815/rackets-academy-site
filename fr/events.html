@@ -48,6 +48,7 @@
 <meta name="description" content="Événements Rackets Academy en Valais : tournoi 24 h NTO24, Padel +Dine, week-ends Ski &amp;Padel, Racketero, Rackemix, Pickleball Mix &amp; Match, Padel+Paella/Wine/Beer/Fitness, Swiss Tennis et Rivella League.">
 <link rel="canonical" href="https://www.racketsacademy.ch/fr/events.html">
 <link rel="stylesheet" href="../styles.css?v=42">
+<link rel="stylesheet" href="../events.css?v=1">
 <meta property="og:title" content="Événements &amp; tournois de padel | Rackets Academy">
 <meta property="og:description" content="Événements Rackets Academy en Valais : tournoi 24 h NTO24, Padel +Dine, week-ends Ski &amp;Padel, Racketero, Rackemix, Pickleball Mix &amp; Match, Padel+Paella/Wine/Beer/Fitness, Swiss Tennis et Rivella League.">
 <meta property="og:type" content="website">
@@ -121,108 +122,23 @@
   </div>
 </section>
 
-<section class="ev-agenda-sec">
+<section class="ev-top">
   <div class="wrap">
-    <h2>À venir</h2>
-    <div class="ev-agenda" data-agenda="8"><p class="ev-agenda-loading">Chargement des dates…</p></div>
+    <div class="ev-toolbar">
+      <h2>Les 30 prochains jours</h2>
+      <span id="ev-range"></span>
+    </div>
+    <div id="ev-chips" class="ev-chips" aria-label="Filtrer par catégorie"></div>
+    <p id="ev-status" class="ev-empty"></p>
+    <div id="ev-grid" class="ev-grid"><p class="ev-empty">Chargement des dates…</p></div>
+    <div id="ev-daylist"></div>
+    <div id="ev-daypanel" hidden></div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <h2>Tous nos événements</h2>
-    <div class="grid-3">
-      <a class="card card-link" href="padel4ever/">
-        <span class="ev-new">Nouveau</span><h3>NTO24 · 24h</h3>
-        <p>24 heures de padel non-stop : des équipes de 6 tournent pour ne jamais quitter le terrain. La dernière équipe debout gagne.</p>
-        <span class="ev-price"><b>249 CHF</b> par personne</span>
-        <span data-next-event="24h">Prochaine date en chargement…</span>
-        <span class="card-cta">En savoir plus →</span>
-      </a>
-      <a class="card card-link" href="padel-dine.html">
-        <span class="ev-new">Nouveau</span><h3>Padel +Dine powered by Instinct Amazonia</h3>
-        <p>Tournoi de padel le jour, Dinner Party le soir : buffet nikkei d'Instinct Amazonia et DJ jusqu'à 2h. Dès 59 CHF.</p>
-        <span class="ev-price"><b>dès 59 CHF</b> par personne</span>
-        <span data-next-event="amazonia,dine">Prochaine date en chargement…</span>
-        <span class="card-cta">Prendre mes billets →</span>
-      </a>
-      <a class="card card-link" href="ski-and-padel.html">
-        <h3>Ski &amp;Padel</h3>
-        <p>Ski le jour, padel le soir. Week-ends de 4 jours en février, petit groupe, chambres simples et sportives à Salgesch.</p>
-        <span class="ev-price"><b>dès 999 CHF</b> par personne</span>
-        <span data-next-event="ski">Prochaine date en chargement…</span>
-        <span class="card-cta">Voir les camps →</span>
-      </a>
-      <a class="card card-link" href="racketero.html">
-        <h3>Racketero</h3>
-        <p>Notre tournoi convivial pour débutants et intermédiaires — nouveaux adversaires, ton niveau.</p>
-        <span class="ev-price"><b>30 CHF</b> par personne</span>
-        <span data-next-event="racketero">Prochaine date en chargement…</span>
-        <span class="card-cta">En savoir plus →</span>
-      </a>
-      <a class="card card-link" href="rackemix.html">
-        <span class="ev-new">Nouveau</span><h3>Rackemix</h3>
-        <p>Notre soirée mix mensuelle sur le terrain — nouveaux partenaires, bonne ambiance, un verre après.</p>
-        <span class="ev-price"><b>30 CHF</b> par personne</span>
-        <span data-next-event="rackemix">Prochaine date en chargement…</span>
-        <span class="card-cta">En savoir plus →</span>
-      </a>
-      <a class="card card-link" href="pickleball.html">
-        <span class="ev-new">Nouveau</span><h3>Pickleball Mix &amp; Match</h3>
-        <p>Chaque dimanche : on mélange les partenaires, on équilibre les niveaux, on joue au pickleball. Débutants bienvenus.</p>
-        <span class="ev-price"><b>10 CHF</b> par personne</span>
-        <span data-next-event="pickleball">Prochaine date en chargement…</span>
-        <span class="card-cta">En savoir plus →</span>
-      </a>
-      <a class="card card-link" href="padel-paella.html">
-        <h3>Padel+Paella</h3>
-        <p>2 heures de padel, puis une paella fraîche et une boisson. Max. 16 places.</p>
-        <span class="ev-price"><b>35 CHF</b> par personne</span>
-        <span data-next-event="paella">Prochaine date en chargement…</span>
-        <span class="card-cta">En savoir plus →</span>
-      </a>
-      <a class="card card-link" href="padel-wine.html">
-        <h3>Padel+Wine</h3>
-        <p>Joue, puis détends-toi avec un verre de vin valaisan.</p>
-        <span class="ev-price"><b>35 CHF</b> par personne</span>
-        <span data-next-event="wine">Prochaine date en chargement…</span>
-        <span class="card-cta">En savoir plus →</span>
-      </a>
-      <a class="card card-link" href="padel-beer.html">
-        <span class="ev-new">Nouveau</span><h3>Padel+Beer</h3>
-        <p>Joue, puis une bière fraîche au bar avec tout le monde.</p>
-        <span class="ev-price"><b>50 CHF</b> par personne</span>
-        <span data-next-event="beer">Prochaine date en chargement…</span>
-        <span class="card-cta">En savoir plus →</span>
-      </a>
-      <a class="card card-link" href="padel-fitness.html">
-        <h3>Padel+Fitness</h3>
-        <p>Padel sur le terrain et séance de fitness pour une matinée d'entraînement complète.</p>
-        <span class="ev-price"><b>30 CHF</b> par personne</span>
-        <span data-next-event="fitness">Prochaine date en chargement…</span>
-        <span class="card-cta">En savoir plus →</span>
-      </a>
-      <a class="card card-link" href="swiss-tennis.html">
-        <h3>Tournois Swiss Tennis</h3>
-        <p>La Rackets Hyundai Cup et les compétitions officielles Swiss Tennis Padel (P20 à P200).</p>
-        <span class="ev-price"><b>45 CHF</b> par personne</span>
-        <span data-next-event="swisstennis,p20,p50,p100,p200,hyundai">Prochaine date en chargement…</span>
-        <span class="card-cta">Voir les tournois →</span>
-      </a>
-      <a class="card card-link" href="rivella-league.html">
-        <h3>Rivella League</h3>
-        <p>32 équipes, 8 groupes, d'avril à novembre. La finale désigne le champion de l'Academy.</p>
-        <span class="ev-price"><b>30 CHF</b> par personne · inscriptions 2027 en janvier</span>
-        <span data-next-event="rivella">Prochaine date en chargement…</span>
-        <span class="card-cta">Voir le classement →</span>
-      </a>
-      <a class="card card-link" href="https://wa.me/41795885483?text=Hola%20%21%20Je%20suis%20int%C3%A9ress%C3%A9%C2%B7e%20par%20Tournois%20de%20tennis%20du%20TC%20Veyras.%20Tenez-moi%20au%20courant." target="_blank" rel="noopener">
-        <span class="ev-new">Nouveau</span><h3>Tournois de tennis du TC Veyras</h3>
-        <p>Les tournois de tennis du TC Veyras : un tournoi enfants en décembre et un tournoi en double en janvier.</p>
-        <span data-next-event="veyras">Prochaine date en chargement…</span>
-        <span class="card-cta">Préviens-moi de la prochaine date →</span>
-      </a>
-    </div>
+    <div id="ev-sections"></div>
     <p class="ev-own">Tu organises ton propre événement ? <a href="company-events.html">Événements d'entreprise</a> · <a href="kids-birthday.html">Anniversaires enfants</a> · <a href="https://www.instagram.com/racketsacademy.ch" target="_blank" rel="noopener">Instagram</a></p>
   </div>
 </section>
@@ -261,5 +177,6 @@
   </div>
 </footer>
 <script src="../nav.js?v=35"></script>
+<script src="../events.js?v=3"></script>
 </body>
 </html>

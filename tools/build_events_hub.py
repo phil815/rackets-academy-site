@@ -2,6 +2,7 @@
 Edits only the hero lede, the main section, meta description and an inline style block.
 Dates come live from the calendars via nav.js (data-next-event / data-agenda)."""
 import re, urllib.parse
+raise SystemExit("Superseded (02.11.2026): events.html EN/DE/FR now use the 30-day calendar (events.js + events.css). Edit those instead.")
 WA = 'https://wa.me/41772780115?text='
 MSG = {'en': 'Hola! I am interested in {e}. Please keep me posted.',
        'fr': 'Hola ! Je suis intéressé·e par {e}. Tenez-moi au courant.',
