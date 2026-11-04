@@ -1093,3 +1093,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .pb-spa-logo img{width:200px; height:auto;}
 .pb-spa-link{font-weight:800; color:var(--blue);}
 @media (max-width:700px){ .pb-spa{flex-direction:column; align-items:flex-start;} }
+/* Neue Kollektion, noch nicht an Lager (Guti 04.11.2026): Bild voll sichtbar, Badge, Button gesperrt */
+.racket-card.coming .racket-photo{opacity:1; filter:none;}
+.racket-badge{position:absolute; top:8px; left:8px; z-index:1; background:var(--blue-dark); color:var(--white); font-size:.68rem; font-weight:800; padding:3px 8px; border-radius:999px; letter-spacing:.02em;}
+.product-avail{display:block; font-size:.9rem; font-weight:700; color:var(--blue-dark); margin:0 0 8px;}

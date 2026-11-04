@@ -10,16 +10,19 @@ T = {
             facts=['Official {brand} reseller', 'Pick up in Salgesch or Sion, or shipping by post for 9 CHF', 'Test for 10 CHF — credited when you buy', 'Returns within 30 days if new and in original packaging'],
             test_btn='Book a test on WhatsApp', back='← Back to shop', wa="Hola! I'd like to test the {label}.",
             suffix=' – test & buy', similar='You might also like', brand_suffix=' | Rackets Academy', pickup='Pick up in Salgesch or Sion (next day) · or shipping for 9 CHF in 1–2 working days',
+            avail='New 2027 collection · in store from {day}',
             meta='{label} for {price} CHF at Rackets Academy in Valais. Test it for 10 CHF first — credited when you buy. Pick up in Salgesch or Sion or shipping by post.'),
  'fr': dict(test_h="Teste-la d'abord", test_p="Loue cette raquette pour 10 CHF et joue un vrai match avec. Si tu l'achètes, on déduit les 10 CHF du prix — sans aucun risque.",
             facts=['Revendeur officiel {brand}', "Retrait à Salgesch ou Sion, ou envoi par la Poste pour 9 CHF", 'Test à 10 CHF — déduit si tu achètes', "Retour sous 30 jours si neuve et dans l'emballage d'origine"],
             test_btn='Réserver un test sur WhatsApp', back='← Retour à la boutique', wa="Hola ! J'aimerais tester la {label}.",
             suffix=' – tester & acheter', similar='Tu aimeras aussi', brand_suffix=' | Rackets Academy', pickup='Retrait à Salgesch ou Sion (dès le lendemain) · ou envoi pour 9 CHF en 1–2 jours ouvrables',
+            avail='Nouvelle collection 2027 · en magasin dès le {day}',
             meta="{label} à {price} CHF à la Rackets Academy en Valais. Teste-la d'abord pour 10 CHF, déduits si tu achètes. Retrait à Salgesch ou Sion ou envoi par la Poste."),
  'de': dict(test_h='Erst testen', test_p='Miete dieses Racket für 10 CHF und spiel damit ein echtes Match. Kaufst du es, schreiben wir dir die 10 CHF gut — ganz ohne Risiko.',
             facts=['Offizieller {brand}-Händler', 'Abholung in Salgesch oder Sion, oder Versand per Post für 9 CHF', 'Test für 10 CHF — beim Kauf angerechnet', 'Rückgabe innert 30 Tagen, wenn neu und originalverpackt'],
             test_btn='Test per WhatsApp buchen', back='← Zurück zum Shop', wa='Hola! Ich möchte das {label} testen.',
             suffix=' – testen & kaufen', similar='Das könnte dir auch gefallen', brand_suffix=' | Rackets Academy', pickup='Abholung in Salgesch oder Sion (ab dem nächsten Tag) · oder Versand für 9 CHF in 1–2 Werktagen',
+            avail='Neue Kollektion 2027 · im Laden ab {day}',
             meta='{label} für {price} CHF bei der Rackets Academy im Wallis. Erst für 10 CHF testen, beim Kauf angerechnet. Abholung in Salgesch oder Sion oder Versand per Post.'),
 }
 CARD_RE = re.compile(r'<div class="racket-card[^"]*">\n.*?\n      </div>\n', re.S)
@@ -34,6 +37,13 @@ MPN = {
   'wilson-defy': 'WR173711U2', 'wilson-defy-ls': 'WR173811U2',
   'wilson-bela-v3': 'WR186511U2', 'wilson-bela-v3-pro': 'WR186411U2', 'wilson-bela-v3-ls': 'WR186711U2'}
 
+def day_txt(iso, lang):
+    d = datetime.date.fromisoformat(iso)
+    m = {'en': 'January February March April May June July August September October November December',
+         'de': 'Januar Februar März April Mai Juni Juli August September Oktober November Dezember',
+         'fr': 'janvier février mars avril mai juin juillet août septembre octobre novembre décembre'}[lang].split()
+    return (f'{d.day}. ' if lang == 'de' else f'{d.day} ') + m[d.month - 1]
+
 def cards(shop):
     out = []
     for m in CARD_RE.finditer(shop):
@@ -46,7 +56,9 @@ def cards(shop):
         price = re.search(r'<span class="racket-price">(\d+)', c).group(1)
         img = re.search(r'<img class="racket-photo" src="([^"]+)"', c).group(1)
         btn = re.search(r'<button type="button" class="buy-btn"[^>]*>[^<]*</button>', c).group(0)
-        out.append(dict(model=model, label=label, price=price, img=img, btn=btn, sold='sold-out' in c.split('\n')[0]))
+        av = re.search(r'data-available="([\d-]+)"', c)
+        out.append(dict(model=model, label=label, price=price, img=img, btn=btn, sold='sold-out' in c.split('\n')[0],
+                        coming='coming' in c.split('\n')[0], avail=av.group(1) if av else ''))
     return out
 
 def build(lang):
@@ -97,6 +109,7 @@ def build(lang):
               'brand': {'@type': 'Brand', 'name': brand}, 'image': hd_abs or img_abs, 'description': meta,
               'offers': {'@type': 'Offer', 'price': price, 'priceCurrency': 'CHF', 'url': url,
                          'availability': 'https://schema.org/' + ('OutOfStock' if it['sold'] else 'InStock'),
+                         **({'availabilityStarts': it['avail']} if it['coming'] and it['avail'] else {}),
                          'itemCondition': 'https://schema.org/NewCondition',
                          # Guti 28.10.2026: Versand 9 CHF (CH), Rückgabe 30 Tage, neu und originalverpackt
                          'hasMerchantReturnPolicy': {'@type': 'MerchantReturnPolicy', 'applicableCountry': 'CH',
@@ -124,14 +137,15 @@ def build(lang):
   <div class="wrap">
     <a class="product-back" href="shop.html#rackets">{t['back']}</a>
     <div class="product-grid">
-      <div class="racket-card product-card{' sold-out' if it['sold'] else ''}">
+      <div class="racket-card product-card{' sold-out' if it['sold'] else ''}{' coming' if it['coming'] else ''}">
         <img class="racket-photo" id="product-main" src="{gal_rel[0] if gal_rel else img_rel}" alt="{html.escape(label)}">
         {('<div class="product-thumbs">' + ''.join('<button type="button" class="product-thumb' + (' active' if i == 0 else '') + '" onclick="var m=document.getElementById(\'product-main\');m.src=this.dataset.src;[].forEach.call(this.parentNode.children,function(b){b.classList.remove(\'active\')});this.classList.add(\'active\')" data-src="' + g + '"><img src="' + g + '" alt="' + html.escape(label) + ' ' + str(i + 1) + '" loading="lazy"></button>' for i, g in enumerate(gal_rel)) + '</div>') if len(gal_rel) > 1 else ''}
       </div>
       <div class="product-info">
         <p class="product-brand">{html.escape(brand)}</p>
         <h1>{html.escape(label)}</h1>
-        <div class="racket-card product-buy{' sold-out' if it['sold'] else ''}">
+        <div class="racket-card product-buy{' sold-out' if it['sold'] else ''}{' coming' if it['coming'] else ''}">
+          {('<span class="product-avail">' + t['avail'].format(day=day_txt(it['avail'], lang)) + '</span>') if it['coming'] and it['avail'] else ''}
           <span class="racket-price">{price} CHF</span>
           <span class="product-pickup">{t['pickup']}</span>
           {it['btn']}

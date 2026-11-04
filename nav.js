@@ -763,7 +763,7 @@ document.addEventListener('submit', function (e) {
           if (priceEl && info.price) priceEl.textContent = info.price + ' CHF';
           var call = src.replace(/price:\d+(\.\d+)?/, 'price:' + info.price);
           if (info.qty > 0) {
-            card.classList.remove('sold-out');
+            card.classList.remove('sold-out', 'coming');
             btn.disabled = false;
             btn.textContent = BUY;
             btn.setAttribute('onclick', call);
@@ -772,7 +772,19 @@ document.addEventListener('submit', function (e) {
             btn.dataset.onclick = call;
             btn.removeAttribute('onclick');
             btn.disabled = true;
-            btn.textContent = SOLD;
+            // Neue Modelle vor dem Liefertermin: «Ab 15. Dez.» statt «Ausverkauft» (data-available="JJJJ-MM-TT")
+            var av = btn.dataset.available, d = av && new Date(av + 'T00:00:00');
+            if (d && d > new Date()) {
+              var mo = { en: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+                         de: ['Jan.','Feb.','März','Apr.','Mai','Juni','Juli','Aug.','Sep.','Okt.','Nov.','Dez.'],
+                         fr: ['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'] }[L] || [];
+              var day = d.getDate() + (L === 'de' ? '. ' : ' ') + mo[d.getMonth()];
+              card.classList.add('coming');
+              btn.textContent = ({ en: 'From ', de: 'Ab ', fr: 'Dès le ' }[L] || 'From ') + day;
+            } else {
+              card.classList.remove('coming');
+              btn.textContent = SOLD;
+            }
           }
         });
       })

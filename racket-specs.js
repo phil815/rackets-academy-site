@@ -242,5 +242,50 @@ window.RA_SPECS = {
 "hard": "Hart",
 "level": "Profi",
 "balance": "Mittel"
+},
+"siux-fenix-pro-black-2027": {
+"shape": "Diamant",
+"weight": "355–375",
+"face": "Carbon 3K (SC Power)",
+"core": "EVA Hard",
+"hard": "Hart",
+"level": "Profi",
+"balance": "Kopflastig"
+},
+"siux-pegasus-pro-black-2027": {
+"shape": "Träne",
+"weight": "355–375",
+"face": "Carbon 12K",
+"core": "EVA Hard",
+"hard": "Hart",
+"level": "Profi",
+"balance": "Mittel"
+},
+"siux-electra-elite-2027": {
+"shape": "Träne",
+"weight": "355–375",
+"face": "Carbon 3K (SC Comfort)",
+"core": "EVA Mid",
+"hard": "Mittel",
+"level": "Fortgeschritten",
+"balance": "Mittel"
+},
+"siux-obsidian-elite-2027": {
+"shape": "Träne",
+"weight": "355–375",
+"face": "Carbon 3K (SC Comfort)",
+"core": "EVA Soft",
+"hard": "Weich",
+"level": "Fortgeschritten",
+"balance": "Grifflastig"
+},
+"siux-valkiria-elite-2027": {
+"shape": "Träne",
+"weight": "340–360",
+"face": "Carbon 3K (SC Comfort)",
+"core": "EVA Soft",
+"hard": "Weich",
+"level": "Fortgeschritten",
+"balance": "Mittel"
 }
 };
