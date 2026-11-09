@@ -141,3 +141,7 @@ a.evw-card:focus-visible{outline:3px solid var(--evw-green); outline-offset:3px;
   .evw-btn{padding:8px 14px; font-size:.8rem;}
   .evw-skel{height:120px;}
 }
+@media (max-width:620px){
+  .evw-card .evw-desc{display:-webkit-box; -webkit-line-clamp:2; font-size:.72rem; line-height:1.3;}
+  .evw-card.dark .evw-desc{-webkit-line-clamp:3;}
+}
