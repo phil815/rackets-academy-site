@@ -65,7 +65,8 @@ def mores(items):
 
 def near(items):
     return '<div class="spa-near">' + ''.join(
-        f'<div class="spa-near-item"><strong>{a}</strong><span>{b}</span></div>' for a, b in items) + '</div>'
+        (f'<a class="spa-near-item" href="{x[2]}"><strong>{x[0]} →</strong><span>{x[1]}</span></a>' if len(x) > 2 else
+         f'<div class="spa-near-item"><strong>{x[0]}</strong><span>{x[1]}</span></div>') for x in items) + '</div>'
 
 
 def faq(items, h):
@@ -182,7 +183,7 @@ def valais(L):
               ('🧒', 'Kindercamps', 'Padel-Feriencamps in Salgesch für Kinder von 6–14 Jahren.', 'kids-camp.html'),
               ('🏔️', 'Padel im Oberwallis', 'Alles für Leuk, Visp, Brig und Umgebung.', 'padel-oberwallis.html')],
         near_h='Wie weit ist dein nächster Platz?',
-        near=[('Siders', '≈ 5 Min. nach Salgesch'), ('Sitten', 'in der Stadt'), ('Leuk', '≈ 10 Min. nach Salgesch'), ('Visp', '≈ 20 Min. nach Salgesch'), ('Brig', '≈ 30 Min. nach Salgesch'), ('Leukerbad', '≈ 25 Min. nach Salgesch'), ('Crans-Montana', '≈ 25 Min. nach Salgesch'), ('Martinach', '≈ 25 Min. nach Sitten')],
+        near=[('Siders', '≈ 5 Min. nach Salgesch'), ('Sitten', 'in der Stadt'), ('Leuk', '≈ 10 Min. nach Salgesch', 'padel-oberwallis.html'), ('Visp', '≈ 20 Min. nach Salgesch', 'padel-visp.html'), ('Brig', '≈ 30 Min. nach Salgesch', 'padel-visp.html'), ('Leukerbad', '≈ 25 Min. nach Salgesch'), ('Crans-Montana', '≈ 25 Min. nach Salgesch'), ('Martinach', '≈ 25 Min. nach Sitten')],
         faq_h='Padel im Wallis: gut zu wissen',
         faq=[('Wo kann man im Wallis Padel spielen?', 'Die Rackets Academy hat zwei Padelzentren im Wallis: in Sitten (3 Indoor-Plätze) und in Salgesch bei Siders (4 Indoor- und 2 Outdoor-Plätze). Beide sind täglich von 07:00 bis 23:30 offen und auf Playtomic buchbar.'),
              ('Was kostet Padel im Wallis?', 'Bei der Rackets Academy kostet ein 90-Minuten-Spiel indoor 17 CHF pro Person werktags vor 17 Uhr und 20 CHF pro Person ab 17 Uhr und am Wochenende, gleich in Sitten und Salgesch.'),

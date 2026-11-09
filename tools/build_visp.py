@@ -4,8 +4,8 @@ PT = 'https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3'
 WA = 'https://wa.me/41762914369?text=' + urllib.parse.quote('Hola Philip! Ich komme aus Visp/Brig und möchte in Salgesch Padel spielen.')
 MAPS = 'https://www.google.com/maps/dir/?api=1&destination=Littenstrasse+30+3970+Salgesch'
 URL = 'https://www.racketsacademy.ch/de/padel-visp.html'
-TITLE = 'Padel Visp & Brig – 6 Plätze in Salgesch | Rackets Academy'
-DESC = 'Padel für Visp und Brig: 6 Plätze (4 indoor), Kurse auf Deutsch, Leihschläger gratis und Spa – 20 Min. ab Visp in Salgesch, täglich 07:00–23:30.'
+TITLE = 'Padel Visp & Brig – 6 Plätze ab 17 CHF, 20 Min. | Rackets Academy'
+DESC = 'Padel ab Visp in 20 Min.: 4 Indoor- + 2 Outdoor-Plätze in Salgesch, ab 17 CHF p. P., Kurse auf Deutsch, Leihschläger fürs 1. Spiel gratis. Täglich 07–23:30.'
 FAC = [('🎾', 'Padel', '4 Plätze indoor, 2 outdoor', 'Täglich 07:00–23:30'),
        ('🏓', 'Pickleball', '3 Plätze indoor, Schlägermiete 2 CHF', 'Täglich 07:00–23:30'),
        ('🎾', 'Tennis', '2 Plätze indoor', 'Täglich 07:00–23:30'),
@@ -19,7 +19,7 @@ FAQ = [('Wo kann man in Visp Padel spielen?', 'In Visp selbst gibt es zwei Padel
        ('Wie komme ich von Visp nach Salgesch?', 'Mit dem Auto über die A9 in rund 20 Minuten, ab Brig in rund 30 Minuten. Parkplätze direkt vor der Halle. Mit dem Zug bis Leuk oder Salgesch.'),
        ('Brauche ich einen eigenen Schläger?', 'Nein. Für dein erstes Spiel bekommst du einen Leihschläger gratis.'),
        ('Gibt es Training auf Deutsch?', 'Ja, in Salgesch trainieren dich auch deutschsprachige Coaches — einzeln oder in der Gruppe.'),
-       ('Wann ist es am günstigsten?', 'Vor 17 Uhr spielst du günstiger — ideal bei Schichtarbeit, Teilzeit oder freien Nachmittagen.')]
+       ('Was kostet Padel in Salgesch?', 'Ein 90-Minuten-Spiel indoor kostet 17 CHF pro Person Mo–Fr vor 17 Uhr und 20 CHF pro Person ab 17 Uhr und am Wochenende. Vor 17 Uhr ist es also günstiger — ideal bei Schichtarbeit, Teilzeit oder freien Nachmittagen.')]
 
 def body():
     fac = ''.join(f'<div class="ow-fac"><span class="co2-ic">{e}</span><div><h3>{h}</h3><p>{a}</p><p class="ow-time">{b}</p></div></div>' for e, h, a, b in FAC)
@@ -32,7 +32,7 @@ def body():
     <p class="spa-kicker">Padel für Visp &amp; Brig · Salgesch</p>
     <h1>Padel für Visp und Brig — 20 Minuten nach Salgesch.</h1>
     <p class="lede">Das grösste Padelzentrum im Wallis: 6 Plätze, Kurse auf Deutsch, Spa und Bar — und die beste Padel-Community im Oberwallis.</p>
-    <div class="spa-chips"><span class="spa-chip">🚗 20 Min. ab Visp</span><span class="spa-chip">🚗 30 Min. ab Brig</span><span class="spa-chip">Gratis Leihschläger fürs erste Spiel</span></div>
+    <div class="spa-chips"><span class="spa-chip">🚗 20 Min. ab Visp</span><span class="spa-chip">🚗 30 Min. ab Brig</span><span class="spa-chip">Ab 17 CHF pro Person</span><span class="spa-chip">Gratis Leihschläger fürs erste Spiel</span></div>
     <div class="hero-actions">
       <a class="btn btn-green spa-cta" href="{PT}" target="_blank" rel="noopener">Platz in Salgesch buchen</a>
       <a class="btn spa-cta-ghost" href="{WA}" target="_blank" rel="noopener">WhatsApp an Philip</a>
@@ -51,7 +51,7 @@ def body():
   <div class="wrap co2-price">
     <p class="spa-kicker" style="color:var(--blue);">Tagsüber spielen</p>
     <h2 class="co2-h">Vor 17 Uhr günstiger.</h2>
-    <p>Schichtarbeit, Teilzeit oder freier Nachmittag? Vor 17 Uhr spielst du günstiger — und die Plätze sind frei.</p>
+    <p>Schichtarbeit, Teilzeit oder freier Nachmittag? Mo–Fr vor 17 Uhr kostet ein 90-Minuten-Spiel indoor 17 CHF pro Person (sonst 20 CHF) — und die Plätze sind frei.</p>
     <a class="btn btn-green spa-cta" href="{PT}" target="_blank" rel="noopener">Freie Plätze ansehen</a>
   </div>
 </section>
