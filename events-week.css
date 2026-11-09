@@ -1,0 +1,147 @@
+/* Events page (Guti 09.11.2026): next 30 days as weekly cards, in the style of the weekly Instagram visuals.
+   Brand blue page, green accents, hero / dark / white cards. Every card links straight to its Playtomic sign-up. */
+.evw{
+  --evw-blue:#0077de; --evw-green:#6ffd1d; --evw-ink:#0a1e3c; --evw-dark1:#16283d; --evw-dark2:#0b1a2c;
+  position:relative; overflow:hidden; background:var(--evw-blue); color:#fff; padding:44px 0 56px;
+  font-family:'Galano Grotesque','Poppins',system-ui,sans-serif;
+}
+/* tennis-ball dots, top left and bottom right */
+.evw::before,.evw::after{
+  content:""; position:absolute; width:260px; height:260px; pointer-events:none; opacity:.22;
+  background-image:radial-gradient(circle, var(--evw-green) 0 5px, transparent 6px); background-size:26px 26px;
+  -webkit-mask-image:radial-gradient(circle at center, #000 30%, transparent 70%); mask-image:radial-gradient(circle at center, #000 30%, transparent 70%);
+}
+.evw::before{top:-60px; left:-60px;}
+.evw::after{bottom:-70px; right:-50px;}
+.evw .wrap{position:relative; z-index:1;}
+.evw-kicker{color:var(--evw-green); font-weight:800; letter-spacing:.18em; font-size:.82rem; text-transform:uppercase; margin:0 0 10px;}
+.evw-title{font-weight:800; font-size:clamp(2rem,5.4vw,3.6rem); line-height:.98; margin:0 0 22px; color:#fff; text-transform:uppercase; letter-spacing:-.01em;}
+.evw-title span{color:var(--evw-green);}
+.evw-chips{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 30px;}
+.evw-chip{
+  font:inherit; font-weight:700; font-size:.88rem; color:#fff; background:rgba(255,255,255,.12);
+  border:1.5px solid rgba(255,255,255,.35); border-radius:999px; padding:8px 16px; cursor:pointer;
+}
+.evw-chip:hover{border-color:#fff;}
+.evw-chip[aria-pressed="true"]{background:var(--evw-green); border-color:var(--evw-green); color:var(--evw-ink);}
+.evw-week{margin:0 0 34px;}
+.evw-week h2{font-weight:800; font-size:1.05rem; letter-spacing:.12em; text-transform:uppercase; color:#fff; margin:0 0 14px;
+  display:flex; align-items:center; gap:12px;}
+.evw-week h2::after{content:""; flex:1; height:2px; background:rgba(255,255,255,.25); border-radius:2px;}
+.evw-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
+@media (max-width:980px){ .evw-grid{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:620px){ .evw-grid{grid-template-columns:1fr;} }
+
+/* cards */
+.evw-card{
+  position:relative; display:flex; flex-direction:column; gap:8px; border-radius:24px; padding:20px 20px 18px;
+  text-decoration:none; color:var(--evw-ink); background:#fff; min-height:190px;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+a.evw-card:hover, a.evw-card:focus-visible{transform:translateY(-4px); box-shadow:0 14px 30px rgba(4,30,70,.28);}
+a.evw-card:focus-visible{outline:3px solid var(--evw-green); outline-offset:3px;}
+.evw-when{font-weight:800; font-size:.8rem; letter-spacing:.08em; text-transform:uppercase; color:var(--evw-blue);}
+.evw-name{font-weight:800; font-size:1.35rem; line-height:1.08; text-transform:uppercase; margin:0; padding-right:40px;}
+.evw-icon{position:absolute; top:16px; right:18px; font-size:1.7rem; line-height:1;}
+.evw-desc{font-size:.92rem; line-height:1.4; color:#5b6878; margin:0;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
+.evw-desc strong{color:inherit;}
+.evw-pill{align-self:flex-start; font-weight:800; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase;
+  background:var(--evw-green); color:var(--evw-ink); border-radius:999px; padding:6px 12px;}
+.evw-foot{margin-top:auto; display:flex; align-items:flex-end; justify-content:space-between; gap:10px; padding-top:6px;}
+.evw-where{font-size:.88rem; color:#5b6878;}
+.evw-where b{color:var(--evw-ink);}
+.evw-go{font-weight:800; font-size:.88rem; color:var(--evw-blue); white-space:nowrap;}
+
+/* dark: deadlines, official tournaments */
+.evw-card.dark{background:linear-gradient(160deg,var(--evw-dark1),var(--evw-dark2)); color:#fff;}
+.evw-card.dark .evw-when{color:var(--evw-green);}
+.evw-card.dark .evw-desc{color:rgba(255,255,255,.88);}
+.evw-card.dark .evw-desc strong{color:var(--evw-green);}
+.evw-card.dark .evw-where{color:rgba(255,255,255,.75);}
+.evw-card.dark .evw-where b{color:#fff;}
+.evw-card.dark .evw-go{color:var(--evw-green);}
+
+/* hero: full width, green, photo left */
+.evw-card.hero{grid-column:1/-1; background:var(--evw-green); flex-direction:row; padding:0; overflow:hidden; min-height:260px;}
+.evw-hero-photo{flex:0 0 42%; background:#0a1e3c center/cover no-repeat; min-height:240px;}
+.evw-hero-body{flex:1; display:flex; flex-direction:column; gap:10px; padding:26px 28px;}
+.evw-card.hero .evw-when{color:var(--evw-ink);}
+.evw-card.hero .evw-name{font-size:clamp(1.8rem,3.6vw,2.7rem); padding-right:0;}
+.evw-card.hero .evw-name em{font-style:normal; color:var(--evw-blue);}
+.evw-card.hero .evw-desc{color:var(--evw-ink); -webkit-line-clamp:3; font-size:1rem;}
+.evw-card.hero .evw-pill{background:var(--evw-ink); color:var(--evw-green);}
+.evw-card.hero .evw-foot{align-items:center;}
+.evw-price{font-weight:800; font-size:1.5rem;}
+.evw-btn{display:inline-block; background:var(--evw-ink); color:#fff; font-weight:800; border-radius:999px; padding:12px 22px; font-size:.95rem;}
+.evw-card.hero:not(.has-photo) .evw-hero-photo{display:none;}
+@media (max-width:620px){
+  .evw-card.hero{flex-direction:column;}
+  .evw-hero-photo{flex:none; min-height:190px;}
+  .evw-hero-body{padding:20px;}
+}
+
+/* full: greyed, not clickable */
+.evw-card.full{filter:grayscale(1); opacity:.55; cursor:default;}
+.evw-card.full .evw-go, .evw-card.full .evw-btn{display:none;}
+
+.evw-note{font-size:.82rem; color:rgba(255,255,255,.8); margin:4px 0 0;}
+.evw-msg{background:rgba(255,255,255,.12); border-radius:20px; padding:20px 22px; font-size:1rem; line-height:1.5;}
+.evw-msg a{color:var(--evw-green); font-weight:800;}
+.evw-own{margin:26px 0 0; font-size:.92rem; color:rgba(255,255,255,.85);}
+.evw-own a{color:#fff; font-weight:700;}
+.evw-skel{height:190px; border-radius:24px; background:rgba(255,255,255,.12);}
+.evw-card.white .evw-desc{-webkit-line-clamp:1;}
+
+/* compact (Guti 09.11.: less scrolling) — 4 / 3 / 2 columns, smaller cards */
+.evw{padding:34px 0 44px;}
+.evw-title{margin-bottom:18px;}
+.evw-chips{margin-bottom:24px;}
+.evw-week{margin-bottom:26px;}
+.evw-week h2{font-size:.95rem; margin-bottom:12px;}
+.evw-grid{grid-template-columns:repeat(4,1fr);}
+.evw-card{min-height:0; padding:16px 16px 14px; gap:6px; border-radius:22px;}
+.evw-when{font-size:.72rem;}
+.evw-name{font-size:1.08rem; padding-right:30px;}
+.evw-icon{top:12px; right:14px; font-size:1.35rem;}
+.evw-desc{font-size:.85rem;}
+.evw-pill{font-size:.66rem; padding:5px 10px;}
+.evw-foot{padding-top:4px;}
+.evw-where,.evw-go{font-size:.82rem;}
+.evw-card.hero{min-height:0;}
+.evw-hero-photo{flex-basis:38%; min-height:220px; background-position:center 30%;}
+.evw-hero-body{padding:22px 24px; gap:8px;}
+.evw-card.hero .evw-name{font-size:clamp(1.5rem,3vw,2.2rem);}
+.evw-price{font-size:1.25rem;}
+.evw-btn{padding:10px 20px; font-size:.9rem;}
+.evw-skel{height:150px;}
+@media (max-width:980px){ .evw-grid{grid-template-columns:repeat(3,1fr);} }
+@media (max-width:620px){
+  .evw-title{font-size:1.75rem;}
+  .evw-chip{padding:6px 12px; font-size:.8rem;}
+  .evw-grid{grid-template-columns:repeat(2,1fr); gap:8px;}
+  .evw-week h2{font-size:.8rem; letter-spacing:.08em;}
+  .evw-card{padding:12px 12px 11px; border-radius:18px; gap:5px;}
+  .evw-when{font-size:.62rem; letter-spacing:.04em;}
+  .evw-name{font-size:.9rem; padding-right:22px;}
+  .evw-icon{top:9px; right:9px; font-size:1.05rem;}
+  .evw-card .evw-desc{display:none;}
+  .evw-pill{font-size:.56rem; padding:4px 7px; letter-spacing:.04em;}
+  .evw-foot{flex-direction:column; align-items:flex-start; gap:2px;}
+  .evw-where{font-size:.75rem;}
+  .evw-go{font-size:.75rem;}
+  /* hero stays full width, photo left, compact */
+  .evw-card.hero{flex-direction:row;}
+  .evw-hero-photo{flex:0 0 36%; min-height:0;}
+  .evw-hero-body{padding:14px; gap:6px;}
+  .evw-card.hero .evw-name{font-size:1.3rem;}
+  .evw-card.hero .evw-desc{display:-webkit-box; -webkit-line-clamp:2; font-size:.8rem;}
+  .evw-card.hero .evw-foot{flex-direction:row; align-items:center; gap:8px;}
+  .evw-price{font-size:1rem;}
+  .evw-btn{padding:8px 14px; font-size:.8rem;}
+  .evw-skel{height:120px;}
+}
+@media (max-width:620px){
+  .evw-card .evw-desc{display:-webkit-box; -webkit-line-clamp:2; font-size:.72rem; line-height:1.3;}
+  .evw-card.dark .evw-desc{-webkit-line-clamp:3;}
+}
