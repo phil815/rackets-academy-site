@@ -50,7 +50,7 @@
 <meta name="description" content="Rackets Academy Events im Wallis: P424 24-Std.-Turnier, Padel +Dine, Ski &amp;Padel Wochenenden, Racketero, Rackemix, Pickleball Mix &amp; Match, Padel+Paella/Wine/Beer/Fitness, Swiss Tennis und Rivella League.">
 <link rel="canonical" href="https://www.racketsacademy.ch/de/events.html">
 <link rel="stylesheet" href="../styles.css?v=43">
-<link rel="stylesheet" href="../events.css?v=1">
+<link rel="stylesheet" href="../events-week.css?v=1">
 <meta property="og:title" content="Padel Events &amp; Turniere | Rackets Academy">
 <meta property="og:description" content="Rackets Academy Events im Wallis: P424 24-Std.-Turnier, Padel +Dine, Ski &amp;Padel Wochenenden, Racketero, Rackemix, Pickleball Mix &amp; Match, Padel+Paella/Wine/Beer/Fitness, Swiss Tennis und Rivella League.">
 <meta property="og:type" content="website">
@@ -116,32 +116,13 @@
 </header>
 </div>
 
-<section class="hero" style="background-image:linear-gradient(180deg, rgba(4,30,70,.35), rgba(4,30,70,.72)), url('https://www.racketsacademy.ch/images/photos/events-group.jpg'); background-size:cover; background-position:center 62%;">
-  <span class="ball b1"></span><span class="ball b2"></span><span class="ball b3"></span>
-  <div class="wrap hero-inner">
-    <h1>Events</h1>
-    <p class="lede">Gesellige Abende, regelmässige Turniere, ein 24-Stunden-Marathon, Ski-Wochenenden und offizielle Swiss Tennis Wettkämpfe. Die Daten kommen live aus unserem Kalender.</p>
-  </div>
-</section>
-
-<section class="ev-top">
+<section class="evw" aria-labelledby="evw-h">
   <div class="wrap">
-    <div class="ev-toolbar">
-      <h2>Die nächsten 30 Tage</h2>
-      <span id="ev-range"></span>
-    </div>
-    <div id="ev-chips" class="ev-chips" aria-label="Nach Kategorie filtern"></div>
-    <p id="ev-status" class="ev-empty"></p>
-    <div id="ev-grid" class="ev-grid"><p class="ev-empty">Daten werden geladen…</p></div>
-    <div id="ev-daylist"></div>
-    <div id="ev-daypanel" hidden></div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div id="ev-sections"></div>
-    <p class="ev-own">Du planst deinen eigenen Anlass? <a href="company-events.html">Firmenevents</a> · <a href="kids-birthday.html">Kindergeburtstage</a> · <a href="https://www.instagram.com/racketsacademy.ch" target="_blank" rel="noopener">Instagram</a></p>
+    <p class="evw-kicker">EVENTS · NÄCHSTE 30 TAGE</p>
+    <h1 class="evw-title" id="evw-h">Hola Racketeros <span>&amp; Racketeras</span></h1>
+    <div id="evw-chips" class="evw-chips" role="group" aria-label="Events filtern"></div>
+    <div id="evw-list" aria-live="polite"><p class="evw-note">Events werden geladen…</p><div class="evw-grid"><div class="evw-skel"></div><div class="evw-skel"></div><div class="evw-skel"></div></div></div>
+    <p class="evw-own">Du planst deinen eigenen Anlass? <a href="company-events.html">Firmenevents</a> · <a href="kids-birthday.html">Kindergeburtstage</a> · <a href="https://www.instagram.com/racketsacademy.ch" target="_blank" rel="noopener">Instagram</a></p>
   </div>
 </section>
 
@@ -179,6 +160,6 @@
   </div>
 </footer>
 <script src="../nav.js?v=38"></script>
-<script src="../events.js?v=4"></script>
+<script src="../events-week.js?v=1"></script>
 </body>
 </html>
