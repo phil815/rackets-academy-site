@@ -92,3 +92,52 @@ a.evw-card:focus-visible{outline:3px solid var(--evw-green); outline-offset:3px;
 .evw-own a{color:#fff; font-weight:700;}
 .evw-skel{height:190px; border-radius:24px; background:rgba(255,255,255,.12);}
 .evw-card.white .evw-desc{-webkit-line-clamp:1;}
+
+/* compact (Guti 09.11.: less scrolling) — 4 / 3 / 2 columns, smaller cards */
+.evw{padding:34px 0 44px;}
+.evw-title{margin-bottom:18px;}
+.evw-chips{margin-bottom:24px;}
+.evw-week{margin-bottom:26px;}
+.evw-week h2{font-size:.95rem; margin-bottom:12px;}
+.evw-grid{grid-template-columns:repeat(4,1fr);}
+.evw-card{min-height:0; padding:16px 16px 14px; gap:6px; border-radius:22px;}
+.evw-when{font-size:.72rem;}
+.evw-name{font-size:1.08rem; padding-right:30px;}
+.evw-icon{top:12px; right:14px; font-size:1.35rem;}
+.evw-desc{font-size:.85rem;}
+.evw-pill{font-size:.66rem; padding:5px 10px;}
+.evw-foot{padding-top:4px;}
+.evw-where,.evw-go{font-size:.82rem;}
+.evw-card.hero{min-height:0;}
+.evw-hero-photo{flex-basis:38%; min-height:220px; background-position:center 30%;}
+.evw-hero-body{padding:22px 24px; gap:8px;}
+.evw-card.hero .evw-name{font-size:clamp(1.5rem,3vw,2.2rem);}
+.evw-price{font-size:1.25rem;}
+.evw-btn{padding:10px 20px; font-size:.9rem;}
+.evw-skel{height:150px;}
+@media (max-width:980px){ .evw-grid{grid-template-columns:repeat(3,1fr);} }
+@media (max-width:620px){
+  .evw-title{font-size:1.75rem;}
+  .evw-chip{padding:6px 12px; font-size:.8rem;}
+  .evw-grid{grid-template-columns:repeat(2,1fr); gap:8px;}
+  .evw-week h2{font-size:.8rem; letter-spacing:.08em;}
+  .evw-card{padding:12px 12px 11px; border-radius:18px; gap:5px;}
+  .evw-when{font-size:.62rem; letter-spacing:.04em;}
+  .evw-name{font-size:.9rem; padding-right:22px;}
+  .evw-icon{top:9px; right:9px; font-size:1.05rem;}
+  .evw-card .evw-desc{display:none;}
+  .evw-pill{font-size:.56rem; padding:4px 7px; letter-spacing:.04em;}
+  .evw-foot{flex-direction:column; align-items:flex-start; gap:2px;}
+  .evw-where{font-size:.75rem;}
+  .evw-go{font-size:.75rem;}
+  /* hero stays full width, photo left, compact */
+  .evw-card.hero{flex-direction:row;}
+  .evw-hero-photo{flex:0 0 36%; min-height:0;}
+  .evw-hero-body{padding:14px; gap:6px;}
+  .evw-card.hero .evw-name{font-size:1.3rem;}
+  .evw-card.hero .evw-desc{display:-webkit-box; -webkit-line-clamp:2; font-size:.8rem;}
+  .evw-card.hero .evw-foot{flex-direction:row; align-items:center; gap:8px;}
+  .evw-price{font-size:1rem;}
+  .evw-btn{padding:8px 14px; font-size:.8rem;}
+  .evw-skel{height:120px;}
+}

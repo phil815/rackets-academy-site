@@ -3,11 +3,11 @@
 //
 // Optional block at the end of the calendar description, after a line "---" (never shown on the page):
 //   playtomic: https://...   direct sign-up link (missing → Academy link of the site)
-//   places: 8/16             taken/total → free = total − taken
+//   places: 8/16             booked/total → pill "8 VON 16 GEBUCHT"; booked ≥ total = full (greyed, not clickable)
 //   style: hero | dark | white   (default white)
 //   icon: 🍕
 //   accent: +YOGA            highlighted part of the hero title
-//   photo: https://...       hero photo
+//   photo: https://...       hero photo (yoga / paella have a default photo and are hero by default)
 //   price: 35 CHF
 //   updated: 2026-11-09      when the places were last updated
 // Shown: events with this block, plus those the old page showed (keyword list KEYS). Short text = first sentence above "---".
@@ -22,25 +22,27 @@
   var KEYS = ['padel+', 'padel +', 'dine', 'amazonia', 'wine', 'paella', 'beer', 'fitness', 'yoga', 'pizza', 'bifana', 'swisstennis', 'hyundai',
     'veyras', 'rivella', 'initiation', 'leveling', 'levelling', 'racketero', 'pickleball', '24h', 'p424', 'ski', 'rackemix'];
   var DAYS = 30;
+  // default hero photos (site root), used when a hero has no photo: line
+  var PHOTOS = [[/yoga/i, '/images/events/padel-yoga.jpg', 'center 30%'], [/paella/i, '/images/padel-paella-2.jpg', 'center 85%']];
 
   var L = (document.documentElement.lang || 'en').slice(0, 2);
   if (['en', 'de', 'fr'].indexOf(L) < 0) L = 'en';
   var TX = {
     fr: { days: ['DIM', 'LUN', 'MAR', 'MER', 'JEU', 'VEN', 'SAM'], time: function (h, m) { return h + 'H' + m; }, date: function (d, mo) { return d + '.' + mo; },
           week: function (a, b) { return 'SEMAINE DU ' + a + ' AU ' + b; }, wd: function (d, mo, same) { return same ? String(d) : d + '.' + mo; }, we: function (d, mo) { return d + '.' + mo; },
-          free: function (n) { return n > 3 ? n + ' PLACES LIBRES' : n > 0 ? 'PLUS QUE ' + n + ' PLACE' + (n > 1 ? 'S' : '') : 'COMPLET'; },
+          booked: function (a, b) { return a + ' SUR ' + b + ' INSCRITS'; },
           go: 'S’inscrire', btn: 'Je m’inscris', upd: 'Places mises à jour le ', all: 'Tous',
           empty: 'Aucun événement dans les 30 prochains jours pour ce filtre.', fail: 'Les événements n’ont pas pu être chargés.',
           pt: 'Voir tous nos événements sur Playtomic', full: 'complet' },
     de: { days: ['SO', 'MO', 'DI', 'MI', 'DO', 'FR', 'SA'], time: function (h, m) { return h + ':' + m; }, date: function (d, mo) { return d + '.' + mo + '.'; },
           week: function (a, b) { return 'WOCHE VOM ' + a + ' BIS ' + b; }, wd: function (d, mo, same) { return same ? d + '.' : d + '.' + mo + '.'; }, we: function (d, mo) { return d + '.' + mo + '.'; },
-          free: function (n) { return n > 3 ? n + ' PLÄTZE FREI' : n > 0 ? 'NUR NOCH ' + n + (n > 1 ? ' PLÄTZE' : ' PLATZ') : 'AUSGEBUCHT'; },
+          booked: function (a, b) { return a + ' VON ' + b + ' GEBUCHT'; },
           go: 'Anmelden', btn: 'Anmelden', upd: 'Plätze aktualisiert am ', all: 'Alle',
           empty: 'In den nächsten 30 Tagen keine Events für diesen Filter.', fail: 'Die Events konnten nicht geladen werden.',
           pt: 'Alle Events auf Playtomic', full: 'ausgebucht' },
     en: { days: ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'], time: function (h, m) { return h + ':' + m; }, date: function (d, mo) { return d + '.' + mo; },
           week: function (a, b) { return 'WEEK OF ' + a + ' TO ' + b; }, wd: function (d, mo, same) { return same ? String(d) : d + '.' + mo; }, we: function (d, mo) { return d + '.' + mo; },
-          free: function (n) { return n > 3 ? n + ' SPOTS LEFT' : n > 0 ? 'ONLY ' + n + ' SPOT' + (n > 1 ? 'S' : '') + ' LEFT' : 'FULL'; },
+          booked: function (a, b) { return a + ' OF ' + b + ' BOOKED'; },
           go: 'Sign up', btn: 'Sign up', upd: 'Spots updated on ', all: 'All',
           empty: 'No events in the next 30 days for this filter.', fail: 'The events could not be loaded.',
           pt: 'See all our events on Playtomic', full: 'full' }
@@ -73,7 +75,7 @@
   }
   function places(meta) {
     var p = /^\s*(\d+)\s*\/\s*(\d+)\s*$/.exec((meta && meta.places) || '');
-    return p ? Math.max(0, +p[2] - +p[1]) : null;
+    return p && +p[2] > 0 ? { taken: Math.min(+p[1], +p[2]), total: +p[2] } : null;
   }
 
   function toEvent(ev, cal) {
@@ -84,11 +86,12 @@
     meta = meta || {};
     var allDay = !ev.start.dateTime;
     var start = allDay ? new Date(ev.start.date + 'T12:00:00') : new Date(ev.start.dateTime);
-    var style = (meta.style || 'white').toLowerCase();
+    var deflt = PHOTOS.filter(function (x) { return x[0].test(title); })[0];
+    var style = (meta.style || (deflt ? 'hero' : 'white')).toLowerCase();
     if (['hero', 'dark', 'white'].indexOf(style) < 0) style = 'white';
     return { title: title, start: start, allDay: allDay, loc: cal.loc, style: style, short: d.short,
-      href: safeUrl(meta.playtomic) || ACADEMY[cal.loc], free: places(meta), icon: meta.icon || '', accent: meta.accent || '',
-      photo: safeUrl(meta.photo), price: meta.price || '', updated: meta.updated || '', pickle: /pickleball/i.test(title) };
+      href: safeUrl(meta.playtomic) || ACADEMY[cal.loc], pl: places(meta), icon: meta.icon || '', accent: meta.accent || '',
+      photo: safeUrl(meta.photo) || (deflt ? deflt[1] : ''), photoPos: safeUrl(meta.photo) || !deflt ? '' : deflt[2], price: meta.price || '', updated: meta.updated || '', pickle: /pickleball/i.test(title) };
   }
 
   function whenLine(e, withLoc) {
@@ -104,16 +107,16 @@
     var i = t.toLowerCase().indexOf(a.toLowerCase());
     return i > -1 ? t.slice(0, i) + '<em>' + t.slice(i, i + a.length) + '</em>' + t.slice(i + a.length) : t + ' <em>' + a + '</em>';
   }
-  function pillHtml(e) { return e.free == null ? '' : '<span class="evw-pill">' + esc(TX.free(e.free)) + '</span>'; }
+  function pillHtml(e) { return e.pl ? '<span class="evw-pill">' + esc(TX.booked(e.pl.taken, e.pl.total)) + '</span>' : ''; }
 
   function card(e) {
-    var full = e.free === 0, cls = 'evw-card ' + e.style + (full ? ' full' : '') + (e.photo ? ' has-photo' : '');
+    var full = !!e.pl && e.pl.taken >= e.pl.total, cls = 'evw-card ' + e.style + (full ? ' full' : '') + (e.photo ? ' has-photo' : '');
     var open = full ? '<div class="' + cls + '" aria-disabled="true">' : '<a class="' + cls + '" href="' + esc(e.href) + '" target="_blank" rel="noopener">';
     var close = full ? '</div>' : '</a>';
     var label = esc(e.title) + (full ? ' (' + TX.full + ')' : '');
     if (e.style === 'hero') {
       return open.replace('>', ' aria-label="' + label + '">') +
-        '<div class="evw-hero-photo"' + (e.photo ? ' role="img" aria-label="' + esc(e.title) + '" style="background-image:url(\'' + esc(e.photo) + '\')"' : '') + '></div>' +
+        '<div class="evw-hero-photo"' + (e.photo ? ' role="img" aria-label="' + esc(e.title) + '" style="background-image:url(\'' + esc(e.photo) + '\')' + (e.photoPos ? ';background-position:' + e.photoPos : '') + '"' : '') + '></div>' +
         '<div class="evw-hero-body"><span class="evw-when">' + esc(whenLine(e, true)) + '</span>' +
         '<h3 class="evw-name">' + titleHtml(e) + '</h3>' + (e.short ? '<p class="evw-desc">' + descHtml(e.short) + '</p>' : '') + pillHtml(e) +
         '<div class="evw-foot"><span class="evw-price">' + esc(e.price) + '</span><span class="evw-btn">' + esc(TX.btn) + '</span></div></div>' + close;
@@ -186,11 +189,11 @@
     function ev(t, s, desc, cal) { return { ev: { summary: t, start: s.length > 10 ? { dateTime: s } : { date: s }, description: desc }, cal: cal || S }; }
     var pt = 'playtomic: https://playtomic.com/events\n', up = 'updated: 2026-11-09';
     return [
-      ev('Padel +Yoga', '2026-11-21T09:30:00+01:00', 'Une heure de yoga pour démarrer, puis deux heures de padel. Tapis fournis.\n---\n' + pt + 'places: 0/8\nstyle: hero\naccent: +YOGA\nprice: 35 CHF\nphoto: https://www.racketsacademy.ch/images/photos/events-group.jpg\n' + up),
+      ev('Padel +Yoga', '2026-11-21T09:30:00+01:00', 'Une heure de yoga pour démarrer, puis deux heures de padel. Tapis fournis.\n---\n' + pt + 'places: 0/8\nstyle: hero\naccent: +YOGA\nprice: 35 CHF\n' + up),
       ev('Rivella League', '2026-11-18', 'Deadline d’inscription mercredi : **inscris ton équipe** avant minuit.\n---\n' + pt + 'style: dark\nicon: 🏆', G),
       ev('Padel +Pizza', '2026-11-13T11:00:00+01:00', 'Padel et pizza maison au bord du court.\n---\n' + pt + 'places: 0/8\nicon: 🍕\nprice: 35 CHF\n' + up),
       ev('Racketero Bifana', '2026-11-13T18:30:00+01:00', 'Matchs en rotation, puis bifana portugaise pour tout le monde.\n---\n' + pt + 'places: 14/16\nicon: 🥪\nprice: 35 CHF\n' + up, G),
-      ev('Padel +Paella', '2026-11-15T09:00:00+01:00', 'Le dimanche matin padel, suivi d’une paella géante.\n---\n' + pt + 'places: 2/16\nicon: 🥘\nprice: 35 CHF\n' + up, G),
+      ev('Padel +Paella', '2026-11-15T09:00:00+01:00', 'Le dimanche matin padel, suivi d’une paella géante.\n---\n' + pt + 'places: 2/16\naccent: +PAELLA\nicon: 🥘\nprice: 35 CHF\n' + up, G),
       ev('Pickleball Mix & Match', '2026-11-15T10:00:00+01:00', 'Rotation des partenaires, tous niveaux bienvenus.\n---\n' + pt + 'places: 0/16\nicon: 🏓\nprice: 10 CHF\n' + up, G),
       ev('Racketeros Advanced', '2026-11-16T20:30:00+01:00', 'Le rendez-vous des joueurs confirmés, niveau 3.5+.\n---\n' + pt + 'places: 3/12\nicon: 🔥\nprice: 30 CHF\n' + up),
       ev('ETA Sion groupe école', '2026-11-17T14:00:00+01:00', 'Interne.')
