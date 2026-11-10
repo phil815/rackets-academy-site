@@ -33,19 +33,19 @@
     fr: { days: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'], time: function (h, m) { return h + 'h' + m; }, date: function (d, mo) { return d + '.' + mo; },
           week: function (a, b) { return 'Semaine du ' + a + ' au ' + b; }, wd: function (d, mo, same) { return same ? String(d) : d + '.' + mo; }, we: function (d, mo) { return d + '.' + mo; },
           booked: function (a, b) { return a + ' sur ' + b + ' inscrits'; },
-          go: 'S’inscrire', btn: 'Je m’inscris', upd: 'Places mises à jour le ', all: 'Tous',
+          go: 'S’inscrire', btn: 'Je m’inscris', cta: { schedule: 'Voir le programme', whatsapp: 'Inscription par WhatsApp' }, upd: 'Places mises à jour le ', all: 'Tous',
           empty: 'Aucun événement dans les 30 prochains jours pour ce filtre.', fail: 'Les événements n’ont pas pu être chargés.',
           pt: 'Voir tous nos événements sur Playtomic', full: 'complet' },
     de: { days: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'], time: function (h, m) { return h + ':' + m; }, date: function (d, mo) { return d + '.' + mo + '.'; },
           week: function (a, b) { return 'Woche vom ' + a + ' bis ' + b; }, wd: function (d, mo, same) { return same ? d + '.' : d + '.' + mo + '.'; }, we: function (d, mo) { return d + '.' + mo + '.'; },
           booked: function (a, b) { return a + ' von ' + b + ' gebucht'; },
-          go: 'Anmelden', btn: 'Anmelden', upd: 'Plätze aktualisiert am ', all: 'Alle',
+          go: 'Anmelden', btn: 'Anmelden', cta: { schedule: 'Spielplan ansehen', whatsapp: 'Anmelden per WhatsApp' }, upd: 'Plätze aktualisiert am ', all: 'Alle',
           empty: 'In den nächsten 30 Tagen keine Events für diesen Filter.', fail: 'Die Events konnten nicht geladen werden.',
           pt: 'Alle Events auf Playtomic', full: 'ausgebucht' },
     en: { days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], time: function (h, m) { return h + ':' + m; }, date: function (d, mo) { return d + '.' + mo; },
           week: function (a, b) { return 'Week of ' + a + ' to ' + b; }, wd: function (d, mo, same) { return same ? String(d) : d + '.' + mo; }, we: function (d, mo) { return d + '.' + mo; },
           booked: function (a, b) { return a + ' of ' + b + ' booked'; },
-          go: 'Sign up', btn: 'Sign up', upd: 'Spots updated on ', all: 'All',
+          go: 'Sign up', btn: 'Sign up', cta: { schedule: 'Check schedule', whatsapp: 'Sign up on WhatsApp' }, upd: 'Spots updated on ', all: 'All',
           empty: 'No events in the next 30 days for this filter.', fail: 'The events could not be loaded.',
           pt: 'See all our events on Playtomic', full: 'full' }
   }[L];
@@ -93,9 +93,12 @@
     var style = (meta.style || (deflt ? 'hero' : 'white')).toLowerCase();
     if (['hero', 'dark', 'white'].indexOf(style) < 0) style = 'white';
     return { title: title, start: start, allDay: allDay, loc: cal.loc, style: style, short: (meta[L] || d.short),
-      href: safeUrl(meta.playtomic) || (/swiss ?tennis/i.test(title) ? 'https://www.swisstennis.ch' : ACADEMY[cal.loc]), pl: places(meta), icon: meta.icon || '', accent: meta.accent || '',
+      cta: (TX.cta[meta.cta] || ''), href: safeUrl(meta.playtomic) || safeUrl(meta.link) || sitePath(meta.link) || (/swiss ?tennis/i.test(title) ? 'https://www.swisstennis.ch' : ACADEMY[cal.loc]), pl: places(meta), icon: meta.icon || '', accent: meta.accent || '',
       photo: safeUrl(meta.photo) || (deflt ? deflt[1] : ''), photoPos: safeUrl(meta.photo) || !deflt ? '' : deflt[2], price: meta.price || '', updated: meta.updated || '', pickle: /pickleball/i.test(title) };
   }
+
+  // site-relative link, e.g. /{lang}/rivella-league.html (English pages live at the root)
+  function sitePath(u) { return u && /^\/[\w{}\/.-]*$/.test(u) ? u.replace('/{lang}', L === 'en' ? '' : '/' + L) : ''; }
 
   function whenLine(e, withLoc) {
     var d = e.start, s = TX.days[d.getDay()] + ' ' + TX.date(pad(d.getDate()), pad(d.getMonth() + 1));
@@ -108,7 +111,7 @@
     var t = esc(e.title), a = e.accent && esc(e.accent);
     if (!a) return t;
     var i = t.toLowerCase().indexOf(a.toLowerCase());
-    return i > -1 ? t.slice(0, i) + '<em>' + t.slice(i, i + a.length) + '</em>' + t.slice(i + a.length) : t + ' <em>' + a + '</em>';
+    return i > -1 ? t.slice(0, i) + '<em>' + t.slice(i, i + a.length) + '</em>' + t.slice(i + a.length) : t;
   }
   function pillHtml(e) { return e.pl ? '<span class="evw-pill">' + esc(TX.booked(e.pl.taken, e.pl.total)) + '</span>' : ''; }
 
@@ -122,13 +125,13 @@
         '<div class="evw-hero-photo"' + (e.photo ? ' role="img" aria-label="' + esc(e.title) + '" style="background-image:url(\'' + esc(e.photo) + '\')' + (e.photoPos ? ';background-position:' + e.photoPos : '') + '"' : '') + '></div>' +
         '<div class="evw-hero-body"><span class="evw-when">' + esc(whenLine(e, true)) + '</span>' +
         '<h3 class="evw-name">' + titleHtml(e) + '</h3>' + (e.short ? '<p class="evw-desc">' + descHtml(e.short) + '</p>' : '') + pillHtml(e) +
-        '<div class="evw-foot"><span class="evw-price">' + esc(e.price) + '</span><span class="evw-btn">' + esc(TX.btn) + '</span></div></div>' + close;
+        '<div class="evw-foot"><span class="evw-price">' + esc(e.price) + '</span><span class="evw-btn">' + esc(e.cta || TX.btn) + '</span></div></div>' + close;
     }
     return open.replace('>', ' aria-label="' + label + '">') +
       '<span class="evw-when">' + esc(whenLine(e, false)) + '</span>' + (e.icon ? '<span class="evw-icon" aria-hidden="true">' + esc(e.icon) + '</span>' : '') +
       '<h3 class="evw-name">' + esc(e.title) + '</h3>' + (e.short ? '<p class="evw-desc">' + descHtml(e.short) + '</p>' : '') + pillHtml(e) +
       '<div class="evw-foot"><span class="evw-where">' + esc(e.loc) + (e.price ? ' · <b>' + esc(e.price) + '</b>' : '') + '</span>' +
-      '<span class="evw-go">→ ' + esc(TX.go) + '</span></div>' + close;
+      '<span class="evw-go">→ ' + esc(e.cta || TX.go) + '</span></div>' + close;
   }
 
   function keep(e) {
