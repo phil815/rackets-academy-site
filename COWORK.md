@@ -73,7 +73,7 @@ var PUSH_JOBS_ = [
 - **Gemeinsame Teile:** `styles.css`, `nav.js` (Menü, Footer, mobile Buchungsleiste). Bei Änderung an `nav.js` die Version `nav.js?v=N` in allen Seiten hochzählen.
 - **Medien:** `images/` (fertig optimiert), `uploads/` (aus Drive gepusht), `videos/` (Hero-Videos).
 - **Shop/Tickets:** Formulare → Shop-Apps-Script (Code.gs, Camps.gs, Events.gs) → SumUp → Orders-Sheet → Mail + KLARA-Entwurf. Kopie von Events.gs liegt in `tools/apps-script/`.
-- **Versteckt:** `padel4ever/` (24h-Turnier, nicht verlinkt, noindex).
+- **Versteckt:** `padel4ever/` (24h-Turnier, nicht verlinkt, noindex); `miatuya-staging/` (Staging-Kopie von Marios Shop miatuyapadel.com, nicht verlinkt, noindex, Bilder noch vom Shopify-CDN).
 
 ## Brand
 - Schrift: **Galano Grotesque** (`fonts/`).
