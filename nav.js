@@ -173,6 +173,9 @@ function openBuyModal(type, opts) {
   var giftWrap = document.getElementById('modal-gift-wrap');
   if (giftWrap) giftWrap.style.display = type === 'racket' ? 'none' : '';
   raShipSetup(type === 'racket', Number(opts.price) || 0);
+  var locWrap = locationSelect.closest('label') || locationSelect.parentNode;
+  if (locWrap) locWrap.style.display = type === 'racketvoucher' ? 'none' : '';
+  locationSelect.disabled = type === 'racketvoucher';
 
   var emailNote = document.getElementById('modal-email-note');
   if (emailNote) {
@@ -251,6 +254,26 @@ function openVoucherModal() {
     price: price,
     qty: qty
   });
+}
+
+// Racket-Gutschein (Guti 13.11.2026): 100 / 150 / 200 CHF oder freier Betrag 50–1000, für beide Standorte.
+document.addEventListener('change', function (e) {
+  if (e.target && e.target.name === 'rvoucher') {
+    var w = document.getElementById('rvoucher-custom-wrap');
+    if (w) w.style.display = e.target.value === 'custom' ? '' : 'none';
+  }
+});
+function openRacketVoucherModal() {
+  var checked = document.querySelector('#rvoucher-options input[name="rvoucher"]:checked');
+  if (!checked) return;
+  var amt = checked.value;
+  if (amt === 'custom') {
+    var inp = document.getElementById('rvoucher-custom');
+    amt = Math.round(Number(inp && inp.value));
+    if (!(amt >= 50 && amt <= 1000)) { if (inp) { inp.focus(); inp.reportValidity && inp.reportValidity(); } return; }
+  }
+  var RL = { en: 'Racket Voucher', fr: 'Bon raquette', de: 'Racket-Gutschein' }[(document.documentElement.lang || 'en').slice(0, 2)] || 'Racket Voucher';
+  openBuyModal('racketvoucher', { title: RL + ' ' + amt + ' CHF', price: amt });
 }
 
 function openLessonModal() {
