@@ -25,7 +25,12 @@
     'veyras', 'rivella', 'initiation', 'leveling', 'levelling', 'level', 'racketero', 'pickleball', '24h', 'p424', 'ski', 'rackemix'];
   var DAYS = 30;
   // default hero photos (site root), used when a hero has no photo: line
-  var PHOTOS = [[/yoga/i, '/images/events/padel-yoga.jpg', 'center'], [/paella/i, '/images/padel-paella-2.jpg', 'center 85%']];
+  var PHOTOS = [[/yoga/i, '/images/events/padel-yoga.jpg', 'center'], [/paella/i, '/images/padel-paella-2.jpg', 'center 85%'],
+    [/oakberry|\+oak\b/i, '/images/coaching/coaching-2.jpg', 'center 60%']];
+  // partner themes (Guti 17.11.2026): partner colours + logo on the hero card; matched on calendar title or display title
+  var THEMES = [[/oakberry|\+oak\b/i, { cls: 'theme-oakberry', logo: '/images/partners/oakberry-logo-white.png', alt: 'Oakberry',
+    side: '/images/events/oakberry-bowl.png', sideAlt: { en: 'Oakberry açaí bowl', de: 'Açaí-Bowl von Oakberry', fr: 'Bowl açaí Oakberry' },
+    kicker: { en: 'New in Sion · padel + açaí', de: 'Neu in Sion · Padel + Açaí', fr: 'Nouveau à Sion · padel + açaí' } }]];
 
   var L = (document.documentElement.lang || 'en').slice(0, 2);
   if (['en', 'de', 'fr'].indexOf(L) < 0) L = 'en';
@@ -50,7 +55,7 @@
           pt: 'See all our events on Playtomic', full: 'full' }
   }[L];
   var FILTERS = [['all', TX.all], ['Sion', 'Sion'], ['Salgesch', 'Salgesch'], ['padel', 'Padel'], ['pickleball', 'Pickleball']];
-  var filter = 'all', events = [], failed = false;
+  var filter = 'all', events = [], failed = false, seen = {}, jumped = false;
 
   function esc(x) { return String(x == null ? '' : x).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function pad(n) { return (n < 10 ? '0' : '') + n; }
@@ -89,12 +94,14 @@
     meta = meta || {};
     var allDay = !ev.start.dateTime;
     var start = allDay ? new Date(ev.start.date + 'T12:00:00') : new Date(ev.start.dateTime);
-    var deflt = PHOTOS.filter(function (x) { return x[0].test(title); })[0];
+    var deflt = PHOTOS.filter(function (x) { return x[0].test(title) || x[0].test(ev.summary || ''); })[0];
+    var theme = (THEMES.filter(function (x) { return x[0].test(title) || x[0].test(ev.summary || ''); })[0] || [])[1] || null;
     var style = (meta.style || (deflt ? 'hero' : 'white')).toLowerCase();
     if (['hero', 'dark', 'white'].indexOf(style) < 0) style = 'white';
     return { title: title, start: start, allDay: allDay, loc: cal.loc, style: style, short: (meta[L] || d.short),
       cta: (TX.cta[meta.cta] || ''), href: safeUrl(meta.playtomic) || safeUrl(meta.link) || sitePath(meta.link) || (/swiss ?tennis/i.test(title) ? 'https://www.swisstennis.ch' : ACADEMY[cal.loc]), pl: places(meta), icon: meta.icon || '', accent: meta.accent || '',
-      photo: safeUrl(meta.photo) || (deflt ? deflt[1] : ''), photoPos: safeUrl(meta.photo) || !deflt ? '' : deflt[2], price: meta.price || '', updated: meta.updated || '', pickle: /pickleball/i.test(title) };
+      photo: safeUrl(meta.photo) || (deflt ? deflt[1] : ''), photoPos: safeUrl(meta.photo) || !deflt ? '' : deflt[2], price: meta.price || '', updated: meta.updated || '', pickle: /pickleball/i.test(title),
+      theme: theme, id: title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') };
   }
 
   // site-relative link, e.g. /{lang}/rivella-league.html (English pages live at the root)
@@ -116,16 +123,20 @@
   function pillHtml(e) { return e.pl ? '<span class="evw-pill">' + esc(TX.booked(e.pl.taken, e.pl.total)) + '</span>' : ''; }
 
   function card(e) {
-    var full = !!e.pl && e.pl.taken >= e.pl.total, cls = 'evw-card ' + e.style + (full ? ' full' : '') + (e.photo ? ' has-photo' : '');
-    var open = full ? '<div class="' + cls + '" aria-disabled="true">' : '<a class="' + cls + '" href="' + esc(e.href) + '" target="_blank" rel="noopener">';
+    var full = !!e.pl && e.pl.taken >= e.pl.total, cls = 'evw-card ' + e.style + (full ? ' full' : '') + (e.photo ? ' has-photo' : '') + (e.theme ? ' ' + e.theme.cls : '');
+    var idAttr = e.id && !seen[e.id] ? ' id="' + esc(e.id) + '"' : '';
+    if (e.id) seen[e.id] = 1;
+    var open = full ? '<div class="' + cls + '"' + idAttr + ' aria-disabled="true">' : '<a class="' + cls + '"' + idAttr + ' href="' + esc(e.href) + '" target="_blank" rel="noopener">';
     var close = full ? '</div>' : '</a>';
     var label = esc(e.title) + (full ? ' (' + TX.full + ')' : '');
     if (e.style === 'hero') {
       return open.replace('>', ' aria-label="' + label + '">') +
         '<div class="evw-hero-photo"' + (e.photo ? ' role="img" aria-label="' + esc(e.title) + '" style="background-image:url(\'' + esc(e.photo) + '\')' + (e.photoPos ? ';background-position:' + e.photoPos : '') + '"' : '') + '></div>' +
-        '<div class="evw-hero-body"><span class="evw-when">' + esc(whenLine(e, true)) + '</span>' +
+        '<div class="evw-hero-body">' + (e.theme && e.theme.logo ? '<img class="evw-partner" src="' + esc(e.theme.logo) + '" alt="' + esc(e.theme.alt) + '" width="277" height="394">' : '') +
+        (e.theme && e.theme.kicker ? '<span class="evw-kick">' + esc(e.theme.kicker[L] || e.theme.kicker.en) + '</span>' : '') + '<span class="evw-when">' + esc(whenLine(e, true)) + '</span>' +
         '<h3 class="evw-name">' + titleHtml(e) + '</h3>' + (e.short ? '<p class="evw-desc">' + descHtml(e.short) + '</p>' : '') + pillHtml(e) +
-        '<div class="evw-foot"><span class="evw-price">' + esc(e.price) + '</span><span class="evw-btn">' + esc(e.cta || TX.btn) + '</span></div></div>' + close;
+        '<div class="evw-foot"><span class="evw-price">' + esc(e.price) + '</span><span class="evw-btn">' + esc(e.cta || TX.btn) + '</span></div></div>' +
+        (e.theme && e.theme.side ? '<div class="evw-hero-side"><img src="' + esc(e.theme.side) + '" alt="' + esc(e.theme.sideAlt[L] || e.theme.sideAlt.en) + '" width="607" height="700"></div>' : '') + close;
     }
     return open.replace('>', ' aria-label="' + label + '">') +
       '<span class="evw-when">' + esc(whenLine(e, false)) + '</span>' + (e.icon ? '<span class="evw-icon" aria-hidden="true">' + esc(e.icon) + '</span>' : '') +
@@ -154,6 +165,7 @@
     var list = events.filter(keep);
     if (!list.length) { root.innerHTML = '<p class="evw-msg">' + esc(TX.empty) + ' <a href="' + ACADEMY.Sion + '" target="_blank" rel="noopener">' + esc(TX.pt) + ' →</a></p>'; return; }
     var weeks = {}, order = [];
+    seen = {};
     list.forEach(function (e) { var k = monday(e.start).getTime(); if (!weeks[k]) { weeks[k] = []; order.push(k); } weeks[k].push(e); });
     var rank = { hero: 0, dark: 1, white: 2 };
     var html = order.sort(function (a, b) { return a - b; }).map(function (k) {
@@ -168,6 +180,9 @@
       html += '<p class="evw-note">' + esc(TX.upd + (m ? m[3] + '.' + m[2] + '.' + m[1] : upd)) + '</p>';
     }
     root.innerHTML = html;
+    // deep link, e.g. /fr/events.html#padel-oak (shared with partners): scroll to the event card once
+    var h = decodeURIComponent((location.hash || '').slice(1));
+    if (!jumped && h && /^[a-z0-9-]+$/.test(h) && document.getElementById(h)) { jumped = true; document.getElementById(h).scrollIntoView({ block: 'start' }); }
   }
 
   function load(cb) {
@@ -221,6 +236,9 @@
       ev('Pickleball Mix & Match', '2026-11-15T10:00:00+01:00', blk({ icon: '🥒', price: '10 CHF', places: '6/16', updated: up,
         fr: 'Tous niveaux : on mélange les équipes, nouveaux partenaires à chaque tour. Location de raquette +2 CHF.',
         de: 'Für alle Levels: Wir mischen die Teams, jede Runde neue Mitspieler. Schlägermiete +2 CHF.' }), G),
+      ev('Initiation Padel +Oakberry', '2026-11-21T10:00:00+01:00', blk({ title: 'Padel +Oak', style: 'hero', accent: '+Oak', icon: '🥣', price: '35 CHF', places: '0/8', updated: up,
+        fr: 'Deux nouveautés à Sion, un samedi matin tranquille : découvre le padel en 1h avec un coach, puis savoure ta bowl açaí offerte chez Oakberry Sion. Aucune expérience requise, raquettes et 1h de parking inclus.',
+        de: 'Zwei Neuheiten in Sion, ein entspannter Samstagmorgen: Padel entdecken in 1 Stunde mit Coach, danach deine Gratis-Açaí-Bowl bei Oakberry Sion. Keine Vorkenntnisse nötig, Schläger und 1 Stunde Parking inklusive.' })),
       ev('ETA Sion groupe école', '2026-11-17T14:00:00+01:00', 'Interne.')
     ];
   }

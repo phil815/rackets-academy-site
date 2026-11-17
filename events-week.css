@@ -18,6 +18,7 @@
 .evw-week h2::after{content:""; flex:1; height:2px; background:rgba(255,255,255,.25); border-radius:2px;}
 .evw-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px;}
 .evw-grid > *{min-width:0;}
+.evw-card[id]{scroll-margin-top:132px;}
 @media (max-width:1000px){ .evw-grid{grid-template-columns:repeat(3,1fr);} }
 
 /* cards */
@@ -61,6 +62,22 @@ a.evw-card:focus-visible{outline:3px solid var(--evw-green); outline-offset:3px;
 .evw-btn{display:inline-block; background:var(--evw-ink); color:#fff; font-weight:800; border-radius:999px; padding:11px 22px; font-size:.95rem;}
 .evw-card.hero:not(.has-photo) .evw-hero-photo{display:none;}
 
+/* partner theme: Oakberry (Guti 17.11.2026) · padel class left, Oakberry purple body, açaí bowl right on purple */
+.evw-card.hero.theme-oakberry{background:#481a59; color:#fff;}
+.theme-oakberry .evw-hero-photo{flex-basis:34%;}
+.theme-oakberry .evw-hero-body{position:relative;}
+.evw-hero-side{flex:0 0 24%; display:flex; align-items:center; justify-content:center; padding:18px 18px 18px 0;}
+.evw-hero-side img{display:block; max-width:100%; max-height:270px; height:auto; filter:drop-shadow(0 14px 22px rgba(0,0,0,.35));}
+.evw-partner{position:absolute; top:18px; right:4px; width:auto; height:80px;}
+.evw-kick{align-self:flex-start; background:#fff; color:#481a59; font-weight:800; font-size:.8rem; border-radius:999px; padding:4px 11px;}
+.evw-card.hero.theme-oakberry .evw-when, .evw-card.hero.theme-oakberry .evw-desc{color:#fff;}
+.evw-card.hero.theme-oakberry .evw-desc{-webkit-line-clamp:5;}
+.evw-card.hero.theme-oakberry .evw-name{padding-right:70px;}
+.evw-card.hero.theme-oakberry .evw-name em{color:#e7c6f5;}
+.evw-card.hero.theme-oakberry .evw-pill{background:rgba(255,255,255,.18); color:#fff;}
+.evw-card.hero.theme-oakberry .evw-btn{background:#fff; color:#481a59;}
+a.evw-card.theme-oakberry:focus-visible{outline-color:#fff;}
+
 /* full: greyed, not clickable */
 .evw-card.full{filter:grayscale(1); opacity:.55; cursor:default;}
 .evw-card.full .evw-go, .evw-card.full .evw-btn{display:none;}
@@ -96,4 +113,12 @@ a.evw-card:focus-visible{outline:3px solid var(--evw-green); outline-offset:3px;
   .evw-price{font-size:1.1rem;}
   .evw-btn{padding:9px 16px; font-size:.88rem;}
   .evw-skel{height:130px;}
+  .evw-card.hero.theme-oakberry{display:grid; grid-template-columns:1fr 1fr;}
+  .theme-oakberry .evw-hero-photo{aspect-ratio:auto; min-height:190px;}
+  .evw-hero-side{padding:12px; grid-column:2; grid-row:1;}
+  .evw-hero-side img{max-height:180px;}
+  .theme-oakberry .evw-hero-body{grid-column:1/-1; grid-row:2;}
+  .evw-partner{top:14px; right:14px; height:62px;}
+  .evw-card.hero.theme-oakberry .evw-name{padding-right:56px;}
+}
 }
