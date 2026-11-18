@@ -46,9 +46,10 @@ function refreshAll() {
     ['GA Einstiegsseiten', function () { return ga_(['date', 'landingPage', 'sessionSourceMedium', 'deviceCategory'], ['sessions', 'engagedSessions', 'userEngagementDuration'], end); }],
     ['GA Seiten', function () { return ga_(['date', 'pagePath'], ['screenPageViews', 'totalUsers', 'sessions', 'userEngagementDuration'], end); }],
     ['GA Ereignisse', function () { return ga_(['date', 'eventName', 'pagePath'], ['eventCount', 'totalUsers'], end, { filter: { fieldName: 'eventName', inListFilter: { values: KEY_EVENTS_ } } }); }],
+    ['GA Google Ads', function () { return ga_(['date', 'sessionGoogleAdsCampaignName'], ['advertiserAdCost', 'advertiserAdClicks', 'advertiserAdImpressions'], end); }],
     ['GA Länder & Geräte', function () { return ga_(['date', 'country', 'city', 'deviceCategory'], ['sessions', 'engagedSessions'], end); }],
     ['Meta Ads', function () { return metaAds_(end); }],
-    ['Instagram Posts', function () { return igPosts_(); }],
+    ['Instagram Posts', function () { var r = igPosts_(); igLog_(ss, r); return r; }],
     ['GSC Tage', function () { return gscDays_(end); }]
   ];
   jobs.forEach(function (j) {
@@ -136,18 +137,58 @@ function metaAds_(end) {
   return rows;
 }
 
-// Instagram: letzte 50 Posts mit Reichweite/Interaktionen
+// Instagram: last 50 posts with reach/interactions (+ follows, profile visits, watch time)
 function igPosts_() {
-  var rows = [['date', 'type', 'caption', 'likes', 'comments', 'reach', 'saved', 'shares', 'views', 'link']];
-  graph_(IG_ID_ + '/media', { fields: 'id,timestamp,media_type,caption,like_count,comments_count,permalink', limit: 50 }).data.forEach(function (m) {
+  var rows = [['date', 'type', 'caption', 'likes', 'comments', 'reach', 'saved', 'shares', 'views', 'link',
+    'interactions', 'follows', 'profile_visits', 'avg_watch_s', 'time']];
+  var BASE = 'reach,saved,shares,views';
+  graph_(IG_ID_ + '/media', {
+    fields: 'id,timestamp,media_type,media_product_type,caption,like_count,comments_count,permalink', limit: 50
+  }).data.forEach(function (m) {
     var ins = {};
-    try {
-      graph_(m.id + '/insights', { metric: 'reach,saved,shares,views' }).data.forEach(function (d) { ins[d.name] = d.values[0].value; });
-    } catch (e) {}
+    var reel = m.media_product_type === 'REELS';
+    // Reels and feed posts offer different metrics; try the rich set first, then the basic one.
+    var sets = [reel ? BASE + ',total_interactions,ig_reels_avg_watch_time'
+                     : BASE + ',total_interactions,follows,profile_visits', BASE];
+    for (var i = 0; i < sets.length; i++) {
+      try {
+        graph_(m.id + '/insights', { metric: sets[i] }).data.forEach(function (d) { ins[d.name] = d.values[0].value; });
+        break;
+      } catch (e) {}
+    }
+    var iso = String(m.timestamp).replace(/([+-]\d{2})(\d{2})$/, '$1:$2');
+    var time = '';
+    try { time = Utilities.formatDate(new Date(iso), TZ_, 'HH:mm'); } catch (e) {}
+    var watch = ins.ig_reels_avg_watch_time ? Math.round(ins.ig_reels_avg_watch_time / 100) / 10 : '';
     rows.push([String(m.timestamp).slice(0, 10), m.media_type, String(m.caption || '').replace(/\s+/g, ' ').slice(0, 80),
-      m.like_count || 0, m.comments_count || 0, ins.reach || '', ins.saved || '', ins.shares || '', ins.views || '', m.permalink]);
+      m.like_count || 0, m.comments_count || 0, ins.reach || '', ins.saved || '', ins.shares || '', ins.views || '', m.permalink,
+      ins.total_interactions || '', ins.follows || '', ins.profile_visits || '', watch, time]);
   });
   return rows;
+}
+
+// Content Log: permanent history, keyed by the post link. Planning columns are preserved.
+function igLog_(ss, rows) {
+  var AUTO = rows[0];
+  var MANUAL = ['slot', 'priority', 'series', 'hook', 'face_first_frame', 'language', 'site', 'tinyurl',
+    'fill_at_post', 'fill_at_event', 'note'];
+  var LINK = AUTO.indexOf('link');
+  var width = AUTO.length + MANUAL.length;
+  var sh = ss.getSheetByName('Content Log') || ss.insertSheet('Content Log');
+  var all = {};
+  if (sh.getLastRow() > 1) {
+    sh.getRange(2, 1, sh.getLastRow() - 1, width).getDisplayValues().forEach(function (r) { if (r[LINK]) all[r[LINK]] = r; });
+  }
+  rows.slice(1).forEach(function (r) {
+    var keep = all[r[LINK]] ? all[r[LINK]].slice(AUTO.length) : MANUAL.map(function () { return ''; });
+    all[r[LINK]] = r.concat(keep);
+  });
+  var out = Object.keys(all).map(function (k) { return all[k]; })
+    .sort(function (a, b) { return a[0] < b[0] ? 1 : a[0] > b[0] ? -1 : 0; });
+  sh.clearContents();
+  sh.getRange(1, 1, 1, width).setValues([AUTO.concat(MANUAL)]).setFontWeight('bold');
+  if (out.length) sh.getRange(2, 1, out.length, width).setValues(out);
+  sh.setFrozenRows(1);
 }
 
 // Instagram: Followerzahl pro Tag (Verlauf wird angehängt, nicht überschrieben)
