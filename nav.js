@@ -322,19 +322,19 @@ document.addEventListener('DOMContentLoaded', function () {
     { k: ['24h'], l: { en: 'P424 · 24h padel tournament', fr: 'P424 · tournoi de padel 24 h', de: 'P424 · 24-Std.-Padelturnier' }, h: 'padel4ever/' },
     { k: ['amazonia', 'dine'], l: { en: 'Padel +Dine powered by Instinct Amazonia', fr: 'Padel +Dine powered by Instinct Amazonia', de: 'Padel +Dine powered by Instinct Amazonia' }, h: 'padel-dine.html' },
     { k: ['ski'], l: { en: 'Ski &Padel weekend', fr: 'Week-end Ski &Padel', de: 'Ski &Padel Wochenende' }, h: 'ski-and-padel.html' },
-    { k: ['rackemix'], l: { en: 'Rackemix', fr: 'Rackemix', de: 'Rackemix' }, h: 'rackemix.html' },
-    { k: ['racketero - beginner'], l: { en: 'Racketero · Beginner', fr: 'Racketero · Débutants', de: 'Racketero · Einsteiger' }, h: 'racketero.html' },
-    { k: ['racketero - intermediate'], l: { en: 'Racketero · Intermediate', fr: 'Racketero · Intermédiaires', de: 'Racketero · Fortgeschrittene' }, h: 'racketero.html' },
-    { k: ['racketero'], l: { en: 'Racketero', fr: 'Racketero', de: 'Racketero' }, h: 'racketero.html' },
+    { k: ['rackemix'], l: { en: 'Rackemix', fr: 'Rackemix', de: 'Rackemix' }, h: 'events.html' },
+    { k: ['racketero - beginner'], l: { en: 'Racketero · Beginner', fr: 'Racketero · Débutants', de: 'Racketero · Einsteiger' }, h: 'events.html' },
+    { k: ['racketero - intermediate'], l: { en: 'Racketero · Intermediate', fr: 'Racketero · Intermédiaires', de: 'Racketero · Fortgeschrittene' }, h: 'events.html' },
+    { k: ['racketero'], l: { en: 'Racketero', fr: 'Racketero', de: 'Racketero' }, h: 'events.html' },
     { k: ['pickleball'], l: { en: 'Pickleball Mix & Match', fr: 'Pickleball Mix & Match', de: 'Pickleball Mix & Match' }, h: 'pickleball.html' },
     { k: ['padel initiation', 'initiation'], l: { en: 'Padel initiation · beginners (Sion)', fr: 'Initiation au padel · débutants (Sion)', de: 'Padel-Einführung · Einsteiger (Sion)' }, h: 'training.html' },
     { k: ['level-session', 'level session'], l: { en: 'Coaching · Playtomic level session (Sion)', fr: 'Coaching · séance de niveau Playtomic (Sion)', de: 'Coaching · Playtomic Level-Session (Sion)' }, h: 'training.html' },
-    { k: ['paella'], l: { en: 'Padel+Paella', fr: 'Padel+Paella', de: 'Padel+Paella' }, h: 'padel-paella.html' },
-    { k: ['wine'], l: { en: 'Padel+Wine', fr: 'Padel+Wine', de: 'Padel+Wine' }, h: 'padel-wine.html' },
-    { k: ['beer'], l: { en: 'Padel+Beer', fr: 'Padel+Beer', de: 'Padel+Beer' }, h: 'padel-beer.html' },
-    { k: ['fitness'], l: { en: 'Padel+Fitness', fr: 'Padel+Fitness', de: 'Padel+Fitness' }, h: 'padel-fitness.html' },
+    { k: ['paella'], l: { en: 'Padel+Paella', fr: 'Padel+Paella', de: 'Padel+Paella' }, h: 'events.html' },
+    { k: ['wine'], l: { en: 'Padel+Wine', fr: 'Padel+Wine', de: 'Padel+Wine' }, h: 'events.html' },
+    { k: ['beer'], l: { en: 'Padel+Beer', fr: 'Padel+Beer', de: 'Padel+Beer' }, h: 'events.html' },
+    { k: ['fitness'], l: { en: 'Padel+Fitness', fr: 'Padel+Fitness', de: 'Padel+Fitness' }, h: 'events.html' },
     { k: ['rivella'], l: { en: 'Rivella League Final', fr: 'Finale de la Rivella League', de: 'Rivella League Finale' }, h: 'rivella-league.html' },
-    { k: ['swisstennis', 'hyundai'], l: null, h: 'swiss-tennis.html' },
+    { k: ['swisstennis', 'hyundai'], l: null, h: 'events.html' },
     { k: ['veyras tennis tournament kids'], l: { en: 'TC Veyras · Kids tennis tournament', fr: 'TC Veyras · Tournoi de tennis enfants', de: 'TC Veyras · Kinder-Tennisturnier' }, wa: 'TC Veyras', n: '41795885483' },
     { k: ['veyras'], l: { en: 'TC Veyras · Doubles tennis tournament', fr: 'TC Veyras · Tournoi de tennis en double', de: 'TC Veyras · Doppel-Tennisturnier' }, wa: 'TC Veyras', n: '41795885483' }
   ];
@@ -498,7 +498,7 @@ document.addEventListener('DOMContentLoaded', function () {
       '<button type="button" class="sb-court" data-pick="court">' + T.court + '</button>' +
       '<a class="sb-course" href="training.html">' + T.course + '</a>';
     if (/padel-dine/.test(location.pathname)) {
-      var TK = { en: 'Get your tickets', fr: 'Prendre mes billets', de: 'Tickets sichern' }[L] || 'Get your tickets';
+      var TK = { en: 'Keep me posted', fr: 'Me tenir au courant', de: 'Vormerken lassen' }[L] || 'Keep me posted';
       bar.innerHTML = '<a class="sb-court" href="#tk-book">' + TK + '</a>';
     } else if (/ski-and-padel/.test(location.pathname)) {
       var SK = { en: 'Choose your weekend', fr: 'Choisir mon week-end', de: 'Wochenende wählen' }[L] || 'Choose your weekend';
@@ -535,9 +535,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // event pages: top banner promotes the event instead of court booking
     var EV = null;
     if (/padel-dine/.test(location.pathname)) EV = {
-      en: ['🍽️ PADEL +DINE · SAT 7 NOV · SALGESCH', 'Get your tickets →'],
-      fr: ['🍽️ PADEL +DINE · SAMEDI 7 NOV · SALGESCH', 'Prendre mes billets →'],
-      de: ['🍽️ PADEL +DINE · SA 7. NOV · SALGESCH', 'Tickets sichern →'], h: '#tk-book' };
+      en: ['🍽️ PADEL +DINE · NEXT DATE: TBD · SALGESCH', 'Keep me posted →'],
+      fr: ['🍽️ PADEL +DINE · PROCHAINE DATE : TBD · SALGESCH', 'Me tenir au courant →'],
+      de: ['🍽️ PADEL +DINE · NÄCHSTES DATUM: TBD · SALGESCH', 'Vormerken lassen →'], h: '#tk-book' };
     else if (/ski-and-padel/.test(location.pathname)) EV = {
       en: ['⛷️ SKI & PADEL · FEBRUARY 2027 · 12 PLACES PER WEEKEND', 'Choose your weekend →'],
       fr: ['⛷️ SKI & PADEL · FÉVRIER 2027 · 12 PLACES PAR WEEK-END', 'Choisir mon week-end →'],

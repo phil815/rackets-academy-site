@@ -1,6 +1,8 @@
 """Padel +Dine powered by Instinct Amazonia (padel-dine.html, EN/FR/DE), built from the spa page shell.
 Tickets: Tournament + Dinner Party 79 CHF pp (teams of 2, 48 places), Dinner Party 59 CHF (52 places).
 Booking via dine.js -> Shop Apps Script (Events.gs, formType=ticket) -> SumUp pop-up."""
+raise SystemExit("19.11.2026: Padel +Dine steht auf «Datum TBD» (Seiten von Hand angepasst, Ticketverkauf aus, dine.js nicht geladen). Für die nächste Ausgabe zuerst Datum, Texte und EVENT in dine.js setzen, dann diese Zeile entfernen.")
+
 import re, json
 SLUG = 'padel-dine.html'
 ACTION = 'https://script.google.com/macros/s/AKfycbwLWTwsILcSkAHe9FSKjicU1pUk5s3nxSnS4PQ2Tws2RVejiHjBltJJ8gKpmIe3JLRe/exec'

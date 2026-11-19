@@ -116,8 +116,8 @@ def valais(L):
         start_h='New to padel? Start here',
         more=[('🎓', 'Beginner session in Sion', 'Every Saturday 10–11, 25 CHF. No experience needed.', 'training.html'),
               ('📈', 'Playtomic level session', 'Every Saturday 11–12 in Sion: a coach sets your Playtomic level.', 'training.html'),
-              ('🏆', 'Racketero', 'Our weekly tournament: matches against players at your level.', 'racketero.html'),
-              ('🔀', 'Rackemix', 'Monthly mix tournament on Sunday morning, new partner every round.', 'rackemix.html'),
+              ('🏆', 'Racketero', 'Our weekly tournament: matches against players at your level.', 'events.html'),
+              ('🔀', 'Rackemix', 'Monthly mix tournament on Sunday morning, new partner every round.', 'events.html'),
               ('🧒', 'Kids camps', 'Holiday padel camps in Salgesch for kids aged 6–14.', 'kids-camp.html'),
               ('🏢', 'Company events', 'Team events with padel, food and apéro in Sion or Salgesch.', 'company-events.html')],
         near_h='How far is your nearest court?',
@@ -147,8 +147,8 @@ def valais(L):
         start_h='Débutant ? Commence ici',
         more=[('🎓', 'Séance d’initiation à Sion', 'Chaque samedi de 10h à 11h, 25 CHF. Aucune expérience nécessaire.', 'training.html'),
               ('📈', 'Séance de niveau Playtomic', 'Chaque samedi de 11h à 12h à Sion : un coach détermine ton niveau Playtomic.', 'training.html'),
-              ('🏆', 'Racketero', 'Notre tournoi hebdomadaire : des matchs contre des joueurs de ton niveau.', 'racketero.html'),
-              ('🔀', 'Rackemix', 'Tournoi mix mensuel le dimanche matin, nouveau partenaire à chaque tour.', 'rackemix.html'),
+              ('🏆', 'Racketero', 'Notre tournoi hebdomadaire : des matchs contre des joueurs de ton niveau.', 'events.html'),
+              ('🔀', 'Rackemix', 'Tournoi mix mensuel le dimanche matin, nouveau partenaire à chaque tour.', 'events.html'),
               ('🧒', 'Camps enfants', 'Camps de padel pendant les vacances à Salgesch, 6–14 ans.', 'kids-camp.html'),
               ('🏢', 'Événements d’entreprise', 'Sorties d’équipe avec padel, repas et apéro à Sion ou Salgesch.', 'company-events.html')],
         near_h='À quelle distance est ton terrain ?',
@@ -178,8 +178,8 @@ def valais(L):
         start_h='Neu beim Padel? Hier anfangen',
         more=[('🎓', 'Einsteiger-Session in Sitten', 'Jeden Samstag 10–11 Uhr, 25 CHF. Keine Erfahrung nötig.', 'training.html'),
               ('📈', 'Playtomic-Level-Session', 'Jeden Samstag 11–12 Uhr in Sitten: Ein Coach bestimmt dein Playtomic-Level.', 'training.html'),
-              ('🏆', 'Racketero', 'Unser Wochenturnier: Spiele gegen Leute auf deinem Niveau.', 'racketero.html'),
-              ('🔀', 'Rackemix', 'Monatliches Mix-Turnier am Sonntagmorgen, jede Runde ein neuer Partner.', 'rackemix.html'),
+              ('🏆', 'Racketero', 'Unser Wochenturnier: Spiele gegen Leute auf deinem Niveau.', 'events.html'),
+              ('🔀', 'Rackemix', 'Monatliches Mix-Turnier am Sonntagmorgen, jede Runde ein neuer Partner.', 'events.html'),
               ('🧒', 'Kindercamps', 'Padel-Feriencamps in Salgesch für Kinder von 6–14 Jahren.', 'kids-camp.html'),
               ('🏔️', 'Padel im Oberwallis', 'Alles für Leuk, Visp, Brig und Umgebung.', 'padel-oberwallis.html')],
         near_h='Wie weit ist dein nächster Platz?',
@@ -386,6 +386,6 @@ def write(slug, L, T, body, ld, ogimg):
 
 
 for L in LANGS:
-    for slug, fn in [('padel-valais.html', valais), ('rackemix.html', rackemix), ('padel-beer.html', beer)]:
+    for slug, fn in [('padel-valais.html', valais)]:   # rackemix/padel-beer leiten seit 19.11.2026 auf events.html weiter
         T, body, ld, og = fn(L)
         write(slug, L, T, body, ld, og)
