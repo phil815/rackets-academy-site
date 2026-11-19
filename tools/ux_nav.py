@@ -40,6 +40,17 @@ def fix(path):
     if 'class="foot-more"' not in s and login:
         more = '<span class="foot-more"><a href="about.html">%s</a> · <a href="faq.html">%s</a> · <a href="%s" rel="nofollow">%s</a></span>\n      ' % (t['about'], t['faq'], login.group(1), t['login'])
         s = re.sub(r'(<div class="footer-bottom">\s*)', lambda m: m.group(1) + more, s, count=1)
+    # Vorschaubilder (og:image, JSON-LD) bleiben JPG/PNG: nicht jede Plattform zeigt WebP
+    def orig(m):
+        base = m.group(2)
+        for ext in ('.jpg', '.jpeg', '.png'):
+            if os.path.exists(base + ext): return m.group(1) + base + ext
+        return m.group(0)
+    lines = s.split('\n')
+    for i, l in enumerate(lines):
+        if '.webp' in l and ('og:image' in l or 'twitter:image' in l or 'application/ld+json' in l):
+            lines[i] = re.sub(r'(https://www\.racketsacademy\.ch/)((?:images|uploads)/[^"\s]+?)\.webp', orig, l)
+    s = '\n'.join(lines)
     if s != o: open(path, 'w', encoding='utf-8').write(s)
     return s != o
 if __name__ == '__main__':

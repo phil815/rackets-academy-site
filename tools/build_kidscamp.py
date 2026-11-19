@@ -325,21 +325,19 @@ def camps_body(t, L, pre):
     c = t['camps']
     cards = ''.join(f'<a class="co2-b ow-more" href="{SLUG[s]}"><span class="co2-ic">{ICON[s]}</span><h3>{t["season_lbl"][s]} →</h3><p>{t["season_sub"][s]}</p></a>' for s in SEASONS)
     wa = 'https://wa.me/' + WA_SA + '?text=' + urllib.parse.quote(t['wa'].format(w='Camps'))
-    return hero(t, pre + 'images/coaching/coaching-hero.webp', c['kicker'], c['h1'], c['lede'], [t['chips'][0], 'Ski &Padel'], '#kids', t['cta2'], wa) + f'''
+    # UX W5 (19.11.2026): eine Auswahl mit 3 Karten; Saisonseiten bleiben als Textlinks (Google), Kindergeburtstag ist verlinkt
+    BD = {'en': ('Kids’ birthday', '2 h of padel with a coach, mini tournament, cake and pizza · 20 CHF per child'),
+          'fr': ('Anniversaire enfant', '2 h de padel avec coach, mini-tournoi, gâteau et pizza · 20 CHF par enfant'),
+          'de': ('Kindergeburtstag', '2 Std. Padel mit Coach, Mini-Turnier, Kuchen und Pizza · 20 CHF pro Kind')}[L]
+    seasons = ' · '.join(f'<a href="{SLUG[s]}">{t["season_lbl"][s]}</a>' for s in SEASONS)
+    big = (f'<a class="co2-b ow-more" href="{SLUG["hub"]}#dates"><span class="co2-ic">🎾</span><h3>{c["kids_h"]} →</h3><p>{c["kids_p"]}</p></a>'
+           f'<a class="co2-b ow-more" href="ski-and-padel.html"><span class="co2-ic">⛷️</span><h3>{c["ski_h"]} →</h3><p>{c["ski_p"]}</p></a>'
+           f'<a class="co2-b ow-more" href="kids-birthday.html"><span class="co2-ic">🎂</span><h3>{BD[0]} →</h3><p>{BD[1]}</p></a>')
+    return hero(t, pre + 'images/coaching/coaching-hero.webp', c['kicker'], c['h1'], c['lede'], [t['chips'][0], 'Ski &Padel', BD[0]], '#kids', t['cta2'], wa) + f'''
 <section class="co2-sec" id="kids">
   <div class="wrap">
-    <h2 class="co2-h">🎾 {c['kids_h']}</h2>
-    <p class="kc-sub">{c['kids_p']}</p>
-    <div class="co2-bens ow-mores kc-mores">{cards}</div>
-    <p style="margin-top:16px;"><a class="btn btn-green" href="{SLUG['hub']}">{t['name']['hub']} →</a></p>
-  </div>
-</section>
-
-<section class="co2-sec ow-day">
-  <div class="wrap">
-    <h2 class="co2-h">⛷️ {c['ski_h']}</h2>
-    <p class="kc-sub">{c['ski_p']}</p>
-    <p><a class="btn btn-green" href="ski-and-padel.html">{c['ski_cta']}</a></p>
+    <div class="co2-bens ow-mores kc-mores">{big}</div>
+    <p class="offer-more">{c['kids_h']}: {seasons}</p>
   </div>
 </section>
 '''
