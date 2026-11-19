@@ -1139,3 +1139,20 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .sp-logos img{height:54px; width:auto; max-width:190px; object-fit:contain; display:block;}
 .sp-logos .sp-word{color:#fff; font-weight:800; font-size:1.7rem; letter-spacing:.01em;}
 @media (max-width:760px){ .sp-logos{gap:26px 34px;} .sp-logos img{height:40px; max-width:130px;} .sp-logos .sp-word{font-size:1.3rem;} }
+
+/* Ski & Padel (UX W6, 19.11.2026) */
+.ski-price{margin:18px 0 0; font-size:2rem; font-weight:800; color:#fff; line-height:1.1; text-shadow:0 1px 10px rgba(0,0,0,.35);}
+.ski-price small{font-size:1rem; font-weight:600; opacity:.95;}
+.inc-compact .grid-3{gap:12px;}
+.inc-compact .card{display:grid; grid-template-columns:76px 1fr; column-gap:14px; align-items:start; padding:14px;}
+.inc-compact .card img{width:76px; height:76px; object-fit:cover; border-radius:10px; grid-row:1 / span 2; margin:0;}
+.inc-compact .card h3{margin:0 0 4px; font-size:1.02rem;}
+.inc-compact .card p{margin:0; font-size:.92rem; line-height:1.4;}
+.gal-short .gal-item:nth-child(n+13){display:none;}
+.ski-acc{border:2px solid #e3e9f0; border-radius:16px; padding:0 20px; background:#fff;}
+.ski-acc summary{cursor:pointer; font-weight:800; font-size:1.2rem; color:var(--blue-dark); padding:18px 0; list-style:none; display:flex; justify-content:space-between; align-items:center;}
+.ski-acc summary::-webkit-details-marker{display:none;}
+.ski-acc summary::after{content:"+"; font-size:1.6rem; color:var(--blue);}
+.ski-acc[open] summary::after{content:"–";}
+.ski-acc[open]{padding-bottom:20px;}
+.camp-check-one span{line-height:1.5;}
