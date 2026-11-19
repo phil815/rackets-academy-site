@@ -22,11 +22,11 @@ def fix(path):
     name = os.path.basename(path)
     login = re.search(r'<a class="nav-login" href="([^"]+)"', s)
     items = [('book.html', t['book']), ('training.html', None), ('events.html', None), ('camps.html', t['camps']),
-             ('company-events.html', t['co']), ('spa-and-sauna.html', 'Spa'), ('rackets-plus.html', t['member']), ('shop.html', None)]
+             ('company.html', t['co']), ('spa-and-sauna.html', 'Spa'), ('rackets-plus.html', t['member']), ('shop.html', None)]
     out = ['<nav class="navlinks">']
     for href, label in items:
         act, old = link(href)
-        if href == 'company-events.html' and name in ('company-events.html', 'company.html', 'sponsoring.html'): act = ' class="active"'
+        if href == 'company.html' and name in ('company-events.html', 'company.html', 'sponsoring.html'): act = ' class="active"'
         if href == 'camps.html' and (name.startswith('kids-') or name == 'ski-and-padel.html'): act = ' class="active"'
         out.append('      <a href="%s"%s>%s</a>' % (href, act, label or old or href))
     ls = re.search(r'\n(\s*<div class="lang-switch">.*?</div>\s*</div>)', nav, flags=re.S)

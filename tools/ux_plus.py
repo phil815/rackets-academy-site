@@ -13,7 +13,7 @@ T = {
   desc='RACKETS+ is the free membership of Rackets Academy in Salgesch and Sion: collect points with every booking, get free water, balls and tournaments, and redeem rackets or lessons. All on WhatsApp.',
   h1='Padel membership in Valais: free, with rewards', lede='Play at Rackets Academy and get something back every time. Play 4 days in a month and you get free water at every visit, a drinking bottle and a can of balls every month.',
   cta='Join free on WhatsApp', facts=['Free', 'No app, no account', 'Start in 1 minute'],
-  top_h='What members play for', top=[('Racket', 'Worth 200 CHF, for 1’250 points'), ('Private lesson', 'With one of our coaches, for 750 points'), ('Spa session', 'Sauna after the match, for 80 points')],
+  top_h='Play. Collect. Treat yourself.', top=[('Racket', 'Worth 200 CHF. You pick the model.'), ('Private lesson', 'One hour with one of our coaches.'), ('Spa session', 'Sauna and jacuzzi after the match.')],
   how_h='How it works', how=[('Say «Hola» to María', 'Write to our WhatsApp bot. She signs you up in a minute and sends your member card.'), ('Play as usual', 'Every booking in Playtomic gives you points, automatically. Nothing to scan.'), ('Collect your rewards', 'Send María the number of the reward you want and pick it up at the bar.')],
   st_h='Benefits by status', st_p='The more often you play, the better your goodies.', entry='the start', from_='from {n} visit days', entry_s='start', from_s='{n}+ days',
   rows=['Collect points with every booking', 'Redeem points', 'Free water at every visit', 'RACKETS+ drinking bottle (once)', '1 can of balls per month', '2 overgrips per month', '1 free tournament per month'],
@@ -37,7 +37,7 @@ T = {
   desc='RACKETS+ ist die kostenlose Mitgliedschaft der Rackets Academy in Salgesch und Sion: Punkte bei jeder Buchung, gratis Wasser, Bälle und Turniere, Rackets oder Lektionen als Prämie. Alles über WhatsApp.',
   h1='Padel-Mitgliedschaft im Wallis: gratis, mit Prämien', lede='Spiel bei der Rackets Academy und bekomm jedes Mal etwas zurück. Spielst du an 4 Tagen im Monat, gibt es gratis Wasser bei jedem Besuch, eine Trinkflasche und jeden Monat eine Dose Bälle.',
   cta='Gratis per WhatsApp beitreten', facts=['Kostenlos', 'Keine App, kein Konto', 'In 1 Minute dabei'],
-  top_h='Dafür spielen unsere Mitglieder', top=[('Racket', 'Im Wert von 200 CHF, für 1’250 Punkte'), ('Privatstunde', 'Mit einem unserer Coaches, für 750 Punkte'), ('Spa-Session', 'Sauna nach dem Match, für 80 Punkte')],
+  top_h='Spielen. Sammeln. Gönnen.', top=[('Racket', 'Im Wert von 200 CHF. Du wählst das Modell.'), ('Privatstunde', 'Eine Stunde mit einem unserer Coaches.'), ('Spa-Session', 'Sauna und Jacuzzi nach dem Match.')],
   how_h='So funktioniert es', how=[('Sag «Hola» zu María', 'Schreib unserem WhatsApp-Bot. Sie meldet dich in einer Minute an und schickt dir deine Mitgliedskarte.'), ('Spiel wie immer', 'Jede Buchung in Playtomic bringt dir automatisch Punkte. Du musst nichts scannen.'), ('Hol dir deine Prämien', 'Schick María die Nummer der Prämie und hol sie an der Bar ab.')],
   st_h='Vorteile nach Status', st_p='Je öfter du spielst, desto besser deine Goodies.', entry='der Einstieg', from_='ab {n} Besuchstagen', entry_s='Start', from_s='{n}+ Tage',
   rows=['Punkte sammeln bei jeder Buchung', 'Punkte einlösen', 'Wasser gratis bei jedem Besuch', 'RACKETS+ Trinkflasche (einmalig)', '1 Dose Bälle pro Monat', '2 Griffbänder pro Monat', '1 Gratis-Turnier pro Monat'],
@@ -61,7 +61,7 @@ T = {
   desc='RACKETS+ est la carte membre gratuite de la Rackets Academy à Salgesch et Sion : des points à chaque réservation, de l’eau, des balles et des tournois offerts, raquettes ou cours en récompense. Tout sur WhatsApp.',
   h1='Carte membre padel en Valais : gratuite, avec récompenses', lede='Joue à la Rackets Academy et reçois quelque chose à chaque fois. Joue 4 jours dans le mois et tu as de l’eau gratuite à chaque visite, une gourde et une boîte de balles chaque mois.',
   cta='Rejoindre gratuitement sur WhatsApp', facts=['Gratuit', 'Pas d’app, pas de compte', 'Inscrit en 1 minute'],
-  top_h='Ce que gagnent nos membres', top=[('Raquette', 'D’une valeur de 200 CHF, pour 1’250 points'), ('Cours privé', 'Avec un de nos coachs, pour 750 points'), ('Session spa', 'Sauna après le match, pour 80 points')],
+  top_h='Joue. Cumule. Fais-toi plaisir.', top=[('Raquette', 'D’une valeur de 200 CHF. Tu choisis le modèle.'), ('Cours privé', 'Une heure avec un de nos coachs.'), ('Session spa', 'Sauna et jacuzzi après le match.')],
   how_h='Comment ça marche', how=[('Dis «Hola» à María', 'Écris à notre bot WhatsApp. Elle t’inscrit en une minute et t’envoie ta carte membre.'), ('Joue comme d’habitude', 'Chaque réservation sur Playtomic te donne des points, automatiquement. Rien à scanner.'), ('Récupère tes récompenses', 'Envoie à María le numéro de la récompense et passe la prendre au bar.')],
   st_h='Avantages par statut', st_p='Plus tu joues, meilleurs sont tes goodies.', entry='le début', from_='dès {n} jours de visite', entry_s='début', from_s='{n}+ jours',
   rows=['Des points à chaque réservation', 'Échanger ses points', 'Eau gratuite à chaque visite', 'Gourde RACKETS+ (une fois)', '1 boîte de balles par mois', '2 surgrips par mois', '1 tournoi gratuit par mois'],
@@ -83,7 +83,9 @@ T = {
 }
 TIERS = [('Member', 0, 'mb', 0), ('Challenger', 1, 'ch', 4), ('Master', 2, 'ms', 7), ('Legend', 3, 'lg', 10)]
 FROM = [0, 0, 1, 1, 1, 2, 3]   # row i is included from tier index FROM[i]
-TOPIMG = [IMG + 'rackets/babolat-veron-2026-air.jpg', '{rel}images/team/jesus.webp', IMG + 'wix/605dcc51aa4c.jpg']
+TOPIMG = [IMG + 'rackets/babolat-veron-2026-air.jpg', IMG + 'photos/training-player.webp', IMG + 'spa/spa-jacuzzi.webp']
+PTS = ['1’250', '750', '80']
+HERO = IMG + 'photos/events-group.webp'
 
 def body(t, rel):
     e = html.escape
@@ -92,16 +94,14 @@ def body(t, rel):
     for i, r in enumerate(t['rows']):
         cells = ''.join(f'<div class="pt-c" role="cell"><i class="pt-dot pt-{c}{"" if s >= FROM[i] else " off"}" role="img" aria-label="{t["yes"] if s >= FROM[i] else t["no"]}"></i></div>' for n, s, c, d in TIERS)
         rows += f'<div class="pt-r" role="row"><div class="pt-l" role="rowheader">{r}</div>{cells}</div>'
-    top = ''.join(f'<div class="card plus-top"><img src="{TOPIMG[i].format(rel=rel)}" alt="{e(h)}" loading="lazy"><h3>{h}</h3><p>{p}</p></div>' for i, (h, p) in enumerate(t['top']))
+    top = ''.join(f'<div class="plus-tile{" plus-tile-prod" if i == 0 else ""}"><img src="{TOPIMG[i].format(rel=rel)}" alt="{e(h)}" loading="lazy"><span class="plus-pts">{PTS[i]} {t["rew_th"][1]}</span><div class="plus-tile-t"><h3>{h}</h3><p>{p}</p></div></div>' for i, (h, p) in enumerate(t['top']))
     how = ''.join(f'<li><b>{h}</b><span>{p}</span></li>' for h, p in t['how'])
     rew = ''.join(f'<tr><td class="lead">{i + 1}. {n}{" <span class=sub>" + s + "</span>" if s else ""}</td><td>{p} 🟢</td></tr>' for i, (n, s, p) in enumerate(t['rew'])).replace('class=sub', 'class="sub"')
     faq = ''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in t['faq'])
     ld = json.dumps({'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in t['faq']]}, ensure_ascii=False)
-    return f'''<section class="hero">
-  <span class="ball b1"></span><span class="ball b2"></span><span class="ball b3"></span>
+    return f'''<section class="hero plus-hero" style="background-image:linear-gradient(100deg, rgba(4,60,130,.94) 0%, rgba(0,105,205,.86) 45%, rgba(0,119,222,.45) 100%), url('{HERO}'); background-size:cover; background-position:center 35%;">
   <div class="wrap hero-inner">
-    <p class="plus-eyebrow">RACKETS+</p>
-    <h1>{t['h1']}</h1>
+    <h1><span class="plus-brand">Rackets<i>+</i></span><span class="plus-h1sub">{t['h1']}</span></h1>
     <p class="lede">{t['lede']}</p>
     <div class="hero-actions">
       <a class="btn btn-green" href="{WA}" target="_blank" rel="noopener">{t['cta']}</a>
@@ -113,7 +113,7 @@ def body(t, rel):
 <section class="section-tight">
   <div class="wrap">
     <h2>{t['top_h']}</h2>
-    <div class="grid-3">{top}</div>
+    <div class="plus-tiles">{top}</div>
   </div>
 </section>
 
@@ -195,7 +195,7 @@ for lang, t in T.items():
     for pat in (r'(<meta name="description" content=")[^"]*(")', r'(<meta property="og:description" content=")[^"]*(")'):
         s = re.sub(pat, lambda m: m.group(1) + a(t['desc']) + m.group(2), s, count=1)
     s = re.sub(r'(<meta property="og:title" content=")[^"]*(")', lambda m: m.group(1) + a(t['title']) + m.group(2), s, count=1)
-    i = s.index('<section class="hero">'); j = s.index('<footer')
+    i = s.index('<section class="hero'); j = s.index('<footer')
     s = s[:i] + body(t, '../' if lang else '') + s[j:]
     p.write_text(s, encoding='utf-8')
     print('ok', p.relative_to(ROOT), len(s))
