@@ -78,7 +78,7 @@ def body():
   </div>
 </section>
 
-<section class="spa-final" style="background-image:url('../images/photos/visp-player.jpg'); background-position:center 30%;">
+<section class="spa-final" style="background-image:url('../images/photos/visp-player.webp'); background-position:center 30%;">
   <div class="spa-hero-shade"></div>
   <div class="wrap spa-final-inner">
     <h2>Dein erstes Spiel? Der Schläger geht auf uns.</h2>

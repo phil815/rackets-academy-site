@@ -289,7 +289,7 @@ def rackemix(L):
            'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode', 'eventStatus': 'https://schema.org/EventScheduled',
            'location': {'@type': 'Place', 'name': 'Rackets Academy Salgesch', 'address': {'@type': 'PostalAddress', 'streetAddress': 'Littenstrasse 30', 'postalCode': '3970', 'addressLocality': 'Salgesch', 'addressCountry': 'CH'}},
            'offers': {'@type': 'Offer', 'price': '30', 'priceCurrency': 'CHF', 'url': PT_SAL},
-           'organizer': {'@type': 'Organization', 'name': 'Rackets Academy', 'url': BASE}, 'image': BASE + 'images/photos/events-group.jpg'}
+           'organizer': {'@type': 'Organization', 'name': 'Rackets Academy', 'url': BASE}, 'image': BASE + 'images/photos/events-group.webp'}
           for d in RACKEMIX_DATES]
     return T, body, ld, img + 'events-group.jpg'
 
@@ -351,7 +351,7 @@ def beer(L):
            'eventStatus': 'https://schema.org/EventScheduled',
            'location': {'@type': 'Place', 'name': 'Rackets Academy Salgesch', 'address': {'@type': 'PostalAddress', 'streetAddress': 'Littenstrasse 30', 'postalCode': '3970', 'addressLocality': 'Salgesch', 'addressCountry': 'CH'}},
            'offers': {'@type': 'Offer', 'price': '50', 'priceCurrency': 'CHF'},
-           'organizer': {'@type': 'Organization', 'name': 'Rackets Academy', 'url': BASE}, 'image': BASE + 'images/photos/events-friends.jpg'}]
+           'organizer': {'@type': 'Organization', 'name': 'Rackets Academy', 'url': BASE}, 'image': BASE + 'images/photos/events-friends.webp'}]
     return T, body, ld, img + 'events-friends.jpg'
 
 

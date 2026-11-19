@@ -79,7 +79,7 @@ def body(t, pre):
     facts = ''.join(f'<div class="co2-b"><span class="co2-ic">{e}</span><h3>{h}</h3><p>{p}</p></div>' for e, h, p in t['facts'])
     faq = ''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in t['faq'])
     return f'''
-<section class="spa-hero co-hero kb-hero" style="background-image:url('{img("images/photos/kids-group.jpg")}');">
+<section class="spa-hero co-hero kb-hero" style="background-image:url('{img("images/photos/kids-group.webp")}');">
   <div class="spa-hero-shade"></div>
   <div class="wrap spa-hero-inner">
     <p class="spa-kicker">{t['kicker']}</p>
@@ -114,7 +114,7 @@ def body(t, pre):
   </div>
 </section>
 
-<section class="spa-final kb-final" style="background-image:url('{img("images/photos/kid-birthday.jpg")}'); background-position:center 30%;">
+<section class="spa-final kb-final" style="background-image:url('{img("images/photos/kid-birthday.webp")}'); background-position:center 30%;">
   <div class="spa-hero-shade"></div>
   <div class="wrap spa-final-inner">
     <h2>{t['final_h']}</h2>

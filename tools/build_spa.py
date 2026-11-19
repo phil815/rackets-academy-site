@@ -213,7 +213,7 @@ for lang, t in T.items():
     import json
     ld = {'@context': 'https://schema.org', '@graph': [
       {'@type': 'DaySpa', 'name': 'Rackets Academy Spa & Sauna', 'url': 'https://www.racketsacademy.ch/' + ('' if lang == 'en' else lang + '/') + 'spa-and-sauna.html',
-       'image': 'https://www.racketsacademy.ch/images/spa/spa-jacuzzi.jpg', 'telephone': '+41772780115', 'priceRange': 'CHF 25–120',
+       'image': 'https://www.racketsacademy.ch/images/spa/spa-jacuzzi.webp', 'telephone': '+41772780115', 'priceRange': 'CHF 25–120',
        'address': {'@type': 'PostalAddress', 'streetAddress': 'Littenstrasse 30', 'postalCode': '3970', 'addressLocality': 'Salgesch', 'addressRegion': 'VS', 'addressCountry': 'CH'},
        'openingHoursSpecification': [{'@type': 'OpeningHoursSpecification', 'dayOfWeek': ['Monday','Tuesday','Wednesday','Thursday','Friday'], 'opens': '14:00', 'closes': '22:00'}, {'@type': 'OpeningHoursSpecification', 'dayOfWeek': ['Saturday','Sunday'], 'opens': '10:00', 'closes': '22:00'}],
        'areaServed': ['Salgesch', 'Sierre', 'Siders', 'Sion', 'Sitten', 'Crans-Montana', 'Leuk', 'Valais', 'Wallis'],

@@ -17,8 +17,8 @@ WEEKS = {   # (start, end, slot)  am = 9-12, pm = 14-17 (after skiing)
 }
 SEASONS = ['winter', 'easter', 'summer']
 SLUG = {'hub': 'kids-camp.html', 'winter': 'kids-camp-winter.html', 'easter': 'kids-camp-easter.html', 'summer': 'kids-camp-summer.html'}
-IMG = {'hub': 'images/photos/kids-group.jpg', 'winter': 'images/photos/kids-drill.jpg', 'easter': 'images/photos/kids-group.jpg', 'summer': 'images/photos/kids-drill.jpg'}
-FINAL = {'hub': 'images/photos/kids-drill.jpg', 'winter': 'images/photos/kids-group.jpg', 'easter': 'images/photos/kids-drill.jpg', 'summer': 'images/photos/kids-group.jpg'}
+IMG = {'hub': 'images/photos/kids-group.webp', 'winter': 'images/photos/kids-drill.webp', 'easter': 'images/photos/kids-group.webp', 'summer': 'images/photos/kids-drill.webp'}
+FINAL = {'hub': 'images/photos/kids-drill.webp', 'winter': 'images/photos/kids-group.webp', 'easter': 'images/photos/kids-drill.webp', 'summer': 'images/photos/kids-group.webp'}
 ICON = {'winter': '❄️', 'easter': '🐣', 'summer': '☀️'}
 SLOT = {'am': ('09:00', '12:00'), 'pm': ('14:00', '17:00')}
 MON = {'en': 'January February March April May June July August September October November December'.split(),
@@ -325,7 +325,7 @@ def camps_body(t, L, pre):
     c = t['camps']
     cards = ''.join(f'<a class="co2-b ow-more" href="{SLUG[s]}"><span class="co2-ic">{ICON[s]}</span><h3>{t["season_lbl"][s]} →</h3><p>{t["season_sub"][s]}</p></a>' for s in SEASONS)
     wa = 'https://wa.me/' + WA_SA + '?text=' + urllib.parse.quote(t['wa'].format(w='Camps'))
-    return hero(t, pre + 'images/coaching/coaching-hero.jpg', c['kicker'], c['h1'], c['lede'], [t['chips'][0], 'Ski &Padel'], '#kids', t['cta2'], wa) + f'''
+    return hero(t, pre + 'images/coaching/coaching-hero.webp', c['kicker'], c['h1'], c['lede'], [t['chips'][0], 'Ski &Padel'], '#kids', t['cta2'], wa) + f'''
 <section class="co2-sec" id="kids">
   <div class="wrap">
     <h2 class="co2-h">🎾 {c['kids_h']}</h2>
@@ -395,7 +395,7 @@ for L, t in T.items():
                   f'<script src="{pre}kidscamp.js?v=1"></script>')
         out.append((f, len(t['title'][page]), len(t['desc'][page])))
     c = t['camps']
-    f = shell(d, 'camps.html', camps_body(t, L, pre), c['title'], c['desc'], 'images/coaching/coaching-hero.jpg', None)
+    f = shell(d, 'camps.html', camps_body(t, L, pre), c['title'], c['desc'], 'images/coaching/coaching-hero.webp', None)
     out.append((f, len(c['title']), len(c['desc'])))
 for o in out:
     print(*o)

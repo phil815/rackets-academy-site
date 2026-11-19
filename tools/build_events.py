@@ -93,7 +93,7 @@ def body(t, pre):
     refs = ''.join(f'<span class="ev-ref">{r}</span>' for r in t['refs'])
     faq = ''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in t['faq'])
     return f'''
-<section class="spa-hero co-hero" style="background-image:url('{img("images/padel-paella-2.jpg")}'); background-position:center 70%;">
+<section class="spa-hero co-hero" style="background-image:url('{img("images/padel-paella-2.webp")}'); background-position:center 70%;">
   <div class="spa-hero-shade"></div>
   <div class="wrap spa-hero-inner">
     <p class="spa-kicker">{t['kicker']}</p>
@@ -116,7 +116,7 @@ def body(t, pre):
 
 <section class="co2-sec co2-proof" id="example">
   <div class="wrap co2-split">
-    <img class="co2-photo" src="{img('images/padel-paella-3.jpg')}" alt="Paella" loading="lazy">
+    <img class="co2-photo" src="{img('images/padel-paella-3.webp')}" alt="Paella" loading="lazy">
     <div>
       <h2 class="co2-h">{t['day_h']}</h2>
       <div class="co-plan ev-day">
@@ -142,7 +142,7 @@ def body(t, pre):
   </div>
 </section>
 
-<section class="spa-final" style="background-image:url('{img("images/photos/events-friends.jpg")}'); background-position:center 30%;">
+<section class="spa-final" style="background-image:url('{img("images/photos/events-friends.webp")}'); background-position:center 30%;">
   <div class="spa-hero-shade"></div>
   <div class="wrap spa-final-inner">
     <h2>{t['final_h']}</h2>

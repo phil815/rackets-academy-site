@@ -25,11 +25,11 @@
     'veyras', 'rivella', 'initiation', 'leveling', 'levelling', 'level', 'racketero', 'pickleball', '24h', 'p424', 'ski', 'rackemix'];
   var DAYS = 30;
   // default hero photos (site root), used when a hero has no photo: line
-  var PHOTOS = [[/yoga/i, '/images/events/padel-yoga.jpg', 'center'], [/paella/i, '/images/padel-paella-2.jpg', 'center 85%'],
-    [/oakberry|\+oak\b/i, '/images/coaching/coaching-2.jpg', 'center 60%']];
+  var PHOTOS = [[/yoga/i, '/images/events/padel-yoga.webp', 'center'], [/paella/i, '/images/padel-paella-2.webp', 'center 85%'],
+    [/oakberry|\+oak\b/i, '/images/coaching/coaching-2.webp', 'center 60%']];
   // partner themes (Guti 17.11.2026): partner colours + logo on the hero card; matched on calendar title or display title
   var THEMES = [[/oakberry|\+oak\b/i, { cls: 'theme-oakberry', logo: '/images/partners/oakberry-logo-white.png', alt: 'Oakberry',
-    side: '/images/events/oakberry-bowl.png', sideAlt: { en: 'Oakberry açaí bowl', de: 'Açaí-Bowl von Oakberry', fr: 'Bowl açaí Oakberry' },
+    side: '/images/events/oakberry-bowl.webp', sideAlt: { en: 'Oakberry açaí bowl', de: 'Açaí-Bowl von Oakberry', fr: 'Bowl açaí Oakberry' },
     kicker: { en: 'New in Sion · padel + açaí', de: 'Neu in Sion · Padel + Açaí', fr: 'Nouveau à Sion · padel + açaí' } }]];
 
   var L = (document.documentElement.lang || 'en').slice(0, 2);

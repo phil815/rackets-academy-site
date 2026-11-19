@@ -258,7 +258,7 @@ def body(L, t, pre):
       <ul>{padl}</ul>
       <a class="btn dn-btn-gold" href="#tk-book">{t['cta']}</a>
     </div>
-    <img class="dn-media" src="{pre}images/dine/padel-salgesch.jpg" alt="{t['pad_h']} · Rackets Academy Salgesch" loading="lazy" width="1200" height="1600">
+    <img class="dn-media" src="{pre}images/dine/padel-salgesch.webp" alt="{t['pad_h']} · Rackets Academy Salgesch" loading="lazy" width="1200" height="1600">
   </div>
 </section>
 
