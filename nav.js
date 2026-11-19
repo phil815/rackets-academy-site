@@ -572,6 +572,12 @@ function raPixel(name, params, custom, eventId) {
   else fbq(custom ? 'trackCustom' : 'track', name, params || {});
 }
 raPixelLoad();
+// RACKETS+ sign-up: click on the WhatsApp join link counts as a lead (Meta pixel; GA4 event rackets_plus_signup is sent in the page head).
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a[href*="tinyurl.com/RA-Plus"]');
+  if (a) raPixel('Lead', { content_name: 'rackets_plus' });
+}, true);
+
 // Value + product of a checkout form (hidden "price" field; camp/shop/ticket forms).
 function raCheckoutParams(f) {
   var p = { currency: 'CHF' };

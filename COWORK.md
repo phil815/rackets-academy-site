@@ -154,3 +154,4 @@ var PUSH_JOBS_ = [
 - Weekly report (Analytics) now in English, also the Monday email.
 - Lesson: HtmlService strips JS comments from HTML files – never use a comment as a placeholder.
 - 2026-11-19: Menü gekürzt (Phil): «Spielen & Preise» → «Buchen» / «Réserver» / «Book»; «Kinder & Camps» → «Camps». Nur Menütexte via tools/ux_nav.py, keine URLs, Titel oder H1 geändert.
+- 2026-11-19: Mitgliedschaft (rackets-plus, 3 Sprachen) neu via tools/ux_plus.py: Title/H1 «Padel-Mitgliedschaft im Wallis», Nutzen zuerst, 3 Schritte, Status-Tabelle (Member/Challenger/Master/Legend), FAQ mit Schema; Meta-Pixel «Lead» beim Klick auf den WhatsApp-Beitrittslink (nav.js v41). Shop: Gutschein-Text verständlicher. Firmen-Seite mit zwei Wegen liegt als Vorschau bereit (nicht live).
