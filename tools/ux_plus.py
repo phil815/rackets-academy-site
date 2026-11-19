@@ -83,7 +83,7 @@ T = {
 }
 TIERS = [('Member', 0, 'mb', 0), ('Challenger', 1, 'ch', 4), ('Master', 2, 'ms', 7), ('Legend', 3, 'lg', 10)]
 FROM = [0, 0, 1, 1, 1, 2, 3]   # row i is included from tier index FROM[i]
-TOPIMG = [IMG + 'rackets/babolat-veron-2026-air.jpg', IMG + 'photos/training-player.webp', IMG + 'spa/spa-jacuzzi.webp']
+TOPIMG = [IMG + 'rackets/wilson-bela-v3.jpg', IMG + 'photos/training-player.webp', IMG + 'spa/spa-jacuzzi.webp']
 PTS = ['1’250', '750', '80']
 HERO = IMG + 'photos/events-group.webp'
 
