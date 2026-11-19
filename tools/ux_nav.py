@@ -1,12 +1,12 @@
 """Menü, Menüknopf und Footer-Links für alle Seiten (UX W2, Phil 19.11.2026).
-Menü: Spielen & Preise · Training · Events · Kinder & Camps · Firmen · Spa · Mitgliedschaft · Shop + Knopf «Platz buchen».
+Menü: Buchen · Training · Events · Camps · Firmen · Spa · Mitgliedschaft · Shop + Knopf «Platz buchen».
 Über uns, FAQ und Team-Login stehen im Footer. Der Menüknopf am Handy trägt das Wort «Menü» (auch für 60+ verständlich).
 Idempotent. Nach jedem build_*.py laufen lassen:  python3 tools/ux_nav.py   (vom Repo-Wurzelordner)"""
 import re, glob, os
 T = {
- 'de': dict(book='Spielen &amp; Preise', camps='Kinder &amp; Camps', co='Firmen', cta='Platz buchen', member='Mitgliedschaft', sponsor='Sponsor werden', menu='Menü', close='Schliessen', about='Über uns', faq='FAQ', login='Team-Login'),
- 'fr': dict(book='Jouer &amp; tarifs', camps='Enfants &amp; camps', co='Entreprises', cta='Réserver un terrain', member='Membres', sponsor='Devenir sponsor', menu='Menu', close='Fermer', about='À propos', faq='FAQ', login='Login équipe'),
- 'en': dict(book='Play &amp; prices', camps='Kids &amp; camps', co='Companies', cta='Book a court', member='Membership', sponsor='Become a sponsor', menu='Menu', close='Close', about='About', faq='FAQ', login='Team login'),
+ 'de': dict(book='Buchen', camps='Camps', co='Firmen', cta='Platz buchen', member='Mitgliedschaft', sponsor='Sponsor werden', menu='Menü', close='Schliessen', about='Über uns', faq='FAQ', login='Team-Login'),
+ 'fr': dict(book='Réserver', camps='Camps', co='Entreprises', cta='Réserver un terrain', member='Membres', sponsor='Devenir sponsor', menu='Menu', close='Fermer', about='À propos', faq='FAQ', login='Login équipe'),
+ 'en': dict(book='Book', camps='Camps', co='Companies', cta='Book a court', member='Membership', sponsor='Become a sponsor', menu='Menu', close='Close', about='About', faq='FAQ', login='Team login'),
 }
 def fix(path):
     s = open(path, encoding='utf-8').read()

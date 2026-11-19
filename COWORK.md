@@ -153,3 +153,4 @@ var PUSH_JOBS_ = [
 - Outreach statuses reduced to 5 (To contact, Contacted, In talks, Won, Lost); tracker sheet migrated (92 cells) incl. dropdowns.
 - Weekly report (Analytics) now in English, also the Monday email.
 - Lesson: HtmlService strips JS comments from HTML files – never use a comment as a placeholder.
+- 2026-11-19: Menü gekürzt (Phil): «Spielen & Preise» → «Buchen» / «Réserver» / «Book»; «Kinder & Camps» → «Camps». Nur Menütexte via tools/ux_nav.py, keine URLs, Titel oder H1 geändert.
