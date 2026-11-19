@@ -1129,3 +1129,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .navlinks a{padding:16px 4px; border-bottom:1px solid #eef2f7; font-size:1.05rem; width:100%;}
 }
 .nav-toggle-word{font:inherit;}
+
+/* Seite «Sponsor werden» (19.11.2026): Partnerlogos als Beleg, im Navy des Footers */
+.sp-logos-sec{background:#0b1a2b; padding:44px 0 48px;}
+.sp-logos-h{color:#fff; text-align:center; font-size:1.25rem; margin:0 0 26px;}
+.sp-logos{display:flex; flex-wrap:wrap; gap:34px 56px; justify-content:center; align-items:center;}
+.sp-logos a{display:flex; align-items:center; opacity:.95;}
+.sp-logos a:hover{opacity:1;}
+.sp-logos img{height:54px; width:auto; max-width:190px; object-fit:contain; display:block;}
+.sp-logos .sp-word{color:#fff; font-weight:800; font-size:1.7rem; letter-spacing:.01em;}
+@media (max-width:760px){ .sp-logos{gap:26px 34px;} .sp-logos img{height:40px; max-width:130px;} .sp-logos .sp-word{font-size:1.3rem;} }
