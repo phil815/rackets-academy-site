@@ -98,6 +98,7 @@ var PUSH_JOBS_ = [
 - [ ] Merchant Center: falsche Gratisversand-Richtlinie durch Abholrichtlinie ersetzen
 
 ## Log
+- 19.11.2026 · UX-Check (Phil OK): Menüpunkt «Spa» zeigte auf 8 Seiten je Sprache auf sich selbst → behoben (auch in build_kidscamp/events/birthday/dine.py). Handy-Menüsymbol wieder 3 Balken. Handy: Eingabefelder 16 px, grössere Tippflächen im Footer, Fokusrahmen dunkel+grün. Hero-Video Desktop 5,7 → 2,7 MB. events.js/events.css entfernt (seit 02.11. ungenutzt). styles v45.
 - 07.10.2026 · Meta Pixel: InitiateCheckout jetzt mit Betrag (Feld `price`) + Paket; Purchase mit eventID (SumUp-ID); Klick auf «Pay on the SumUp page instead» = AddPaymentInfo; Rückkehr von SumUp mit `?paid=<ref>&amount=<CHF>` zählt als Purchase (1× pro ref). ~~**Offen:** im Shop-Apps-Script beim SumUp-Checkout `redirect_url` = `https://www.racketsacademy.ch/ski-and-padel.html?paid=<ref>&amount=<CHF>` (bzw. Seite des Produkts) setzen.~~ ✅ erledigt 07.10. (Return.gs) nav.js v29. Live-Kampagne «Ski & Padel 2027 – Sales» optimiert auf InitiateCheckout.
 - 06.10.2026 · Meta Pixel 1826093361488124 in nav.js (loads only after cookie consent; events: PageView, PlaytomicClick, Contact, Lead, InitiateCheckout, Purchase). Cookie banner text + privacy policy (EN/FR/DE) updated.
 - 2026-10-04 · Phil · COWORK.md angelegt, Felix als Collaborator, Drive-Ordner pro Seite

@@ -367,6 +367,8 @@ def shell(d, slug, html, title, desc, img, ld, scripts=''):
     b = s.index('<footer')
     s = s[:a] + html + s[b:]
     s = s.replace('spa-and-sauna.html', slug)
+    # Menüpunkt «Spa» muss weiter auf die Spa-Seite zeigen (UX W1, 19.11.2026)
+    s = re.sub(r'<a href="[^"]+"\s*>Spa</a>', '<a href="spa-and-sauna.html">Spa</a>', s)
     s = re.sub(r'<script type="application/ld\+json" id="ld-spa">.*?</script>\n', '', s, flags=re.S)
     s = re.sub(r'<title>.*?</title>', '<title>' + title + '</title>', s, count=1, flags=re.S)
     esc = lambda x: x.replace('"', '&quot;')
