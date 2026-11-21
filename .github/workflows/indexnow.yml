@@ -1,0 +1,55 @@
+# Meldet geänderte Seiten nach jedem Push an IndexNow (Bing, Yandex u. a.).
+# Der Schlüssel ist absichtlich öffentlich: IndexNow prüft ihn über die Datei /6f9b54271879c911c2f52facb6e8815f.txt.
+# Gemeldet werden nur Seiten, die in sitemap.xml stehen (versteckte Seiten nie).
+name: IndexNow
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Geänderte Seiten sammeln
+        id: urls
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          BASE="https://www.racketsacademy.ch/"
+          if [ -z "$BEFORE" ] || ! git cat-file -e "$BEFORE" 2>/dev/null; then
+            FILES=$(git ls-files '*.html')
+          else
+            FILES=$(git diff --name-only "$BEFORE" HEAD -- '*.html' sitemap.xml)
+          fi
+          grep -o '<loc>[^<]*</loc>' sitemap.xml | sed 's/<[^>]*>//g' | sort -u > sitemap_urls.txt
+          : > urls.txt
+          for f in $FILES; do
+            [ "$f" = sitemap.xml ] && continue
+            u="$BASE$f"
+            case "$f" in index.html|*/index.html) u="$BASE${f%index.html}";; esac
+            grep -qxF "$u" sitemap_urls.txt && echo "$u" >> urls.txt
+          done
+          sort -u urls.txt -o urls.txt
+          echo "count=$(wc -l < urls.txt | tr -d ' ')" >> "$GITHUB_OUTPUT"
+          cat urls.txt
+      - name: An IndexNow senden
+        if: steps.urls.outputs.count != '0'
+        run: |
+          sleep 120  # GitHub Pages braucht 1–2 Min., bis die neue Version live ist
+          python3 - <<'PY'
+          import json, urllib.request
+          urls = [l.strip() for l in open("urls.txt") if l.strip()][:10000]
+          body = json.dumps({
+              "host": "www.racketsacademy.ch",
+              "key": "6f9b54271879c911c2f52facb6e8815f",
+              "keyLocation": "https://www.racketsacademy.ch/6f9b54271879c911c2f52facb6e8815f.txt",
+              "urlList": urls,
+          }).encode()
+          req = urllib.request.Request("https://api.indexnow.org/indexnow", data=body,
+              headers={"Content-Type": "application/json; charset=utf-8"})
+          with urllib.request.urlopen(req, timeout=30) as r:
+              print("IndexNow:", r.status, "für", len(urls), "Seiten")
+          PY

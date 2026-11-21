@@ -1,28 +1,33 @@
 # Rackets Academy
 
-> Padel, pickleball and tennis club with two locations in Valais, Switzerland: Salgesch (padel, pickleball, tennis) and Sion (padel). Court booking, coaching for kids and adults, events, racket shop, spa and bar. Website in English, French and German.
+> Padel, pickleball and tennis club with two locations in Valais, Switzerland: Salgesch near Sierre (padel, 3 indoor pickleball courts, 2 indoor tennis courts, spa) and Sion (padel). Court booking, coaching for kids and adults, events, kids holiday camps, Ski &Padel weekends, racket shop, spa and bar. Website in English, French and German.
 
 ## Key facts
 - Locations: Littenstrasse 30, 3970 Salgesch · Route de Préjeux 16, 1950 Sion
 - Opening hours: daily 07:00–23:30
 - Court booking: online via Playtomic (live availability for both locations)
 - Coaching: group courses for kids and adults from CHF 19 per session; private lessons from CHF 55 per person
-- Beginner course: every Saturday at 10:00, bookable on Playtomic
+- Beginner course (cours d'initiation): every Saturday at 10:00 in Sion, bookable on Playtomic
 - Racket shop: official reseller of Babolat, Wilson and Siux. Any racket can be tested for CHF 10; the fee is credited when you buy. Pick-up in Salgesch or Sion.
 - Gift vouchers: CHF 20 per voucher (one evening game), valid without time limit, bought online
-- Membership: RACKETS+ loyalty programme via WhatsApp
+- Membership: Rackets+, free membership with rewards, via WhatsApp
 - Contact: phil@racketsacademy.ch · WhatsApp +41 77 278 01 15 (Salgesch) · +41 76 291 43 69 (Sion)
 
 ## Pages
 - [Home](https://www.racketsacademy.ch/): overview of both locations and offers
 - [Book a court](https://www.racketsacademy.ch/book.html): Playtomic booking for Salgesch and Sion
 - [Courses & coaching](https://www.racketsacademy.ch/training.html): kids, adults, private lessons, prices
-- [Events](https://www.racketsacademy.ch/events.html): Racketero, Rivella League, Padel & Wine, Padel & Paella, Swiss Tennis tournaments
-- [Padel +Dine powered by Instinct Amazonia](https://www.racketsacademy.ch/fr/padel-dine.html): Sat 7 Nov 2026 in Salgesch, padel tournament for teams of 2 + nikkei buffet and DJ party until 2am. Tournament + Dinner Party 79 CHF, Dinner Party 59 CHF; tickets online from 5 Oct 2026
+- [Events](https://www.racketsacademy.ch/events.html): all upcoming tournaments, open plays and social events in Salgesch and Sion, with live places and Playtomic links
+- [Padel in Valais](https://www.racketsacademy.ch/padel-valais.html): padel in Sion and Salgesch near Sierre, 07:00–23:30 daily
+- [Pickleball](https://www.racketsacademy.ch/pickleball.html): 3 indoor pickleball courts in Salgesch (only there)
+- [Tennis](https://www.racketsacademy.ch/tennis.html): 2 indoor tennis courts in Salgesch, between Sion and Brig (only there)
+- [Kids holiday camps](https://www.racketsacademy.ch/kids-camp.html): day camps 2027 in Salgesch, 14:00–17:00, CHF 250 per week, bookable online
+- [Kids birthday parties](https://www.racketsacademy.ch/kids-birthday.html): in Salgesch
+- [Padel +Dine](https://www.racketsacademy.ch/fr/padel-dine.html): padel tournament with dinner party in Salgesch; next date to be announced
 - [Shop](https://www.racketsacademy.ch/shop.html): gift vouchers and padel rackets (one page per racket under /rackets/)
 - [Ski &Padel weekends](https://www.racketsacademy.ch/ski-and-padel.html): all-inclusive Ski &Padel weekends in Salgesch, Valais (Switzerland), 18–21 and 25–28 Feb 2027; skiing in Crans-Montana, Leukerbad, Grimentz-Zinal or the 4 Vallées depending on conditions, padel, spa, lodging, breakfast and dinner; individual place 1199 CHF, group of 4 999 CHF per person; bookable online
-- [Spa](https://www.racketsacademy.ch/spa-and-sauna.html): sauna, hammam and jacuzzi
-- [Companies](https://www.racketsacademy.ch/company.html): corporate discount and company events
-- [Membership](https://www.racketsacademy.ch/rackets-plus.html): RACKETS+
+- [Spa](https://www.racketsacademy.ch/spa-and-sauna.html): sauna, hammam and jacuzzi in Salgesch near Sierre
+- [Companies](https://www.racketsacademy.ch/company.html): company events, sponsoring and corporate discount (15 % before 17:30)
+- [Membership](https://www.racketsacademy.ch/rackets-plus.html): Rackets+, free, with rewards
 - [About](https://www.racketsacademy.ch/about.html): team and story
 - French: https://www.racketsacademy.ch/fr/ · German: https://www.racketsacademy.ch/de/
