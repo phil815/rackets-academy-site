@@ -1227,3 +1227,9 @@ a.card-link.offer.co-way .offer-text p{font-size:1rem; line-height:1.5; color:va
 .grid-3.co-ways a.card-link.offer.co-way .offer-text h3{font-size:1.2rem;}
 @media (max-width:800px){ .plus-tiles{grid-template-columns:1fr;} .plus-tile{min-height:260px;} }
 @media (max-width:800px){ .plus-tile-prod{min-height:330px;} }
+
+/* Tennis-Seite: Fahrzeiten */
+.tn-nears{display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin-top:18px;}
+.tn-near{background:#fff; border:1px solid #dfeaf5; border-radius:16px; padding:18px 12px; text-align:center;}
+.tn-near b{display:block; font-size:1.6rem; color:var(--blue); line-height:1.1;} .tn-near span{display:block; margin-top:4px; font-weight:600; color:#0b1a2b;}
+@media (max-width:800px){ .tn-nears{grid-template-columns:repeat(2,1fr);} .tn-near:last-child{grid-column:1 / -1;} }

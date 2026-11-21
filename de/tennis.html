@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T9T2GZHGS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    analytics_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_user_data: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_personalization: 'denied'
+  });
+  gtag('js', new Date());
+  // Team-Geraete: einmal racketsacademy.ch/?internal=1 aufrufen → Besuche als intern markiert (GA4-Filter «Internal Traffic»); ?internal=0 hebt es auf
+  (function(){try{var q=location.search;if(/[?&]internal=1/.test(q))localStorage.setItem('ra_internal','1');if(/[?&]internal=0/.test(q))localStorage.removeItem('ra_internal');}catch(e){}})();
+  gtag('config', 'G-T9T2GZHGS2', (function(){try{return localStorage.getItem('ra_internal')==='1'?{traffic_type:'internal'}:{};}catch(e){return {};}})());
+  // Rackets Academy conversion events
+  (function(){
+    var lang = (location.pathname.match(/\/(fr|de)\//)||[,'en'])[1];
+    function send(name, p){ p=p||{}; p.page_lang=lang; p.page_path=location.pathname; p.transport_type='beacon'; gtag('event', name, p); }
+    document.addEventListener('click', function(e){
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (a && a.hasAttribute('data-pick')) return;
+      if (a) {
+        var h = a.href;
+        if (/playtomic\.com/.test(h)) return send('book_court', {link_url:h, link_text:(a.textContent||'').trim().slice(0,60)});
+        if (/wa\.me|whatsapp\.com/.test(h)) return send('whatsapp_click', {link_url:h});
+        if (/tinyurl\.com\/RA-Plus/i.test(h)) return send('rackets_plus_signup', {link_url:h});
+        if (/docs\.google\.com\/forms|forms\.gle/.test(h)) return send('form_click', {link_url:h});
+        return;
+      }
+      var b = e.target.closest && e.target.closest('button[onclick*="openBuyModal"], button[onclick*="openVoucherModal"], button[onclick*="openLessonModal"]');
+      if (b) {
+        var card = b.closest('.card, .racket-card, div');
+        var t = card && card.querySelector('h3');
+        send('shop_buy_click', {item_name: t ? t.textContent.trim().slice(0,80) : (/Voucher/.test(b.getAttribute('onclick')) ? 'Voucher' : 'unknown')});
+      }
+    }, true);
+    document.addEventListener('submit', function(e){
+      var f = e.target;
+      if (f && /script\.google/.test(f.action||'')) send('begin_checkout', {form_type: (f.querySelector('[name="type"]')||{}).value || ''});
+    }, true);
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tennishalle Wallis – Indoor-Tennis zwischen Sion und Brig | Rackets Academy</title>
+<meta name="description" content="Tennishalle im Wallis: 2 Hallenplätze in Salgesch, 5 Min. ab Siders, 20 Min. ab Sion und Visp, 30 Min. ab Brig. Ab 15 CHF pro Person, online buchen, täglich 07:00–23:30 offen.">
+<link rel="canonical" href="https://www.racketsacademy.ch/de/tennis.html">
+<link rel="stylesheet" href="../styles.css?v=52">
+<meta property="og:title" content="Tennishalle Wallis – Indoor-Tennis zwischen Sion und Brig | Rackets Academy">
+<meta property="og:description" content="Tennishalle im Wallis: 2 Hallenplätze in Salgesch, 5 Min. ab Siders, 20 Min. ab Sion und Visp, 30 Min. ab Brig. Ab 15 CHF pro Person, online buchen, täglich 07:00–23:30 offen.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.racketsacademy.ch/de/tennis.html">
+<meta property="og:image" content="https://www.racketsacademy.ch/images/photos/tennis-lesson.jpg">
+<meta property="og:locale" content="de_CH">
+<meta property="og:site_name" content="Rackets Academy">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://www.racketsacademy.ch/tennis.html">
+<link rel="alternate" hreflang="fr" href="https://www.racketsacademy.ch/fr/tennis.html">
+<link rel="alternate" hreflang="de" href="https://www.racketsacademy.ch/de/tennis.html">
+<link rel="alternate" hreflang="x-default" href="https://www.racketsacademy.ch/tennis.html">
+<script type="application/ld+json" id="ld-tn">{"@context": "https://schema.org", "@graph": [{"@type": "SportsActivityLocation", "name": "Rackets Academy Salgesch – Tennis", "url": "https://www.racketsacademy.ch/de/tennis.html", "telephone": "+41772780115", "image": "https://www.racketsacademy.ch/images/photos/tennis-lesson.jpg", "sport": "Tennis", "address": {"@type": "PostalAddress", "streetAddress": "Littenstrasse 30", "postalCode": "3970", "addressLocality": "Salgesch", "addressRegion": "VS", "addressCountry": "CH"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "07:00", "closes": "23:30"}], "areaServed": ["Sierre", "Siders", "Sion", "Sitten", "Leuk", "Loèche", "Crans-Montana", "Visp", "Viège", "Brig", "Brigue", "Valais", "Wallis"]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Wo gibt es im Wallis eine Tennishalle?", "acceptedAnswer": {"@type": "Answer", "text": "In der Rackets Academy in Salgesch: 2 Hallenplätze, täglich 07:00–23:30, 5 Minuten ab Siders, 20 ab Sion und Visp, 30 ab Brig. Online buchen auf Playtomic."}}, {"@type": "Question", "name": "Was kostet ein Tennisplatz?", "acceptedAnswer": {"@type": "Answer", "text": "Ab 15 CHF pro Person. Den genauen Preis für deine Zeit siehst du bei der Buchung."}}, {"@type": "Question", "name": "Muss ich Clubmitglied sein?", "acceptedAnswer": {"@type": "Answer", "text": "Nein. Jeder kann online einen Platz buchen, ohne Mitgliedschaft und ohne Jahresbeitrag."}}, {"@type": "Question", "name": "Gibt es Tennis in der Rackets Academy in Sion?", "acceptedAnswer": {"@type": "Answer", "text": "Nein. An unserem Standort Sion gibt es nur Padel. Die Tennisplätze sind in Salgesch, 20 Minuten von Sion."}}, {"@type": "Question", "name": "Gibt es eine Tennishalle in der Nähe von Visp oder Brig?", "acceptedAnswer": {"@type": "Answer", "text": "Ja, Salgesch liegt 20 Minuten von Visp und 30 Minuten von Brig."}}, {"@type": "Question", "name": "Kann ich abends oder am Sonntag spielen?", "acceptedAnswer": {"@type": "Answer", "text": "Ja. Die Halle ist täglich von 07:00 bis 23:30 offen."}}]}]}</script>
+</head>
+<body>
+<div class="site-top">
+<div class="promo-banner">
+  <div class="promo-track">
+    <span>🎾 PLÄTZE JETZT OFFEN — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Jetzt auf Playtomic buchen →</a></span>
+    <span>🎾 PLÄTZE JETZT OFFEN — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Jetzt auf Playtomic buchen →</a></span>
+    <span>🎾 PLÄTZE JETZT OFFEN — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Jetzt auf Playtomic buchen →</a></span>
+  </div>
+</div>
+
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo"><img src="https://www.racketsacademy.ch/images/wix/834be8bc03b7.png" alt="Rackets Academy logo" width="180" height="63"></a>
+    <nav class="navlinks">
+      <a href="book.html">Buchen</a>
+      <a href="training.html">Training</a>
+      <a href="events.html">Events</a>
+      <a href="camps.html">Camps</a>
+      <a href="company.html">Firmen</a>
+      <a href="spa-and-sauna.html">Spa</a>
+      <a href="rackets-plus.html">Mitgliedschaft</a>
+      <a href="shop.html">Shop</a>
+      <div class="lang-switch">
+        <button type="button" aria-haspopup="true">DE</button>
+        <div class="lang-menu"><a href="../tennis.html">English</a><a href="#">Deutsch</a><a href="../fr/tennis.html">Français</a></div>
+      </div>
+    </nav>
+    <div class="lang-switch">
+      <button type="button" aria-haspopup="true">DE</button>
+      <div class="lang-menu"><a href="../tennis.html">English</a><a href="#">Deutsch</a><a href="../fr/tennis.html">Français</a></div>
+    </div>
+    <a class="nav-cta" href="book.html" data-pick="court">Platz buchen</a>
+    <button class="nav-toggle nav-toggle-word" aria-label="Menü" aria-expanded="false"><i class="nt-bars"><b></b><b></b><b></b></i><em class="nt-open">Menü</em><em class="nt-close">Schliessen</em></button>
+  </div>
+</header>
+</div>
+
+<section class="spa-hero co-hero kb-hero" style="background-image:url('https://www.racketsacademy.ch/images/photos/tennis-lesson.jpg'); background-position:center 35%;">
+  <div class="spa-hero-shade"></div>
+  <div class="wrap spa-hero-inner">
+    <p class="spa-kicker">Tennis Wallis · Salgesch</p>
+    <h1>Tennishalle im Wallis — zwischen Sion und Brig.</h1>
+    <p class="lede">Zwei Hallenplätze in Salgesch, das ganze Jahr und bei jedem Wetter bespielbar. 5 Min. ab Siders, 20 Min. ab Sion, 20 Min. ab Visp.</p>
+    <div class="spa-chips"><span class="spa-chip">Ab 15 CHF p.P.</span><span class="spa-chip">2 Hallenplätze</span><span class="spa-chip">Täglich 07:00–23:30</span><span class="spa-chip">Online buchen</span></div>
+    <div class="hero-actions">
+      <a class="btn btn-green spa-cta" href="https://playtomic.com/clubs/rackets-academy-salgesch" target="_blank" rel="noopener">Tennisplatz buchen</a>
+      <a class="btn spa-cta-ghost" href="#near">So kommst du hin</a>
+    </div>
+  </div>
+</section>
+
+<section class="co2-sec" id="near">
+  <div class="wrap">
+    <h2 class="co2-h">In deiner Nähe, egal wo im Wallis</h2>
+    <p class="pb-intro">Salgesch liegt an der Sprachgrenze und ist mit Auto und Zug (Bahnhof Salgesch) gut erreichbar. Damit ist es die Tennishalle für die ganze Strecke von Sion bis Brig.</p>
+    <div class="tn-nears"><div class="tn-near"><b>5 Min.</b><span>Siders</span></div><div class="tn-near"><b>10 Min.</b><span>Leuk</span></div><div class="tn-near"><b>20 Min.</b><span>Sion</span></div><div class="tn-near"><b>20 Min.</b><span>Visp</span></div><div class="tn-near"><b>30 Min.</b><span>Brig</span></div></div>
+  </div>
+</section>
+
+<section class="co2-sec kb-flow-sec" id="how">
+  <div class="wrap">
+    <h2 class="co2-h">So funktioniert es</h2>
+    <div class="kb-flow"><div class="kb-step"><span class="kb-badge">1</span><h3>Auf Playtomic buchen</h3><p>«Rackets Academy Salgesch» wählen, dann Tennis und deine Zeit. Keine Mitgliedschaft nötig.</p></div><div class="kb-step"><span class="kb-badge">2</span><h3>Kommen und spielen</h3><p>Gratis-Parkplätze vor der Tür, Garderoben und Duschen vor Ort.</p></div><div class="kb-step"><span class="kb-badge">3</span><h3>Noch etwas bleiben</h3><p>Bar mit Pizzas und Snacks, Spa mit Sauna, Hammam und Whirlpool im gleichen Gebäude.</p></div></div>
+  </div>
+</section>
+
+<section class="co2-sec">
+  <div class="wrap">
+    <h2 class="co2-h">Gut zu wissen</h2>
+    <div class="co2-bens ev-mods"><div class="co2-b"><span class="co2-ic">📍</span><h3>Wo</h3><p>Rackets Academy Salgesch, Littenstrasse 30, 3970 Salgesch. Tennis gibt es nur in Salgesch, nicht an unserem Standort Sion.</p></div><div class="co2-b"><span class="co2-ic">💰</span><h3>Preise</h3><p>Ab 15 CHF pro Person. Du bezahlst online bei der Buchung. Kostenlos stornieren bis 24 Std. vorher.</p></div><div class="co2-b"><span class="co2-ic">☔</span><h3>Ganzjährig, bei jedem Wetter</h3><p>Beide Plätze sind in der Halle. Täglich von 07:00 bis 23:30 offen, auch am Sonntag.</p></div></div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="wrap">
+    <h2>Fragen zu Tennis</h2>
+    <div class="spa-faq"><details><summary>Wo gibt es im Wallis eine Tennishalle?</summary><p>In der Rackets Academy in Salgesch: 2 Hallenplätze, täglich 07:00–23:30, 5 Minuten ab Siders, 20 ab Sion und Visp, 30 ab Brig. Online buchen auf Playtomic.</p></details><details><summary>Was kostet ein Tennisplatz?</summary><p>Ab 15 CHF pro Person. Den genauen Preis für deine Zeit siehst du bei der Buchung.</p></details><details><summary>Muss ich Clubmitglied sein?</summary><p>Nein. Jeder kann online einen Platz buchen, ohne Mitgliedschaft und ohne Jahresbeitrag.</p></details><details><summary>Gibt es Tennis in der Rackets Academy in Sion?</summary><p>Nein. An unserem Standort Sion gibt es nur Padel. Die Tennisplätze sind in Salgesch, 20 Minuten von Sion.</p></details><details><summary>Gibt es eine Tennishalle in der Nähe von Visp oder Brig?</summary><p>Ja, Salgesch liegt 20 Minuten von Visp und 30 Minuten von Brig.</p></details><details><summary>Kann ich abends oder am Sonntag spielen?</summary><p>Ja. Die Halle ist täglich von 07:00 bis 23:30 offen.</p></details></div>
+  </div>
+</section>
+
+<section class="co2-sec">
+  <div class="wrap">
+    <h2 class="co2-h">Mehr in der Rackets Academy</h2>
+    <div class="co2-bens ow-mores kc-mores"><a class="co2-b ow-more" href="index.html"><span class="co2-ic">🎾</span><h3>Padel →</h3><p>Das grösste Padelzentrum im Wallis.</p></a><a class="co2-b ow-more" href="pickleball.html"><span class="co2-ic">🏓</span><h3>Pickleball →</h3><p>3 Indoor-Plätze in der gleichen Halle.</p></a><a class="co2-b ow-more" href="spa-and-sauna.html"><span class="co2-ic">🧖</span><h3>Spa & Sauna →</h3><p>Sauna, Hammam und Whirlpool nach dem Spiel.</p></a></div>
+  </div>
+</section>
+
+<section class="spa-final kb-final" style="background-image:url('../images/coaching/coaching-6.webp');">
+  <div class="spa-hero-shade"></div>
+  <div class="wrap spa-final-inner">
+    <h2>Lust auf einen Satz?</h2>
+    <p>Salgesch · 2 Hallenplätze · täglich 07:00–23:30</p>
+    <div class="hero-actions" style="justify-content:center;">
+      <a class="btn btn-green spa-cta" href="https://playtomic.com/clubs/rackets-academy-salgesch" target="_blank" rel="noopener">Tennisplatz buchen</a>
+      <a class="btn spa-cta-ghost" href="https://wa.me/41772780115?text=Hola%21%20Ich%20habe%20eine%20Frage%20zu%20Tennis%20in%20Salgesch." target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="https://www.racketsacademy.ch/images/wix/fd51e1e7dfdf.png" alt="Rackets Academy" width="200" height="72" style="margin-bottom:8px;">
+    <p style="opacity:.85; margin:0 0 14px;">PLAY. COMPETE. ENJOY.</p>
+    <div class="footer-grid ux-foot"><div><h4>Salgesch</h4><a href="https://www.google.com/maps/search/?api=1&query=Littenstrasse+30+3970+Salgesch" target="_blank" rel="noopener">Littenstrasse 30, 3970 Salgesch</a><p>Padel · Pickleball · Tennis · Spa</p><p>Täglich 7–23:30 Uhr</p></div><div><h4>Sion</h4><a href="https://www.google.com/maps/search/?api=1&query=Route+de+Pr%C3%A9jeux+16+1950+Sion" target="_blank" rel="noopener">Route de Préjeux 16, 1950 Sion</a><p>Padel</p><p>Täglich 7–23:30 Uhr</p></div><div class="foot-links"><h4>Schnellzugriff</h4><a href="book.html">Platz buchen</a><a href="training.html">Kurse</a><a href="faq.html">FAQ</a><a href="shop.html#vouchers">Geschenkgutscheine</a><a href="shop.html">Shop</a><a href="events.html">Events</a></div><div class="footer-contact"><h4>Kontakt</h4><a class="foot-wa" href="https://wa.me/41772780115?text=Hola%21%20Ich%20habe%20eine%20Frage%20zur%20Rackets%20Academy." target="_blank" rel="noopener">Schreib uns auf WhatsApp</a><p>Schnelle Antwort · +41 77 278 01 15</p><a href="mailto:phil@racketsacademy.ch">phil@racketsacademy.ch</a></div></div>
+    <div class="sponsor-row">
+      <div class="sponsor-track">
+      <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/5887f86ed50b.png" alt="Wilson" loading="lazy"></a>
+      <a href="https://www.estrellagalicia.es" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e0ff8b826424.png" alt="Estrella Galicia" loading="lazy"></a>
+      <a href="https://www.decathlon.ch" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/75ca95274283.png" alt="Decathlon" loading="lazy"></a>
+      <a href="https://www.coca-cola.com/ch/de/brands/powerade" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4662d7547275.png" alt="Powerade" loading="lazy"></a>
+      <a href="https://tanguy.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4c92a56af6fb.png" alt="Garage Tanguy" loading="lazy"></a>
+      <a href="https://tanguy.hyundai.ch/fr" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/f74a1e85ce45.png" alt="Hyundai" loading="lazy"></a>
+      <a href="https://www.scleanup.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d7bc95225fa2.png" alt="S Clean-up" loading="lazy"></a>
+      <a href="https://shop.morand.ch/shop/category/sirops-65" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e03b161cd8bb.png" alt="Distillerie Morand" loading="lazy"></a>
+      <a href="https://rivella.ch/de/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d4f0de57b68e.png" alt="Rivella" loading="lazy"></a>
+      <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/5887f86ed50b.png" alt="Wilson" loading="lazy"></a>
+      <a href="https://www.estrellagalicia.es" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e0ff8b826424.png" alt="Estrella Galicia" loading="lazy"></a>
+      <a href="https://www.decathlon.ch" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/75ca95274283.png" alt="Decathlon" loading="lazy"></a>
+      <a href="https://www.coca-cola.com/ch/de/brands/powerade" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4662d7547275.png" alt="Powerade" loading="lazy"></a>
+      <a href="https://tanguy.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4c92a56af6fb.png" alt="Garage Tanguy" loading="lazy"></a>
+      <a href="https://tanguy.hyundai.ch/fr" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/f74a1e85ce45.png" alt="Hyundai" loading="lazy"></a>
+      <a href="https://www.scleanup.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d7bc95225fa2.png" alt="S Clean-up" loading="lazy"></a>
+      <a href="https://shop.morand.ch/shop/category/sirops-65" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e03b161cd8bb.png" alt="Distillerie Morand" loading="lazy"></a>
+      <a href="https://rivella.ch/de/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d4f0de57b68e.png" alt="Rivella" loading="lazy"></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="foot-more"><a href="about.html">Über uns</a> · <a href="faq.html">FAQ</a> · <a href="sponsoring.html">Sponsor werden</a> · <a href="../intern.html" rel="nofollow">Team-Login</a></span>
+      <span>© 2026 Rackets Academy</span>
+      <span><a href="terms-and-conditions.html">AGB</a> · <a href="privacy-policy.html">Datenschutz</a> · <a href="impressum.html">Impressum</a></span>
+    </div>
+  </div>
+</footer>
+<script src="../nav.js?v=41"></script>
+</body>
+</html>
