@@ -114,6 +114,6 @@ for lang, path in [('en', 'rivella-league.html'), ('fr', 'fr/rivella-league.html
     anchor = '<section class="section-tight">\n  <div id="league"></div>'
     assert anchor in s, path
     s = s.replace(anchor, block(lang) + '\n' + anchor)
-    s = re.sub(r'league\.css\?v=\d+', 'league.css?v=2', s)
+    s = re.sub(r'league\.css\?v=\d+', 'league.css?v=3', s)
     p.write_text(s, encoding='utf-8')
     print('ok', path)

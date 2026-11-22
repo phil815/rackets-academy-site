@@ -49,7 +49,7 @@
 @media (max-width:560px){
   .lg-bar{ flex-direction:column; align-items:stretch; }
   .lg-tabs{ align-self:center; }
-  .lg-search{ max-width:none; }
+  .lg-search{ max-width:none; flex:0 0 auto; }
   .lg-halves{ display:flex; } .lg-halves button{ flex:1; padding:9px 8px; font-size:.85rem; }
   .lg-groups{ grid-template-columns:1fr; }
 }
