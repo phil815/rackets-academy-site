@@ -53,3 +53,42 @@
   .lg-halves{ display:flex; } .lg-halves button{ flex:1; padding:9px 8px; font-size:.85rem; }
   .lg-groups{ grid-template-columns:1fr; }
 }
+
+/* Finale 29.11.2026 (tools/build_league_finale.py) */
+.fn h2{ margin:0 0 6px; color:var(--ink); }
+.fn-lede{ margin:0 0 14px; color:var(--blue-dark); font-weight:600; }
+.fn-perks{ list-style:none; padding:0; margin:0 0 22px; display:flex; flex-wrap:wrap; gap:8px; }
+.fn-perks li{ background:#fff; border:2px solid var(--blue); color:var(--blue-dark); border-radius:999px; padding:8px 14px 8px 10px; font-weight:700; font-size:.95rem; }
+.fn-perks li::before{ content:"✓"; display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%; background:var(--blue); color:#fff; font-size:.8rem; margin-right:8px; }
+.fn-cols{ display:grid; grid-template-columns:1.15fr 1fr; gap:18px; align-items:start; }
+.fn-box{ background:var(--ink); color:#fff; border-radius:22px; padding:20px; }
+.fn-box h3{ margin:0 0 14px; color:var(--green); font-size:1.15rem; }
+.fn-row{ display:flex; gap:10px; align-items:stretch; margin-bottom:8px; }
+.fn-t{ flex:0 0 58px; font-weight:800; color:var(--green); display:flex; align-items:center; font-variant-numeric:tabular-nums; }
+.fn-gs{ flex:1; display:grid; grid-template-columns:repeat(3,1fr); gap:6px; }
+.fn-g{ background:rgba(255,255,255,.08); border-radius:12px; padding:6px 4px; text-align:center; line-height:1.15; }
+.fn-g small{ display:block; font-size:.66rem; font-weight:700; color:#9fb3c8; text-transform:uppercase; letter-spacing:.04em; }
+.fn-g b{ font-size:1.12rem; }
+.fn-g.f{ background:#0f4f94; } .fn-g.f small{ color:var(--green); }
+.fn-g.gf{ background:var(--green); color:var(--ink); } .fn-g.gf small{ color:var(--ink); }
+.fn-g.cer{ grid-column:1 / -1; background:transparent; border:2px solid var(--green); padding:10px; }
+.fn-note{ margin:10px 0 0; font-size:.85rem; color:#c9d3df; }
+.fn-p{ display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 10px; background:rgba(255,255,255,.08); border-radius:12px; padding:10px 12px; margin-bottom:8px; }
+.fn-p span{ flex:0 0 84px; color:var(--green); font-weight:800; }
+.fn-p em{ font-style:normal; color:#c9d3df; margin-left:auto; }
+.fn-p.k1{ background:var(--green); color:var(--ink); } .fn-p.k1 span{ color:var(--ink); }
+.fn-p.k1.b{ background:rgba(255,255,255,.18); color:#fff; } .fn-p.k1.b span{ color:var(--green); }
+.fn-p.k2{ border-left:5px solid var(--green); } .fn-p.k3{ border-left:5px solid #fff; } .fn-p.k4{ border-left:5px solid var(--blue); }
+.fn-every{ margin:12px 0 6px; font-weight:700; }
+.fn-all summary{ cursor:pointer; color:var(--green); font-weight:700; padding:8px 0; }
+.fn-all ul{ list-style:none; padding:0; margin:6px 0 0; columns:2; column-gap:14px; font-size:.88rem; }
+.fn-all li{ break-inside:avoid; padding:4px 0; border-bottom:1px solid rgba(255,255,255,.1); }
+.fn-all li span{ display:inline-block; min-width:40px; color:var(--green); font-weight:800; }
+@media (max-width:860px){ .fn-cols{ grid-template-columns:1fr; } }
+@media (max-width:560px){
+  .fn-t{ flex-basis:46px; font-size:.92rem; }
+  .fn-g b{ font-size:1rem; }
+  .fn-p span{ flex-basis:70px; }
+  .fn-p em{ margin-left:0; flex-basis:100%; padding-left:80px; }
+  .fn-all ul{ columns:1; }
+}
