@@ -110,7 +110,7 @@
 .home-v2 .faq-list a, .home-v2 .faq-more a{color:#0b1a2b; text-decoration:underline;}
 
 /* Buchungsseite (book-v2): gleicher Baukasten, eigener Kopf */
-.book-v2 .hero{background-color:#0b1a2b; background-image:linear-gradient(180deg, rgba(11,26,43,.8) 0%, rgba(11,26,43,.95) 100%), url('images/wix/c213587e533f.webp') !important; background-size:cover; background-position:center; padding:0; display:flex; align-items:flex-end; min-height:min(52vh,460px);}
+.book-v2 .hero{background-color:#0b1a2b; background-image:linear-gradient(180deg, rgba(11,26,43,.45) 0%, rgba(11,26,43,.88) 100%), url('images/home/book-hero.webp') !important; background-size:cover; background-position:center 55% !important; padding:0; display:flex; align-items:flex-end; min-height:min(52vh,460px);}
 .book-v2 .hero .ball{display:none;}
 .book-v2 .hero .hero-inner{max-width:var(--max); width:100%; padding:110px 24px 56px;}
 .book-v2 .hero h1{font-size:clamp(2.7rem,7vw,5.2rem); line-height:.98; letter-spacing:-.035em; font-weight:800; margin:0 0 18px; color:#fff;}
