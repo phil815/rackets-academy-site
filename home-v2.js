@@ -44,6 +44,7 @@
   function loadFree() {
     if (!free) return;
     var mine = ++run;
+    free.hidden = true;                               // nie die Zahlen einer früheren Auswahl stehen lassen
     if (!FREE_URL || state.sport !== 'PADEL' || !window.fetch) { free.hidden = true; return; }
     fetch(FREE_URL + '?club=' + state.club + '&date=' + dateFor(state.day))
       .then(function (r) { return r.json(); })
