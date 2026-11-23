@@ -4,13 +4,16 @@ Idempotent: Bloecke stehen zwischen <!-- ux:hv2-NAME --> ... <!-- /ux:hv2-NAME -
 Titel, H1, Meta und alle uebrigen Abschnitte bleiben unveraendert."""
 import os, re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VER = '1'
+VER = '2'
+# Web-App «Free slots» (Apps Script). Leer = Anzeige der freien Padel-Plätze bleibt aus, nur der Link zu Playtomic.
+FREE_URL = ''
 SA = 'https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3'
 
 T = {
  'en': dict(file='index.html', p='',
   promo=('🎾 COURTS OPEN NOW — ', 'Courts open now — '), promo_a=('Book Now on Playtomic', 'Book now on Playtomic'),
   aria='Book a court', wo='Where', was='What', wann='When', today='Today', tomorrow='Tomorrow', weekend='Weekend',
+  free_lead='Free padel courts', free_parts='Morning|Afternoon|Evening', free_one='1 court free', free_n='{n} courts free', free_full='Fully booked', free_asof='As of {t}',
   cta='See free slots', note='You book securely on Playtomic', note_sion='Pickleball and tennis are in Salgesch',
   more='Also here: <a href="company.html#discount">Company discount</a> · <a href="shop.html#vouchers">Gift vouchers</a>',
   tiles=[('Play', 'Padel, tennis and pickleball. Pick your court and book directly, from CHF 17 per person.'),
@@ -25,6 +28,7 @@ T = {
  'fr': dict(file='fr/index.html', p='../',
   promo=('🎾 COURTS OUVERTS — ', 'Courts ouverts — '), promo_a=None,
   aria='Réserver un court', wo='Où', was='Quoi', wann='Quand', today="Aujourd'hui", tomorrow='Demain', weekend='Week-end',
+  free_lead='Courts de padel libres', free_parts='Matin|Après-midi|Soir', free_one='1 court libre', free_n='{n} courts libres', free_full='Complet', free_asof='État à {t}',
   cta='Voir les créneaux libres', note='Tu réserves en toute sécurité sur Playtomic', note_sion='Pickleball et tennis sont à Salgesch',
   more='Aussi chez nous : <a href="company.html#discount">Rabais entreprise</a> · <a href="shop.html#vouchers">Bons cadeaux</a>',
   tiles=[('Jouer', 'Padel, tennis et pickleball. Choisis ton terrain et réserve directement, dès 17 CHF par personne.'),
@@ -39,6 +43,7 @@ T = {
  'de': dict(file='de/index.html', p='../',
   promo=('🎾 PLÄTZE JETZT OFFEN — ', 'Plätze jetzt offen — '), promo_a=None,
   aria='Platz buchen', wo='Wo', was='Was', wann='Wann', today='Heute', tomorrow='Morgen', weekend='Wochenende',
+  free_lead='Freie Padel-Plätze', free_parts='Vormittag|Nachmittag|Abend', free_one='1 Platz frei', free_n='{n} Plätze frei', free_full='Ausgebucht', free_asof='Stand {t}',
   cta='Freie Zeiten ansehen', note='Du buchst sicher über Playtomic', note_sion='Pickleball und Tennis gibt es in Salgesch',
   more='Auch bei uns: <a href="company.html#discount">Firmenrabatt</a> · <a href="shop.html#vouchers">Geschenkgutscheine</a>',
   tiles=[('Spielen', 'Padel, Tennis und Pickleball. Platz wählen und direkt buchen, ab 17 CHF pro Person.'),
@@ -77,14 +82,15 @@ def book_html(t):
     pill = lambda attr, label, on=False: '<button type="button" class="hv2-pill" aria-pressed="%s" %s>%s</button>' % ('true' if on else 'false', attr, label)
     return '''<section class="hv2-book" aria-label="%(aria)s">
   <div class="wrap">
-    <div class="hv2-card" data-hv2-book>
+    <div class="hv2-card" data-hv2-book data-free-url="%(free_url)s">
       <div class="hv2-group"><p class="hv2-label" id="hv2-wo">%(wo)s</p><div class="hv2-pills" role="group" aria-labelledby="hv2-wo">%(clubs)s</div></div>
       <div class="hv2-group"><p class="hv2-label" id="hv2-was">%(was)s</p><div class="hv2-pills" role="group" aria-labelledby="hv2-was">%(sports)s</div></div>
       <div class="hv2-group"><p class="hv2-label" id="hv2-wann">%(wann)s</p><div class="hv2-pills" role="group" aria-labelledby="hv2-wann">%(days)s</div></div>
       <div class="hv2-go"><a class="btn btn-green hv2-cta" href="https://playtomic.com/clubs/rackets-academy-salgesch?sport=PADEL" target="_blank" rel="noopener">%(cta)s</a><p class="hv2-note" data-std="%(note)s" data-sion="%(note_sion)s">%(note)s</p></div>
+      <div class="hv2-free" hidden aria-live="polite" data-lead="%(free_lead)s" data-parts="%(free_parts)s" data-one="%(free_one)s" data-n="%(free_n)s" data-full="%(free_full)s" data-asof="%(free_asof)s"></div>
     </div>
   </div>
-</section>''' % dict(t,
+</section>''' % dict(t, free_url=FREE_URL,
         clubs=pill('data-club="salgesch"', 'Salgesch', True) + pill('data-club="sion"', 'Sion'),
         sports=pill('data-sport="PADEL"', 'Padel', True) + pill('data-sport="PICKLEBALL"', 'Pickleball') + pill('data-sport="TENNIS"', 'Tennis'),
         days=pill('data-day="0"', t['today'], True) + pill('data-day="1"', t['tomorrow']) + pill('data-day="we"', t['weekend']))

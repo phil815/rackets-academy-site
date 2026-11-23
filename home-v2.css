@@ -32,6 +32,15 @@
 .hv2-go{display:flex; flex-direction:column; gap:6px; align-items:stretch; margin-left:auto;}
 .hv2-go .hv2-cta{font-size:1.1rem; padding:16px 30px; text-align:center; color:#0b1a2b;}
 .hv2-note{margin:0; font-size:.85rem; color:#4c5d70; text-align:center;}
+/* Freie Padel-Plätze nach Tagesabschnitt */
+.hv2-free{flex:1 1 100%; border-top:1px solid #e3e9ef; padding-top:16px; display:flex; align-items:center; gap:10px 16px; flex-wrap:wrap;}
+.hv2-free[hidden]{display:none;}
+.hv2-free-lead{margin:0; font-size:.95rem; font-weight:700; color:#4c5d70;}
+.hv2-parts{display:flex; gap:8px; flex-wrap:wrap;}
+.hv2-part{display:inline-flex; align-items:baseline; gap:8px; background:#e9fbdc; color:#0b1a2b; border-radius:14px; padding:9px 14px; font-size:1rem;}
+.hv2-part b{font-weight:800;}
+.hv2-part-full{background:#f1f4f7; color:#4c5d70;}
+.hv2-free-asof{margin:0 0 0 auto; font-size:.85rem; color:#4c5d70;}
 
 /* Einführungskurs */
 .home-v2 .beginner-banner{padding:36px 0 0;}
@@ -111,6 +120,10 @@
   .hv2-card{margin-top:-84px; padding:20px 16px; border-radius:24px; flex-direction:column; align-items:stretch; gap:14px;}
   .hv2-pills{flex-wrap:nowrap;}
   .hv2-pill{flex:1 1 auto; padding:11px 8px; font-size:.95rem;}
+  .hv2-free{flex-direction:column; align-items:stretch; gap:8px; padding-top:14px;}
+  .hv2-parts{flex-direction:column;}
+  .hv2-part{justify-content:space-between;}
+  .hv2-free-asof{margin:0;}
   /* Handy: Foto oben, Text darunter (Gesichter bleiben frei), zwei Spalten, erste Kachel breit */
   .hv2-tiles{grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px;}
   .hv2-tile{height:auto; border-radius:20px; display:flex; flex-direction:column;}

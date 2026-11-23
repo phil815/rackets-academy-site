@@ -33,6 +33,39 @@
     });
     cta.href = CLUBS[state.club] + '?date=' + dateFor(state.day) + '&sport=' + state.sport;
     if (note) note.textContent = sionOnly ? note.dataset.sion : note.dataset.std;
+    loadFree();
+  }
+
+  // Freie Padel-Plätze nach Tagesabschnitt (Web-App «Free slots»). Ohne Adresse oder bei einem Fehler
+  // bleibt der Bereich unsichtbar und der Knopf führt wie bisher zu Playtomic.
+  var free = card.querySelector('.hv2-free');
+  var FREE_URL = card.getAttribute('data-free-url') || '';
+  var run = 0;
+  function loadFree() {
+    if (!free) return;
+    var mine = ++run;
+    if (!FREE_URL || state.sport !== 'PADEL' || !window.fetch) { free.hidden = true; return; }
+    fetch(FREE_URL + '?club=' + state.club + '&date=' + dateFor(state.day))
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (mine !== run) return;                       // inzwischen wurde etwas anderes gewählt
+        if (!d || !d.ok || !d.parts) { free.hidden = true; return; }
+        var names = free.dataset.parts.split('|');
+        var keys = ['morning', 'afternoon', 'evening'];
+        var html = '';
+        d.parts.forEach(function (p) {
+          var i = keys.indexOf(p.key);
+          if (i < 0 || p.past) return;
+          var n = Number(p.courts) || 0;
+          var txt = n === 0 ? free.dataset.full : (n === 1 ? free.dataset.one : free.dataset.n.replace('{n}', n));
+          html += '<span class="hv2-part' + (n === 0 ? ' hv2-part-full' : '') + '"><b>' + names[i] + '</b> ' + txt + '</span>';
+        });
+        if (!html) { free.hidden = true; return; }
+        free.innerHTML = '<p class="hv2-free-lead">' + free.dataset.lead + '</p><div class="hv2-parts">' + html +
+          '</div><p class="hv2-free-asof">' + free.dataset.asof.replace('{t}', String(d.updated || '').replace(/[^0-9:]/g, '')) + '</p>';
+        free.hidden = false;
+      })
+      .catch(function () { if (mine === run) free.hidden = true; });
   }
   card.addEventListener('click', function (e) {
     var b = e.target.closest && e.target.closest('.hv2-pill');
