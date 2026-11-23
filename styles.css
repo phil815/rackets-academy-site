@@ -1233,3 +1233,8 @@ a.card-link.offer.co-way .offer-text p{font-size:1rem; line-height:1.5; color:va
 .tn-near{background:#fff; border:1px solid #dfeaf5; border-radius:16px; padding:18px 12px; text-align:center;}
 .tn-near b{display:block; font-size:1.6rem; color:var(--blue); line-height:1.1;} .tn-near span{display:block; margin-top:4px; font-weight:600; color:#0b1a2b;}
 @media (max-width:800px){ .tn-nears{grid-template-columns:repeat(2,1fr);} .tn-near:last-child{grid-column:1 / -1;} }
+
+/* Footer: Sport-Links in der Standortzeile (23.11.2026) */
+.footer-grid p a.foot-sport{display:inline; padding:0; color:inherit; text-decoration:underline; text-underline-offset:3px;}
+@media (max-width:760px){.footer-grid p a.foot-sport{display:inline-block; padding:8px 2px;}}
+.pc-sport a{color:inherit; text-decoration:underline; text-underline-offset:3px;}

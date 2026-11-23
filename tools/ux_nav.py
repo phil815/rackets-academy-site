@@ -43,6 +43,8 @@ def fix(path):
         more = '<span class="foot-more"><a href="about.html">%s</a> · <a href="faq.html">%s</a> · <a href="sponsoring.html">%s</a> · <a href="%s" rel="nofollow">%s</a></span>\n      ' % (t['about'], t['faq'], t['sponsor'], lg, t['login'])
         if m: s = s[:m.start()] + more + s[m.end():]
         else: s = re.sub(r'(<div class="footer-bottom">\s*)', lambda x: x.group(1) + more, s, count=1)
+    # Footer Salgesch: Pickleball und Tennis als Links (Wochenlauf 23.11.2026, interne Links zu den Prio-Produkten)
+    s = s.replace('<p>Padel · Pickleball · Tennis · Spa</p>', '<p>Padel · <a class="foot-sport" href="pickleball.html">Pickleball</a> · <a class="foot-sport" href="tennis.html">Tennis</a> · Spa</p>')
     # Vorschaubilder (og:image, JSON-LD) bleiben JPG/PNG: nicht jede Plattform zeigt WebP
     def orig(m):
         base = m.group(2)
