@@ -109,6 +109,17 @@
 .home-v2 .faq-list details p{color:#2b3b4d; font-size:1.05rem;}
 .home-v2 .faq-list a, .home-v2 .faq-more a{color:#0b1a2b; text-decoration:underline;}
 
+/* Buchungsseite (book-v2): gleicher Baukasten, eigener Kopf */
+.book-v2 .hero{background-color:#0b1a2b; background-image:linear-gradient(180deg, rgba(11,26,43,.8) 0%, rgba(11,26,43,.95) 100%), url('images/wix/c213587e533f.webp') !important; background-size:cover; background-position:center; padding:0; display:flex; align-items:flex-end; min-height:min(52vh,460px);}
+.book-v2 .hero .ball{display:none;}
+.book-v2 .hero .hero-inner{max-width:var(--max); width:100%; padding:110px 24px 56px;}
+.book-v2 .hero h1{font-size:clamp(2.7rem,7vw,5.2rem); line-height:.98; letter-spacing:-.035em; font-weight:800; margin:0 0 18px; color:#fff;}
+.book-v2 .hero p.lede{font-size:clamp(1.05rem,1.6vw,1.25rem); line-height:1.5; opacity:1; max-width:56ch; margin:0; color:#fff;}
+.book-v2 .hv2-card{margin-top:28px; text-align:left; border:1px solid #dfe6ee; box-shadow:0 10px 30px rgba(11,26,43,.1);}
+.book-v2 .wrap.grid-3 > .card{background:#eef4fa; border:0; border-radius:24px; padding:28px; color:#0b1a2b;}
+.book-v2 .wrap.grid-3 > .card h3{font-size:1.5rem; letter-spacing:-.01em; margin:0 0 8px; color:#0b1a2b;}
+.book-v2 .wrap.grid-3 > .card p{color:#2b3b4d; font-size:1.05rem; margin:0;}
+
 @media (max-width:900px){
   .hv2-tiles{grid-template-columns:repeat(2,minmax(0,1fr));}
   .hv2-go{margin-left:0; width:100%;}
@@ -135,6 +146,10 @@
   .hv2-tile-text h3{font-size:1.2rem;}
   .hv2-tile-text p{font-size:.93rem; line-height:1.35;}
   .home-v2 .beginner-banner .bb-inner{padding:22px 20px;}
+  .book-v2 .hero{min-height:0;}
+  .book-v2 .hero .hero-inner{padding:44px 20px 36px;}
+  .book-v2 section.section-tight:first-of-type{padding-top:36px;}
+  .book-v2 .hv2-card{margin-top:22px;}
   .home-v2 .location-photo{height:190px;}
   .home-v2 .price-card:not(.main) .pc-row b{font-size:1.45rem;}
 }

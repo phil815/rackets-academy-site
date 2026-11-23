@@ -54,6 +54,7 @@
 <meta name="description" content="Book padel, pickleball and tennis courts in Salgesch and Sion via Playtomic — live availability, open matches and tournaments.">
 <link rel="canonical" href="https://www.racketsacademy.ch/book.html">
 <link rel="stylesheet" href="styles.css?v=54">
+<link rel="stylesheet" href="home-v2.css?v=4">
 <meta property="og:title" content="Book a Court — Rackets Academy Salgesch &amp; Sion">
 <meta property="og:description" content="Book padel, pickleball and tennis courts in Salgesch and Sion via Playtomic — live availability, open matches and tournaments.">
 <meta property="og:type" content="website">
@@ -71,7 +72,7 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much does a court cost?", "acceptedAnswer": {"@type": "Answer", "text": "Padel indoor (90 min): 17 CHF per person Mon–Fri before 5pm, 20 CHF per person from 5pm and at weekends. Tennis from 15 CHF per person. Pickleball (1 h) from 5 CHF per person. Prices apply at both clubs."}}, {"@type": "Question", "name": "I don't have a racket.", "acceptedAnswer": {"@type": "Answer", "text": "Rent one at the club for 3, 5 or 10 CHF (beginner / intermediate / pro), pay with Twint. Balls are on sale on site."}}, {"@type": "Question", "name": "I've never played.", "acceptedAnswer": {"@type": "Answer", "text": "Join the intro course every Saturday at 10:00 in Sion. No experience needed, rackets to rent on site. Sign up on Playtomic."}}, {"@type": "Question", "name": "How do I cancel?", "acceptedAnswer": {"@type": "Answer", "text": "Free cancellation up to 24 hours before your booking, directly in the Playtomic app. Later cancellations and no-shows are charged in full."}}, {"@type": "Question", "name": "When are you open?", "acceptedAnswer": {"@type": "Answer", "text": "Every day 7am–11:30pm at both clubs."}}, {"@type": "Question", "name": "Changing rooms and showers?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, at both clubs."}}, {"@type": "Question", "name": "Where do I park?", "acceptedAnswer": {"@type": "Answer", "text": "Salgesch: free parking on site, the station is a 15-minute walk. Sion: parking on site, Route de Préjeux 16."}}, {"@type": "Question", "name": "Can we split the payment?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Playtomic splits the court price automatically between the players."}}]}</script>
 <!-- /ux:faq-schema -->
 </head>
-<body>
+<body class="home-v2 book-v2">
 <div class="site-top">
 <div class="promo-banner">
   <div class="promo-track">
@@ -119,10 +120,15 @@
   <div class="wrap">
     <h2>Check live availability</h2>
     <p class="section-lede" style="margin-left:auto; margin-right:auto;">Tap your location to see open slots and book in under a minute.</p>
-    <div class="hero-actions" style="justify-content:center; display:flex; gap:14px; flex-wrap:wrap;">
-      <a class="btn btn-green" href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-book-modal>Book in Salgesch</a>
-      <a class="btn btn-green" href="https://playtomic.com/tenant/c2ce2a9e-ab52-4191-bf7f-0c0aa70a2701" target="_blank" rel="noopener" data-book-modal>Book in Sion</a>
+    <!-- ux:bv2-book -->
+    <div class="hv2-card" data-hv2-book data-free-url="https://script.google.com/macros/s/AKfycbyhaXT98MOSUwf7W7f09CfWK21OaJP3MDpi2dZMk09LLelhNF_Hp5gKe68cpekoxryCEA/exec">
+      <div class="hv2-group"><p class="hv2-label" id="hv2-wo">Where</p><div class="hv2-pills" role="group" aria-labelledby="hv2-wo"><button type="button" class="hv2-pill" aria-pressed="true" data-club="salgesch">Salgesch</button><button type="button" class="hv2-pill" aria-pressed="false" data-club="sion">Sion</button></div></div>
+      <div class="hv2-group"><p class="hv2-label" id="hv2-was">What</p><div class="hv2-pills" role="group" aria-labelledby="hv2-was"><button type="button" class="hv2-pill" aria-pressed="true" data-sport="PADEL">Padel</button><button type="button" class="hv2-pill" aria-pressed="false" data-sport="PICKLEBALL">Pickleball</button><button type="button" class="hv2-pill" aria-pressed="false" data-sport="TENNIS">Tennis</button></div></div>
+      <div class="hv2-group"><p class="hv2-label" id="hv2-wann">When</p><div class="hv2-pills" role="group" aria-labelledby="hv2-wann"><button type="button" class="hv2-pill" aria-pressed="true" data-day="0">Today</button><button type="button" class="hv2-pill" aria-pressed="false" data-day="1">Tomorrow</button><button type="button" class="hv2-pill" aria-pressed="false" data-day="we">Weekend</button></div></div>
+      <div class="hv2-go"><a class="btn btn-green hv2-cta" href="https://playtomic.com/clubs/rackets-academy-salgesch?sport=PADEL" target="_blank" rel="noopener">See free slots</a><p class="hv2-note" data-std="You book securely on Playtomic" data-sion="Pickleball and tennis are in Salgesch">You book securely on Playtomic</p></div>
+      <div class="hv2-free" hidden aria-live="polite" data-lead="Free padel courts" data-parts="Morning|Afternoon|Evening" data-one="1 court free" data-n="{n} courts free" data-full="Fully booked" data-asof="As of {t}"></div>
     </div>
+    <!-- /ux:bv2-book -->
   </div>
 </section>
 <!-- ux:prices -->
@@ -145,14 +151,6 @@
   </div>
 </section>
 <!-- /ux:prices -->
-<!-- ux:faq -->
-<section class="section-tight ux-faq" id="faq">
-  <div class="wrap">
-    <h2>First time? Good to know</h2>
-    <div class="faq-list"><details><summary>What are the house rules?</summary><p>Cancel at least 24 hours before your booking, no glass near the courts, clean indoor shoes, and lights go on 5 minutes before and off 10 minutes after your slot. <a href="house-rules.html">All house rules</a>.</p></details><details><summary>How much does a court cost?</summary><p>Padel indoor (90 min): 17 CHF per person Mon–Fri before 5pm, 20 CHF per person from 5pm and at weekends. Tennis from 15 CHF per person. Pickleball (1 h) from 5 CHF per person. Prices apply at both clubs.</p></details><details><summary>I don't have a racket.</summary><p>Rent one at the club for 3, 5 or 10 CHF (beginner / intermediate / pro), pay with Twint. Balls are on sale on site.</p></details><details><summary>I've never played.</summary><p>Join the intro course every Saturday at 10:00 in Sion. No experience needed, rackets to rent on site. <a href="https://tinyurl.com/Academy-Sion" target="_blank" rel="noopener">Sign up on Playtomic</a>.</p></details><details><summary>How do I cancel?</summary><p>Free cancellation up to 24 hours before your booking, directly in the Playtomic app. Later cancellations and no-shows are charged in full.</p></details><details><summary>When are you open?</summary><p>Every day 7am–11:30pm at both clubs.</p></details><details><summary>Changing rooms and showers?</summary><p>Yes, at both clubs.</p></details><details><summary>Where do I park?</summary><p>Salgesch: free parking on site, the station is a 15-minute walk. Sion: parking on site, Route de Préjeux 16.</p></details><details><summary>Can we split the payment?</summary><p>Yes. Playtomic splits the court price automatically between the players.</p></details></div>
-  </div>
-</section>
-<!-- /ux:faq -->
 
 
 
@@ -177,6 +175,17 @@
     </div>
   </div>
 </section>
+
+
+
+<!-- ux:faq -->
+<section class="section-tight ux-faq" id="faq">
+  <div class="wrap">
+    <h2>First time? Good to know</h2>
+    <div class="faq-list"><details><summary>What are the house rules?</summary><p>Cancel at least 24 hours before your booking, no glass near the courts, clean indoor shoes, and lights go on 5 minutes before and off 10 minutes after your slot. <a href="house-rules.html">All house rules</a>.</p></details><details><summary>How much does a court cost?</summary><p>Padel indoor (90 min): 17 CHF per person Mon–Fri before 5pm, 20 CHF per person from 5pm and at weekends. Tennis from 15 CHF per person. Pickleball (1 h) from 5 CHF per person. Prices apply at both clubs.</p></details><details><summary>I don't have a racket.</summary><p>Rent one at the club for 3, 5 or 10 CHF (beginner / intermediate / pro), pay with Twint. Balls are on sale on site.</p></details><details><summary>I've never played.</summary><p>Join the intro course every Saturday at 10:00 in Sion. No experience needed, rackets to rent on site. <a href="https://tinyurl.com/Academy-Sion" target="_blank" rel="noopener">Sign up on Playtomic</a>.</p></details><details><summary>How do I cancel?</summary><p>Free cancellation up to 24 hours before your booking, directly in the Playtomic app. Later cancellations and no-shows are charged in full.</p></details><details><summary>When are you open?</summary><p>Every day 7am–11:30pm at both clubs.</p></details><details><summary>Changing rooms and showers?</summary><p>Yes, at both clubs.</p></details><details><summary>Where do I park?</summary><p>Salgesch: free parking on site, the station is a 15-minute walk. Sion: parking on site, Route de Préjeux 16.</p></details><details><summary>Can we split the payment?</summary><p>Yes. Playtomic splits the court price automatically between the players.</p></details></div>
+  </div>
+</section>
+<!-- /ux:faq -->
 
 <section class="section-tight" style="text-align:center;">
   <div class="wrap">
@@ -224,5 +233,6 @@
   </div>
 </footer>
 <script src="nav.js?v=41"></script>
+<script src="home-v2.js?v=4" defer></script>
 </body>
 </html>

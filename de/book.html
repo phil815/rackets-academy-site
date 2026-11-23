@@ -50,6 +50,7 @@
 <meta name="description" content="Padel-, Pickleball- und Tennisplätze in Salgesch und Sion über Playtomic buchen — Live-Verfügbarkeit, offene Matches und Turniere.">
 <link rel="canonical" href="https://www.racketsacademy.ch/de/book.html">
 <link rel="stylesheet" href="../styles.css?v=54">
+<link rel="stylesheet" href="../home-v2.css?v=4">
 <meta property="og:title" content="Platz buchen — Rackets Academy Salgesch &amp; Sion">
 <meta property="og:description" content="Padel-, Pickleball- und Tennisplätze in Salgesch und Sion über Playtomic buchen — Live-Verfügbarkeit, offene Matches und Turniere.">
 <meta property="og:type" content="website">
@@ -67,7 +68,7 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Was kostet ein Platz?", "acceptedAnswer": {"@type": "Answer", "text": "Padel indoor (90 Min.): 17 CHF pro Person Mo–Fr vor 17 Uhr, 20 CHF pro Person ab 17 Uhr und am Wochenende. Tennis ab 15 CHF pro Person. Pickleball (1 Std.) ab 5 CHF pro Person. Gleiche Preise an beiden Standorten."}}, {"@type": "Question", "name": "Ich habe keinen Schläger.", "acceptedAnswer": {"@type": "Answer", "text": "Miete einen im Club für 3, 5 oder 10 CHF (Einsteiger / Fortgeschritten / Pro), bezahlt wird mit Twint. Bälle gibt es vor Ort."}}, {"@type": "Question", "name": "Ich habe noch nie gespielt.", "acceptedAnswer": {"@type": "Answer", "text": "Komm in den Einführungskurs, jeden Samstag um 10 Uhr in Sion. Keine Vorkenntnisse nötig, Schläger kannst du vor Ort mieten. Auf Playtomic anmelden."}}, {"@type": "Question", "name": "Wie storniere ich?", "acceptedAnswer": {"@type": "Answer", "text": "Kostenlos bis 24 Stunden vor deiner Buchung, direkt in der Playtomic-App. Spätere Stornierungen und Nichterscheinen werden voll verrechnet."}}, {"@type": "Question", "name": "Wann habt ihr offen?", "acceptedAnswer": {"@type": "Answer", "text": "Täglich von 7 bis 23:30 Uhr, an beiden Standorten."}}, {"@type": "Question", "name": "Gibt es Garderoben und Duschen?", "acceptedAnswer": {"@type": "Answer", "text": "Ja, an beiden Standorten."}}, {"@type": "Question", "name": "Wo kann ich parken?", "acceptedAnswer": {"@type": "Answer", "text": "Salgesch: Gratis-Parkplätze vor Ort, der Bahnhof ist 15 Gehminuten entfernt. Sion: Parkplätze vor Ort, Route de Préjeux 16."}}, {"@type": "Question", "name": "Kann man die Zahlung teilen?", "acceptedAnswer": {"@type": "Answer", "text": "Ja. Playtomic teilt den Platzpreis automatisch unter den Spielern auf."}}]}</script>
 <!-- /ux:faq-schema -->
 </head>
-<body>
+<body class="home-v2 book-v2">
 <div class="site-top">
 <div class="promo-banner">
   <div class="promo-track">
@@ -115,10 +116,15 @@
   <div class="wrap">
     <h2>Live-Verfügbarkeit prüfen</h2>
     <p class="section-lede" style="margin-left:auto; margin-right:auto;">Wähl deinen Standort, um freie Plätze zu sehen und in unter einer Minute zu buchen.</p>
-    <div class="hero-actions" style="justify-content:center; display:flex; gap:14px; flex-wrap:wrap;">
-      <a class="btn btn-green" href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-book-modal>In Salgesch buchen</a>
-      <a class="btn btn-green" href="https://playtomic.com/tenant/c2ce2a9e-ab52-4191-bf7f-0c0aa70a2701" target="_blank" rel="noopener" data-book-modal>In Sion buchen</a>
+    <!-- ux:bv2-book -->
+    <div class="hv2-card" data-hv2-book data-free-url="https://script.google.com/macros/s/AKfycbyhaXT98MOSUwf7W7f09CfWK21OaJP3MDpi2dZMk09LLelhNF_Hp5gKe68cpekoxryCEA/exec">
+      <div class="hv2-group"><p class="hv2-label" id="hv2-wo">Wo</p><div class="hv2-pills" role="group" aria-labelledby="hv2-wo"><button type="button" class="hv2-pill" aria-pressed="true" data-club="salgesch">Salgesch</button><button type="button" class="hv2-pill" aria-pressed="false" data-club="sion">Sion</button></div></div>
+      <div class="hv2-group"><p class="hv2-label" id="hv2-was">Was</p><div class="hv2-pills" role="group" aria-labelledby="hv2-was"><button type="button" class="hv2-pill" aria-pressed="true" data-sport="PADEL">Padel</button><button type="button" class="hv2-pill" aria-pressed="false" data-sport="PICKLEBALL">Pickleball</button><button type="button" class="hv2-pill" aria-pressed="false" data-sport="TENNIS">Tennis</button></div></div>
+      <div class="hv2-group"><p class="hv2-label" id="hv2-wann">Wann</p><div class="hv2-pills" role="group" aria-labelledby="hv2-wann"><button type="button" class="hv2-pill" aria-pressed="true" data-day="0">Heute</button><button type="button" class="hv2-pill" aria-pressed="false" data-day="1">Morgen</button><button type="button" class="hv2-pill" aria-pressed="false" data-day="we">Wochenende</button></div></div>
+      <div class="hv2-go"><a class="btn btn-green hv2-cta" href="https://playtomic.com/clubs/rackets-academy-salgesch?sport=PADEL" target="_blank" rel="noopener">Freie Zeiten ansehen</a><p class="hv2-note" data-std="Du buchst sicher über Playtomic" data-sion="Pickleball und Tennis gibt es in Salgesch">Du buchst sicher über Playtomic</p></div>
+      <div class="hv2-free" hidden aria-live="polite" data-lead="Freie Padel-Plätze" data-parts="Vormittag|Nachmittag|Abend" data-one="1 Platz frei" data-n="{n} Plätze frei" data-full="Ausgebucht" data-asof="Stand {t}"></div>
     </div>
+    <!-- /ux:bv2-book -->
   </div>
 </section>
 <!-- ux:prices -->
@@ -141,14 +147,6 @@
   </div>
 </section>
 <!-- /ux:prices -->
-<!-- ux:faq -->
-<section class="section-tight ux-faq" id="faq">
-  <div class="wrap">
-    <h2>Zum ersten Mal hier? Gut zu wissen</h2>
-    <div class="faq-list"><details><summary>Welche Hausregeln gelten?</summary><p>Stornierung mindestens 24 Stunden vorher, kein Glas bei den Courts, saubere Hallenschuhe, Licht 5 Minuten vor deiner Buchung an und 10 Minuten danach aus. <a href="house-rules.html">Ganze Hausordnung</a>.</p></details><details><summary>Was kostet ein Platz?</summary><p>Padel indoor (90 Min.): 17 CHF pro Person Mo–Fr vor 17 Uhr, 20 CHF pro Person ab 17 Uhr und am Wochenende. Tennis ab 15 CHF pro Person. Pickleball (1 Std.) ab 5 CHF pro Person. Gleiche Preise an beiden Standorten.</p></details><details><summary>Ich habe keinen Schläger.</summary><p>Miete einen im Club für 3, 5 oder 10 CHF (Einsteiger / Fortgeschritten / Pro), bezahlt wird mit Twint. Bälle gibt es vor Ort.</p></details><details><summary>Ich habe noch nie gespielt.</summary><p>Komm in den Einführungskurs, jeden Samstag um 10 Uhr in Sion. Keine Vorkenntnisse nötig, Schläger kannst du vor Ort mieten. <a href="https://tinyurl.com/Academy-Sion" target="_blank" rel="noopener">Auf Playtomic anmelden</a>.</p></details><details><summary>Wie storniere ich?</summary><p>Kostenlos bis 24 Stunden vor deiner Buchung, direkt in der Playtomic-App. Spätere Stornierungen und Nichterscheinen werden voll verrechnet.</p></details><details><summary>Wann habt ihr offen?</summary><p>Täglich von 7 bis 23:30 Uhr, an beiden Standorten.</p></details><details><summary>Gibt es Garderoben und Duschen?</summary><p>Ja, an beiden Standorten.</p></details><details><summary>Wo kann ich parken?</summary><p>Salgesch: Gratis-Parkplätze vor Ort, der Bahnhof ist 15 Gehminuten entfernt. Sion: Parkplätze vor Ort, Route de Préjeux 16.</p></details><details><summary>Kann man die Zahlung teilen?</summary><p>Ja. Playtomic teilt den Platzpreis automatisch unter den Spielern auf.</p></details></div>
-  </div>
-</section>
-<!-- /ux:faq -->
 
 
 
@@ -173,6 +171,17 @@
     </div>
   </div>
 </section>
+
+
+
+<!-- ux:faq -->
+<section class="section-tight ux-faq" id="faq">
+  <div class="wrap">
+    <h2>Zum ersten Mal hier? Gut zu wissen</h2>
+    <div class="faq-list"><details><summary>Welche Hausregeln gelten?</summary><p>Stornierung mindestens 24 Stunden vorher, kein Glas bei den Courts, saubere Hallenschuhe, Licht 5 Minuten vor deiner Buchung an und 10 Minuten danach aus. <a href="house-rules.html">Ganze Hausordnung</a>.</p></details><details><summary>Was kostet ein Platz?</summary><p>Padel indoor (90 Min.): 17 CHF pro Person Mo–Fr vor 17 Uhr, 20 CHF pro Person ab 17 Uhr und am Wochenende. Tennis ab 15 CHF pro Person. Pickleball (1 Std.) ab 5 CHF pro Person. Gleiche Preise an beiden Standorten.</p></details><details><summary>Ich habe keinen Schläger.</summary><p>Miete einen im Club für 3, 5 oder 10 CHF (Einsteiger / Fortgeschritten / Pro), bezahlt wird mit Twint. Bälle gibt es vor Ort.</p></details><details><summary>Ich habe noch nie gespielt.</summary><p>Komm in den Einführungskurs, jeden Samstag um 10 Uhr in Sion. Keine Vorkenntnisse nötig, Schläger kannst du vor Ort mieten. <a href="https://tinyurl.com/Academy-Sion" target="_blank" rel="noopener">Auf Playtomic anmelden</a>.</p></details><details><summary>Wie storniere ich?</summary><p>Kostenlos bis 24 Stunden vor deiner Buchung, direkt in der Playtomic-App. Spätere Stornierungen und Nichterscheinen werden voll verrechnet.</p></details><details><summary>Wann habt ihr offen?</summary><p>Täglich von 7 bis 23:30 Uhr, an beiden Standorten.</p></details><details><summary>Gibt es Garderoben und Duschen?</summary><p>Ja, an beiden Standorten.</p></details><details><summary>Wo kann ich parken?</summary><p>Salgesch: Gratis-Parkplätze vor Ort, der Bahnhof ist 15 Gehminuten entfernt. Sion: Parkplätze vor Ort, Route de Préjeux 16.</p></details><details><summary>Kann man die Zahlung teilen?</summary><p>Ja. Playtomic teilt den Platzpreis automatisch unter den Spielern auf.</p></details></div>
+  </div>
+</section>
+<!-- /ux:faq -->
 
 <section class="section-tight" style="text-align:center;">
   <div class="wrap">
@@ -220,5 +229,6 @@
   </div>
 </footer>
 <script src="../nav.js?v=41"></script>
+<script src="../home-v2.js?v=4" defer></script>
 </body>
 </html>
