@@ -40,7 +40,8 @@ def fix(path):
     m = re.search(r'<span class="foot-more">.*?href="([^"]*intern\.html)".*?</span>\n\s*', s, flags=re.S)
     lg = login.group(1) if login else (m.group(1) if m else None)
     if lg:
-        more = '<span class="foot-more"><a href="about.html">%s</a> · <a href="faq.html">%s</a> · <a href="sponsoring.html">%s</a> · <a href="%s" rel="nofollow">%s</a></span>\n      ' % (t['about'], t['faq'], t['sponsor'], lg, t['login'])
+        # FAQ steht schon unter «Schnellzugriff»; in der unteren Zeile nicht doppelt (UX-Check 23.11.2026)
+        more = '<span class="foot-more"><a href="about.html">%s</a> · <a href="sponsoring.html">%s</a> · <a href="%s" rel="nofollow">%s</a></span>\n      ' % (t['about'], t['sponsor'], lg, t['login'])
         if m: s = s[:m.start()] + more + s[m.end():]
         else: s = re.sub(r'(<div class="footer-bottom">\s*)', lambda x: x.group(1) + more, s, count=1)
     # Footer Salgesch: Pickleball und Tennis als Links (Wochenlauf 23.11.2026, interne Links zu den Prio-Produkten)

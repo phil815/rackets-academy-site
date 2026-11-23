@@ -1238,3 +1238,6 @@ a.card-link.offer.co-way .offer-text p{font-size:1rem; line-height:1.5; color:va
 .footer-grid p a.foot-sport{display:inline; padding:0; color:inherit; text-decoration:underline; text-underline-offset:3px;}
 @media (max-width:760px){.footer-grid p a.foot-sport{display:inline-block; padding:8px 2px;}}
 .pc-sport a{color:inherit; text-decoration:underline; text-underline-offset:3px;}
+/* UX-Check 23.11.2026: Tap-Ziele am Handy (Sprachknopf, Ski-&-Padel-FAQ) */
+@media (max-width:820px){ .nav > .lang-switch > button{min-height:40px; min-width:44px;} }
+details.card > summary{padding:10px 0; min-height:40px; box-sizing:border-box;}
