@@ -41,7 +41,15 @@ MPN = {
 GTIN = {
   'siux-diablo-pro-royal-blue-2026': '8436625200389', 'siux-pegasus-pro-storm-grey-2026': '8436625200334',
   'siux-fenix-pro-2026-black-purple': '8436625200433', 'siux-trilogy-pro-2026-ash-green': '8436625200365',
-  'siux-electra4-pro-grey-2026': '8436625200419'}
+  'siux-electra4-pro-grey-2026': '8436625200419',
+  # Wilson (12-stellige UPC) und Babolat: am 25.11.2026 online nachgeschlagen, je zwei unabhängige Händler mit gleicher Herstellernummer
+  # (zonadepadel.com, tiendapadelpoint.com). Noch offen, nur eine Quelle: wilson-blade-ls-green/-rosa, wilson-defy-white, wilson-defy-ls-white.
+  'babolat-viper-2026-technical-soft': '3324922283226', 'babolat-viper-2026-technical': '3324922283110', 'babolat-viper-2026-air': '3324922283127',
+  'babolat-viper-2026-counter': '3324922283134', 'babolat-viper-2026-lebron': '3324922389027', 'babolat-viper-soft-jl-3-1': '3324922389034',
+  'babolat-veron-2026-technical': '3324922283196', 'babolat-veron-2026-air': '3324922283165', 'wilson-endure-pro': '097512976282',
+  'wilson-endure': '097512976275', 'wilson-endure-ls': '097512976268', 'wilson-defy-pro': '097512859851',
+  'wilson-defy': '097512859844', 'wilson-defy-ls': '097512859837', 'wilson-bela-v3': '097512928854',
+  'wilson-bela-v3-pro': '097512928861', 'wilson-bela-v3-ls': '097512928908'}
 
 def day_txt(iso, lang):
     d = datetime.date.fromisoformat(iso)
@@ -112,7 +120,7 @@ def build(lang):
                           page_top, flags=re.S)
         ld = {'@context': 'https://schema.org', '@type': 'Product', 'name': label, 'sku': slug,
               **({'mpn': MPN[slug]} if slug in MPN else {}),
-              **({'gtin13': GTIN[slug]} if slug in GTIN else {}),
+              **({'gtin' + str(len(GTIN[slug])): GTIN[slug]} if slug in GTIN else {}),
               'brand': {'@type': 'Brand', 'name': brand}, 'image': hd_abs or img_abs, 'description': meta,
               'offers': {'@type': 'Offer', 'price': price, 'priceCurrency': 'CHF', 'url': url,
                          'availability': 'https://schema.org/' + ('OutOfStock' if it['sold'] else 'InStock'),
