@@ -1337,6 +1337,14 @@ details.card > summary{padding:10px 0; min-height:40px; box-sizing:border-box;}
 .v2 .racket-selects label{font-size:.9rem;}
 .v2 .wrap:has(> .rating-summary){max-width:var(--max) !important;}
 .v2 p > button.btn.btn-outline{color:#0077de; background:#fff; border:2px solid #0077de;}
+/* Stufe 6: Textseiten (FAQ, Hausordnung, Rechtliches), Ueber uns, Unterseiten */
+.v2 .section-tight h1{font-size:clamp(2.4rem,5.4vw,3.6rem) !important; line-height:1.02; letter-spacing:-.03em; color:#0077de;}
+.v2 .section-tight div[style*="border-left"] h2{color:#0b1a2b;}
+.v2 .faq-list{gap:0;}
+.v2 .faq-list details{background:none; border:0; border-top:1px solid #c9d3de; border-radius:0; padding:0;}
+.v2 .faq-list details:last-child{border-bottom:1px solid #c9d3de;}
+.v2 .faq-list summary{font-size:1.15rem; font-weight:700; padding:18px 36px 18px 0; color:#0b1a2b;}
+.v2 .faq-list details p{color:#2b3b4d; font-size:1.05rem;}
 @media (max-width:640px){
   .v2 .co2-sec, .v2 .section-tight{padding:54px 0;}
   .v2 .hero-actions .btn{width:100%; text-align:center;}
