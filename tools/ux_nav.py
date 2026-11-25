@@ -9,7 +9,9 @@ T = {
  'en': dict(book='Book', camps='Camps', co='Companies', cta='Book a court', member='Membership', sponsor='Become a sponsor', menu='Menu', close='Close', about='About', faq='FAQ', login='Team login'),
 }
 V2_PAGES = {'tennis.html', 'pickleball.html', 'padel-valais.html',
-            'training.html', 'camps.html', 'spa-and-sauna.html'}   # events.html: eigener Stil (evw), schon in Hauptblau
+            'training.html', 'camps.html', 'spa-and-sauna.html',
+            'company.html', 'company-events.html', 'sponsoring.html', 'rackets-plus.html', 'kids-birthday.html',
+            'kids-camp.html', 'kids-camp-winter.html', 'kids-camp-easter.html', 'kids-camp-summer.html'}   # events.html: eigener Stil (evw), schon in Hauptblau
 V2_SPORT = {'tennis.html': 'TENNIS', 'pickleball.html': 'PICKLEBALL'}
 def fix(path):
     s = open(path, encoding='utf-8').read()
