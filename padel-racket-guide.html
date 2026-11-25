@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  // first visit: follow the browser language (fr/de); explicit choice is remembered
+  (function(){try{var k='ra_lang';if(!localStorage.getItem(k)){var n=(navigator.language||'').slice(0,2).toLowerCase();if(n==='fr'||n==='de'){localStorage.setItem(k,n);var p=location.pathname.split('/').pop()||'index.html';location.replace(n+'/'+p+location.search+location.hash);}else{localStorage.setItem(k,'en');}}}catch(e){}})();
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T9T2GZHGS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    analytics_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_user_data: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_personalization: 'denied'
+  });
+  gtag('js', new Date());
+  // Team-Geraete: einmal racketsacademy.ch/?internal=1 aufrufen → Besuche als intern markiert (GA4-Filter «Internal Traffic»); ?internal=0 hebt es auf
+  (function(){try{var q=location.search;if(/[?&]internal=1/.test(q))localStorage.setItem('ra_internal','1');if(/[?&]internal=0/.test(q))localStorage.removeItem('ra_internal');}catch(e){}})();
+  gtag('config', 'G-T9T2GZHGS2', (function(){try{return localStorage.getItem('ra_internal')==='1'?{traffic_type:'internal'}:{};}catch(e){return {};}})());
+  // Rackets Academy conversion events
+  (function(){
+    var lang = (location.pathname.match(/\/(fr|de)\//)||[,'en'])[1];
+    function send(name, p){ p=p||{}; p.page_lang=lang; p.page_path=location.pathname; p.transport_type='beacon'; gtag('event', name, p); }
+    document.addEventListener('click', function(e){
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (a && a.hasAttribute('data-pick')) return;
+      if (a) {
+        var h = a.href;
+        if (/playtomic\.com/.test(h)) return send('book_court', {link_url:h, link_text:(a.textContent||'').trim().slice(0,60)});
+        if (/wa\.me|whatsapp\.com/.test(h)) return send('whatsapp_click', {link_url:h});
+        if (/tinyurl\.com\/RA-Plus/i.test(h)) return send('rackets_plus_signup', {link_url:h});
+        if (/docs\.google\.com\/forms|forms\.gle/.test(h)) return send('form_click', {link_url:h});
+        return;
+      }
+      var b = e.target.closest && e.target.closest('button[onclick*="openBuyModal"], button[onclick*="openVoucherModal"], button[onclick*="openLessonModal"]');
+      if (b) {
+        var card = b.closest('.card, .racket-card, div');
+        var t = card && card.querySelector('h3');
+        send('shop_buy_click', {item_name: t ? t.textContent.trim().slice(0,80) : (/Voucher/.test(b.getAttribute('onclick')) ? 'Voucher' : 'unknown')});
+      }
+    }, true);
+    document.addEventListener('submit', function(e){
+      var f = e.target;
+      if (f && /script\.google/.test(f.action||'')) send('begin_checkout', {form_type: (f.querySelector('[name="type"]')||{}).value || ''});
+    }, true);
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Which padel racket suits me? Buying guide | Rackets Academy</title>
+<meta name="description" content="Padel racket buying guide from Valais: shape, hardness and weight explained simply, with picks for beginners, control, all-round and power. Test any racket for 10 CHF.">
+<link rel="canonical" href="https://www.racketsacademy.ch/padel-racket-guide.html">
+<link rel="stylesheet" href="styles.css?v=61">
+<meta property="og:title" content="Which padel racket suits me? Buying guide | Rackets Academy">
+<meta property="og:description" content="Padel racket buying guide from Valais: shape, hardness and weight explained simply, with picks for beginners, control, all-round and power. Test any racket for 10 CHF.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.racketsacademy.ch/padel-racket-guide.html">
+<meta property="og:image" content="https://www.racketsacademy.ch/images/photos/shop-winners.jpg">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="Rackets Academy">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://www.racketsacademy.ch/padel-racket-guide.html">
+<link rel="alternate" hreflang="fr" href="https://www.racketsacademy.ch/fr/padel-racket-guide.html">
+<link rel="alternate" hreflang="de" href="https://www.racketsacademy.ch/de/padel-racket-guide.html">
+<link rel="alternate" hreflang="x-default" href="https://www.racketsacademy.ch/padel-racket-guide.html">
+<script type="application/ld+json" id="ld-rg">{"@context": "https://schema.org", "@graph": [{"@type": "ItemList", "name": "Which padel racket suits me?", "url": "https://www.racketsacademy.ch/padel-racket-guide.html", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Wilson Blade LS Green", "url": "https://www.racketsacademy.ch/rackets/wilson-blade-ls-green.html"}, {"@type": "ListItem", "position": 2, "name": "Babolat Veron 2026 Air", "url": "https://www.racketsacademy.ch/rackets/babolat-veron-2026-air.html"}, {"@type": "ListItem", "position": 3, "name": "Wilson Blade LS Rosa", "url": "https://www.racketsacademy.ch/rackets/wilson-blade-ls-rosa.html"}, {"@type": "ListItem", "position": 4, "name": "Wilson Endure LS", "url": "https://www.racketsacademy.ch/rackets/wilson-endure-ls.html"}, {"@type": "ListItem", "position": 5, "name": "Wilson Endure", "url": "https://www.racketsacademy.ch/rackets/wilson-endure.html"}, {"@type": "ListItem", "position": 6, "name": "Babolat Viper 2026 Counter", "url": "https://www.racketsacademy.ch/rackets/babolat-viper-2026-counter.html"}, {"@type": "ListItem", "position": 7, "name": "Siux Trilogy Pro 2026 Ash Green", "url": "https://www.racketsacademy.ch/rackets/siux-trilogy-pro-2026-ash-green.html"}, {"@type": "ListItem", "position": 8, "name": "Wilson Endure Pro", "url": "https://www.racketsacademy.ch/rackets/wilson-endure-pro.html"}, {"@type": "ListItem", "position": 9, "name": "Wilson Bela v3", "url": "https://www.racketsacademy.ch/rackets/wilson-bela-v3.html"}, {"@type": "ListItem", "position": 10, "name": "Babolat Viper 2026 Air", "url": "https://www.racketsacademy.ch/rackets/babolat-viper-2026-air.html"}, {"@type": "ListItem", "position": 11, "name": "Siux Diablo Pro Royal Blue 2026", "url": "https://www.racketsacademy.ch/rackets/siux-diablo-pro-royal-blue-2026.html"}, {"@type": "ListItem", "position": 12, "name": "Wilson Bela v3 Pro", "url": "https://www.racketsacademy.ch/rackets/wilson-bela-v3-pro.html"}, {"@type": "ListItem", "position": 13, "name": "Wilson Defy LS", "url": "https://www.racketsacademy.ch/rackets/wilson-defy-ls.html"}, {"@type": "ListItem", "position": 14, "name": "Babolat Veron 2026 Technical", "url": "https://www.racketsacademy.ch/rackets/babolat-veron-2026-technical.html"}, {"@type": "ListItem", "position": 15, "name": "Siux Fenix Pro 2026 Black/Purple", "url": "https://www.racketsacademy.ch/rackets/siux-fenix-pro-2026-black-purple.html"}, {"@type": "ListItem", "position": 16, "name": "Wilson Defy LS White", "url": "https://www.racketsacademy.ch/rackets/wilson-defy-ls-white.html"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Which padel racket is best for beginners?", "acceptedAnswer": {"@type": "Answer", "text": "A round or teardrop racket that is soft to medium and not too heavy. It forgives off-centre hits and is easy on the arm. In our shop these are for example Wilson Blade LS Green, Babolat Veron 2026 Air."}}, {"@type": "Question", "name": "Round, teardrop or diamond: what is the difference?", "acceptedAnswer": {"@type": "Answer", "text": "Round means control and a large sweet spot. Diamond means power, with the weight in the head. Teardrop is the middle: some of both."}}, {"@type": "Question", "name": "How much does a good padel racket cost?", "acceptedAnswer": {"@type": "Answer", "text": "The rackets in our shop currently cost between 169 and 350 CHF. For a beginner a racket around 169–200 CHF is enough."}}, {"@type": "Question", "name": "Can I test a racket before I buy it?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. You rent any racket for 10 CHF and play a real match with it in Salgesch or Sion. If you buy it, the 10 CHF are credited."}}, {"@type": "Question", "name": "Where can I buy a padel racket in Valais?", "acceptedAnswer": {"@type": "Answer", "text": "At Rackets Academy in Salgesch (Littenstrasse 30) and Sion (Route de Préjeux 16), or online with pick-up or shipping in Switzerland for 9 CHF."}}, {"@type": "Question", "name": "I come from tennis. Which racket should I choose?", "acceptedAnswer": {"@type": "Answer", "text": "Tennis players often bring power from their swing, so many feel comfortable with a teardrop racket of medium hardness. The best way is to test two shapes in a match."}}]}]}</script>
+</head>
+<body class="v2">
+<div class="site-top">
+<div class="promo-banner">
+  <div class="promo-track">
+    <span>Courts open now — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Book now on Playtomic →</a></span>
+    <span>Courts open now — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Book now on Playtomic →</a></span>
+    <span>Courts open now — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Book now on Playtomic →</a></span>
+  </div>
+</div>
+
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo"><img src="https://www.racketsacademy.ch/images/wix/834be8bc03b7.png" alt="Rackets Academy logo" width="180" height="63"></a>
+    <nav class="navlinks">
+      <a href="book.html">Book</a>
+      <a href="training.html">Coaching</a>
+      <a href="events.html">Events</a>
+      <a href="camps.html">Camps</a>
+      <a href="company.html">Companies</a>
+      <a href="spa-and-sauna.html">Spa</a>
+      <a href="rackets-plus.html">Membership</a>
+      <a href="shop.html">Shop</a>
+      <div class="lang-switch">
+        <button type="button" aria-haspopup="true">EN</button>
+        <div class="lang-menu"><a href="#">English</a><a href="de/padel-racket-guide.html">Deutsch</a><a href="fr/padel-racket-guide.html">Français</a></div>
+      </div>
+    </nav>
+    <div class="lang-switch">
+      <button type="button" aria-haspopup="true">EN</button>
+      <div class="lang-menu"><a href="#">English</a><a href="de/padel-racket-guide.html">Deutsch</a><a href="fr/padel-racket-guide.html">Français</a></div>
+    </div>
+    <a class="nav-cta" href="book.html" data-pick="court">Book a court</a>
+    <button class="nav-toggle nav-toggle-word" aria-label="Menu" aria-expanded="false"><i class="nt-bars"><b></b><b></b><b></b></i><em class="nt-open">Menu</em><em class="nt-close">Close</em></button>
+  </div>
+</header>
+</div>
+
+<section class="spa-hero co-hero kb-hero" style="background-image:url('https://www.racketsacademy.ch/images/photos/shop-winners.jpg'); background-position:center 35%;">
+  <div class="spa-hero-shade"></div>
+  <div class="wrap spa-hero-inner">
+    <p class="spa-kicker">Padel racket guide</p>
+    <h1>Which padel racket suits me?</h1>
+    <p class="lede">Three things decide: shape, hardness and weight. Here is how to choose, with the rackets we have in the shop right now. And you can test every one before you buy.</p>
+    <div class="spa-chips"><span class="spa-chip">Test for 10 CHF</span><span class="spa-chip">Credited when you buy</span><span class="spa-chip">Pick up in Salgesch or Sion</span><span class="spa-chip">Shipping 9 CHF</span></div>
+    <div class="hero-actions">
+      <a class="btn btn-green spa-cta" href="shop.html#rackets">See all rackets</a>
+      <a class="btn spa-cta-ghost" href="https://wa.me/41772780115?text=Hola%21%20I%20need%20help%20choosing%20a%20padel%20racket." target="_blank" rel="noopener">Ask us on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section class="co2-sec kb-flow-sec" id="how">
+  <div class="wrap">
+    <h2 class="co2-h">Three questions to the right racket</h2>
+    <div class="kb-flow"><div class="kb-step"><span class="kb-badge">1</span><h3>Which shape?</h3><p>Round gives control and forgives off-centre hits. Diamond gives power but needs clean technique. Teardrop sits in between.</p></div><div class="kb-step"><span class="kb-badge">2</span><h3>How hard?</h3><p>A soft racket is comfortable, easy on the arm and helps the ball out. A hard racket gives more pressure and precision once you hit cleanly.</p></div><div class="kb-step"><span class="kb-badge">3</span><h3>How heavy?</h3><p>Lighter and balanced towards the handle is easy to move at the net. Heavier and head-heavy puts more weight behind smashes.</p></div></div>
+  </div>
+</section>
+
+<section class="co2-sec" id="beg">
+  <div class="wrap">
+    <h2 class="co2-h">For beginners</h2>
+    <p class="pb-intro">Easy to play and forgiving. These rackets are soft or made for amateur level, so you get the ball over the net while you learn.</p>
+    <div class="similar-grid"><a class="similar-card" href="rackets/wilson-blade-ls-green.html"><img src="images/rackets/wilson-blade-ls-green.jpg?v=3" alt="Wilson Blade LS Green" loading="lazy"><span>Wilson Blade LS Green</span><span>Teardrop · soft · 355 g</span><strong>169 CHF</strong></a><a class="similar-card" href="rackets/babolat-veron-2026-air.html"><img src="images/rackets/babolat-veron-2026-air.jpg?v=3" alt="Babolat Veron 2026 Air" loading="lazy"><span>Babolat Veron 2026 Air</span><span>Teardrop · medium · 345–365 g</span><strong>199 CHF</strong></a><a class="similar-card" href="rackets/wilson-blade-ls-rosa.html"><img src="images/rackets/wilson-blade-ls-rosa.jpg?v=3" alt="Wilson Blade LS Rosa" loading="lazy"><span>Wilson Blade LS Rosa</span><span>Teardrop · soft · 355 g</span><strong>169 CHF</strong></a><a class="similar-card" href="rackets/wilson-endure-ls.html"><img src="images/rackets/wilson-endure-ls.jpg?v=3" alt="Wilson Endure LS" loading="lazy"><span>Wilson Endure LS</span><span>Round · medium · 345–365 g</span><strong>199 CHF</strong></a></div>
+  </div>
+</section>
+
+<section class="co2-sec" id="ctl">
+  <div class="wrap">
+    <h2 class="co2-h">For control</h2>
+    <p class="pb-intro">Round shape, large sweet spot. For players who build the point, defend well and rarely give a ball away.</p>
+    <div class="similar-grid"><a class="similar-card" href="rackets/wilson-endure.html"><img src="images/rackets/wilson-endure.jpg?v=3" alt="Wilson Endure" loading="lazy"><span>Wilson Endure</span><span>Round · medium · 355–375 g</span><strong>209 CHF</strong></a><a class="similar-card" href="rackets/babolat-viper-2026-counter.html"><img src="images/rackets/babolat-viper-2026-counter.jpg?v=3" alt="Babolat Viper 2026 Counter" loading="lazy"><span>Babolat Viper 2026 Counter</span><span>Round · hard · 355–375 g</span><strong>249 CHF</strong></a><a class="similar-card" href="rackets/siux-trilogy-pro-2026-ash-green.html"><img src="images/rackets/siux-trilogy-pro-2026-ash-green.jpg?v=3" alt="Siux Trilogy Pro 2026 Ash Green" loading="lazy"><span>Siux Trilogy Pro 2026 Ash Green</span><span>Round · hard · 355–375 g</span><strong>250 CHF</strong></a><a class="similar-card" href="rackets/wilson-endure-pro.html"><img src="images/rackets/wilson-endure-pro.jpg?v=3" alt="Wilson Endure Pro" loading="lazy"><span>Wilson Endure Pro</span><span>Round · hard · 355–375 g</span><strong>229 CHF</strong></a></div>
+  </div>
+</section>
+
+<section class="co2-sec" id="all">
+  <div class="wrap">
+    <h2 class="co2-h">All-round</h2>
+    <p class="pb-intro">Teardrop shape: a mix of control and power. A good choice if you play a bit of everything or do not know your style yet.</p>
+    <div class="similar-grid"><a class="similar-card" href="rackets/wilson-bela-v3.html"><img src="images/rackets/wilson-bela-v3.jpg?v=3" alt="Wilson Bela v3" loading="lazy"><span>Wilson Bela v3</span><span>Teardrop · medium · 355–375 g</span><strong>200 CHF</strong></a><a class="similar-card" href="rackets/babolat-viper-2026-air.html"><img src="images/rackets/babolat-viper-2026-air.jpg?v=3" alt="Babolat Viper 2026 Air" loading="lazy"><span>Babolat Viper 2026 Air</span><span>Teardrop · hard · 345–365 g</span><strong>249 CHF</strong></a><a class="similar-card" href="rackets/siux-diablo-pro-royal-blue-2026.html"><img src="images/rackets/siux-diablo-pro-royal-blue-2026.jpg?v=3" alt="Siux Diablo Pro Royal Blue 2026" loading="lazy"><span>Siux Diablo Pro Royal Blue 2026</span><span>Teardrop · medium · 365–375 g</span><strong>250 CHF</strong></a><a class="similar-card" href="rackets/wilson-bela-v3-pro.html"><img src="images/rackets/wilson-bela-v3-pro.jpg?v=3" alt="Wilson Bela v3 Pro" loading="lazy"><span>Wilson Bela v3 Pro</span><span>Teardrop · hard · 360–380 g</span><strong>230 CHF</strong></a></div>
+  </div>
+</section>
+
+<section class="co2-sec" id="pow">
+  <div class="wrap">
+    <h2 class="co2-h">For power</h2>
+    <p class="pb-intro">Diamond shape, more weight in the head. For players who attack, smash and already hit the ball cleanly.</p>
+    <div class="similar-grid"><a class="similar-card" href="rackets/wilson-defy-ls.html"><img src="images/rackets/wilson-defy-ls.jpg?v=3" alt="Wilson Defy LS" loading="lazy"><span>Wilson Defy LS</span><span>Diamond · medium · 345–365 g</span><strong>180 CHF</strong></a><a class="similar-card" href="rackets/babolat-veron-2026-technical.html"><img src="images/rackets/babolat-veron-2026-technical.jpg?v=3" alt="Babolat Veron 2026 Technical" loading="lazy"><span>Babolat Veron 2026 Technical</span><span>Diamond · medium · 350–370 g</span><strong>199 CHF</strong></a><a class="similar-card" href="rackets/siux-fenix-pro-2026-black-purple.html"><img src="images/rackets/siux-fenix-pro-2026-black-purple.jpg?v=3" alt="Siux Fenix Pro 2026 Black/Purple" loading="lazy"><span>Siux Fenix Pro 2026 Black/Purple</span><span>Diamond · hard · 355–375 g</span><strong>250 CHF</strong></a><a class="similar-card" href="rackets/wilson-defy-ls-white.html"><img src="images/rackets/wilson-defy-ls-white.jpg?v=3" alt="Wilson Defy LS White" loading="lazy"><span>Wilson Defy LS White</span><span>Diamond · medium · 355–365 g</span><strong>200 CHF</strong></a></div>
+  </div>
+</section>
+
+<section class="co2-sec">
+  <div class="wrap">
+    <h2 class="co2-h">Test first, then buy</h2>
+    <div class="co2-bens ev-mods"><div class="co2-b"><span class="co2-ic">🎾</span><h3>Test for 10 CHF</h3><p>Rent the racket and play a real match with it. If you buy it, we credit the 10 CHF to the price.</p></div><div class="co2-b"><span class="co2-ic">✅</span><h3>Official reseller</h3><p>We are an official reseller of Wilson, Babolat and Siux. Every racket is new and original.</p></div><div class="co2-b"><span class="co2-ic">📦</span><h3>Pick up or shipping</h3><p>Pick up in Salgesch or Sion, or shipping by post for 9 CHF. Returns within 30 days if new and in original packaging.</p></div></div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="wrap">
+    <h2>Racket questions</h2>
+    <div class="spa-faq"><details><summary>Which padel racket is best for beginners?</summary><p>A round or teardrop racket that is soft to medium and not too heavy. It forgives off-centre hits and is easy on the arm. In our shop these are for example Wilson Blade LS Green, Babolat Veron 2026 Air.</p></details><details><summary>Round, teardrop or diamond: what is the difference?</summary><p>Round means control and a large sweet spot. Diamond means power, with the weight in the head. Teardrop is the middle: some of both.</p></details><details><summary>How much does a good padel racket cost?</summary><p>The rackets in our shop currently cost between 169 and 350 CHF. For a beginner a racket around 169–200 CHF is enough.</p></details><details><summary>Can I test a racket before I buy it?</summary><p>Yes. You rent any racket for 10 CHF and play a real match with it in Salgesch or Sion. If you buy it, the 10 CHF are credited.</p></details><details><summary>Where can I buy a padel racket in Valais?</summary><p>At Rackets Academy in Salgesch (Littenstrasse 30) and Sion (Route de Préjeux 16), or online with pick-up or shipping in Switzerland for 9 CHF.</p></details><details><summary>I come from tennis. Which racket should I choose?</summary><p>Tennis players often bring power from their swing, so many feel comfortable with a teardrop racket of medium hardness. The best way is to test two shapes in a match.</p></details></div>
+  </div>
+</section>
+
+<section class="spa-final kb-final" style="background-image:url('images/coaching/coaching-6.webp');">
+  <div class="spa-hero-shade"></div>
+  <div class="wrap spa-final-inner">
+    <h2>Not sure yet? Test two.</h2>
+    <p>10 CHF per test · credited when you buy · Salgesch and Sion</p>
+    <div class="hero-actions" style="justify-content:center;">
+      <a class="btn btn-green spa-cta" href="shop.html#rackets">See all rackets</a>
+      <a class="btn spa-cta-ghost" href="https://wa.me/41772780115?text=Hola%21%20I%20need%20help%20choosing%20a%20padel%20racket." target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="https://www.racketsacademy.ch/images/wix/fd51e1e7dfdf.png" alt="Rackets Academy" width="200" height="72" style="margin-bottom:8px;">
+    <p style="opacity:.85; margin:0 0 14px;">PLAY. COMPETE. ENJOY.</p>
+    <div class="footer-grid ux-foot"><div><h4>Salgesch</h4><a href="https://www.google.com/maps/search/?api=1&query=Littenstrasse+30+3970+Salgesch" target="_blank" rel="noopener">Littenstrasse 30, 3970 Salgesch</a><p>Padel · <a class="foot-sport" href="pickleball.html">Pickleball</a> · <a class="foot-sport" href="tennis.html">Tennis</a> · Spa</p><p>Daily 7am–11:30pm</p></div><div><h4>Sion</h4><a href="https://www.google.com/maps/search/?api=1&query=Route+de+Pr%C3%A9jeux+16+1950+Sion" target="_blank" rel="noopener">Route de Préjeux 16, 1950 Sion</a><p>Padel</p><p>Daily 7am–11:30pm</p></div><div class="foot-links"><h4>Quick links</h4><a href="book.html">Book a court</a><a href="training.html">Courses</a><a href="faq.html">FAQ</a><a href="shop.html#vouchers">Gift vouchers</a><a href="shop.html">Shop</a><a href="events.html">Events</a></div><div class="footer-contact"><h4>Contact</h4><a class="foot-wa" href="https://wa.me/41772780115?text=Hola%21%20I%20have%20a%20question%20about%20Rackets%20Academy." target="_blank" rel="noopener">Message us on WhatsApp</a><p>Quick reply · +41 77 278 01 15</p><a href="mailto:phil@racketsacademy.ch">phil@racketsacademy.ch</a></div></div>
+    <div class="sponsor-row">
+      <div class="sponsor-track">
+      <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/5887f86ed50b.png" alt="Wilson" loading="lazy"></a>
+      <a href="https://www.estrellagalicia.es" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e0ff8b826424.png" alt="Estrella Galicia" loading="lazy"></a>
+      <a href="https://www.decathlon.ch" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/75ca95274283.png" alt="Decathlon" loading="lazy"></a>
+      <a href="https://www.coca-cola.com/ch/de/brands/powerade" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4662d7547275.png" alt="Powerade" loading="lazy"></a>
+      <a href="https://tanguy.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4c92a56af6fb.png" alt="Garage Tanguy" loading="lazy"></a>
+      <a href="https://tanguy.hyundai.ch/fr" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/f74a1e85ce45.png" alt="Hyundai" loading="lazy"></a>
+      <a href="https://www.scleanup.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d7bc95225fa2.png" alt="S Clean-up" loading="lazy"></a>
+      <a href="https://shop.morand.ch/shop/category/sirops-65" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e03b161cd8bb.png" alt="Distillerie Morand" loading="lazy"></a>
+      <a href="https://rivella.ch/de/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d4f0de57b68e.png" alt="Rivella" loading="lazy"></a>
+      <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/5887f86ed50b.png" alt="Wilson" loading="lazy"></a>
+      <a href="https://www.estrellagalicia.es" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e0ff8b826424.png" alt="Estrella Galicia" loading="lazy"></a>
+      <a href="https://www.decathlon.ch" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/75ca95274283.png" alt="Decathlon" loading="lazy"></a>
+      <a href="https://www.coca-cola.com/ch/de/brands/powerade" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4662d7547275.png" alt="Powerade" loading="lazy"></a>
+      <a href="https://tanguy.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4c92a56af6fb.png" alt="Garage Tanguy" loading="lazy"></a>
+      <a href="https://tanguy.hyundai.ch/fr" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/f74a1e85ce45.png" alt="Hyundai" loading="lazy"></a>
+      <a href="https://www.scleanup.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d7bc95225fa2.png" alt="S Clean-up" loading="lazy"></a>
+      <a href="https://shop.morand.ch/shop/category/sirops-65" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e03b161cd8bb.png" alt="Distillerie Morand" loading="lazy"></a>
+      <a href="https://rivella.ch/de/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d4f0de57b68e.png" alt="Rivella" loading="lazy"></a>
+      </div>
+    <div class="footer-bottom">
+      <span class="foot-more"><a href="about.html">About</a> · <a href="sponsoring.html">Become a sponsor</a> · <a href="intern.html" rel="nofollow">Team login</a></span>
+      <span>© 2026 Rackets Academy</span>
+      <span><a href="terms-and-conditions.html">Terms &amp; Conditions</a> · <a href="privacy-policy.html">Privacy Policy</a> · <a href="impressum.html">Imprint</a></span>
+    </div>
+    </div>
+</footer>
+
+<script src="nav.js?v=41"></script>
+</body>
+</html>
