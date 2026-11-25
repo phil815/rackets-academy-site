@@ -114,16 +114,36 @@ CARD_RE = re.compile(r'<div class="racket-card([^"]*)">\n(.*?)\n      </div>\n',
 SPECS = {r[0]: dict(zip(['shape', 'weight', 'face', 'core', 'hard', 'level', 'balance'], r[2:] + [''] * 7))
          for r in json.load(open('tools/racket_specs.json'))[1:]}
 
+def stock_url(shop):
+    m = re.search(r'<form id="buy-modal-form"[^>]*action="([^"]+)"', shop)
+    return m.group(1) + '?action=stock' if m else ''
+
+_STOCK = {}
+def live_stock(shop):
+    """Live price and quantity from the shop app (same call as nav.js on the shop page). Empty dict if it cannot be reached:
+    then the static shop.html decides, and the page corrects itself in the browser."""
+    url = stock_url(shop)
+    if url and url not in _STOCK:
+        try:
+            import urllib.request
+            j = json.loads(urllib.request.urlopen(url, timeout=40).read().decode('utf-8'))
+            _STOCK[url] = j.get('rackets', {}) if j.get('ok') else {}
+        except Exception as e:
+            print('  Lagerabfrage nicht erreichbar, nehme shop.html:', e); _STOCK[url] = {}
+    return _STOCK.get(url, {})
+
 def rackets(shop):
     """All rackets that can be bought today, with price, photo and specs."""
-    out = []
+    out = []; live = live_stock(shop)
     for m in CARD_RE.finditer(shop):
         cls, c = m.group(1), m.group(2)
         mo = re.search(r"racketModel:'([^']+)'", c)
-        if not mo or 'sold-out' in cls or 'coming' in cls or mo.group(1) not in SPECS: continue
+        if not mo or mo.group(1) not in SPECS: continue
+        if mo.group(1) not in live_stock(shop) and ('sold-out' in cls or 'coming' in cls): continue
         slug = mo.group(1)
+        if slug in live and not live[slug].get('qty'): continue      # Lager 0: nicht empfehlen
         label = re.search(r"racketLabel:'([^']+)'", c).group(1).replace(' — ', ' ')
-        out.append(dict(slug=slug, label=label, brand=label.split(' ')[0], price=int(re.search(r'racket-price">(\d+)', c).group(1)),
+        out.append(dict(slug=slug, label=label, brand=label.split(' ')[0], price=int(live.get(slug, {}).get('price') or re.search(r'racket-price">(\d+)', c).group(1)),
                         img=re.search(r'<img class="racket-photo" src="([^"]+)"', c).group(1), **SPECS[slug]))
     return out
 
@@ -213,11 +233,20 @@ FINDER_JS = """<script id="rg-finder-js">
   box.addEventListener('click',function(e){var b=e.target.closest('.rg-pill'); if(!b) return;
     b.parentNode.querySelectorAll('.rg-pill').forEach(function(x){x.setAttribute('aria-pressed', x===b?'true':'false');}); draw();});
   draw();
+  // Live-Bestand wie im Shop: ausverkaufte Schläger verschwinden, Preise werden nachgezogen
+  if(D.stock) fetch(D.stock).then(function(r){return r.json();}).then(function(j){
+    if(!j||!j.ok||!j.rackets) return;
+    R=R.filter(function(r){var i=j.rackets[r.slug]; if(i&&i.price) r.price=i.price; return !i||i.qty>0;});
+    draw();
+    document.querySelectorAll('.similar-card[data-rg]').forEach(function(a){var i=j.rackets[a.dataset.rg]; if(!i) return;
+      if(!(i.qty>0)){var g=a.parentNode; a.remove(); if(!g.children.length){var sec=g.closest('section'); if(sec) sec.hidden=true;}}
+      else if(i.price){var p=a.querySelector('strong'); if(p) p.textContent=i.price+' CHF';}});
+  }).catch(function(){});
 })();
 </script>
 """
 
-def finder(t, rs):
+def finder(t, rs, stock=''):
     """Interactive picker (Guti 25.11.2026): three questions as pills like the booking block on the home page, three rackets as result.
     The static sections below stay for Google and AI assistants, which read text, not buttons."""
     f = t['fd']; keys = ['level', 'style', 'arm']; first = {'level': 'new', 'style': 'all', 'arm': 'no'}
@@ -225,7 +254,7 @@ def finder(t, rs):
         f'<div class="rg-group"><p class="rg-label" id="rg-{k}">{q}</p><div class="rg-pills" role="group" aria-labelledby="rg-{k}">'
         + ''.join(f'<button type="button" class="rg-pill" aria-pressed="{"true" if v == first[k] else "false"}" data-k="{k}" data-v="{v}">{lab}</button>' for v, lab in opts)
         + '</div></div>' for k, (q, opts) in zip(keys, f['q']))
-    data = dict(wa=WA, t=dict(spec=t['spec'], view=f['view'], test=f['test'], wa=f['wa']),
+    data = dict(wa=WA, stock=stock, t=dict(spec=t['spec'], view=f['view'], test=f['test'], wa=f['wa']),
                 rackets=[{k: r[k] for k in ('slug', 'label', 'brand', 'price', 'img', 'shape', 'hard', 'level', 'weight')} for r in rs])
     return f'''
 <section class="rg-finder" id="finder">
@@ -242,14 +271,14 @@ def finder(t, rs):
 <script type="application/json" id="rg-data">{json.dumps(data, ensure_ascii=False).replace('</', '<\\\\/')}</script>
 '''
 
-def body(t, pre, rs):
+def body(t, pre, rs, stock=''):
     wa = 'https://wa.me/' + WA + '?text=' + urllib.parse.quote(t['wa'])
     pk = picks(rs)
     chips = ''.join(f'<span class="spa-chip">{c}</span>' for c in t['chips'])
     flow = ''.join(f'<div class="kb-step"><span class="kb-badge">{a}</span><h3>{h}</h3><p>{p}</p></div>' for a, h, p in t['flow'])
     facts = ''.join(f'<div class="co2-b"><span class="co2-ic">{e}</span><h3>{h}</h3><p>{p}</p></div>' for e, h, p in t['facts'])
     faq = ''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in t['faq'])
-    card = lambda r: (f'<a class="similar-card" href="rackets/{r["slug"]}.html"><img src="{r["img"]}" alt="{html.escape(r["label"])}" loading="lazy">'
+    card = lambda r: (f'<a class="similar-card" data-rg="{r["slug"]}" href="rackets/{r["slug"]}.html"><img src="{r["img"]}" alt="{html.escape(r["label"])}" loading="lazy">'
                       f'<span>{html.escape(r["label"])}</span><span>{t["spec"][r["shape"]]} · {t["spec"][r["hard"]]} · {r["weight"]} g</span><strong>{r["price"]} CHF</strong></a>')
     profs = ''.join(f'''
 <section class="co2-sec" id="{key}">
@@ -274,7 +303,7 @@ def body(t, pre, rs):
     </div>
   </div>
 </section>
-{finder(t, rs)}
+{finder(t, rs, stock)}
 <section class="co2-sec kb-flow-sec" id="how">
   <div class="wrap">
     <h2 class="co2-h">{t['flow_h']}</h2>
@@ -324,7 +353,7 @@ for lang, t in T.items():
     b = s.index('<footer')
     head, tail = s[:a], s[b:]
     head = head.replace('spa-and-sauna.html', SLUG).replace(f'href="{SLUG}" class="active"', 'href="spa-and-sauna.html"')   # canonical/hreflang/lang menu -> this page; nav Spa link stays
-    s = head + body(t, pre, rs) + tail
+    s = head + body(t, pre, rs, stock_url(open(d + 'shop.html').read())) + tail
     s = re.sub(r'<script type="application/ld\+json" id="ld-spa">.*?</script>\n', '', s, flags=re.S)
     s = re.sub(r'<title>.*?</title>', '<title>' + t['title'] + '</title>', s, count=1, flags=re.S)
     esc = lambda x: x.replace('"', '&quot;')
