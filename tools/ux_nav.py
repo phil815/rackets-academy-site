@@ -8,6 +8,8 @@ T = {
  'fr': dict(book='Réserver', camps='Camps', co='Entreprises', cta='Réserver un terrain', member='Membres', sponsor='Devenir sponsor', menu='Menu', close='Fermer', about='À propos', faq='FAQ', login='Login équipe'),
  'en': dict(book='Book', camps='Camps', co='Companies', cta='Book a court', member='Membership', sponsor='Become a sponsor', menu='Menu', close='Close', about='About', faq='FAQ', login='Team login'),
 }
+V2_PAGES = {'tennis.html', 'pickleball.html', 'padel-valais.html'}
+V2_SPORT = {'tennis.html': 'TENNIS', 'pickleball.html': 'PICKLEBALL'}
 def fix(path):
     s = open(path, encoding='utf-8').read()
     if '<nav class="navlinks">' not in s: return False
@@ -57,6 +59,13 @@ def fix(path):
         if '.webp' in l and ('og:image' in l or 'twitter:image' in l or 'application/ld+json' in l):
             lines[i] = re.sub(r'(https://www\.racketsacademy\.ch/)((?:images|uploads)/[^"\s]+?)\.webp', orig, l)
     s = '\n'.join(lines)
+    # Design v2 (Rollout Nov 2026): diese Seiten bekommen die Klasse «v2» (Stil dazu am Ende von styles.css).
+    # Steht hier, weil ux_nav.py nach jedem build_*.py laeuft: so bleibt die Klasse auch nach einem Neubau erhalten.
+    if name in V2_PAGES:
+        s = re.sub(r'<body(?: class="([^"]*)")?>', lambda m: '<body class="%s">' % ' '.join(dict.fromkeys(((m.group(1) or '').split() + ['v2']))), s, count=1)
+        sport = V2_SPORT.get(name)
+        if sport:   # Knopf fuehrt direkt zu den freien Zeiten dieser Sportart
+            s = s.replace('href="https://playtomic.com/clubs/rackets-academy-salgesch"', 'href="https://playtomic.com/clubs/rackets-academy-salgesch?sport=%s"' % sport)
     if s != o: open(path, 'w', encoding='utf-8').write(s)
     return s != o
 if __name__ == '__main__':
