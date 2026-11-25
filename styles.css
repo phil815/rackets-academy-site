@@ -952,8 +952,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   #serve-banner .sv-title{font-size:.95rem; margin-bottom:2px}
   #serve-banner .sv-text{margin-bottom:8px; font-size:.82rem}
   #serve-banner .sv-btns button{padding:8px 10px; font-size:.85rem}
-  body.has-sticky-book.consent-open #serve-banner{bottom:10px}
-  body.consent-open .sticky-book{display:none}
+  /* W13 (Nov 2026): Buchen-Leiste bleibt auch beim Cookie-Hinweis sichtbar, der Hinweis sitzt darueber */
+  body.has-sticky-book.consent-open #serve-banner{bottom:84px}
 }
 
 /* hero balls: one cropped ball in the corner, never behind text (UX F5) */
