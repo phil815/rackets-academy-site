@@ -18,6 +18,11 @@ T = {
   lede='Three things decide: shape, hardness and weight. Here is how to choose, with the rackets we have in the shop right now. And you can test every one before you buy.',
   chips=['Test for 10 CHF', 'Credited when you buy', 'Pick up in Salgesch or Sion', 'Shipping 9 CHF'],
   cta='See all rackets', cta2='Ask us on WhatsApp', wa='Hola! I need help choosing a padel racket.',
+  fd=dict(h='Find your racket', p='Three taps and you see the rackets that suit you.',
+     q=[('How often do you play?', [('new', 'I am new'), ('reg', 'Regularly'), ('pro', 'Tournaments')]),
+        ('How do you play?', [('ctl', 'Safe and controlled'), ('all', 'A bit of everything'), ('pow', 'Attack')]),
+        ('Sensitive arm?', [('yes', 'Yes'), ('no', 'No')])],
+     res='These suit you', view='View', test='Book a test', wa="Hola! I'd like to test the {label}."),
   flow_h='Three questions to the right racket',
   flow=[('1', 'Which shape?', 'Round gives control and forgives off-centre hits. Diamond gives power but needs clean technique. Teardrop sits in between.'),
         ('2', 'How hard?', 'A soft racket is comfortable, easy on the arm and helps the ball out. A hard racket gives more pressure and precision once you hit cleanly.'),
@@ -45,6 +50,11 @@ T = {
   lede="Trois choses comptent : la forme, la dureté et le poids. Voici comment choisir, avec les raquettes que nous avons en ce moment à la boutique. Et tu peux tester chacune avant d'acheter.",
   chips=['Test à 10 CHF', 'Déduit si tu achètes', 'Retrait à Salgesch ou Sion', 'Envoi 9 CHF'],
   cta='Voir toutes les raquettes', cta2='Demande-nous sur WhatsApp', wa="Hola ! J'ai besoin d'aide pour choisir une raquette de padel.",
+  fd=dict(h='Trouve ta raquette', p='Trois réponses et tu vois les raquettes qui te conviennent.',
+     q=[('Tu joues souvent ?', [('new', 'Je débute'), ('reg', 'Régulièrement'), ('pro', 'En tournoi')]),
+        ('Comment joues-tu ?', [('ctl', 'Sûr et contrôlé'), ('all', 'Un peu de tout'), ('pow', 'Attaque')]),
+        ('Bras sensible ?', [('yes', 'Oui'), ('no', 'Non')])],
+     res='Celles qui te conviennent', view='Voir', test='Réserver un test', wa="Hola ! J'aimerais tester la {label}."),
   flow_h='Trois questions pour trouver ta raquette',
   flow=[('1', 'Quelle forme ?', 'La forme ronde donne du contrôle et pardonne les frappes décentrées. Le diamant donne de la puissance mais demande une technique propre. La goutte d’eau est entre les deux.'),
         ('2', 'Quelle dureté ?', 'Une raquette souple est confortable, ménage le bras et aide la balle à sortir. Une raquette dure donne plus de pression et de précision quand tu frappes proprement.'),
@@ -72,6 +82,11 @@ T = {
   lede='Drei Dinge entscheiden: Form, Härte und Gewicht. So wählst du, mit den Schlägern, die wir gerade im Shop haben. Und du kannst jeden vor dem Kauf testen.',
   chips=['Test für 10 CHF', 'Beim Kauf angerechnet', 'Abholung in Salgesch oder Sion', 'Versand 9 CHF'],
   cta='Alle Schläger ansehen', cta2='Frag uns per WhatsApp', wa='Hola! Ich brauche Hilfe bei der Wahl eines Padelschlägers.',
+  fd=dict(h='Finde deinen Schläger', p='Drei Antworten antippen, und du siehst die Schläger, die zu dir passen.',
+     q=[('Wie oft spielst du?', [('new', 'Neu dabei'), ('reg', 'Regelmässig'), ('pro', 'Turniere')]),
+        ('Wie spielst du?', [('ctl', 'Sicher und kontrolliert'), ('all', 'Von allem etwas'), ('pow', 'Angriff')]),
+        ('Empfindlicher Arm?', [('yes', 'Ja'), ('no', 'Nein')])],
+     res='Diese passen zu dir', view='Ansehen', test='Test buchen', wa='Hola! Ich möchte das {label} testen.'),
   flow_h='In drei Fragen zum richtigen Schläger',
   flow=[('1', 'Welche Form?', 'Rund gibt Kontrolle und verzeiht Bälle, die du nicht mittig triffst. Diamant gibt Power, braucht aber saubere Technik. Die Tränenform liegt dazwischen.'),
         ('2', 'Wie hart?', 'Ein weicher Schläger ist angenehm, schont den Arm und hilft dem Ball hinaus. Ein harter Schläger gibt mehr Druck und Präzision, sobald du sauber triffst.'),
@@ -131,6 +146,102 @@ def picks(rs):
         used |= {r['slug'] for r in res[key]}
     return res
 
+FINDER_CSS = """<style id="rg-finder-css">
+.rg-finder{padding:0; position:relative; z-index:3;}
+.rg-card{margin-top:-56px; background:#fff; border-radius:28px; padding:26px 28px; box-shadow:0 18px 44px rgba(11,26,43,.2);}
+.rg-card h2{margin:0 0 4px; color:#0077de; letter-spacing:-.02em;}
+.rg-card > p{margin:0 0 18px; color:#0b1a2b;}
+.rg-qs{display:flex; gap:18px 28px; flex-wrap:wrap;}
+.rg-group{display:flex; flex-direction:column; gap:8px; min-width:0;}
+.rg-label{margin:0; font-size:.95rem; font-weight:700; color:#4c5d70;}
+.rg-pills{display:flex; gap:8px; flex-wrap:wrap;}
+.rg-pill{font:inherit; font-size:1rem; font-weight:700; color:#0b1a2b; background:#fff; border:2px solid #c9d3de; border-radius:999px; padding:11px 18px; min-height:48px; cursor:pointer; transition:background .15s, border-color .15s, color .15s;}
+.rg-pill:hover{border-color:#0077de;}
+.rg-pill[aria-pressed="true"]{background:#0077de; border-color:#0077de; color:#fff;}
+.rg-pill:focus-visible{outline:3px solid #0077de; outline-offset:3px;}
+.rg-res-h{margin:24px 0 12px; font-size:1.15rem; color:#0b1a2b;}
+.rg-res{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+.rg-item{display:flex; flex-direction:column; gap:6px; background:#eef4fa; border-radius:20px; padding:14px; color:#0b1a2b;}
+.rg-item img{width:100%; aspect-ratio:1/1; object-fit:contain; background:#fff; border-radius:14px;}
+.rg-item b{font-size:1.05rem; line-height:1.25;}
+.rg-item span{font-size:.95rem; color:#4c5d70;}
+.rg-item strong{font-size:1.15rem;}
+.rg-acts{display:flex; gap:8px; flex-wrap:wrap; margin-top:auto; padding-top:6px;}
+.rg-acts a{flex:1 1 auto; text-align:center; font-weight:700; font-size:1rem; border-radius:999px; padding:11px 14px; min-height:48px; box-sizing:border-box; text-decoration:none; display:flex; align-items:center; justify-content:center;}
+.rg-acts .rg-test{background:#6ffd1d; color:#0b1a2b;}
+.rg-acts .rg-view{background:#fff; color:#0077de; border:2px solid #0077de;}
+@media (max-width:760px){
+  .rg-card{margin-top:-28px; padding:20px 16px; border-radius:22px;}
+  .rg-qs{flex-direction:column;}
+  .rg-pill{flex:1 1 auto; padding:11px 12px;}
+  .rg-res{grid-template-columns:1fr;}
+  .rg-item{display:grid; grid-template-columns:96px 1fr; column-gap:12px; align-items:start;}
+  .rg-item img{grid-row:1 / span 4;}
+  .rg-acts{grid-column:1 / -1;}
+}
+@media (prefers-reduced-motion:reduce){ .rg-pill{transition:none;} }
+</style>
+"""
+
+FINDER_JS = """<script id="rg-finder-js">
+(function(){
+  var box=document.querySelector('[data-rg-finder]'); if(!box) return;
+  var D=JSON.parse(document.getElementById('rg-data').textContent), R=D.rackets, T=D.t, out=box.querySelector('.rg-res');
+  var BR=['Wilson','Babolat','Siux'];
+  function score(r,a){
+    var s=0, near={ctl:{Rund:4,'Träne':1},all:{'Träne':4,Rund:1,Diamant:1},pow:{Diamant:4,'Träne':1}}[a.style];
+    s+=near[r.shape]||0;
+    if(a.level==='new'){ s+=(r.level==='Amateur'?3:0)+(r.hard==='Weich'?2:0)-(r.hard==='Hart'?3:0)-(r.level==='Profi'?2:0); }
+    if(a.level==='reg'){ s+=(r.level==='Fortgeschritten'?2:0)+(r.level==='Amateur'?1:0); }
+    if(a.level==='pro'){ s+=(r.level==='Profi'?3:0)+(r.level==='Fortgeschritten'?1:0)+(r.hard==='Hart'?1:0); }
+    if(a.arm==='yes'){ s+=(r.hard==='Weich'?2:0)+(r.hard==='Mittel'?1:0)-(r.hard==='Hart'?4:0); }
+    return s;
+  }
+  function esc(x){return String(x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function draw(){
+    var a={}; box.querySelectorAll('.rg-pill[aria-pressed="true"]').forEach(function(b){a[b.dataset.k]=b.dataset.v;});
+    var list=R.map(function(r){return {r:r,s:score(r,a)};}).sort(function(x,y){
+      return y.s-x.s || BR.indexOf(x.r.brand)-BR.indexOf(y.r.brand) || x.r.price-y.r.price;});
+    var seen={}, per={}, pick=[];   // no colour twins, at most two per brand
+    list.forEach(function(x){var r=x.r, k=[r.brand,r.shape,r.hard,r.level,r.price].join('|');
+      if(pick.length<3 && !seen[k] && (per[r.brand]||0)<2){seen[k]=1; per[r.brand]=(per[r.brand]||0)+1; pick.push(x);}});
+    list=pick;
+    out.innerHTML=list.map(function(x){var r=x.r;
+      return '<div class="rg-item"><img src="'+esc(r.img)+'" alt="'+esc(r.label)+'" loading="lazy"><b>'+esc(r.label)+'</b><span>'+esc(T.spec[r.shape])+' · '+esc(T.spec[r.hard])+' · '+esc(r.weight)+' g</span><strong>'+r.price+' CHF</strong>'+
+        '<div class="rg-acts"><a class="rg-test" target="_blank" rel="noopener" href="https://wa.me/'+D.wa+'?text='+encodeURIComponent(T.wa.replace('{label}',r.label))+'">'+esc(T.test)+'</a><a class="rg-view" href="rackets/'+esc(r.slug)+'.html">'+esc(T.view)+'</a></div></div>';}).join('');
+  }
+  box.addEventListener('click',function(e){var b=e.target.closest('.rg-pill'); if(!b) return;
+    b.parentNode.querySelectorAll('.rg-pill').forEach(function(x){x.setAttribute('aria-pressed', x===b?'true':'false');}); draw();});
+  draw();
+})();
+</script>
+"""
+
+def finder(t, rs):
+    """Interactive picker (Guti 25.11.2026): three questions as pills like the booking block on the home page, three rackets as result.
+    The static sections below stay for Google and AI assistants, which read text, not buttons."""
+    f = t['fd']; keys = ['level', 'style', 'arm']; first = {'level': 'new', 'style': 'all', 'arm': 'no'}
+    groups = ''.join(
+        f'<div class="rg-group"><p class="rg-label" id="rg-{k}">{q}</p><div class="rg-pills" role="group" aria-labelledby="rg-{k}">'
+        + ''.join(f'<button type="button" class="rg-pill" aria-pressed="{"true" if v == first[k] else "false"}" data-k="{k}" data-v="{v}">{lab}</button>' for v, lab in opts)
+        + '</div></div>' for k, (q, opts) in zip(keys, f['q']))
+    data = dict(wa=WA, t=dict(spec=t['spec'], view=f['view'], test=f['test'], wa=f['wa']),
+                rackets=[{k: r[k] for k in ('slug', 'label', 'brand', 'price', 'img', 'shape', 'hard', 'level', 'weight')} for r in rs])
+    return f'''
+<section class="rg-finder" id="finder">
+  <div class="wrap">
+    <div class="rg-card" data-rg-finder>
+      <h2>{f['h']}</h2>
+      <p>{f['p']}</p>
+      <div class="rg-qs">{groups}</div>
+      <h3 class="rg-res-h">{f['res']}</h3>
+      <div class="rg-res" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+<script type="application/json" id="rg-data">{json.dumps(data, ensure_ascii=False).replace('</', '<\\\\/')}</script>
+'''
+
 def body(t, pre, rs):
     wa = 'https://wa.me/' + WA + '?text=' + urllib.parse.quote(t['wa'])
     pk = picks(rs)
@@ -163,7 +274,7 @@ def body(t, pre, rs):
     </div>
   </div>
 </section>
-
+{finder(t, rs)}
 <section class="co2-sec kb-flow-sec" id="how">
   <div class="wrap">
     <h2 class="co2-h">{t['flow_h']}</h2>
@@ -228,5 +339,6 @@ for lang, t in T.items():
       {'@type': 'FAQPage', 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in t['faq']]}]}
     s = s.replace('</head>', '<script type="application/ld+json" id="ld-rg">' + json.dumps(ld, ensure_ascii=False) + '</script>\n</head>', 1)
     s = s.replace('class="active"', '')
+    s = s.replace('</head>', FINDER_CSS + '</head>', 1).replace('</body>', FINDER_JS + '</body>', 1)
     open(d + SLUG, 'w').write(s)
     print(d + SLUG, len(t['title']), len(t['desc']), {k: [r['slug'] for r in v] for k, v in pk.items()} if lang == 'en' else '')
