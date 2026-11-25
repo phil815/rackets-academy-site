@@ -37,6 +37,12 @@ MPN = {
   'wilson-defy': 'WR173711U2', 'wilson-defy-ls': 'WR173811U2',
   'wilson-bela-v3': 'WR186511U2', 'wilson-bela-v3-pro': 'WR186411U2', 'wilson-bela-v3-ls': 'WR186711U2'}
 
+# EAN/GTIN vom Strichcode. Quelle: Shop-Sheet, Tab "Identifiers" (dieselben Codes gehen in den Google-Feed).
+GTIN = {
+  'siux-diablo-pro-royal-blue-2026': '8436625200389', 'siux-pegasus-pro-storm-grey-2026': '8436625200334',
+  'siux-fenix-pro-2026-black-purple': '8436625200433', 'siux-trilogy-pro-2026-ash-green': '8436625200365',
+  'siux-electra4-pro-grey-2026': '8436625200419'}
+
 def day_txt(iso, lang):
     d = datetime.date.fromisoformat(iso)
     m = {'en': 'January February March April May June July August September October November December',
@@ -106,6 +112,7 @@ def build(lang):
                           page_top, flags=re.S)
         ld = {'@context': 'https://schema.org', '@type': 'Product', 'name': label, 'sku': slug,
               **({'mpn': MPN[slug]} if slug in MPN else {}),
+              **({'gtin13': GTIN[slug]} if slug in GTIN else {}),
               'brand': {'@type': 'Brand', 'name': brand}, 'image': hd_abs or img_abs, 'description': meta,
               'offers': {'@type': 'Offer', 'price': price, 'priceCurrency': 'CHF', 'url': url,
                          'availability': 'https://schema.org/' + ('OutOfStock' if it['sold'] else 'InStock'),
