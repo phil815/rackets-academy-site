@@ -4,7 +4,7 @@ Idempotent: Bloecke stehen zwischen <!-- ux:hv2-NAME --> ... <!-- /ux:hv2-NAME -
 Titel, H1, Meta und alle uebrigen Abschnitte bleiben unveraendert."""
 import os, re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VER = '5'
+VER = '6'
 # Web-App «Free slots» (Apps Script, deployt 23.11.2026; bei Änderungen neue Version auf DIESEM Deployment). Leer = Anzeige der freien Padel-Plätze bleibt aus, nur der Link zu Playtomic.
 FREE_URL = 'https://script.google.com/macros/s/AKfycbyhaXT98MOSUwf7W7f09CfWK21OaJP3MDpi2dZMk09LLelhNF_Hp5gKe68cpekoxryCEA/exec'
 SA = 'https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3'

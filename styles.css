@@ -1245,18 +1245,20 @@ details.card > summary{padding:10px 0; min-height:40px; box-sizing:border-box;}
 /* ---------- Design v2, alle Seiten (Nov 2026): Laufband ruhig, Menue groesser und klarer ---------- */
 .promo-banner{letter-spacing:0; font-size:.95rem;}
 .nav-cta{color:#0b1a2b; font-size:1rem; padding:12px 20px;}
-@media (min-width:821px){
+@media (min-width:1141px){
   .navlinks{gap:2px; font-size:.97rem; font-weight:700;}
   .navlinks a{padding:8px 11px; border:0; border-radius:999px; color:#0b1a2b; transition:background .15s, color .15s;}
   .navlinks a:hover{background:#eef4fa;}
-  .navlinks a.active{background:#0b1a2b; color:#fff;}
+  .navlinks a.active{background:#0077de; color:#fff;}
 }
-@media (min-width:821px) and (max-width:1040px){
-  .navlinks{font-size:.88rem;}
-  .navlinks a{padding:7px 8px;}
-  .nav-cta{font-size:.92rem; padding:11px 15px;}
-}
-@media (max-width:820px){
-  .sticky-book .sb-court{color:#0b1a2b;}
-  .sticky-book .sb-course{background:#0b1a2b;}
+/* Handy und Tablet: blauer Menueknopf, Menue als blaue Flaeche (Hauptfarbe) mit grosser weisser Schrift */
+@media (max-width:1140px){
+  .nav-toggle.nav-toggle-word{background:#0077de; border-color:#0077de; border-radius:999px; padding:0 18px;}
+  .nav-toggle-word em{font-size:19px;}
+  .nav-toggle-word .nt-bars b{background:#fff;}
+  .nav-toggle-word em{color:#fff;}
+  .navlinks{background:#0077de; border-top:0; padding:10px 24px 36px; min-height:calc(100vh - 140px); box-shadow:0 18px 30px rgba(11,26,43,.3);}
+  .navlinks a{color:#fff; font-size:1.55rem; font-weight:800; letter-spacing:-.01em; padding:17px 0; border-bottom:1px solid rgba(255,255,255,.28);}
+  .navlinks a.active{color:#6ffd1d; border-bottom:1px solid rgba(255,255,255,.28);}
+  .navlinks .nav-cta-mobile{color:#0b1a2b; font-size:1.1rem; letter-spacing:0; border-bottom:0; padding:16px; margin-top:22px;}
 }
