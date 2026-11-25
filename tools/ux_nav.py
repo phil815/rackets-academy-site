@@ -11,7 +11,8 @@ T = {
 V2_PAGES = {'tennis.html', 'pickleball.html', 'padel-valais.html',
             'training.html', 'camps.html', 'spa-and-sauna.html',
             'company.html', 'company-events.html', 'sponsoring.html', 'rackets-plus.html', 'kids-birthday.html',
-            'kids-camp.html', 'kids-camp-winter.html', 'kids-camp-easter.html', 'kids-camp-summer.html'}   # events.html: eigener Stil (evw), schon in Hauptblau
+            'kids-camp.html', 'kids-camp-winter.html', 'kids-camp-easter.html', 'kids-camp-summer.html',
+            'shop.html', 'ski-and-padel.html'}   # events.html: eigener Stil (evw), schon in Hauptblau
 V2_SPORT = {'tennis.html': 'TENNIS', 'pickleball.html': 'PICKLEBALL'}
 def fix(path):
     s = open(path, encoding='utf-8').read()

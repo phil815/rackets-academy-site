@@ -1330,6 +1330,13 @@ details.card > summary{padding:10px 0; min-height:40px; box-sizing:border-box;}
 .v2 .kc-week strong{color:#0b1a2b;}
 .v2 .iq-form{background:#eef4fa; border:0; border-radius:24px; padding:26px;}
 .v2 .co-plan li{color:#0b1a2b; font-size:1rem;}
+/* Shop und Ski &Padel */
+.v2 .inc-compact h2{font-size:clamp(2rem,4.4vw,3.1rem); line-height:1.04; letter-spacing:-.025em; color:#0077de;}
+.v2 .shop-panel h2{color:#0077de; letter-spacing:-.02em;}
+.v2 .racket-selects label, .v2 .racket-brand-heading, .v2 .product-brand{text-transform:none; letter-spacing:0;}
+.v2 .racket-selects label{font-size:.9rem;}
+.v2 .wrap:has(> .rating-summary){max-width:var(--max) !important;}
+.v2 p > button.btn.btn-outline{color:#0077de; background:#fff; border:2px solid #0077de;}
 @media (max-width:640px){
   .v2 .co2-sec, .v2 .section-tight{padding:54px 0;}
   .v2 .hero-actions .btn{width:100%; text-align:center;}
