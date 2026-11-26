@@ -141,7 +141,8 @@ for lang in ['en', 'fr', 'de']:
     f = ('' if lang == 'en' else lang + '/') + 'training.html'
     s = open(f).read()
     a = s.index('<section class="section-tight" id="plans">') if '<section class="section-tight" id="plans">' in s else s.index('<section class="co3-head" id="plans">')
-    b = s.index('<section class="section-tight" style="text-align:center;">', a)
+    # Ende: der nach hinten gerueckte Block (tools/ux_training_order.py), sonst der Abschnitt «Fragen»
+    b = s.index('<!-- ux:tr-after -->', a) if '<!-- ux:tr-after -->' in s[a:] else s.index('<section class="section-tight" style="text-align:center;">', a)
     s = s[:a] + build(lang, pre) + s[b:]
     open(f, 'w').write(s)
     print(f, 'ok')
