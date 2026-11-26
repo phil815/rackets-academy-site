@@ -1306,25 +1306,8 @@ details.card > summary{padding:10px 0; min-height:40px; box-sizing:border-box;}
 .v2 .co2-price b{color:#0077de;}
 .v2 .co2-cap{opacity:1; color:#4c5d70; font-size:.95rem;}
 .v2 .co3-t th, .v2 .co3-t td{color:#0b1a2b;}
-.v2 .co3-t thead small, .v2 .co3-t td small{opacity:.8;}
-.v2 .co3-t thead em{text-transform:none;}
-@media (min-width:861px){
-  .v2 .co3-t thead small, .v2 .co3-t td small{font-size:.88rem;}
-  .v2 .co3-t thead em{font-size:.8rem;}
-}
-/* Handy: Preistabelle passt ohne seitliches Wischen (alle fuenf Spalten sichtbar) */
-@media (max-width:860px){
-  .v2 .co3-tw{overflow-x:visible;}
-  .v2 .co3-t{table-layout:fixed;}
-  .v2 .co3-t th, .v2 .co3-t td{padding:9px 3px;}
-  .v2 .co3-t thead th:first-child, .v2 .co3-t tbody th{width:17%;}
-  .v2 .co3-t thead th{font-size:.82rem; overflow-wrap:anywhere;}
-  .v2 .co3-t thead em{font-size:.66rem; padding:2px 5px; line-height:1.2;}
-  .v2 .co3-t td b{font-size:1.05rem;}
-  .v2 .co3-t .co3-u{display:block; margin-left:0; font-size:.7rem; opacity:.8;}
-  .v2 .co3-t td small{font-size:.7rem; overflow-wrap:anywhere;}
-  .v2 .co3-t tbody th{font-size:.85rem; white-space:normal;}
-}
+.v2 .co3-t thead small, .v2 .co3-t td small{font-size:.88rem; opacity:.8;}
+.v2 .co3-t thead em{text-transform:none; font-size:.8rem;}
 .v2 .co3-lbl{color:#0b1a2b; font-size:1rem;}
 .v2 .co3-card p{color:#2b3b4d;}
 .v2 .co3-card p.co3-lbl{color:#0b1a2b;}
