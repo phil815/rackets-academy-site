@@ -12,7 +12,7 @@ V2_PAGES = {'tennis.html', 'pickleball.html', 'padel-valais.html',
             'training.html', 'camps.html', 'spa-and-sauna.html',
             'company.html', 'company-events.html', 'sponsoring.html', 'rackets-plus.html', 'kids-birthday.html',
             'kids-camp.html', 'kids-camp-winter.html', 'kids-camp-easter.html', 'kids-camp-summer.html',
-            'shop.html', 'ski-and-padel.html', 'padel-racket-guide.html',
+            'shop.html', 'ski-and-padel.html', 'padel-racket-guide.html', 'siux-switzerland.html',
             'about.html', 'anniviers.html', 'faq.html', 'house-rules.html', 'impressum.html', 'privacy-policy.html',
             'terms-and-conditions.html', 'padel-oberwallis.html', 'padel-visp.html', 'rivella-league.html'}   # events.html: eigener Stil (evw), schon in Hauptblau
 V2_SPORT = {'tennis.html': 'TENNIS', 'pickleball.html': 'PICKLEBALL'}
