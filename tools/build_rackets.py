@@ -139,8 +139,9 @@ def build(lang):
                                              'shippingRate': {'@type': 'MonetaryAmount', 'value': 9, 'currency': 'CHF'},
                                              'shippingDestination': {'@type': 'DefinedRegion', 'addressCountry': 'CH'},
                                              'deliveryTime': {'@type': 'ShippingDeliveryTime',
-                                                              'handlingTime': {'@type': 'QuantitativeValue', 'minValue': 1, 'maxValue': 2, 'unitCode': 'DAY'},
-                                                              'transitTime': {'@type': 'QuantitativeValue', 'minValue': 1, 'maxValue': 2, 'unitCode': 'DAY'}}},
+                                                              # Guti 26.11.2026: ganze Schweiz in 1–2 Werktagen (Bearbeitung 0–1 + Post 1 Tag), gleich wie der sichtbare Text
+                                                              'handlingTime': {'@type': 'QuantitativeValue', 'minValue': 0, 'maxValue': 1, 'unitCode': 'DAY'},
+                                                              'transitTime': {'@type': 'QuantitativeValue', 'minValue': 1, 'maxValue': 1, 'unitCode': 'DAY'}}},
                          'seller': {'@type': 'Organization', 'name': 'Rackets Academy'}}}
         page_top = page_top.replace('</head>', '<script type="application/ld+json" id="ld-product">' + json.dumps(ld, ensure_ascii=False) + '</script>\n</head>', 1)
         wa = 'https://wa.me/' + WA + '?text=' + urllib.parse.quote(t['wa'].format(label=label))
