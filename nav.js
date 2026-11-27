@@ -187,18 +187,19 @@ function openBuyModal(type, opts) {
   document.getElementById('buy-modal-overlay').classList.add('open');
 }
 
-// Rackets: Abholung oder Versand per Post (+9 CHF). Die Felder werden in den Kauf-Dialog eingefügt,
+// Rackets: Abholung oder Versand per Post (gratis, seit 27.11.2026). Die Felder werden in den Kauf-Dialog eingefügt,
 // damit nicht jede Seite einzeln angepasst werden muss; der Server rechnet den Preis selbst.
-var RA_SHIP_CHF = 9;
+// free shipping since 2026-11 (tools/ux_free_shipping.py)
+var RA_SHIP_CHF = 0;
 function raShipSetup(isRacket, base) {
   var form = document.getElementById('buy-modal-form');
   var loc = document.getElementById('modal-location');
   if (!form || !loc) return;
   var L = (document.documentElement.lang || 'en').slice(0, 2);
   var T = {
-    de: { how: 'Wie willst du dein Racket?', pick: 'Abholung in der Academy (gratis)', ship: 'Versand per Post (+' + RA_SHIP_CHF + ' CHF)', street: 'Strasse und Nr.', zip: 'PLZ', city: 'Ort', note: 'Versand in der Schweiz, innert 1–2 Werktagen mit A-Post. Rückgabe innert 30 Tagen, wenn neu und originalverpackt.' },
-    fr: { how: 'Comment veux-tu ta raquette ?', pick: 'Retrait à l\'Academy (gratuit)', ship: 'Envoi par la Poste (+' + RA_SHIP_CHF + ' CHF)', street: 'Rue et n°', zip: 'NPA', city: 'Localité', note: 'Envoi en Suisse, sous 1–2 jours ouvrables en Courrier A. Retour sous 30 jours si neuve et dans l\'emballage d\'origine.' },
-    en: { how: 'How do you want your racket?', pick: 'Pick up at the academy (free)', ship: 'Shipping by post (+' + RA_SHIP_CHF + ' CHF)', street: 'Street and no.', zip: 'Postcode', city: 'Town', note: 'Shipping within Switzerland, within 1–2 working days by A-Post. Returns within 30 days if new and in original packaging.' }
+    de: { how: 'Wie willst du dein Racket?', pick: 'Abholung in der Academy (gratis)', ship: 'Versand per Post (gratis)', street: 'Strasse und Nr.', zip: 'PLZ', city: 'Ort', note: 'Versand in der Schweiz, innert 1–2 Werktagen mit A-Post. Rückgabe innert 30 Tagen, wenn neu und originalverpackt.' },
+    fr: { how: 'Comment veux-tu ta raquette ?', pick: 'Retrait à l\'Academy (gratuit)', ship: 'Envoi par la Poste (gratuit)', street: 'Rue et n°', zip: 'NPA', city: 'Localité', note: 'Envoi en Suisse, sous 1–2 jours ouvrables en Courrier A. Retour sous 30 jours si neuve et dans l\'emballage d\'origine.' },
+    en: { how: 'How do you want your racket?', pick: 'Pick up at the academy (free)', ship: 'Shipping by post (free)', street: 'Street and no.', zip: 'Postcode', city: 'Town', note: 'Shipping within Switzerland, within 1–2 working days by A-Post. Returns within 30 days if new and in original packaging.' }
   }[L] || null;
   if (!T) return;
   var box = document.getElementById('modal-ship');
