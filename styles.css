@@ -1366,3 +1366,34 @@ details.card > summary{padding:10px 0; min-height:40px; box-sizing:border-box;}
   .v2 .co2-sec, .v2 .section-tight{padding:54px 0;}
   .v2 .hero-actions .btn{width:100%; text-align:center;}
 }
+
+/* ---- Buchungsfenster (W14, 27.11.2026): derselbe Buchungsblock wie auf der Startseite, hinter jedem «Platz buchen» ---- */
+#book-picker{position:fixed; inset:0; z-index:300; background:rgba(11,26,43,.55); display:none; align-items:flex-end; justify-content:center;}
+#book-picker.open{display:flex;}
+#book-picker .bk-sheet{position:relative; background:#fff; width:100%; max-width:520px; max-height:100%; overflow-y:auto; border-radius:24px 24px 0 0; padding:24px 20px calc(20px + env(safe-area-inset-bottom,0px)); box-shadow:0 -10px 40px rgba(0,0,0,.2); text-align:left;}
+@media (min-width:700px){ #book-picker{align-items:center;} #book-picker .bk-sheet{border-radius:24px; padding:28px 28px 24px; max-height:calc(100% - 40px);} }
+#book-picker h3{margin:0 44px 18px 0; font-size:1.5rem; line-height:1.2; color:#0b1a2b;}
+#book-picker .loc-close{position:absolute; top:12px; right:12px; width:48px; height:48px; background:#f1f4f7; border:0; border-radius:50%; font-size:1.7rem; line-height:1; cursor:pointer; color:#0b1a2b;}
+#book-picker .hv2-card{display:flex; flex-direction:column; gap:14px; margin:0; padding:0; background:none; box-shadow:none; border:0;}
+#book-picker .hv2-group{display:flex; flex-direction:column; gap:8px; min-width:0;}
+#book-picker .hv2-label{margin:0; font-size:1rem; font-weight:700; color:#4c5d70;}
+#book-picker .hv2-pills{display:flex; gap:8px;}
+#book-picker .hv2-pill{flex:1 1 0; font:inherit; font-size:1rem; font-weight:700; color:#0b1a2b; background:#fff; border:2px solid #c9d3de; border-radius:999px; padding:11px 8px; min-height:50px; cursor:pointer;}
+#book-picker .hv2-pill:hover{border-color:#0077de;}
+#book-picker .hv2-pill[aria-pressed="true"]{background:#0077de; border-color:#0077de; color:#fff;}
+#book-picker .hv2-pill:disabled{color:#8a97a6; border-color:#e3e9ef; background:#f4f7fa; cursor:not-allowed;}
+#book-picker .hv2-pill:focus-visible, #book-picker .hv2-cta:focus-visible, #book-picker .loc-close:focus-visible{outline:3px solid #0077de; outline-offset:3px;}
+#book-picker .bk-info{margin:0; font-size:.9rem; color:#4c5d70;}
+#book-picker .hv2-free{background:#f3f8fe; border-radius:16px; padding:12px 14px; display:flex; flex-direction:column; gap:8px;}
+#book-picker .hv2-free[hidden]{display:none;}
+#book-picker .hv2-free-lead{margin:0; font-size:1rem; font-weight:700; color:#0b1a2b;}
+#book-picker .hv2-parts{display:flex; flex-direction:column; gap:6px;}
+#book-picker .hv2-part{display:flex; justify-content:space-between; align-items:baseline; gap:8px; background:#fff; color:#0b1a2b; border-radius:12px; padding:9px 14px; font-size:1rem;}
+#book-picker .hv2-part b{font-weight:800;}
+#book-picker .hv2-part-full{color:#4c5d70;}
+#book-picker .hv2-free-asof{margin:0; font-size:.85rem; color:#4c5d70;}
+#book-picker .hv2-go{display:flex; flex-direction:column; gap:6px; position:sticky; bottom:calc(-20px - env(safe-area-inset-bottom,0px)); background:#fff; padding:10px 0 calc(12px + env(safe-area-inset-bottom,0px)); margin:-6px 0 -12px; box-shadow:0 -10px 12px -8px rgba(255,255,255,.9);}
+#book-picker .hv2-go .hv2-cta{display:block; font-size:1.15rem; padding:17px 20px; text-align:center; color:#0b1a2b;}
+#book-picker .hv2-note{margin:0; font-size:.9rem; color:#4c5d70; text-align:center;}
+#book-picker .loc-tip{margin:14px 0 0; font-size:.9rem; color:#4c5d70; text-align:center;}
+@media (max-width:380px){ #book-picker .hv2-pill{font-size:.92rem; padding:11px 4px;} }

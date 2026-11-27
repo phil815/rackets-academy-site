@@ -431,6 +431,152 @@ document.addEventListener('DOMContentLoaded', function () {
     de: { title: 'Wo möchtest du spielen?', court: 'Platz buchen', course: 'Kurse', sub: 'Wähle deinen Standort', close: 'Schliessen', sa: 'Padel · Pickleball · Tennis · Spa · Gratis-Parkplätze', si: 'Padel · Parkplätze vor Ort', tip: 'Schlägermiete 3–10 CHF · kostenlos stornieren bis 24 h vorher' }
   }[L] || null;
   if (!T) return;
+  // Texte des Buchungsblocks im Fenster (gleich wie auf der Startseite, siehe tools/ux_home_v2.py)
+  var B = {
+    en: { h: 'Book a court', wo: 'Where', was: 'What', wann: 'When', d0: 'Today', d1: 'Tomorrow', we: 'Weekend', lead: 'Free padel courts', parts: 'Morning|Afternoon|Evening', one: '1 court free', n: '{n} courts free', full: 'Fully booked', asof: 'As of {t}', cta: 'See free slots', note: 'You book securely on Playtomic', sion: 'Pickleball and tennis are in Salgesch' },
+    fr: { h: 'Réserver un court', wo: 'Où', was: 'Quoi', wann: 'Quand', d0: "Aujourd'hui", d1: 'Demain', we: 'Week-end', lead: 'Courts de padel libres', parts: 'Matin|Après-midi|Soir', one: '1 court libre', n: '{n} courts libres', full: 'Complet', asof: 'État à {t}', cta: 'Voir les créneaux libres', note: 'Tu réserves en toute sécurité sur Playtomic', sion: 'Pickleball et tennis sont à Salgesch' },
+    de: { h: 'Platz buchen', wo: 'Wo', was: 'Was', wann: 'Wann', d0: 'Heute', d1: 'Morgen', we: 'Wochenende', lead: 'Freie Padel-Plätze', parts: 'Vormittag|Nachmittag|Abend', one: '1 Platz frei', n: '{n} Plätze frei', full: 'Ausgebucht', asof: 'Stand {t}', cta: 'Freie Zeiten ansehen', note: 'Du buchst sicher über Playtomic', sion: 'Pickleball und Tennis gibt es in Salgesch' }
+  }[L];
+  // Web-App «Free slots» (Apps Script). Dieselbe Adresse wie FREE_URL in tools/ux_home_v2.py.
+  var FREE_URL = 'https://script.google.com/macros/s/AKfycbyhaXT98MOSUwf7W7f09CfWK21OaJP3MDpi2dZMk09LLelhNF_Hp5gKe68cpekoxryCEA/exec';
+  var CLUBS = { salgesch: 'https://playtomic.com/clubs/rackets-academy-salgesch', sion: 'https://playtomic.com/clubs/rackets-academy-sion' };
+
+  // Buchungsblock: baut aus Standort, Sport und Tag den Playtomic-Link und zeigt freie Padel-Plätze.
+  // Wird von der Startseite und der Seite «Platz buchen» (home-v2.js) und vom Buchungsfenster unten benutzt.
+  function bookCard(card, opts) {
+    opts = opts || {};
+    var cta = card.querySelector('.hv2-cta');
+    var note = card.querySelector('.hv2-note');
+    var state = { club: opts.club || 'salgesch', sport: opts.sport || 'PADEL', day: '0' };
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    function dateFor(day) {
+      var d = new Date();
+      if (day === '1') d.setDate(d.getDate() + 1);
+      if (day === 'we') {               // nächster Samstag; am Wochenende selbst: heute
+        var w = d.getDay();             // 0 = Sonntag, 6 = Samstag
+        if (w !== 0 && w !== 6) d.setDate(d.getDate() + (6 - w));
+      }
+      return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+    }
+    var free = card.querySelector('.hv2-free');
+    var freeUrl = card.getAttribute('data-free-url') || '';
+    var run = 0;
+    function loadFree() {
+      if (!free) return;
+      var mine = ++run;
+      free.hidden = true;                               // nie die Zahlen einer früheren Auswahl stehen lassen
+      if (!freeUrl || state.sport !== 'PADEL' || !window.fetch) return;
+      fetch(freeUrl + '?club=' + state.club + '&date=' + dateFor(state.day))
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (mine !== run) return;                     // inzwischen wurde etwas anderes gewählt
+          if (!d || !d.ok || !d.parts) return;
+          var names = free.dataset.parts.split('|');
+          var keys = ['morning', 'afternoon', 'evening'];
+          var html = '';
+          d.parts.forEach(function (p) {
+            var i = keys.indexOf(p.key);
+            if (i < 0 || p.past) return;
+            var n = Number(p.courts) || 0;
+            var txt = n === 0 ? free.dataset.full : (n === 1 ? free.dataset.one : free.dataset.n.replace('{n}', n));
+            html += '<span class="hv2-part' + (n === 0 ? ' hv2-part-full' : '') + '"><b>' + names[i] + '</b> ' + txt + '</span>';
+          });
+          if (!html) return;
+          free.innerHTML = '<p class="hv2-free-lead">' + free.dataset.lead + '</p><div class="hv2-parts">' + html +
+            '</div><p class="hv2-free-asof">' + free.dataset.asof.replace('{t}', String(d.updated || '').replace(/[^0-9:]/g, '')) + '</p>';
+          free.hidden = false;
+        })
+        .catch(function () {});
+    }
+    function render() {
+      var sionOnly = state.club === 'sion';
+      if (sionOnly && state.sport !== 'PADEL') state.sport = 'PADEL';   // Pickleball und Tennis nur in Salgesch
+      card.querySelectorAll('.hv2-pill').forEach(function (b) {
+        var on = (b.dataset.club && b.dataset.club === state.club) ||
+                 (b.dataset.sport && b.dataset.sport === state.sport) ||
+                 (b.dataset.day && b.dataset.day === state.day);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        if (b.dataset.sport && b.dataset.sport !== 'PADEL') b.disabled = sionOnly;
+      });
+      cta.href = CLUBS[state.club] + '?date=' + dateFor(state.day) + '&sport=' + state.sport;
+      if (note) note.textContent = sionOnly ? note.dataset.sion : note.dataset.std;
+      if (opts.onChange) opts.onChange(state);
+      loadFree();
+    }
+    card.addEventListener('click', function (e) {
+      var b = e.target.closest && e.target.closest('.hv2-pill');
+      if (!b || b.disabled) return;
+      if (b.dataset.club) state.club = b.dataset.club;
+      if (b.dataset.sport) state.sport = b.dataset.sport;
+      if (b.dataset.day) state.day = b.dataset.day;
+      render();
+    });
+    render();
+    return { set: function (o) { if (o.club) state.club = o.club; if (o.sport) state.sport = o.sport; state.day = '0'; render(); } };
+  }
+  window.raBookCard = bookCard;
+
+  // Buchungsfenster: derselbe Block wie auf der Startseite, hinter jedem «Platz buchen» (Gutis OK 27.11.2026).
+  var bookApi = null, bookOpener = null;
+  function openBook(opener) {
+    var onPage = document.querySelector('.hv2-book [data-hv2-book]');
+    if (onPage) {                         // Startseite und «Platz buchen»: der Block steht schon da
+      onPage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      var p = onPage.querySelector('.hv2-pill');
+      if (p) setTimeout(function () { try { p.focus({ preventScroll: true }); } catch (err) {} }, 400);
+      return;
+    }
+    var last = null;
+    try { last = localStorage.getItem('ra_loc'); } catch (err) {}
+    var path = location.pathname, q = (location.search.match(/sport=([A-Z]+)/) || [])[1];
+    var sport = /tennis/.test(path) || q === 'TENNIS' ? 'TENNIS' : (/pickleball/.test(path) || q === 'PICKLEBALL' ? 'PICKLEBALL' : 'PADEL');
+    var club = sport === 'PADEL' && last === 'si' ? 'sion' : 'salgesch';
+    var ov = document.getElementById('book-picker');
+    if (!ov) {
+      var pill = function (attr, label) { return '<button type="button" class="hv2-pill" aria-pressed="false" ' + attr + '>' + label + '</button>'; };
+      ov = document.createElement('div');
+      ov.id = 'book-picker';
+      ov.setAttribute('role', 'dialog');
+      ov.setAttribute('aria-modal', 'true');
+      ov.setAttribute('aria-labelledby', 'bk-title');
+      ov.innerHTML =
+        '<div class="bk-sheet">' +
+          '<button type="button" class="loc-close" aria-label="' + T.close + '">×</button>' +
+          '<h3 id="bk-title">' + B.h + '</h3>' +
+          '<div class="hv2-card" data-hv2-book data-free-url="' + FREE_URL + '">' +
+            '<div class="hv2-group"><p class="hv2-label" id="bk-wo">' + B.wo + '</p><div class="hv2-pills" role="group" aria-labelledby="bk-wo">' + pill('data-club="salgesch"', 'Salgesch') + pill('data-club="sion"', 'Sion') + '</div><p class="bk-info"></p></div>' +
+            '<div class="hv2-group"><p class="hv2-label" id="bk-was">' + B.was + '</p><div class="hv2-pills" role="group" aria-labelledby="bk-was">' + pill('data-sport="PADEL"', 'Padel') + pill('data-sport="PICKLEBALL"', 'Pickleball') + pill('data-sport="TENNIS"', 'Tennis') + '</div></div>' +
+            '<div class="hv2-group"><p class="hv2-label" id="bk-wann">' + B.wann + '</p><div class="hv2-pills" role="group" aria-labelledby="bk-wann">' + pill('data-day="0"', B.d0) + pill('data-day="1"', B.d1) + pill('data-day="we"', B.we) + '</div></div>' +
+            '<div class="hv2-free" hidden aria-live="polite" data-lead="' + B.lead + '" data-parts="' + B.parts + '" data-one="' + B.one + '" data-n="' + B.n + '" data-full="' + B.full + '" data-asof="' + B.asof + '"></div>' +
+            '<div class="hv2-go"><a class="btn btn-green hv2-cta" href="' + CLUBS.salgesch + '?sport=PADEL" target="_blank" rel="noopener">' + B.cta + '</a><p class="hv2-note" data-std="' + B.note + '" data-sion="' + B.sion + '">' + B.note + '</p></div>' +
+          '</div>' +
+          '<p class="loc-tip">' + T.tip + '</p>' +
+        '</div>';
+      document.body.appendChild(ov);
+      var info = ov.querySelector('.bk-info');
+      var close = function () { ov.classList.remove('open'); if (bookOpener && bookOpener.focus) { try { bookOpener.focus(); } catch (err) {} } };
+      bookApi = bookCard(ov.querySelector('[data-hv2-book]'), {
+        club: club, sport: sport,
+        onChange: function (st) {
+          info.textContent = st.club === 'sion' ? T.si : T.sa;
+          try { localStorage.setItem('ra_loc', st.club === 'sion' ? 'si' : 'sa'); } catch (err) {}
+        }
+      });
+      ov.addEventListener('click', function (e) {
+        if (e.target === ov || e.target.closest('.loc-close')) close();
+        if (e.target.closest('.hv2-cta')) setTimeout(function () { ov.classList.remove('open'); }, 300);
+      });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && ov.classList.contains('open')) close(); });
+    } else {
+      bookApi.set({ club: club, sport: sport });
+    }
+    bookOpener = opener || null;
+    ov.classList.add('open');
+    var c = ov.querySelector('.loc-close');
+    if (c) { try { c.focus({ preventScroll: true }); } catch (err) {} }
+  }
+  window.openBookPicker = openBook;
+
   var URLS = {
     court: { sa: 'https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3', si: 'https://playtomic.com/tenant/c2ce2a9e-ab52-4191-bf7f-0c0aa70a2701' },
     academy: { sa: 'https://tinyurl.com/Academy-Salgesch', si: 'https://tinyurl.com/Academy-Sion' }
@@ -477,7 +623,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var a = e.target.closest && e.target.closest('[data-pick]');
     if (!a) return;
     e.preventDefault();
-    openPicker(a.getAttribute('data-pick'));
+    var kind = a.getAttribute('data-pick');
+    if (kind === 'court') openBook(a); else openPicker(kind);   // Kurse (academy) behalten das Standort-Fenster
   });
 
   // remember explicit language choice (used by the auto-language redirect)
