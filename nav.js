@@ -519,7 +519,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Buchungsfenster: derselbe Block wie auf der Startseite, hinter jedem «Platz buchen» (Gutis OK 27.11.2026).
   var bookApi = null, bookOpener = null;
   function openBook(opener) {
-    var onPage = document.querySelector('.hv2-book [data-hv2-book]');
+    var onPage = document.querySelector('main [data-hv2-book], section [data-hv2-book]');
     if (onPage) {                         // Startseite und «Platz buchen»: der Block steht schon da
       onPage.scrollIntoView({ behavior: 'smooth', block: 'center' });
       var p = onPage.querySelector('.hv2-pill');
