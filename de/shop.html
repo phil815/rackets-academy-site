@@ -77,6 +77,44 @@
 @media(max-width:600px){.shop-bubbles{gap:12px}.shop-bubble{width:104px;height:104px;font-size:.78rem;padding:8px}.shop-bubble .bubble-icon{width:28px;height:28px}}
 @media(max-width:560px){.floky-pts{grid-template-columns:1fr}.floky-card .btn{width:100%;text-align:center}}
 </style>
+<!-- shop-v3 -->
+<script id="sv3-redirect">(function(){function go(){var h=location.hash;if(h==='#vouchers'){location.replace('gift-vouchers.html');}else if(h==='#floky'){location.replace('floky.html');}}go();addEventListener('hashchange',go);})();</script>
+<style id="sv3-css">
+.sv3-chips{display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 0;}
+.sv3-chips span{background:rgba(255,255,255,.16); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,.35); border-radius:999px; padding:6px 14px; font-weight:700; font-size:.9rem; color:#fff;}
+.sv3-cats{display:flex; gap:8px; flex-wrap:wrap; padding:22px 0 6px;}
+.sv3-cats a{font-weight:700; font-size:1rem; color:#0b1a2b; background:#fff; border:2px solid #c9d3de; border-radius:999px; padding:11px 18px; min-height:48px; box-sizing:border-box; display:inline-flex; align-items:center; text-decoration:none;}
+.sv3-cats a:hover{border-color:#0077de;}
+.sv3-cats a[aria-current="page"]{background:#0077de; border-color:#0077de; color:#fff;}
+.sv3-cats a:focus-visible, .sv3-pill:focus-visible, .sv3-sort select:focus-visible{outline:3px solid #0077de; outline-offset:3px;}
+.sv3-bar{background:#fff; border-radius:24px; padding:18px 20px; margin:0 0 20px; display:flex; gap:16px 28px; flex-wrap:wrap; align-items:flex-end; box-shadow:0 6px 20px rgba(11,26,43,.08);}
+.sv3-group{display:flex; flex-direction:column; gap:8px; min-width:0;}
+.sv3-label{margin:0; font-size:.95rem; font-weight:700; color:#4c5d70;}
+.sv3-pills{display:flex; gap:8px; flex-wrap:wrap;}
+.sv3-pill{font:inherit; font-size:1rem; font-weight:700; color:#0b1a2b; background:#fff; border:2px solid #c9d3de; border-radius:999px; padding:9px 16px; min-height:46px; cursor:pointer;}
+.sv3-pill:hover{border-color:#0077de;}
+.sv3-pill[aria-pressed="true"]{background:#0077de; border-color:#0077de; color:#fff;}
+.sv3-sort select{font:inherit; font-size:1rem; font-weight:700; color:#0b1a2b; background:#fff; border:2px solid #c9d3de; border-radius:999px; padding:9px 14px; min-height:46px;}
+.sv3-count{margin:0 0 12px; font-weight:700; color:#4c5d70;}
+.sv3-brand{display:block; font-size:.78rem; font-weight:700; color:#4c5d70; margin-top:2px;}
+.sv3-on .racket-brand-heading{display:none;}
+.sv3-out{margin:28px 0 0;}
+.sv3-out > summary{cursor:pointer; font-weight:700; font-size:1.05rem; color:#0b1a2b; padding:12px 0; min-height:48px; box-sizing:border-box;}
+.sv3-out .racket-grid{margin-top:12px;}
+.sv3-hide{display:none !important;}
+.sv3-after{margin-top:36px;}
+.hero h1{overflow-wrap:anywhere; hyphens:auto;}
+@media (max-width:480px){ .hero h1{font-size:clamp(1.7rem,8.4vw,2.4rem); line-height:1.1;} }
+@media (max-width:760px){
+  .sv3-bar{padding:14px; border-radius:20px; gap:14px;}
+  .sv3-group{width:100%;}
+  .sv3-pills{flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; padding-bottom:2px;}
+  .sv3-pills::-webkit-scrollbar{display:none;}
+  .sv3-pill{flex:none;}
+  .sv3-sort select{width:100%;}
+  .sv3-cats a{flex:1 1 auto; justify-content:center; padding:11px 12px;}
+}
+</style>
 </head>
 <body class="v2">
 <div class="site-top">
@@ -114,98 +152,26 @@
 </header>
 </div>
 
-<section class="hero" style="background-image:linear-gradient(180deg, rgba(4,30,70,.35), rgba(4,30,70,.72)), url('https://www.racketsacademy.ch/images/photos/shop-winners.webp'); background-size:cover; background-position:center 35%;">
+<section class="hero" style="background-image:linear-gradient(180deg, rgba(4,30,70,.35), rgba(4,30,70,.72)), url('https://www.racketsacademy.ch/images/photos/visp-player.webp'); background-size:cover; background-position:center 47%;">
   <span class="ball b1"></span><span class="ball b2"></span><span class="ball b3"></span>
   <div class="wrap hero-inner">
     <h1>Shop</h1>
-    <p class="lede">Verschenk eine Padel-Session oder hol dir ein Racket zur Abholung in der Academy. Wähl unten eine Kategorie.</p>
+    <p class="lede">Padelschläger von Wilson, Babolat und Siux: in 1–2 Werktagen bei dir oder zur Abholung in Salgesch und Sion. Jeden Schläger kannst du vorher testen.</p>
+    <div class="sv3-chips"><span>Lieferung in 1–2 Werktagen</span><span>In CHF, ohne Zoll</span><span>Test für 10 CHF</span><span>30 Tage Rückgabe</span></div>
   </div>
 </section>
 
-<section class="section-tight" style="padding-top:32px; padding-bottom:12px;">
+<section class="section-tight" style="padding-top:0; padding-bottom:0;">
   <div class="wrap">
-    <div class="shop-bubbles">
-      <button type="button" class="shop-bubble" id="bubble-vouchers" onclick="showShopPanel('vouchers')">
-        <svg class="bubble-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 16a4 4 0 0 1 0-8h36a4 4 0 0 1 0 8 4 4 0 0 0 0 8 4 4 0 0 1 0 8H6a4 4 0 0 1 0-8 4 4 0 0 0 0-8z" fill="#6ffd1d"/><line x1="30" y1="10" x2="30" y2="14" stroke="#0b1a2b" stroke-width="2"/><line x1="30" y1="18" x2="30" y2="22" stroke="#0b1a2b" stroke-width="2"/><line x1="30" y1="26" x2="30" y2="30" stroke="#0b1a2b" stroke-width="2"/></svg>Geschenkgutscheine
-      </button>
-      <button type="button" class="shop-bubble" id="bubble-rackets" onclick="showShopPanel('rackets')">
-        <svg class="bubble-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="24" cy="18" rx="14" ry="16" stroke="white" stroke-width="3"/><rect x="21" y="32" width="6" height="14" rx="3" fill="white"/><circle cx="19" cy="12" r="1.4" fill="white"/><circle cx="24" cy="10" r="1.4" fill="white"/><circle cx="29" cy="12" r="1.4" fill="white"/><circle cx="17" cy="18" r="1.4" fill="white"/><circle cx="24" cy="16" r="1.4" fill="white"/><circle cx="31" cy="18" r="1.4" fill="white"/><circle cx="19" cy="24" r="1.4" fill="white"/><circle cx="24" cy="22" r="1.4" fill="white"/><circle cx="29" cy="24" r="1.4" fill="white"/></svg>Rackets
-      </button>
-      <button type="button" class="shop-bubble" id="bubble-floky" onclick="showShopPanel('floky')">
-        <svg class="bubble-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 6h12l4 30a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6z" fill="#6ffd1d"/><path d="M15 14h13M16 22h13M17 30h13" stroke="#0b1a2b" stroke-width="2"/><path d="M34 10l5-3M35 16h6M34 22l5 3" stroke="white" stroke-width="2.4" stroke-linecap="round"/></svg>Floky Sleeves
-      </button>
-    </div>
+    <nav class="sv3-cats" aria-label="Shop"><a href="shop.html" aria-current="page">Schläger</a><a href="gift-vouchers.html">Geschenkgutscheine</a><a href="floky.html">Floky Sleeves</a></nav>
   </div>
 </section>
 
-<section id="vouchers" class="shop-panel">
-  <div class="wrap" style="max-width:600px;">
-    <h2>Geschenkgutscheine</h2>
-    <p class="section-lede">Verschenk ein Padel-Spiel. Ein Gutschein gilt für eine Person und ein Spiel zu jeder Zeit, auch abends und am Wochenende (Wert 20 CHF). Du bekommst ihn per E-Mail, eingelöst wird er als Code bei der Buchung in Playtomic. Wähl dein Paket:</p>
-
-    <div class="shop-options" id="voucher-options">
-      <label class="shop-option">
-        <input type="radio" name="bundle" value="1x20" data-price="20" data-qty="1" checked>
-        <span class="shop-option-body"><strong>1×</strong><span>20 CHF</span></span>
-      </label>
-      <label class="shop-option">
-        <input type="radio" name="bundle" value="5x20" data-price="100" data-qty="5">
-        <span class="shop-option-body"><strong>5×</strong><span>100 CHF</span></span>
-      </label>
-      <label class="shop-option">
-        <input type="radio" name="bundle" value="10x20" data-price="200" data-qty="10">
-        <span class="shop-option-body"><strong>10×</strong><span>200 CHF</span></span>
-      </label>
-      <label class="shop-option">
-        <input type="radio" name="bundle" value="20x20" data-price="400" data-qty="20">
-        <span class="shop-option-body"><strong>20×</strong><span>400 CHF</span></span>
-      </label>
-    </div>
-    <button type="button" class="btn btn-green" style="width:100%; text-align:center;" onclick="openVoucherModal()">Jetzt kaufen</button>
-
-    <h2 style="margin-top:48px;">Kurs-Gutscheine</h2>
-    <p class="section-lede">Ein Playtomic-Code für eine Trainingslektion mit unseren Coaches — das perfekte Geschenk für alle, die besser werden wollen.</p>
-    <div class="shop-options" id="lesson-options">
-      <label class="shop-option">
-        <input type="radio" name="lesson" value="60" data-price="40" checked>
-        <span class="shop-option-body"><strong>60 Min</strong><span>40 CHF</span></span>
-      </label>
-      <label class="shop-option">
-        <input type="radio" name="lesson" value="90" data-price="50">
-        <span class="shop-option-body"><strong>90 Min</strong><span>50 CHF</span></span>
-      </label>
-    </div>
-    <label class="lesson-qty">Anzahl
-      <select id="lesson-qty"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="10">10</option></select>
-    </label>
-    <button type="button" class="btn btn-green" style="width:100%; text-align:center;" onclick="openLessonModal()">Jetzt kaufen</button>
-
-    <h2 style="margin-top:48px;">Racket-Gutscheine</h2>
-    <p class="section-lede">Ein Gutschein für ein neues Padel-Racket aus unserem Shop: Die beschenkte Person wählt ihr Modell selbst und kann es vorher testen. Einlösbar an der Theke in Salgesch oder Sion, 2 Jahre gültig.</p>
-    <div class="shop-options" id="rvoucher-options">
-      <label class="shop-option"><input type="radio" name="rvoucher" value="100" checked><span class="shop-option-body"><strong>100 CHF</strong></span></label>
-      <label class="shop-option"><input type="radio" name="rvoucher" value="150"><span class="shop-option-body"><strong>150 CHF</strong></span></label>
-      <label class="shop-option"><input type="radio" name="rvoucher" value="200"><span class="shop-option-body"><strong>200 CHF</strong></span></label>
-      <label class="shop-option"><input type="radio" name="rvoucher" value="custom"><span class="shop-option-body"><strong>Anderer Betrag</strong></span></label>
-    </div>
-    <label class="lesson-qty" id="rvoucher-custom-wrap" style="display:none;">Betrag in CHF (50–1000)
-      <input type="number" id="rvoucher-custom" min="50" max="1000" step="10" inputmode="numeric" placeholder="120">
-    </label>
-    <button type="button" class="btn btn-green" style="width:100%; text-align:center;" onclick="openRacketVoucherModal()">Jetzt kaufen</button>
-  </div>
-</section>
-
-<section id="rackets" class="shop-panel" style="background:var(--paper);">
+<section id="rackets" class="shop-panel active" style="background:var(--paper);">
   <div class="wrap">
     <h2>Rackets</h2>
     <p class="section-lede">Hol dein Racket in der Academy ab oder lass es dir für 9 CHF per Post schicken. Rückgabe innert 30 Tagen, wenn neu und originalverpackt.</p>
     <p class="section-lede"><strong>Unsicher, welches passt?</strong> <a href="padel-racket-guide.html">Zur Kaufberatung →</a></p>
-
-    <div class="highlight-box" style="margin-bottom:32px;">
-      <span class="eyebrow-tag" style="background:rgba(255,255,255,.18);">Erst testen. Dann entscheiden.</span>
-      <h2 style="color:var(--white); margin-top:14px;">Kauf nie ein Racket blind</h2>
-      <p style="max-width:520px; margin:0 auto;">Wir sind grosse Fans davon, vor dem Kauf zu testen — jedes Racket fühlt sich auf dem Platz anders an. Miete jedes Modell für 10 CHF und spiel damit ein echtes Match, ganz ohne Risiko: Kaufst du es, schreiben wir dir die 10 CHF auf den Kaufpreis gut. Online findest du vielleicht ein günstigeres Angebot, aber nicht die Sicherheit, dass es das richtige Racket für dich ist.</p>
-    </div>
 
     <h3 class="racket-brand-heading">Babolat</h3>
     <div class="racket-grid">
@@ -439,24 +405,17 @@
         <button type="button" class="buy-btn" onclick="openBuyModal('racket',{price:250,racketModel:'siux-electra4-pro-grey-2026',racketLabel:'Siux Electra Pro 2026 — Shadow Red',title:'Siux Electra Pro 2026 — Shadow Red'})">Jetzt kaufen</button>
       </div>
     </div>
+    <div class="sv3-after">
+    <div class="highlight-box">
+      <span class="eyebrow-tag" style="background:rgba(255,255,255,.18);">Erst testen. Dann entscheiden.</span>
+      <h2 style="color:var(--white); margin-top:14px;">Kauf nie ein Racket blind</h2>
+      <p style="max-width:520px; margin:0 auto;">Wir sind grosse Fans davon, vor dem Kauf zu testen — jedes Racket fühlt sich auf dem Platz anders an. Miete jedes Modell für 10 CHF und spiel damit ein echtes Match, ganz ohne Risiko: Kaufst du es, schreiben wir dir die 10 CHF auf den Kaufpreis gut. Online findest du vielleicht ein günstigeres Angebot, aber nicht die Sicherheit, dass es das richtige Racket für dich ist.</p>
+    </div>
+    </div>
   </div>
 </section>
 
-<section id="floky" class="shop-panel">
-  <div class="wrap" style="max-width:820px;">
-    <h2>Floky × Rackets Academy</h2>
-    <p class="section-lede">Unser Partner Floky stellt den No-Strain her — den ersten biomechanischen Arm-Sleeve für Padel. Er dämpft die Vibrationen bei jedem Schlag und stützt Ellbogen und Unterarm, damit du länger schmerzfrei spielst.</p>
-    <ul class="floky-pts"><li>Dämpft Schlagvibrationen an Ellbogen & Unterarm</li><li>Integriertes «Tape-System» — wie ein Tape, nur im Sleeve</li><li>Hilft gegen Tennis-/Padel-Ellbogen, vorbeugend und in der Erholung</li><li>Mit einem Biomechanik-Labor entwickelt, getragen von Profis der Premier Padel Tour</li></ul>
-    <div class="floky-card">
-      <div class="floky-off">-11%</div>
-      <div class="floky-txt"><span>Dein Code</span>
-        <button type="button" class="floky-code" onclick="navigator.clipboard&&navigator.clipboard.writeText('RACKETSACADEMY');this.dataset.done=1;this.querySelector('em').textContent='Kopiert!'">RACKETSACADEMY <em>Kopieren</em></button>
-        <small>11% auf jede Bestellung bei floky.ch</small></div>
-      <a class="btn btn-green" href="https://www.floky.ch/discount/RACKETSACADEMY" target="_blank" rel="noopener sponsored" onclick="window.gtag&&gtag('event','floky_click')">Floky mit 11% Rabatt shoppen →</a>
-    </div>
-    <p class="floky-note">Der Rabatt wird über den Link automatisch abgezogen — oder gib den Code beim Bezahlen ein. Bestellung und Lieferung direkt über Floky.</p>
-  </div>
-</section>
+
 
 <div class="buy-modal-overlay" id="buy-modal-overlay">
   <div class="buy-modal">
@@ -531,5 +490,79 @@
   </div>
 </footer>
 <script src="../nav.js?v=44"></script>
+<script type="application/json" id="sv3-data">{"type": "Spielertyp", "brand": "Marke", "sort": "Sortieren", "all": "Alle", "beg": "Einsteiger", "ctl": "Kontrolle", "allr": "Allround", "pow": "Power", "rec": "Empfohlen", "up": "Preis aufsteigend", "down": "Preis absteigend", "out": "Zurzeit ausverkauft", "none": "Kein Schläger passt zu diesen Filtern.", "test": "Testen · 10 CHF", "count": "{n} Schläger"}</script>
+<script id="sv3-js">
+(function(){
+  var sec=document.getElementById('rackets'); if(!sec) return;
+  var T=JSON.parse(document.getElementById('sv3-data').textContent);
+  var BR=['Wilson','Babolat','Siux'], state={type:'*',brand:'*',sort:'rec'}, order=0;
+  var cards=[].slice.call(sec.querySelectorAll('.racket-card'));
+  // brand per card from the heading above its grid, original position for "recommended"
+  var brand='';
+  sec.querySelectorAll('.racket-brand-heading, .racket-grid').forEach(function(el){
+    if(el.classList.contains('racket-brand-heading')){brand=el.textContent.trim();return;}
+    el.querySelectorAll('.racket-card').forEach(function(c){
+      c.dataset.brand=brand; c.dataset.pos=order++;
+      var a=c.querySelector('.racket-link');
+      if(a&&!c.querySelector('.racket-test')){var t=document.createElement('a');t.className='racket-test';t.href=a.getAttribute('href');t.textContent=T.test;c.insertBefore(t,c.querySelector('.racket-model'));}
+      if(!c.querySelector('.sv3-brand')){var b=document.createElement('span');b.className='sv3-brand';b.textContent=brand;c.insertBefore(b,c.querySelector('.racket-model'));}
+    });
+  });
+  var first=sec.querySelector('.racket-brand-heading'); if(!first) return;
+  var bar=document.createElement('div'); bar.className='sv3-bar';
+  function group(key,label,opts){
+    var g=document.createElement('div'); g.className='sv3-group';
+    g.innerHTML='<p class="sv3-label">'+label+'</p><div class="sv3-pills" role="group" aria-label="'+label+'"></div>';
+    opts.forEach(function(o,i){var b=document.createElement('button');b.type='button';b.className='sv3-pill';b.textContent=o[1];b.setAttribute('aria-pressed',i===0?'true':'false');
+      b.addEventListener('click',function(){state[key]=o[0];g.querySelectorAll('.sv3-pill').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});draw();});
+      g.lastChild.appendChild(b);});
+    bar.appendChild(g);
+  }
+  group('type',T.type,[['*',T.all],['beg',T.beg],['ctl',T.ctl],['all',T.allr],['pow',T.pow]]);
+  group('brand',T.brand,[['*',T.all]].concat(BR.map(function(b){return [b,b];})));
+  var sg=document.createElement('div'); sg.className='sv3-group sv3-sort';
+  sg.innerHTML='<label class="sv3-label" for="sv3-sort">'+T.sort+'</label><select id="sv3-sort"><option value="rec">'+T.rec+'</option><option value="up">'+T.up+'</option><option value="down">'+T.down+'</option></select>';
+  sg.querySelector('select').addEventListener('change',function(e){state.sort=e.target.value;draw();});
+  bar.appendChild(sg);
+  var count=document.createElement('p'); count.className='sv3-count'; count.setAttribute('aria-live','polite');
+  var grid=document.createElement('div'); grid.className='racket-grid';
+  var empty=document.createElement('p'); empty.className='racket-empty'; empty.textContent=T.none; empty.hidden=true;
+  var out=document.createElement('details'); out.className='sv3-out'; out.innerHTML='<summary></summary><div class="racket-grid"></div>';
+  first.parentNode.insertBefore(bar,first); first.parentNode.insertBefore(count,first); first.parentNode.insertBefore(grid,first);
+  first.parentNode.insertBefore(empty,first); first.parentNode.insertBefore(out,first);
+  sec.querySelectorAll('.racket-grid').forEach(function(g){if(g!==grid&&g!==out.lastChild&&g.getAttribute('data-brand')===null){g.classList.add('sv3-hide');}});
+  sec.classList.add('sv3-on');
+  function price(c){return parseInt((c.querySelector('.racket-price')||{}).textContent,10)||0;}
+  function isType(c,t){var s=c.dataset;
+    if(t==='beg') return s.level==='Amateur'||s.hard==='Weich';
+    if(t==='ctl') return s.shape==='Rund';
+    if(t==='all') return s.shape==='Träne';
+    if(t==='pow') return s.shape==='Diamant';
+    return true;}
+  var busy=false;
+  function draw(){
+    busy=true;
+    var list=cards.filter(function(c){return (state.brand==='*'||c.dataset.brand===state.brand)&&isType(c,state.type);});
+    list.sort(function(a,b){
+      if(state.sort==='up') return price(a)-price(b)||a.dataset.pos-b.dataset.pos;
+      if(state.sort==='down') return price(b)-price(a)||a.dataset.pos-b.dataset.pos;
+      function rank(c){return c.classList.contains('coming')?2:(c.querySelector('.racket-badge')?0:1);}   // new and in stock, in stock, announced
+      return rank(a)-rank(b)||BR.indexOf(a.dataset.brand)-BR.indexOf(b.dataset.brand)||a.dataset.pos-b.dataset.pos;});   // Wilson first: main sponsor
+    var avail=list.filter(function(c){return !c.classList.contains('sold-out')||c.classList.contains('coming');});
+    var gone=list.filter(function(c){return c.classList.contains('sold-out')&&!c.classList.contains('coming');});
+    cards.forEach(function(c){if(list.indexOf(c)<0&&c.parentNode){c.parentNode.removeChild(c);}});
+    avail.forEach(function(c){grid.appendChild(c);});
+    gone.forEach(function(c){out.lastChild.appendChild(c);});
+    out.firstChild.textContent=T.out+' ('+gone.length+')';
+    out.hidden=!gone.length; empty.hidden=avail.length>0||gone.length>0;
+    count.textContent=T.count.replace('{n}',avail.length);
+    setTimeout(function(){busy=false;},0);
+  }
+  draw();
+  // nav.js sets sold-out / coming / specs after its live stock call: arrange again when that happens
+  var timer; new MutationObserver(function(){if(busy) return; clearTimeout(timer); timer=setTimeout(draw,60);})
+    .observe(sec,{subtree:true,attributes:true,attributeFilter:['class','data-shape']});
+})();
+</script>
 </body>
 </html>

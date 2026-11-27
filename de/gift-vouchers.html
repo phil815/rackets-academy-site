@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T9T2GZHGS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    analytics_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_storage: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_user_data: (function(){try{return localStorage.getItem('ra_consent')==='granted'?'granted':'denied';}catch(e){return 'denied';}})(),
+    ad_personalization: 'denied'
+  });
+  gtag('js', new Date());
+  // Team-Geraete: einmal racketsacademy.ch/?internal=1 aufrufen → Besuche als intern markiert (GA4-Filter «Internal Traffic»); ?internal=0 hebt es auf
+  (function(){try{var q=location.search;if(/[?&]internal=1/.test(q))localStorage.setItem('ra_internal','1');if(/[?&]internal=0/.test(q))localStorage.removeItem('ra_internal');}catch(e){}})();
+  gtag('config', 'G-T9T2GZHGS2', (function(){try{return localStorage.getItem('ra_internal')==='1'?{traffic_type:'internal'}:{};}catch(e){return {};}})());
+  // Rackets Academy conversion events
+  (function(){
+    var lang = (location.pathname.match(/\/(fr|de)\//)||[,'en'])[1];
+    function send(name, p){ p=p||{}; p.page_lang=lang; p.page_path=location.pathname; p.transport_type='beacon'; gtag('event', name, p); }
+    document.addEventListener('click', function(e){
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (a && a.hasAttribute('data-pick')) return;
+      if (a) {
+        var h = a.href;
+        if (/playtomic\.com/.test(h)) return send('book_court', {link_url:h, link_text:(a.textContent||'').trim().slice(0,60)});
+        if (/wa\.me|whatsapp\.com/.test(h)) return send('whatsapp_click', {link_url:h});
+        if (/tinyurl\.com\/RA-Plus/i.test(h)) return send('rackets_plus_signup', {link_url:h});
+        if (/docs\.google\.com\/forms|forms\.gle/.test(h)) return send('form_click', {link_url:h});
+        return;
+      }
+      var b = e.target.closest && e.target.closest('button[onclick*="openBuyModal"], button[onclick*="openVoucherModal"], button[onclick*="openLessonModal"]');
+      if (b) {
+        var card = b.closest('.card, .racket-card, div');
+        var t = card && card.querySelector('h3');
+        send('shop_buy_click', {item_name: t ? t.textContent.trim().slice(0,80) : (/Voucher/.test(b.getAttribute('onclick')) ? 'Voucher' : 'unknown')});
+      }
+    }, true);
+    document.addEventListener('submit', function(e){
+      var f = e.target;
+      if (f && /script\.google/.test(f.action||'')) send('begin_checkout', {form_type: (f.querySelector('[name="type"]')||{}).value || ''});
+    }, true);
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Padel-Geschenkgutscheine | Rackets Academy</title>
+<meta name="description" content="Verschenk Padel: Geschenkgutscheine ab 20 CHF für ein Spiel in der Rackets Academy in Salgesch oder Sion, dazu Kurs- und Racket-Gutscheine. Per E-Mail gleich nach der Zahlung.">
+<link rel="canonical" href="https://www.racketsacademy.ch/de/gift-vouchers.html">
+<link rel="stylesheet" href="../styles.css?v=65">
+<meta property="og:title" content="Padel-Geschenkgutscheine | Rackets Academy">
+<meta property="og:description" content="Verschenk Padel: Geschenkgutscheine ab 20 CHF für ein Spiel in der Rackets Academy in Salgesch oder Sion, dazu Kurs- und Racket-Gutscheine. Per E-Mail gleich nach der Zahlung.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.racketsacademy.ch/de/gift-vouchers.html">
+<meta property="og:image" content="https://www.racketsacademy.ch/images/wix/66ac72740d6a.jpg">
+<meta property="og:locale" content="de_CH">
+<meta property="og:site_name" content="Rackets Academy">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://www.racketsacademy.ch/gift-vouchers.html">
+<link rel="alternate" hreflang="fr" href="https://www.racketsacademy.ch/fr/gift-vouchers.html">
+<link rel="alternate" hreflang="de" href="https://www.racketsacademy.ch/de/gift-vouchers.html">
+<link rel="alternate" hreflang="x-default" href="https://www.racketsacademy.ch/gift-vouchers.html">
+<style>
+.floky-pts{list-style:none;padding:0;margin:18px 0 24px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.floky-pts li{background:#fff;border:1px solid #e1ecf7;border-radius:14px;padding:12px 14px 12px 38px;position:relative;font-size:.95rem}
+.floky-pts li::before{content:"✓";position:absolute;left:14px;top:11px;color:#2fa600;font-weight:800}
+.floky-card{display:flex;align-items:center;gap:20px;flex-wrap:wrap;background:linear-gradient(160deg,var(--blue),var(--blue-dark));color:#fff;border-radius:24px;padding:22px 24px}
+.floky-off{font-size:2.6rem;font-weight:900;color:var(--green);line-height:1}
+.floky-txt{flex:1 1 220px;display:flex;flex-direction:column;gap:6px}
+.floky-txt span{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.85}
+.floky-code{align-self:flex-start;font:inherit;font-weight:800;font-size:1.15rem;letter-spacing:.04em;background:rgba(255,255,255,.14);color:#fff;border:2px dashed rgba(255,255,255,.6);border-radius:12px;padding:8px 14px;cursor:pointer}
+.floky-code em{font-style:normal;font-size:.75rem;font-weight:700;margin-left:8px;opacity:.85}
+.floky-txt small{opacity:.85}
+.floky-note{font-size:.82rem;color:#7a8ea3;margin-top:14px}
+@media(max-width:600px){.shop-bubbles{gap:12px}.shop-bubble{width:104px;height:104px;font-size:.78rem;padding:8px}.shop-bubble .bubble-icon{width:28px;height:28px}}
+@media(max-width:560px){.floky-pts{grid-template-columns:1fr}.floky-card .btn{width:100%;text-align:center}}
+</style>
+<!-- shop-v3 -->
+<style id="sv3-css">
+.sv3-chips{display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 0;}
+.sv3-chips span{background:rgba(255,255,255,.16); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,.35); border-radius:999px; padding:6px 14px; font-weight:700; font-size:.9rem; color:#fff;}
+.sv3-cats{display:flex; gap:8px; flex-wrap:wrap; padding:22px 0 6px;}
+.sv3-cats a{font-weight:700; font-size:1rem; color:#0b1a2b; background:#fff; border:2px solid #c9d3de; border-radius:999px; padding:11px 18px; min-height:48px; box-sizing:border-box; display:inline-flex; align-items:center; text-decoration:none;}
+.sv3-cats a:hover{border-color:#0077de;}
+.sv3-cats a[aria-current="page"]{background:#0077de; border-color:#0077de; color:#fff;}
+.sv3-cats a:focus-visible, .sv3-pill:focus-visible, .sv3-sort select:focus-visible{outline:3px solid #0077de; outline-offset:3px;}
+.sv3-bar{background:#fff; border-radius:24px; padding:18px 20px; margin:0 0 20px; display:flex; gap:16px 28px; flex-wrap:wrap; align-items:flex-end; box-shadow:0 6px 20px rgba(11,26,43,.08);}
+.sv3-group{display:flex; flex-direction:column; gap:8px; min-width:0;}
+.sv3-label{margin:0; font-size:.95rem; font-weight:700; color:#4c5d70;}
+.sv3-pills{display:flex; gap:8px; flex-wrap:wrap;}
+.sv3-pill{font:inherit; font-size:1rem; font-weight:700; color:#0b1a2b; background:#fff; border:2px solid #c9d3de; border-radius:999px; padding:9px 16px; min-height:46px; cursor:pointer;}
+.sv3-pill:hover{border-color:#0077de;}
+.sv3-pill[aria-pressed="true"]{background:#0077de; border-color:#0077de; color:#fff;}
+.sv3-sort select{font:inherit; font-size:1rem; font-weight:700; color:#0b1a2b; background:#fff; border:2px solid #c9d3de; border-radius:999px; padding:9px 14px; min-height:46px;}
+.sv3-count{margin:0 0 12px; font-weight:700; color:#4c5d70;}
+.sv3-brand{display:block; font-size:.78rem; font-weight:700; color:#4c5d70; margin-top:2px;}
+.sv3-on .racket-brand-heading{display:none;}
+.sv3-out{margin:28px 0 0;}
+.sv3-out > summary{cursor:pointer; font-weight:700; font-size:1.05rem; color:#0b1a2b; padding:12px 0; min-height:48px; box-sizing:border-box;}
+.sv3-out .racket-grid{margin-top:12px;}
+.sv3-hide{display:none !important;}
+.sv3-after{margin-top:36px;}
+.hero h1{overflow-wrap:anywhere; hyphens:auto;}
+@media (max-width:480px){ .hero h1{font-size:clamp(1.7rem,8.4vw,2.4rem); line-height:1.1;} }
+@media (max-width:760px){
+  .sv3-bar{padding:14px; border-radius:20px; gap:14px;}
+  .sv3-group{width:100%;}
+  .sv3-pills{flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; padding-bottom:2px;}
+  .sv3-pills::-webkit-scrollbar{display:none;}
+  .sv3-pill{flex:none;}
+  .sv3-sort select{width:100%;}
+  .sv3-cats a{flex:1 1 auto; justify-content:center; padding:11px 12px;}
+}
+</style>
+</head>
+<body class="v2">
+<div class="site-top">
+<div class="promo-banner">
+  <div class="promo-track">
+    <span>Plätze jetzt offen — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Jetzt auf Playtomic buchen →</a></span>
+    <span>Plätze jetzt offen — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Jetzt auf Playtomic buchen →</a></span>
+    <span>Plätze jetzt offen — <a href="https://playtomic.com/tenant/f89dfa07-4283-453e-8be3-316f9bd060d3" target="_blank" rel="noopener" data-pick="court">Jetzt auf Playtomic buchen →</a></span>
+  </div>
+</div>
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo"><img src="https://www.racketsacademy.ch/images/wix/834be8bc03b7.png" alt="Rackets Academy logo" width="180" height="63"></a>
+    <nav class="navlinks">
+      <a href="book.html">Buchen</a>
+      <a href="training.html">Training</a>
+      <a href="events.html">Events</a>
+      <a href="camps.html">Camps</a>
+      <a href="company.html">Firmen</a>
+      <a href="spa-and-sauna.html">Spa</a>
+      <a href="rackets-plus.html">Mitgliedschaft</a>
+      <a href="shop.html" class="active">Shop</a>
+      <div class="lang-switch">
+        <button type="button" aria-haspopup="true">DE</button>
+        <div class="lang-menu"><a href="../gift-vouchers.html">English</a><a href="#">Deutsch</a><a href="../fr/gift-vouchers.html">Français</a></div>
+      </div>
+    </nav>
+    <div class="lang-switch">
+      <button type="button" aria-haspopup="true">DE</button>
+      <div class="lang-menu"><a href="../gift-vouchers.html">English</a><a href="#">Deutsch</a><a href="../fr/gift-vouchers.html">Français</a></div>
+    </div>
+    <a class="nav-cta" href="book.html" data-pick="court">Platz buchen</a>
+    <button class="nav-toggle nav-toggle-word" aria-label="Menü" aria-expanded="false"><i class="nt-bars"><b></b><b></b><b></b></i><em class="nt-open">Menü</em><em class="nt-close">Schliessen</em></button>
+  </div>
+</header>
+</div>
+
+<section class="hero" style="background-image:linear-gradient(180deg, rgba(4,30,70,.35), rgba(4,30,70,.72)), url('https://www.racketsacademy.ch/images/photos/shop-winners.webp'); background-size:cover; background-position:center 35%;">
+  <span class="ball b1"></span><span class="ball b2"></span><span class="ball b3"></span>
+  <div class="wrap hero-inner">
+    <h1>Geschenkgutscheine</h1>
+    <p class="lede">Verschenk ein Padel-Spiel, einen Kurs oder ein Racket. Den Gutschein bekommst du gleich nach der Zahlung per E-Mail.</p>
+  </div>
+</section>
+
+<section class="section-tight" style="padding-top:0; padding-bottom:0;">
+  <div class="wrap">
+    <nav class="sv3-cats" aria-label="Shop"><a href="shop.html">Schläger</a><a href="gift-vouchers.html" aria-current="page">Geschenkgutscheine</a><a href="floky.html">Floky Sleeves</a></nav>
+  </div>
+</section>
+
+<section id="vouchers" class="shop-panel active">
+  <div class="wrap" style="max-width:600px;">
+    <h2>Geschenkgutscheine</h2>
+    <p class="section-lede">Verschenk ein Padel-Spiel. Ein Gutschein gilt für eine Person und ein Spiel zu jeder Zeit, auch abends und am Wochenende (Wert 20 CHF). Du bekommst ihn per E-Mail, eingelöst wird er als Code bei der Buchung in Playtomic. Wähl dein Paket:</p>
+
+    <div class="shop-options" id="voucher-options">
+      <label class="shop-option">
+        <input type="radio" name="bundle" value="1x20" data-price="20" data-qty="1" checked>
+        <span class="shop-option-body"><strong>1×</strong><span>20 CHF</span></span>
+      </label>
+      <label class="shop-option">
+        <input type="radio" name="bundle" value="5x20" data-price="100" data-qty="5">
+        <span class="shop-option-body"><strong>5×</strong><span>100 CHF</span></span>
+      </label>
+      <label class="shop-option">
+        <input type="radio" name="bundle" value="10x20" data-price="200" data-qty="10">
+        <span class="shop-option-body"><strong>10×</strong><span>200 CHF</span></span>
+      </label>
+      <label class="shop-option">
+        <input type="radio" name="bundle" value="20x20" data-price="400" data-qty="20">
+        <span class="shop-option-body"><strong>20×</strong><span>400 CHF</span></span>
+      </label>
+    </div>
+    <button type="button" class="btn btn-green" style="width:100%; text-align:center;" onclick="openVoucherModal()">Jetzt kaufen</button>
+
+    <h2 style="margin-top:48px;">Kurs-Gutscheine</h2>
+    <p class="section-lede">Ein Playtomic-Code für eine Trainingslektion mit unseren Coaches — das perfekte Geschenk für alle, die besser werden wollen.</p>
+    <div class="shop-options" id="lesson-options">
+      <label class="shop-option">
+        <input type="radio" name="lesson" value="60" data-price="40" checked>
+        <span class="shop-option-body"><strong>60 Min</strong><span>40 CHF</span></span>
+      </label>
+      <label class="shop-option">
+        <input type="radio" name="lesson" value="90" data-price="50">
+        <span class="shop-option-body"><strong>90 Min</strong><span>50 CHF</span></span>
+      </label>
+    </div>
+    <label class="lesson-qty">Anzahl
+      <select id="lesson-qty"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="10">10</option></select>
+    </label>
+    <button type="button" class="btn btn-green" style="width:100%; text-align:center;" onclick="openLessonModal()">Jetzt kaufen</button>
+
+    <h2 style="margin-top:48px;">Racket-Gutscheine</h2>
+    <p class="section-lede">Ein Gutschein für ein neues Padel-Racket aus unserem Shop: Die beschenkte Person wählt ihr Modell selbst und kann es vorher testen. Einlösbar an der Theke in Salgesch oder Sion, 2 Jahre gültig.</p>
+    <div class="shop-options" id="rvoucher-options">
+      <label class="shop-option"><input type="radio" name="rvoucher" value="100" checked><span class="shop-option-body"><strong>100 CHF</strong></span></label>
+      <label class="shop-option"><input type="radio" name="rvoucher" value="150"><span class="shop-option-body"><strong>150 CHF</strong></span></label>
+      <label class="shop-option"><input type="radio" name="rvoucher" value="200"><span class="shop-option-body"><strong>200 CHF</strong></span></label>
+      <label class="shop-option"><input type="radio" name="rvoucher" value="custom"><span class="shop-option-body"><strong>Anderer Betrag</strong></span></label>
+    </div>
+    <label class="lesson-qty" id="rvoucher-custom-wrap" style="display:none;">Betrag in CHF (50–1000)
+      <input type="number" id="rvoucher-custom" min="50" max="1000" step="10" inputmode="numeric" placeholder="120">
+    </label>
+    <button type="button" class="btn btn-green" style="width:100%; text-align:center;" onclick="openRacketVoucherModal()">Jetzt kaufen</button>
+  </div>
+</section>
+
+
+
+<div class="buy-modal-overlay" id="buy-modal-overlay">
+  <div class="buy-modal">
+    <button type="button" class="buy-modal-close" id="buy-modal-close" aria-label="Schliessen">&times;</button>
+    <h3 id="buy-modal-title"></h3>
+    <div class="buy-modal-price" id="buy-modal-price"></div>
+    <form id="buy-modal-form" class="shop-form" method="POST" action="https://script.google.com/macros/s/AKfycbwLWTwsILcSkAHe9FSKjicU1pUk5s3nxSnS4PQ2Tws2RVejiHjBltJJ8gKpmIe3JLRe/exec" target="_blank">
+      <input type="hidden" name="formType" id="modal-formType">
+      <input type="hidden" name="price" id="modal-price">
+      <input type="hidden" name="qty" id="modal-qty">
+      <input type="hidden" name="duration" id="modal-duration">
+      <input type="hidden" name="racketModel" id="modal-racketModel">
+      <input type="hidden" name="racketLabel" id="modal-racketLabel">
+
+      <label class="shop-field">
+        Welcher Standort?
+        <select id="modal-location" required>
+          <option value="Salgesch">Salgesch</option>
+          <option value="Sion">Sion</option>
+        </select>
+      </label>
+      <label class="shop-field">
+        Dein Name
+        <input type="text" name="buyerName" required>
+      </label>
+      <label class="shop-field">
+        Deine E-Mail <span id="modal-email-note" data-voucher="(Gutscheine werden hierhin geschickt)" data-racket="(deine Bestätigung wird hierhin geschickt)" style="font-weight:400; opacity:.7;">(Gutscheine werden hierhin geschickt)</span>
+        <input type="email" name="buyerEmail" required>
+      </label>
+      <label class="shop-field" id="modal-gift-wrap">
+        Geschenknachricht <span style="font-weight:400; opacity:.7;">(optional, steht auf dem Gutschein)</span>
+        <textarea name="giftMessage" rows="3" maxlength="200"></textarea>
+      </label>
+
+      <button type="submit" class="btn btn-green" style="width:100%; text-align:center;">Weiter zur Zahlung</button>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <img src="https://www.racketsacademy.ch/images/wix/fd51e1e7dfdf.png" alt="Rackets Academy" width="200" height="72" style="margin-bottom:8px;">
+    <p style="opacity:.85; margin:0 0 14px;">PLAY. COMPETE. ENJOY.</p>
+    <div class="footer-grid ux-foot"><div><h4>Salgesch</h4><a href="https://www.google.com/maps/search/?api=1&query=Littenstrasse+30+3970+Salgesch" target="_blank" rel="noopener">Littenstrasse 30, 3970 Salgesch</a><p>Padel · <a class="foot-sport" href="pickleball.html">Pickleball</a> · <a class="foot-sport" href="tennis.html">Tennis</a> · Spa</p><p>Täglich 7–23:30 Uhr</p></div><div><h4>Sion</h4><a href="https://www.google.com/maps/search/?api=1&query=Route+de+Pr%C3%A9jeux+16+1950+Sion" target="_blank" rel="noopener">Route de Préjeux 16, 1950 Sion</a><p>Padel</p><p>Täglich 7–23:30 Uhr</p></div><div class="foot-links"><h4>Schnellzugriff</h4><a href="book.html">Platz buchen</a><a href="training.html">Kurse</a><a href="faq.html">FAQ</a><a href="shop.html#vouchers">Geschenkgutscheine</a><a href="shop.html">Shop</a><a href="events.html">Events</a></div><div class="footer-contact"><h4>Kontakt</h4><a class="foot-wa" href="https://wa.me/41772780115?text=Hola%21%20Ich%20habe%20eine%20Frage%20zur%20Rackets%20Academy." target="_blank" rel="noopener">Schreib uns auf WhatsApp</a><p>Schnelle Antwort · +41 77 278 01 15</p><a href="mailto:phil@racketsacademy.ch">phil@racketsacademy.ch</a></div></div>
+    <div class="sponsor-row">
+      <div class="sponsor-track">
+      <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/5887f86ed50b.png" alt="Wilson" loading="lazy"></a>
+      <a href="https://www.estrellagalicia.es" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e0ff8b826424.png" alt="Estrella Galicia" loading="lazy"></a>
+      <a href="https://www.decathlon.ch" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/75ca95274283.png" alt="Decathlon" loading="lazy"></a>
+      <a href="https://www.coca-cola.com/ch/de/brands/powerade" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4662d7547275.png" alt="Powerade" loading="lazy"></a>
+      <a href="https://tanguy.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4c92a56af6fb.png" alt="Garage Tanguy" loading="lazy"></a>
+      <a href="https://tanguy.hyundai.ch/fr" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/f74a1e85ce45.png" alt="Hyundai" loading="lazy"></a>
+      <a href="https://www.scleanup.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d7bc95225fa2.png" alt="S Clean-up" loading="lazy"></a>
+      <a href="https://shop.morand.ch/shop/category/sirops-65" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e03b161cd8bb.png" alt="Distillerie Morand" loading="lazy"></a>
+      <a href="https://rivella.ch/de/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d4f0de57b68e.png" alt="Rivella" loading="lazy"></a>
+      <a href="https://www.wilson.com" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/5887f86ed50b.png" alt="Wilson" loading="lazy"></a>
+      <a href="https://www.estrellagalicia.es" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e0ff8b826424.png" alt="Estrella Galicia" loading="lazy"></a>
+      <a href="https://www.decathlon.ch" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/75ca95274283.png" alt="Decathlon" loading="lazy"></a>
+      <a href="https://www.coca-cola.com/ch/de/brands/powerade" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4662d7547275.png" alt="Powerade" loading="lazy"></a>
+      <a href="https://tanguy.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/4c92a56af6fb.png" alt="Garage Tanguy" loading="lazy"></a>
+      <a href="https://tanguy.hyundai.ch/fr" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/f74a1e85ce45.png" alt="Hyundai" loading="lazy"></a>
+      <a href="https://www.scleanup.ch/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d7bc95225fa2.png" alt="S Clean-up" loading="lazy"></a>
+      <a href="https://shop.morand.ch/shop/category/sirops-65" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/e03b161cd8bb.png" alt="Distillerie Morand" loading="lazy"></a>
+      <a href="https://rivella.ch/de/" target="_blank" rel="noopener"><img src="https://www.racketsacademy.ch/images/wix/d4f0de57b68e.png" alt="Rivella" loading="lazy"></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="foot-more"><a href="about.html">Über uns</a> · <a href="sponsoring.html">Sponsor werden</a> · <a href="../intern.html" rel="nofollow">Team-Login</a></span>
+      <span>© 2026 Rackets Academy</span>
+      <span><a href="terms-and-conditions.html">AGB</a> · <a href="privacy-policy.html">Datenschutz</a> · <a href="impressum.html">Impressum</a></span>
+    </div>
+  </div>
+</footer>
+<script src="../nav.js?v=44"></script>
+</body>
+</html>
