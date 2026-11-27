@@ -1397,3 +1397,21 @@ details.card > summary{padding:10px 0; min-height:40px; box-sizing:border-box;}
 #book-picker .hv2-note{margin:0; font-size:.9rem; color:#4c5d70; text-align:center;}
 #book-picker .loc-tip{margin:14px 0 0; font-size:.9rem; color:#4c5d70; text-align:center;}
 @media (max-width:380px){ #book-picker .hv2-pill{font-size:.92rem; padding:11px 4px;} }
+
+/* ---- Ski &Padel am Handy kompakter (27.11.2026): gleiche Inhalte, weniger Höhe ---- */
+.sticky-book.sb-off{display:none !important;}
+@media (max-width:720px){
+  .v2 .inc-compact .grid-3{gap:8px;}
+  .v2 .inc-compact .card{grid-template-columns:60px 1fr; column-gap:12px; padding:12px;}
+  .v2 .inc-compact .card img{width:60px; height:60px;}
+  .v2 .camp-book .camp-dates, .v2 .camp-book .camp-packs.camp-pay{grid-template-columns:1fr 1fr !important; gap:10px; margin-bottom:22px;}
+  .v2 .camp-book .camp-packs{gap:10px; margin-bottom:22px;}
+  .v2 .camp-book .camp-opt .camp-tile{padding:14px;}
+  .v2 .camp-book .camp-tile.camp-ticket{grid-template-columns:1fr; gap:6px; justify-items:start;}
+  .v2 .camp-book .camp-ticket strong, .v2 .camp-book .camp-ticket .camp-spots{grid-column:1;}
+  .v2 .camp-book .camp-day{grid-row:auto; display:flex; align-items:baseline; gap:6px; padding:6px 12px;}
+  .v2 .camp-book .camp-day b{font-size:1.35rem;}
+  .v2 .camp-book .camp-day small{font-size:.9rem;}
+  .v2 .camp-book .camp-ticket strong{font-size:1rem; line-height:1.25;}
+  .v2 .camp-book .camp-pack-price{font-size:1.55rem; margin:2px 0;}
+}

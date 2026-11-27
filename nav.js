@@ -650,6 +650,22 @@ document.addEventListener('DOMContentLoaded', function () {
     } else if (/ski-and-padel/.test(location.pathname)) {
       var SK = { en: 'Choose your weekend', fr: 'Choisir mon week-end', de: 'Wochenende wählen' }[L] || 'Choose your weekend';
       bar.innerHTML = '<a class="sb-court" href="#camp-book">' + SK + '</a>';
+      // Im Buchungsblock: Leiste zeigt den Buchungsknopf mit Total statt «Wochenende wählen»;
+      // ist der echte Knopf selbst sichtbar, verschwindet die Leiste (sonst stünden zwei gleiche Knöpfe da).
+      (function () {
+        var sec = document.getElementById('camp-book'), go = document.getElementById('camp-go'), tot = document.getElementById('camp-sum-total');
+        if (!sec || !go || !tot || !window.IntersectionObserver) return;
+        var inSec = false, goVis = false, link = bar.firstChild;
+        function upd() {
+          var m = (tot.textContent || '').match(/[\d'’]+ CHF/);
+          link.textContent = inSec ? go.textContent + (m ? ' · ' + m[0] : '') : SK;
+          bar.classList.toggle('sb-off', goVis);
+        }
+        link.addEventListener('click', function (e) { if (inSec && !go.disabled) { e.preventDefault(); go.click(); } });
+        new IntersectionObserver(function (en) { inSec = en[0].isIntersecting; upd(); }, { rootMargin: '-45% 0px -45% 0px' }).observe(sec);
+        new IntersectionObserver(function (en) { goVis = en[0].isIntersecting; upd(); }, { rootMargin: '0px 0px -80px 0px' }).observe(go);
+        sec.addEventListener('change', function () { setTimeout(upd, 0); });
+      })();
     } else if (/\/rackets\//.test(location.pathname)) {
       var buy = document.querySelector('.buy-btn'), tst = document.querySelector('.product-test-btn');
       var pr = (buy && (buy.getAttribute('onclick') || '').match(/price:(\d+)/)) || null;
@@ -682,13 +698,13 @@ document.addEventListener('DOMContentLoaded', function () {
     // event pages: top banner promotes the event instead of court booking
     var EV = null;
     if (/padel-dine/.test(location.pathname)) EV = {
-      en: ['🍽️ PADEL +DINE · NEXT DATE: TBD · SALGESCH', 'Keep me posted →'],
-      fr: ['🍽️ PADEL +DINE · PROCHAINE DATE : TBD · SALGESCH', 'Me tenir au courant →'],
-      de: ['🍽️ PADEL +DINE · NÄCHSTES DATUM: TBD · SALGESCH', 'Vormerken lassen →'], h: '#tk-book' };
+      en: ['Padel +Dine · next date: TBD · Salgesch', 'Keep me posted →'],
+      fr: ['Padel +Dine · prochaine date : TBD · Salgesch', 'Me tenir au courant →'],
+      de: ['Padel +Dine · nächstes Datum: TBD · Salgesch', 'Vormerken lassen →'], h: '#tk-book' };
     else if (/ski-and-padel/.test(location.pathname)) EV = {
-      en: ['⛷️ SKI & PADEL · FEBRUARY 2027 · 12 PLACES PER WEEKEND', 'Choose your weekend →'],
-      fr: ['⛷️ SKI & PADEL · FÉVRIER 2027 · 12 PLACES PAR WEEK-END', 'Choisir mon week-end →'],
-      de: ['⛷️ SKI & PADEL · FEBRUAR 2027 · 12 PLÄTZE PRO WOCHENENDE', 'Wochenende wählen →'], h: '#camp-book' };
+      en: ['Ski &Padel · February 2027 · 12 places per weekend', 'Choose your weekend →'],
+      fr: ['Ski &Padel · février 2027 · 12 places par week-end', 'Choisir mon week-end →'],
+      de: ['Ski &Padel · Februar 2027 · 12 Plätze pro Wochenende', 'Wochenende wählen →'], h: '#camp-book' };
     var track = EV && document.querySelector('.promo-track');
     if (track) {
       var tx = EV[L] || EV.en, one = '<span>' + tx[0] + ' — <a href="' + EV.h + '">' + tx[1] + '</a></span>';
