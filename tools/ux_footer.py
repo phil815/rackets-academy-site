@@ -3,11 +3,11 @@ import os, re, glob
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WA = '41772780115'
 F = {
- 'en': dict(h='Daily 7am–11:30pm', dir='Directions', links='Quick links', L=[('book.html','Book a court'),('training.html','Courses'),('book.html#faq','FAQ'),('shop.html#vouchers','Gift vouchers'),('shop.html','Shop'),('events.html','Events')],
+ 'en': dict(h='Daily 7am–11:30pm', dir='Directions', links='Quick links', L=[('book.html','Book a court'),('training.html','Courses'),('book.html#faq','FAQ'),('gift-vouchers.html','Gift vouchers'),('shop.html','Shop'),('events.html','Events')],
             c='Contact', wa='Message us on WhatsApp', wan='Quick reply · +41 77 278 01 15', txt='Hola! I have a question about Rackets Academy.'),
- 'fr': dict(h='Tous les jours 7h–23h30', dir='Itinéraire', links='Liens rapides', L=[('book.html','Réserver un court'),('training.html','Cours'),('book.html#faq','FAQ'),('shop.html#vouchers','Bons cadeaux'),('shop.html','Shop'),('events.html','Événements')],
+ 'fr': dict(h='Tous les jours 7h–23h30', dir='Itinéraire', links='Liens rapides', L=[('book.html','Réserver un court'),('training.html','Cours'),('book.html#faq','FAQ'),('gift-vouchers.html','Bons cadeaux'),('shop.html','Shop'),('events.html','Événements')],
             c='Contact', wa='Écris-nous sur WhatsApp', wan='Réponse rapide · +41 77 278 01 15', txt="Hola ! J'ai une question sur la Rackets Academy."),
- 'de': dict(h='Täglich 7–23:30 Uhr', dir='Route', links='Schnellzugriff', L=[('book.html','Platz buchen'),('training.html','Kurse'),('book.html#faq','FAQ'),('shop.html#vouchers','Geschenkgutscheine'),('shop.html','Shop'),('events.html','Events')],
+ 'de': dict(h='Täglich 7–23:30 Uhr', dir='Route', links='Schnellzugriff', L=[('book.html','Platz buchen'),('training.html','Kurse'),('book.html#faq','FAQ'),('gift-vouchers.html','Geschenkgutscheine'),('shop.html','Shop'),('events.html','Events')],
             c='Kontakt', wa='Schreib uns auf WhatsApp', wan='Schnelle Antwort · +41 77 278 01 15', txt='Hola! Ich habe eine Frage zur Rackets Academy.'),
 }
 from urllib.parse import quote
