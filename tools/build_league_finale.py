@@ -9,28 +9,27 @@ import re, pathlib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 # Programm (Update 28.11.2026 nachmittags: A5, A11, A20, Match 18/19/20 heute gespielt;
-# alle übrigen Spiele; vor 10:00 nur 2 Plätze, danach 3; A17 fix 11:00). Namen eingetragen, wo schon bekannt.
+# alle übrigen Spiele; vor 10:00 nur 2 Plätze, danach 3; alles ab 10:00 auf 3 Plätzen, A17 11:15; Match 23 nur wenn Damian/Nicola Match 14 gewinnen). Namen eingetragen, wo schon bekannt.
 # (Zeit, [Zelle]) Zelle: ('p', Plätze, Art, Team1, Team2) mit Art '' / 'f' (Final 17/18) / 'gf' (grosser Final)
 #                        ('m', Match, Runde, Team1, Team2, hervorheben?)   ('e',) = Platz frei
 # W:/L: vor einem Match = Sieger/Verlierer dieses Matches (wird pro Sprache übersetzt)
 SCHEDULE = [
-    ('08:30', [('m', '14', ('', '9–16'), 'Tiago / Alex', 'Damian / Allen', False),
-               ('e',), ('e',)]),
-    ('09:45', [('m', 'A19', ('semi', '21–24'), 'Theo / Laurent', 'Fabio / David', False),
-               ('m', 'A21', ('semi', '25–28'), 'Nuno / Rui', 'Noam / Kevin', False),
-               ('e',)]),
-    ('11:00', [('m', 'A17', ('semi', '17–20'), 'Johnny / Cristhian', 'Cyril / Maxime', True),
+    ('10:00', [('m', '14', ('', '9–16'), 'Tiago / Alex', 'Damian / Nicola', False),
+               ('m', 'A19', ('semi', '21–24'), 'Theo / Laurent', 'Fabio / David', False),
+               ('m', 'A21', ('semi', '25–28'), 'Nuno / Rui', 'Noam / Kevin', False)]),
+    ('11:15', [('m', 'A17', ('semi', '17–20'), 'Johnny / Cristhian', 'Cyril / Maxime', True),
                ('m', 'A22', ('semi', '25–28'), 'Karim / Keynan', 'Nuno / Elio', False),
                ('p', '7/8', '', 'Jérôme / Yannick', 'David / Yohan')]),
-    ('12:15', [('m', '21', ('semi', '9–12'), 'Nicolas / Yann', 'W:14', False),
-               ('m', '23', ('', '13–16'), 'François / Nicola', 'L:14', False),
-               ('m', 'A18', ('semi', '17–20'), 'Mario / Ricardo', 'Kilian / Ruben', False)]),
-    ('13:30', [('p', '5/6', '', 'Quentin / Cyril', 'Jonathan / Arnaud'), ('p', '25/26', '', 'W:A21', 'W:A22'), ('p', '27/28', '', 'L:A21', 'L:A22')]),
-    ('14:45', [('p', '9/10', '', 'W:21', 'Steven / Patrick'), ('p', '11/12', '', 'L:21', 'Lucien / Pablo'), ('p', '23/24', '', 'L:A19', 'L:A20')]),
-    ('16:00', [('p', '17/18', 'f', 'W:A17', 'W:A18'), ('p', '19/20', '', 'L:A17', 'L:A18'), ('p', '21/22', '', 'W:A19', 'W:A20')]),
-    ('17:15', [('p', '1/2', 'gf', 'Aude / Alexandre', 'W:18'), ('p', '3/4', '', 'Sébastien / Phil', 'L:18')]),
+    ('12:30', [('m', '21', ('semi', '9–12'), 'Nicolas / Yann', 'W:14', False),
+               ('m', 'A18', ('semi', '17–20'), 'Mario / Ricardo', 'Kilian / Ruben', False),
+               ('e',)]),
+    ('13:45', [('p', '5/6', '', 'Quentin / Cyril', 'Jonathan / Arnaud'), ('p', '25/26', '', 'W:A21', 'W:A22'), ('p', '27/28', '', 'L:A21', 'L:A22')]),
+    ('15:00', [('p', '9/10', '', 'W:21', 'Steven / Patrick'), ('p', '11/12', '', 'L:21', 'Lucien / Pablo'), ('p', '23/24', '', 'L:A19', 'L:A20')]),
+    ('16:15', [('p', '17/18', 'f', 'W:A17', 'W:A18'), ('p', '19/20', '', 'L:A17', 'L:A18'), ('p', '21/22', '', 'W:A19', 'W:A20')]),
+    ('17:30', [('p', '1/2', 'gf', 'Aude / Alexandre', 'W:18'), ('p', '3/4', '', 'Sébastien / Phil', 'L:18'),
+               ('m', '23', ('', '13–16'), 'Damian / Nicola', 'L:14', False)]),
 ]
-CEREMONY_TIME = '18:30'
+CEREMONY_TIME = '18:45'
 # Preise pro Spieler (wie Instagram-Carousel 22.11.2026)
 PLAYTOMIC = {r: 60 - 2 * i for i, r in enumerate(range(3, 17))}   # 60 .. 34
 TRAINING = {r: 33 - i for i, r in enumerate(range(17, 26))}        # 33 .. 25
@@ -39,8 +38,8 @@ SPA = range(26, 33)
 T = {
  'en': dict(
    h2='Grand final · Sunday 29 November',
-   lede='Salgesch · from 08:30 · every position is played out on court. Spectators welcome! Schedule updated on 28.11 so every open match can still be played.',
-   perks=['Free for players', '1 bifana + 1 Rivella on us', 'A prize + a surprise for every player', 'Grand final at 17:15, prize ceremony + apéro at 18:30'],
+   lede='Salgesch · from 10:00 · every position is played out on court. Spectators welcome! Schedule updated on 28.11 so every open match can still be played.',
+   perks=['Free for players', '1 bifana + 1 Rivella on us', 'A prize + a surprise for every player', 'Grand final at 17:30, prize ceremony + apéro at 18:45'],
    sched='Schedule', rules='3 full sets · be there 20 min before your match · 15 min late = walkover',
    place='Place', final='Final', gfinal='Grand final', ceremony='Prize ceremony + apéro',
    prizes='Prizes (per player)', every='At every place: + a surprise + a Rivella',
@@ -48,11 +47,11 @@ T = {
    pt='Playtomic credit', tr='Training voucher', spa='Spa entry',
    r3='3rd–16th', r17='17th–25th', r26='26th–32nd', from_to='CHF {a} to {b}', spa_txt='Spa entry',
    all='See the prize for every place', match='Match', semi='Semi', W='Winner', L='Loser', vs='vs',
-   note2='Match 23: winner = 13th, loser = 15th · Places 29–32: no match (walkover)', ord=lambda r: f'{r}{"st" if r==1 else "nd" if r==2 else "rd" if r==3 else "th"}'),
+   note2='Match 23 only if Damian/Nicola win match 14, otherwise no match; winner = 13th, loser = 15th · Places 29–32: no match (walkover)', ord=lambda r: f'{r}{"st" if r==1 else "nd" if r==2 else "rd" if r==3 else "th"}'),
  'fr': dict(
    h2='Grande finale · dimanche 29 novembre',
-   lede='Salgesch · dès 08:30 · chaque place se joue sur le terrain. Public bienvenu ! Programme mis à jour le 28.11 pour que tous les matchs encore ouverts puissent se jouer.',
-   perks=['Gratuit pour les joueurs', '1 bifana + 1 Rivella offerts', 'Un prix + une surprise pour chaque joueur', 'Grande finale à 17h15, remise des prix + apéro à 18h30'],
+   lede='Salgesch · dès 10:00 · chaque place se joue sur le terrain. Public bienvenu ! Programme mis à jour le 28.11 pour que tous les matchs encore ouverts puissent se jouer.',
+   perks=['Gratuit pour les joueurs', '1 bifana + 1 Rivella offerts', 'Un prix + une surprise pour chaque joueur', 'Grande finale à 17h30, remise des prix + apéro à 18h45'],
    sched='Programme', rules='3 sets complets · sois là 20 min avant ton match · 15 min de retard = WO',
    place='Place', final='Finale', gfinal='Grande finale', ceremony='Remise des prix + apéro',
    prizes='Les prix (par joueur)', every='À chaque place : + une surprise + un Rivella',
@@ -60,11 +59,11 @@ T = {
    pt='Crédit Playtomic', tr='Bon entraînement', spa='Entrée spa',
    r3='3e–16e', r17='17e–25e', r26='26e–32e', from_to='CHF {a} à {b}', spa_txt='Entrée spa',
    all='Voir le prix de chaque place', match='Match', semi='Demi', W='Vainqueur', L='Perdant', vs='vs',
-   note2='Match 23 : vainqueur = 13e, perdant = 15e · Places 29–32 : pas de match (WO)', ord=lambda r: f'{r}{"er" if r==1 else "e"}'),
+   note2='Match 23 seulement si Damian/Nicola gagnent le match 14, sinon pas de match ; vainqueur = 13e, perdant = 15e · Places 29–32 : pas de match (WO)', ord=lambda r: f'{r}{"er" if r==1 else "e"}'),
  'de': dict(
    h2='Grosser Final · Sonntag, 29. November',
-   lede='Salgesch · ab 08:30 · jeder Platz wird auf dem Court ausgespielt. Zuschauer willkommen! Programm am 28.11. angepasst, damit alle offenen Spiele noch gespielt werden können.',
-   perks=['Gratis für Spieler', '1 Bifana + 1 Rivella offeriert', 'Ein Preis + eine Überraschung für jeden Spieler', 'Grosser Final um 17:15, Siegerehrung + Apéro um 18:30'],
+   lede='Salgesch · ab 10:00 · jeder Platz wird auf dem Court ausgespielt. Zuschauer willkommen! Programm am 28.11. angepasst, damit alle offenen Spiele noch gespielt werden können.',
+   perks=['Gratis für Spieler', '1 Bifana + 1 Rivella offeriert', 'Ein Preis + eine Überraschung für jeden Spieler', 'Grosser Final um 17:30, Siegerehrung + Apéro um 18:45'],
    sched='Programm', rules='3 volle Sätze · 20 Min vor deinem Spiel da sein · 15 Min zu spät = WO',
    place='Platz', final='Final', gfinal='Grosser Final', ceremony='Siegerehrung + Apéro',
    prizes='Preise (pro Spieler)', every='Auf jedem Platz: + eine Überraschung + ein Rivella',
@@ -72,7 +71,7 @@ T = {
    pt='Playtomic-Guthaben', tr='Trainingsgutschein', spa='Spa-Eintritt',
    r3='3.–16.', r17='17.–25.', r26='26.–32.', from_to='CHF {a} bis {b}', spa_txt='Spa-Eintritt',
    all='Preis für jeden Platz anzeigen', match='Spiel', semi='Halbfinal', W='Sieger', L='Verlierer', vs='vs',
-   note2='Spiel 23: Sieger = 13., Verlierer = 15. · Plätze 29–32: kein Spiel (WO)', ord=lambda r: f'{r}.'),
+   note2='Spiel 23 nur, wenn Damian/Nicola Spiel 14 gewinnen, sonst kein Spiel; Sieger = 13., Verlierer = 15. · Plätze 29–32: kein Spiel (WO)', ord=lambda r: f'{r}.'),
 }
 
 def block(lang):
