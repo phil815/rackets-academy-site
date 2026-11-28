@@ -9,7 +9,7 @@ import re, pathlib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 # Programm (Update 28.11.2026 nachmittags: A5, A11, A20, Match 18/19/20 heute gespielt;
-# alle übrigen Spiele auf 3 Plätzen, A17 fix 11:00). Namen eingetragen, wo schon bekannt.
+# alle übrigen Spiele; vor 10:00 nur 2 Plätze, danach 3; A17 fix 11:00). Namen eingetragen, wo schon bekannt.
 # (Zeit, [Zelle]) Zelle: ('p', Plätze, Art, Team1, Team2) mit Art '' / 'f' (Final 17/18) / 'gf' (grosser Final)
 #                        ('m', Match, Runde, Team1, Team2, hervorheben?)   ('e',) = Platz frei
 # W:/L: vor einem Match = Sieger/Verlierer dieses Matches (wird pro Sprache übersetzt)
@@ -19,9 +19,9 @@ SCHEDULE = [
                ('e',)]),
     ('09:45', [('m', 'A19', ('semi', '21–24'), 'Theo / Laurent', 'Fabio / David', False),
                ('m', 'A21', ('semi', '25–28'), 'Nuno / Rui', 'Noam / Kevin', False),
-               ('m', 'A22', ('semi', '25–28'), 'Karim / Keynan', 'Nuno / Elio', False)]),
+               ('e',)]),
     ('11:00', [('m', 'A17', ('semi', '17–20'), 'Johnny / Cristhian', 'Cyril / Maxime', True),
-               ('e',),
+               ('m', 'A22', ('semi', '25–28'), 'Karim / Keynan', 'Nuno / Elio', False),
                ('p', '7/8', '', 'Jérôme / Yannick', 'L:20')]),
     ('12:15', [('m', '21', ('semi', '9–12'), 'W:13', 'W:14', False),
                ('m', '23', ('', '13–16'), 'L:13', 'L:14', False),
