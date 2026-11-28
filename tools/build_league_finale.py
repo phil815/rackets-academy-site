@@ -14,7 +14,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 #                        ('m', Match, Runde, Team1, Team2, hervorheben?)   ('e',) = Platz frei
 # W:/L: vor einem Match = Sieger/Verlierer dieses Matches (wird pro Sprache übersetzt)
 SCHEDULE = [
-    ('08:30', [('m', '13', ('', '9–16'), 'François / Nicola', 'Nicolas / Yann', False),
+    ('08:30', [('e',),
                ('m', '14', ('', '9–16'), 'Tiago / Alex', 'Damian / Allen', False),
                ('e',)]),
     ('09:45', [('m', 'A19', ('semi', '21–24'), 'Theo / Laurent', 'Fabio / David', False),
@@ -23,8 +23,8 @@ SCHEDULE = [
     ('11:00', [('m', 'A17', ('semi', '17–20'), 'Johnny / Cristhian', 'Cyril / Maxime', True),
                ('m', 'A22', ('semi', '25–28'), 'Karim / Keynan', 'Nuno / Elio', False),
                ('p', '7/8', '', 'Jérôme / Yannick', 'David / Yohan')]),
-    ('12:15', [('m', '21', ('semi', '9–12'), 'W:13', 'W:14', False),
-               ('m', '23', ('', '13–16'), 'L:13', 'L:14', False),
+    ('12:15', [('m', '21', ('semi', '9–12'), 'Nicolas / Yann', 'W:14', False),
+               ('m', '23', ('', '13–16'), 'François / Nicola', 'L:14', False),
                ('m', 'A18', ('semi', '17–20'), 'Mario / Ricardo', 'Kilian / Ruben', False)]),
     ('13:30', [('p', '5/6', '', 'Quentin / Cyril', 'Jonathan / Arnaud'), ('p', '25/26', '', 'W:A21', 'W:A22'), ('p', '27/28', '', 'L:A21', 'L:A22')]),
     ('14:45', [('p', '9/10', '', 'W:21', 'Steven / Patrick'), ('p', '11/12', '', 'L:21', 'Lucien / Pablo'), ('p', '23/24', '', 'L:A19', 'L:A20')]),
