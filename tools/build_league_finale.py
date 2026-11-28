@@ -14,22 +14,23 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 #                        ('m', Match, Runde, Team1, Team2, hervorheben?)   ('e',) = Platz frei
 # W:/L: vor einem Match = Sieger/Verlierer dieses Matches (wird pro Sprache übersetzt)
 SCHEDULE = [
-    ('10:00', [('m', '14', ('', '9–16'), 'Tiago / Alex', 'Damian / Nicola', False),
-               ('m', 'A19', ('semi', '21–24'), 'Theo / Laurent', 'Fabio / David', False),
+    ('10:00', [('m', 'A11', ('', '17–24'), 'Mario / Ricardo', 'Rafael / Pedro', False),
+               ('m', '14', ('', '9–16'), 'Tiago / Alex', 'Damian / Nicola', False),
                ('m', 'A21', ('semi', '25–28'), 'Nuno / Rui', 'Noam / Kevin', False)]),
     ('11:15', [('m', 'A17', ('semi', '17–20'), 'Johnny / Cristhian', 'Cyril / Maxime', True),
-               ('m', 'A22', ('semi', '25–28'), 'Karim / Keynan', 'Nuno / Elio', False),
-               ('p', '7/8', '', 'Jérôme / Yannick', 'David / Yohan')]),
+               ('m', 'A19', ('semi', '21–24'), 'Theo / Laurent', 'Fabio / David', False),
+               ('m', 'A22', ('semi', '25–28'), 'Karim / Keynan', 'Nuno / Elio', False)]),
     ('12:30', [('m', '21', ('semi', '9–12'), 'Nicolas / Yann', 'W:14', False),
-               ('m', 'A18', ('semi', '17–20'), 'Mario / Ricardo', 'Kilian / Ruben', False),
-               ('e',)]),
+               ('m', 'A18', ('semi', '17–20'), 'W:A11', 'Kilian / Ruben', False),
+               ('m', 'A20', ('semi', '21–24'), 'L:A11', 'Thomas / Mathieu', False)]),
     ('13:45', [('p', '5/6', '', 'Quentin / Cyril', 'Jonathan / Arnaud'), ('p', '25/26', '', 'W:A21', 'W:A22'), ('p', '27/28', '', 'L:A21', 'L:A22')]),
     ('15:00', [('p', '9/10', '', 'W:21', 'Steven / Patrick'), ('p', '11/12', '', 'L:21', 'Lucien / Pablo'), ('p', '23/24', '', 'L:A19', 'L:A20')]),
     ('16:15', [('p', '17/18', 'f', 'W:A17', 'W:A18'), ('p', '19/20', '', 'L:A17', 'L:A18'), ('p', '21/22', '', 'W:A19', 'W:A20')]),
-    ('17:30', [('p', '1/2', 'gf', 'Aude / Alexandre', 'W:18'), ('p', '3/4', '', 'Sébastien / Phil', 'L:18'),
+    ('17:30', [('p', '3/4', '', 'Sébastien / Phil', 'L:18'), ('p', '7/8', '', 'Jérôme / Yannick', 'David / Yohan'),
                ('m', '23', ('', '13–16'), 'Damian / Nicola', 'L:14', False)]),
+    ('18:45', [('p', '1/2', 'gf', 'Aude / Alexandre', 'W:18')]),
 ]
-CEREMONY_TIME = '18:45'
+CEREMONY_TIME = '20:00'
 # Preise pro Spieler (wie Instagram-Carousel 22.11.2026)
 PLAYTOMIC = {r: 60 - 2 * i for i, r in enumerate(range(3, 17))}   # 60 .. 34
 TRAINING = {r: 33 - i for i, r in enumerate(range(17, 26))}        # 33 .. 25
@@ -39,7 +40,7 @@ T = {
  'en': dict(
    h2='Grand final · Sunday 29 November',
    lede='Salgesch · from 10:00 · every position is played out on court. Spectators welcome! Schedule updated on 28.11 so every open match can still be played.',
-   perks=['Free for players', '1 bifana + 1 Rivella on us', 'A prize + a surprise for every player', 'Grand final at 17:30, prize ceremony + apéro at 18:45'],
+   perks=['Free for players', '1 bifana + 1 Rivella on us', 'A prize + a surprise for every player', 'Grand final at 18:45, prize ceremony + apéro at 20:00'],
    sched='Schedule', rules='3 full sets · be there 20 min before your match · 15 min late = walkover',
    place='Place', final='Final', gfinal='Grand final', ceremony='Prize ceremony + apéro',
    prizes='Prizes (per player)', every='At every place: + a surprise + a Rivella',
@@ -51,7 +52,7 @@ T = {
  'fr': dict(
    h2='Grande finale · dimanche 29 novembre',
    lede='Salgesch · dès 10:00 · chaque place se joue sur le terrain. Public bienvenu ! Programme mis à jour le 28.11 pour que tous les matchs encore ouverts puissent se jouer.',
-   perks=['Gratuit pour les joueurs', '1 bifana + 1 Rivella offerts', 'Un prix + une surprise pour chaque joueur', 'Grande finale à 17h30, remise des prix + apéro à 18h45'],
+   perks=['Gratuit pour les joueurs', '1 bifana + 1 Rivella offerts', 'Un prix + une surprise pour chaque joueur', 'Grande finale à 18h45, remise des prix + apéro à 20h00'],
    sched='Programme', rules='3 sets complets · sois là 20 min avant ton match · 15 min de retard = WO',
    place='Place', final='Finale', gfinal='Grande finale', ceremony='Remise des prix + apéro',
    prizes='Les prix (par joueur)', every='À chaque place : + une surprise + un Rivella',
@@ -63,7 +64,7 @@ T = {
  'de': dict(
    h2='Grosser Final · Sonntag, 29. November',
    lede='Salgesch · ab 10:00 · jeder Platz wird auf dem Court ausgespielt. Zuschauer willkommen! Programm am 28.11. angepasst, damit alle offenen Spiele noch gespielt werden können.',
-   perks=['Gratis für Spieler', '1 Bifana + 1 Rivella offeriert', 'Ein Preis + eine Überraschung für jeden Spieler', 'Grosser Final um 17:30, Siegerehrung + Apéro um 18:45'],
+   perks=['Gratis für Spieler', '1 Bifana + 1 Rivella offeriert', 'Ein Preis + eine Überraschung für jeden Spieler', 'Grosser Final um 18:45, Siegerehrung + Apéro um 20:00'],
    sched='Programm', rules='3 volle Sätze · 20 Min vor deinem Spiel da sein · 15 Min zu spät = WO',
    place='Platz', final='Final', gfinal='Grosser Final', ceremony='Siegerehrung + Apéro',
    prizes='Preise (pro Spieler)', every='Auf jedem Platz: + eine Überraschung + ein Rivella',
