@@ -14,9 +14,8 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 #                        ('m', Match, Runde, Team1, Team2, hervorheben?)   ('e',) = Platz frei
 # W:/L: vor einem Match = Sieger/Verlierer dieses Matches (wird pro Sprache übersetzt)
 SCHEDULE = [
-    ('08:30', [('e',),
-               ('m', '14', ('', '9–16'), 'Tiago / Alex', 'Damian / Allen', False),
-               ('e',)]),
+    ('08:30', [('m', '14', ('', '9–16'), 'Tiago / Alex', 'Damian / Allen', False),
+               ('e',), ('e',)]),
     ('09:45', [('m', 'A19', ('semi', '21–24'), 'Theo / Laurent', 'Fabio / David', False),
                ('m', 'A21', ('semi', '25–28'), 'Nuno / Rui', 'Noam / Kevin', False),
                ('e',)]),
