@@ -29,6 +29,8 @@ SCHEDULE = [
     ('17:30', [('p', '1/2', 'gf', 'Aude / Alexandre', 'W:18'), ('p', '11/12', '', 'L:14', 'L:23'), ('p', '27/28', '', 'L:A21', 'L:A22')]),
 ]
 CEREMONY_TIME = '18:45'
+COURTS = ['Estrella Galicia', 'Decathlon', 'Powerade']  # Spalten von links nach rechts
+IMG_VER = '16'
 # Preise pro Spieler (wie Instagram-Carousel 22.11.2026)
 PLAYTOMIC = {r: 60 - 2 * i for i, r in enumerate(range(3, 17))}   # 60 .. 34
 TRAINING = {r: 33 - i for i, r in enumerate(range(17, 26))}        # 33 .. 25
@@ -79,7 +81,7 @@ def block(lang):
         if x[:2] in ('W:', 'L:'):
             return f'<span class="o">{t[x[0]]} {x[2:]}</span>'
         return x
-    rows = []
+    rows = ['<div class="fn-row fn-courts"><div class="fn-t"></div><div class="fn-gs">' + ''.join(f'<div>{c}</div>' for c in COURTS) + '</div></div>']
     for time, games in SCHEDULE:
         cells = []
         for g in games:
@@ -117,6 +119,7 @@ def block(lang):
         <h3>{t["sched"]}</h3>
         {"".join(rows)}
         <p class="fn-note">{t["note2"]}<br>{t["rules"]}</p>
+        <a class="fn-img" href="/images/league/rrl-programme-dimanche.png?v={IMG_VER}" target="_blank" rel="noopener"><img src="/images/league/rrl-programme-dimanche.png?v={IMG_VER}" alt="{t["sched"]} · 29.11" loading="lazy"></a>
       </div>
       <div class="fn-box">
         <h3>{t["prizes"]}</h3>

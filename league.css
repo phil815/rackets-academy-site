@@ -99,3 +99,7 @@
   .fn-p em{ margin-left:0; flex-basis:100%; padding-left:80px; }
   .fn-all ul{ columns:1; }
 }
+.fn-courts{ margin-bottom:4px; }
+.fn-courts .fn-gs div{ text-align:center; font-size:.72rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--green); }
+.fn-img{ display:block; margin-top:14px; }
+.fn-img img{ width:100%; height:auto; border-radius:12px; display:block; }
