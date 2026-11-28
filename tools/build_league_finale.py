@@ -8,27 +8,28 @@ import re, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
-# Programm (Update 28.11.2026, alle offenen Spiele auf 3 Plätzen, A17 fix 11:00):
-# (Zeit, [Zelle]) Zelle: ('p', Plätze, Art) mit Art '' / 'f' (Final 17/18) / 'gf' (grosser Final)
-#                        ('m', Match, Runde, Team1, Team2, hervorheben?)
+# Programm (Update 28.11.2026 nachmittags: A5, A11, A20, Match 18/19/20 heute gespielt;
+# alle übrigen Spiele auf 3 Plätzen, A17 fix 11:00). Namen eingetragen, wo schon bekannt.
+# (Zeit, [Zelle]) Zelle: ('p', Plätze, Art, Team1, Team2) mit Art '' / 'f' (Final 17/18) / 'gf' (grosser Final)
+#                        ('m', Match, Runde, Team1, Team2, hervorheben?)   ('e',) = Platz frei
 # W:/L: vor einem Match = Sieger/Verlierer dieses Matches (wird pro Sprache übersetzt)
 SCHEDULE = [
     ('08:30', [('m', '13', ('', '9–16'), 'François / Nicola', 'Nicolas / Yann', False),
                ('m', '14', ('', '9–16'), 'Tiago / Alex', 'Damian / Allen', False),
-               ('m', 'A11', ('', '17–24'), 'W:A5', 'Rafael / Pedro', False)]),
+               ('e',)]),
     ('09:45', [('m', 'A19', ('semi', '21–24'), 'Theo / Laurent', 'Fabio / David', False),
                ('m', 'A21', ('semi', '25–28'), 'Nuno / Rui', 'Noam / Kevin', False),
-               ('m', 'A22', ('semi', '25–28'), 'L:A5', 'Nuno / Elio', False)]),
+               ('m', 'A22', ('semi', '25–28'), 'Karim / Keynan', 'Nuno / Elio', False)]),
     ('11:00', [('m', 'A17', ('semi', '17–20'), 'Johnny / Cristhian', 'Cyril / Maxime', True),
-               ('m', 'A20', ('semi', '21–24'), 'L:A11', 'Thomas / Mathieu', False),
-               ('p', '7/8', '')]),
+               ('e',),
+               ('p', '7/8', '', 'Jérôme / Yannick', 'L:20')]),
     ('12:15', [('m', '21', ('semi', '9–12'), 'W:13', 'W:14', False),
                ('m', '23', ('', '13–16'), 'L:13', 'L:14', False),
-               ('m', 'A18', ('semi', '17–20'), 'W:A11', 'Kilian / Ruben', False)]),
-    ('13:30', [('p', '5/6', ''), ('p', '25/26', ''), ('p', '27/28', '')]),
-    ('14:45', [('p', '9/10', ''), ('p', '11/12', ''), ('p', '23/24', '')]),
-    ('16:00', [('p', '17/18', 'f'), ('p', '19/20', ''), ('p', '21/22', '')]),
-    ('17:15', [('p', '1/2', 'gf'), ('p', '3/4', '')]),
+               ('m', 'A18', ('semi', '17–20'), 'Mario / Ricardo', 'Kilian / Ruben', False)]),
+    ('13:30', [('p', '5/6', '', 'Quentin / Cyril', 'W:20'), ('p', '25/26', '', 'W:A21', 'W:A22'), ('p', '27/28', '', 'L:A21', 'L:A22')]),
+    ('14:45', [('p', '9/10', '', 'W:21', 'Steven / Patrick'), ('p', '11/12', '', 'L:21', 'Lucien / Pablo'), ('p', '23/24', '', 'L:A19', 'L:A20')]),
+    ('16:00', [('p', '17/18', 'f', 'W:A17', 'W:A18'), ('p', '19/20', '', 'L:A17', 'L:A18'), ('p', '21/22', '', 'W:A19', 'W:A20')]),
+    ('17:15', [('p', '1/2', 'gf', 'Aude / Alexandre', 'W:18'), ('p', '3/4', '', 'Sébastien / Phil', 'L:18')]),
 ]
 CEREMONY_TIME = '18:30'
 # Preise pro Spieler (wie Instagram-Carousel 22.11.2026)
@@ -79,16 +80,18 @@ def block(lang):
     t = T[lang]
     def team(x):
         if x[:2] in ('W:', 'L:'):
-            return f'{t[x[0]]} {x[2:]}'
+            return f'<span class="o">{t[x[0]]} {x[2:]}</span>'
         return x
     rows = []
     for time, games in SCHEDULE:
         cells = []
         for g in games:
-            if g[0] == 'p':
-                _, pl, kind = g
+            if g[0] == 'e':
+                cells.append('<div class="fn-g e"></div>')
+            elif g[0] == 'p':
+                _, pl, kind, a, b = g
                 lab = {'': t['place'], 'f': t['final'], 'gf': '🏆 ' + t['gfinal']}[kind]
-                cells.append(f'<div class="fn-g {kind}"><small>{lab}</small><b>{pl}</b></div>')
+                cells.append(f'<div class="fn-g {kind}"><small>{lab}</small><b>{pl}</b><i>{team(a)}<br>{t["vs"]} {team(b)}</i></div>')
             else:
                 _, no, (rnd, rng), a, b, hi = g
                 lab = f'{t["match"]} {no} · ' + (f'{t["semi"]} ' if rnd else '') + rng
@@ -141,6 +144,6 @@ for lang, path in [('en', 'rivella-league.html'), ('fr', 'fr/rivella-league.html
     anchor = '<section class="section-tight">\n  <div id="league"></div>'
     assert anchor in s, path
     s = s.replace(anchor, block(lang) + '\n' + anchor)
-    s = re.sub(r'league\.css\?v=\d+', 'league.css?v=4', s)
+    s = re.sub(r'league\.css\?v=\d+', 'league.css?v=5', s)
     p.write_text(s, encoding='utf-8')
     print('ok', path)

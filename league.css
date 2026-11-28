@@ -75,6 +75,10 @@
 .fn-g.m{ background:rgba(255,255,255,.12); } .fn-g.m small{ color:var(--green); text-transform:none; }
 .fn-g.m i{ display:block; font-style:normal; font-weight:700; font-size:.78rem; line-height:1.3; }
 .fn-g.hi{ outline:2px solid var(--green); outline-offset:-2px; background:#0f4f94; }
+.fn-g i{ display:block; font-style:normal; font-weight:700; font-size:.78rem; line-height:1.3; }
+.fn-g i .o{ color:#9fb3c8; font-weight:600; }
+.fn-g.gf i .o{ color:#1d3a10; }
+.fn-g.e{ background:rgba(255,255,255,.03); }
 .fn-note{ margin:10px 0 0; font-size:.85rem; color:#c9d3df; }
 .fn-p{ display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 10px; background:rgba(255,255,255,.08); border-radius:12px; padding:10px 12px; margin-bottom:8px; }
 .fn-p span{ flex:0 0 84px; color:var(--green); font-weight:800; }
