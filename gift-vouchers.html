@@ -211,6 +211,23 @@
     </label>
     <button type="button" class="btn btn-green" style="width:100%; text-align:center;" onclick="openLessonModal()">Buy Now</button>
 
+    <h2 style="margin-top:48px;">Private lessons</h2>
+    <p class="section-lede">A Playtomic code for a 60-minute private lesson: one person with one of our coaches. 90 CHF before 5pm, 100 CHF from 5pm.</p>
+    <div class="shop-options" id="private-options">
+      <label class="shop-option">
+        <input type="radio" name="private" value="day" data-price="90" data-label="Before 5pm" checked>
+        <span class="shop-option-body"><strong>Before 5pm</strong><span>90 CHF</span></span>
+      </label>
+      <label class="shop-option">
+        <input type="radio" name="private" value="evening" data-price="100" data-label="From 5pm">
+        <span class="shop-option-body"><strong>From 5pm</strong><span>100 CHF</span></span>
+      </label>
+    </div>
+    <label class="lesson-qty">Quantity
+      <select id="private-qty"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="10">10</option></select>
+    </label>
+    <button type="button" class="btn btn-green" style="width:100%; text-align:center;" onclick="openPrivateModal()">Buy Now</button>
+
     <h2 style="margin-top:48px;">Racket Vouchers</h2>
     <p class="section-lede">A voucher for a new padel racket from our shop: the recipient picks the model and can test it first. Redeemable at the counter in Salgesch or Sion, valid for 2 years.</p>
     <div class="shop-options" id="rvoucher-options">
@@ -301,5 +318,15 @@
   </div>
 </footer>
 <script src="nav.js?v=45"></script>
+<script>
+// Privatlektionen-Gutschein (Guti 28.11.2026): 60 Min, 1 Person; 90 CHF vor 17 Uhr, 100 CHF ab 17 Uhr. Preis rechnet die Shop-App (PRIVATE_).
+function openPrivateModal() {
+  var c = document.querySelector('#private-options input[name="private"]:checked');
+  if (!c) return;
+  var qty = parseInt((document.getElementById('private-qty') || {}).value || '1', 10);
+  openBuyModal('private', { title: qty + '× Private lesson 60 Min · ' + c.getAttribute('data-label'), price: qty * Number(c.getAttribute('data-price')), qty: qty, duration: c.value });
+}
+</script>
+
 </body>
 </html>
